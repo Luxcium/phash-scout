@@ -1,3 +1,10 @@
+/*---------------------------------------------------------------------------------------------
+ *  Based on work from @userpixel (https://github.com/userpixel)
+ *  Copyright (c) 2020 Alex Ewerlöf
+ *  Licensed under the MIT License.
+ *  See https://github.com/userpixel/cap-parallel/blob/master/LICENSE.md for license information.
+ *--------------------------------------------------------------------------------------------*/
+
 const am = require('am')
 const got = require('got')
 const { promisify } = require('util')
@@ -47,7 +54,7 @@ async function mapAllSettled(arr, mapFn, limit = arr.length) {
     const gen = arrayGenerator(arr)
 
     limit = Math.min(limit, arr.length)
-    
+
     const workers = new Array(limit)
     for (let i = 0; i < limit; i++) {
         workers.push(worker(i, gen, mapFn, result))
