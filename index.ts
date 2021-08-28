@@ -69,28 +69,16 @@ async function mapAllSettled<T, U>(
     workers.push(worker(gen, mapFn, result));
   }
 
-  // console.log(`Initialized ${limit} workers`)
-
   await Promise.all(workers);
 
   return result;
 }
 
-// const urls = []
-// for (let i = 0; i < 100; i++) {
-//     urls.push(`https://www.google.com/search?q=${i}`)
-// }
-
-// async function mapFn(url, i) {
-//     const contents = await got(url)
-//     return { i, url, contents }
-// }
-
-async function mapParallel<T, U>(
+async function parallelMapping<T, U>(
   arr: T[],
   mapFn: Mapper,
   limit: number = arr.length
 ): Promise<U[]> {
   return mapAllSettled(arr, mapFn, limit);
 }
-export default mapParallel;
+export default parallelMapping;
