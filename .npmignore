@@ -1,0 +1,10 @@
+dist
+*.tgz
+node_modules
+.editorconfig
+.git
+.gitignore
+.history
+.npmignore
+.prettierrc
+.vscode

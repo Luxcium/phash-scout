@@ -86,11 +86,11 @@ async function mapAllSettled<T, U>(
 //     return { i, url, contents }
 // }
 
-async function capParallel<T, U>(
+async function mapParallel<T, U>(
   arr: T[],
   mapFn: Mapper,
   limit: number = arr.length
 ): Promise<U[]> {
   return mapAllSettled(arr, mapFn, limit);
 }
-export default capParallel;
+export default mapParallel;
