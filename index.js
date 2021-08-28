@@ -1,12 +1,13 @@
-/*---------------------------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
  *  Based on work from @userpixel (https://github.com/userpixel)
  *  Copyright (c) 2020 Alex Ewerlöf
  *  Licensed under the MIT License.
- *  See https://github.com/userpixel/cap-parallel/blob/master/LICENSE.md for license information.
- *--------------------------------------------------------------------------------------------*/
+ *  See https://github.com/userpixel/cap-parallel/blob/master/LICENSE.md
+ *  for original license information.
+ *----------------------------------------------------------------------------*/
 
-const am = require('am')
-const got = require('got')
+// const am = require('am')
+// const got = require('got')
 const { promisify } = require('util')
 const { setImmediate } = require('timers')
 
@@ -28,13 +29,14 @@ async function mapItem(mapFn, currentValue, index, array) {
 }
 
 async function worker(id, gen, mapFn, result) {
-    console.time(`Worker ${id}`)
+    // console.time(`Worker ${id}`)
     for (let [ currentValue, index, array ] of gen) {
-        console.time(`Worker ${id} --- index ${index} item ${currentValue}`)
+        // console.time(`Worker ${id} --- index ${index} item ${currentValue}`)
         result[index] = await mapItem(mapFn, currentValue, index, array)
-        console.timeEnd(`Worker ${id} --- index ${index} item ${currentValue}`)
+        // console.timeEnd(`Worker ${id} --- index ${index} item ${currentValue}`)
     }
-    console.timeEnd(`Worker ${id}`)
+    void id
+    // console.timeEnd(`Worker ${id}`)
 }
 
 function* arrayGenerator(array) {
@@ -68,28 +70,29 @@ async function mapAllSettled(arr, mapFn, limit = arr.length) {
 }
 
 
-const urls = []
-for (let i = 0; i < 100; i++) {
-    urls.push(`https://www.google.com/search?q=${i}`)
+// const urls = []
+// for (let i = 0; i < 100; i++) {
+//     urls.push(`https://www.google.com/search?q=${i}`)
+// }
+
+// async function mapFn(url, i) {
+//     const contents = await got(url)
+//     return { i, url, contents }
+// }
+
+async function capParallel(arr, mapFn, limit = arr.length) {
+    // console.time('Promise.allSettled')
+    // const results1 = await Promise.allSettled(arr.map(mapFn))
+    // console.timeEnd('Promise.allSettled')
+    // console.log('------------')
+    // console.dir(results1)
+
+    // console.time('mapAllSettled')
+    return results2 = await mapAllSettled(arr, mapFn, limit)
+    // console.timeEnd('mapAllSettled')
+    // console.log('------------')
+    // console.dir(results2)
+    // void results1,results2
 }
-
-async function mapFn(url, i) {
-    const contents = await got(url)
-    return { i, url, contents }
-}
-
-async function main() {
-    console.time('Promise.allSettled')
-    const results1 = await Promise.allSettled(urls.map(mapFn))
-    console.timeEnd('Promise.allSettled')
-    console.log('------------')
-    console.dir(results1)
-
-    console.time('mapAllSettled')
-    const results2 = await mapAllSettled(urls, mapFn, 10)
-    console.timeEnd('mapAllSettled')
-    console.log('------------')
-    console.dir(results2)
-}
-
-am(main)
+exports = capParallel
+// am(capParallel)
