@@ -3,6 +3,9 @@
  *  Licensed under the MIT License.
  *  For original license information see:
  *  https://github.com/userpixel/cap-parallel/blob/master/LICENSE.md
+ *
+ *  Original °Standar JS° version (without semi colons):
+ *  https://raw.githubusercontent.com/userpixel/cap-parallel/master/index.js
  *----------------------------------------------------------------------------*/
 
 const am = require('am');
