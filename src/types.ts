@@ -9,13 +9,15 @@ export interface Worker_Threads<W> {
 }
 export type WorkerData<V> = { value: V; index: number; array: readonly V[] };
 export type WorkerMapper_<U, R> = (workerData: WorkerData<U>) => R;
-export type ThreadMapper<U, R> = (workerData: WorkerData<U>) => R;
 
-export type Mapper<T,U> = (
+export type Mapper<T,R> = (
   value: T,
   index?: number,
   array?: readonly T[]
-) => U;
+) => R;
+
+
+export type ThreadMapper<T, R> = ((workerData: WorkerData<T>) => R);
 
 // export type WorkerMapper = <R>() => Mapper<TVal> &
 //   (<T>(value: T, index?: number, array?: readonly T[]) => Promise<R>);

@@ -40,6 +40,9 @@ async function parallelMapping<T, U>(
   mapFn: Mapper<T,U>,
   limit: number = arr.length
 ): Promise<U[]> {
+  const [mainWorker, threadWorker] =
+    workerFactory(__filename)(threadWork)(worker_threads);
+  void mainWorker, threadWorker
   return mapAllSettled(arr, mapFn, limit);
 }
 async function worker<T>(
