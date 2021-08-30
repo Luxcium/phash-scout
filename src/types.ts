@@ -11,15 +11,15 @@ export type WorkerData<V> = { value: V; index: number; array: readonly V[] };
 export type WorkerMapper_<U, R> = (workerData: WorkerData<U>) => R;
 export type ThreadMapper<U, R> = (workerData: WorkerData<U>) => R;
 
-export type Mapper = <T, U>(
+export type Mapper<T,U> = (
   value: T,
   index?: number,
   array?: readonly T[]
 ) => U;
 
-export type WorkerMapper = <R>() => Mapper &
-  (<T>(value: T, index?: number, array?: readonly T[]) => Promise<R>);
+// export type WorkerMapper = <R>() => Mapper<TVal> &
+//   (<T>(value: T, index?: number, array?: readonly T[]) => Promise<R>);
 
 
-export type WorkerMapper2 = <T>() =><R>() =>
-  ((value: T, index?: number, array?: readonly T[]) => Promise<R>);
+export type WorkerMapper = <TVal>() =><R>() => /* Mapper<TVal,R> & */
+  ((value: TVal, index?: number, array?: readonly TVal[]) => Promise<R>);

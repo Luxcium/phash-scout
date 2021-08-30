@@ -1,6 +1,6 @@
 import { theMainWorker } from './the-main-worker';
 import { theThreadWorker } from './the-thread-worker';
-import { ThreadMapper, WorkerData, WorkerMapper2, Worker_Threads } from './types';
+import { ThreadMapper, WorkerData, WorkerMapper, Worker_Threads } from './types';
 export function workerFactory(filename: string) {
   return <A, B>(threadWork: ThreadMapper<A, B>) =>
     <T>(worker_threads: Worker_Threads<WorkerData<T>>) => {
@@ -17,7 +17,7 @@ export function workerFactory(filename: string) {
       const t_theThreadWorkerFunction = () =>
         !isMainThread ? theThreadWorker(threadWork) : void null;
 
-      let returnValues: [WorkerMapper2 /* <R>(values: T[]) => Promise<R>[] */, () => void];
+      let returnValues: [WorkerMapper /* <R>(values: T[]) => Promise<R>[] */, () => void];
       returnValues = [
        w_theMainWorkerMapperFunction,
         t_theThreadWorkerFunction,

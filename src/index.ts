@@ -37,14 +37,14 @@ const values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(mainWorker<number>()<numbe
 
 async function parallelMapping<T, U>(
   arr: T[],
-  mapFn: Mapper,
+  mapFn: Mapper<T,U>,
   limit: number = arr.length
 ): Promise<U[]> {
   return mapAllSettled(arr, mapFn, limit);
 }
 async function worker<T>(
   gen: Generator<[T, number, T[]]>,
-  mapFn: Mapper,
+  mapFn: Mapper<T,unknown>,
   result: any
 ) {
   for (let [currentValue, index, array] of gen) {
@@ -53,7 +53,7 @@ async function worker<T>(
 }
 
 async function mapItem<T>(
-  mapFn: Mapper,
+  mapFn: Mapper<T,unknown>,
   currentValue: T,
   index: number,
   array: T[]
@@ -82,7 +82,7 @@ function* arrayGenerator<T>(array: T[]): Generator<[T, number, T[]]> {
 
 async function mapAllSettled<T, U>(
   arr: T[],
-  mapFn: Mapper,
+  mapFn: Mapper<T,U>,
   limit: number = arr.length
 ): Promise<U[]> {
   const result: U[] = [];
