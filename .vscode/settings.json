@@ -21,8 +21,8 @@
   "editor.codeActionsOnSave": [
     "source.addMissingImports",
     "source.organizeImports",
-    "source.eslint",
-    "source.fixAll"
+    "source.fixAll",
+    // "source.eslint",
   ],
   /*
   |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
