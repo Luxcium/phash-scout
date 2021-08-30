@@ -1,3 +1,114 @@
 {
-  "javascript.suggestionActions.enabled": false
+  // #region: FORMAT & FILES BEHAVIOUR                                          !
+  /*
+  |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
+  ―― FORMAT BEHAVIOUR
+  */
+  // "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.tabSize": 2,
+  "editor.formatOnType": true,
+  "editor.suggest.showFiles": true,
+  "editor.suggest.showFolders": true,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  /*
+  |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
+  */
+  "editor.codeActionsOnSave": [
+    "source.addMissingImports",
+    "source.organizeImports",
+    "source.eslint",
+    "source.fixAll"
+  ],
+  /*
+  |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
+  */
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  // #endregion: FILES & FORMAT BEHAVIOUR                                       !
+  // #region: JAVASCRIPT & TYPESCRIPT                                           !
+  /*
+  |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
+  ―― JAVASCRIPT
+  */
+  "javascript.format.semicolons": "insert",
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "javascript.preferences.quoteStyle": "single",
+  "javascript.preferences.useAliasesForRenames": false,
+  "javascript.referencesCodeLens.enabled": true,
+  "javascript.referencesCodeLens.showOnAllFunctions": true,
+  "javascript.suggest.completeFunctionCalls": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  /*
+  |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
+  ―― TYPESCRIPT
+  */
+  "typescript.check.npmIsInstalled": false,
+  "typescript.format.semicolons": "insert",
+  "typescript.implementationsCodeLens.enabled": true,
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.includePackageJsonAutoImports": "on",
+  "typescript.preferences.quoteStyle": "single",
+  "typescript.preferences.useAliasesForRenames": false,
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.referencesCodeLens.showOnAllFunctions": true,
+  "typescript.suggest.autoImports": true,
+  "typescript.suggest.completeFunctionCalls": true,
+  "typescript.suggest.enabled": true,
+  "typescript.suggest.paths": true,
+  "typescript.suggestionActions.enabled": true,
+  "typescript.surveys.enabled": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  // "typescript.tsdk": "node_modules/typescript/lib",
+  // "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  // #endregion: JAVASCRIPT & TYPESCRIPT
+  // #region: PATH INTELLISENSE                                                 !
+  /*
+  |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
+  ―― PATH-INTELLISENSE
+  */
+  "path-intellisense.extensionOnImport": false,
+  "path-intellisense.absolutePathToWorkspace": false,
+  "path-intellisense.autoSlashAfterDirectory": false,
+  "path-intellisense.showHiddenFiles": true,
+  // #endregion: PATH INTELLISENSE                                              !
+  // #region: PRETTIER                                                          !
+  /*
+  |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
+  ―― PRETTIER
+  */
+  "prettier.enable": true,
+  "prettier.requireConfig": true,
+  "prettier.printWidth": 80,
+  "prettier.proseWrap": "preserve",
+  "prettier.trailingComma": "all",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // =====2021=====Luxcium=====Author==Benjamin=Vincent=(Luxcium)=License==MIT====
+  // #endregion: PRETTIER                                                       !
+  // #region: ESLINT                                                            !
+  /*
+  |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
+  ―― ESLINT
+  */
+  // "eslint.quiet": true,
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.codeActionsOnSave.mode": "all",
+  "eslint.packageManager": "yarn",
+  // #endregion: ESLINT
 }
