@@ -46,21 +46,20 @@ async function parallelMapping<T, U>(
   const [mainWorker, threadWorker] =
     workerFactory(__filename)(threadJob)(worker_threads);
   void mainWorker, threadWorker
-  return mapAllSettled(arr, mapFn, limit,mainWorker);
+  return mapAllSettled(arr,/*  mapFn, */ limit,mainWorker);
 }
 async function worker<T>(
   gen: Generator<[T, number, T[]]>,
-  mapFn: Mapper<T,unknown>,
+  // mapFn: Mapper<T,unknown>,
   result: any,
   mainWorker: WM<T,unknown>
 ) {
   for (let [currentValue, index, array] of gen) {
-    result[index] = await mapItem(mapFn, currentValue, index, array,mainWorker);
+    result[index] = await mapItem( currentValue, index, array,mainWorker);
   }
 }
 
 async function mapItem<T>(
-  mapFn: Mapper<T,unknown>,
   currentValue: T,
   index: number,
   array: T[],
@@ -73,7 +72,7 @@ async function mapItem<T>(
     return {
       status: 'fulfilled',
       mainWorker,
-      value: await mapFn(currentValue, index, array),
+      value: await mainWorker(currentValue, index, array),
     };
   } catch (reason) {
     return {
@@ -93,7 +92,7 @@ type WT =   <T>() => <U>() => (value: T, index?: number, array?: readonly T[]) =
 type WM<T,U> =    (value: T, index?: number, array?: readonly T[]) => Promise<U>
 async function mapAllSettled<T, U>(
   arr: T[],
-  mapFn: Mapper<T,U>,
+  // mapFn: Mapper<T,U>,
   limit: number = arr.length,
   mainWorker:WT
 ): Promise<U[]> {
@@ -108,7 +107,7 @@ async function mapAllSettled<T, U>(
 const mainWorker_:WM<T,U> = mainWorker<T>()<U>()
   const workers = new Array(limit);
   for (let i = 0; i < limit; i++) {
-    workers.push(worker(gen, mapFn, result,mainWorker_));
+    workers.push(worker(gen, /* mapFn, */ result,mainWorker_));
   }
 
   await Promise.all(workers);
