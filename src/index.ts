@@ -40,18 +40,22 @@ async function parallelMapping<T, U>(
   mapFn: Mapper<T,U>,
   limit: number = arr.length
 ): Promise<U[]> {
+  const threadJob: ThreadMapper<T, U> = (
+  workerdata: WorkerData<T>
+):U  => mapFn(workerdata.value,workerdata.index,workerdata.array);
   const [mainWorker, threadWorker] =
-    workerFactory(__filename)(threadWork)(worker_threads);
+    workerFactory(__filename)(threadJob)(worker_threads);
   void mainWorker, threadWorker
-  return mapAllSettled(arr, mapFn, limit);
+  return mapAllSettled(arr, mapFn, limit,mainWorker);
 }
 async function worker<T>(
   gen: Generator<[T, number, T[]]>,
   mapFn: Mapper<T,unknown>,
-  result: any
+  result: any,
+  mainWorker: WM<T,unknown>
 ) {
   for (let [currentValue, index, array] of gen) {
-    result[index] = await mapItem(mapFn, currentValue, index, array);
+    result[index] = await mapItem(mapFn, currentValue, index, array,mainWorker);
   }
 }
 
@@ -59,13 +63,16 @@ async function mapItem<T>(
   mapFn: Mapper<T,unknown>,
   currentValue: T,
   index: number,
-  array: T[]
+  array: T[],
+    mainWorker: WM<T,unknown>
+
 ) {
   await restrainingZalgo();
 
   try {
     return {
       status: 'fulfilled',
+      mainWorker,
       value: await mapFn(currentValue, index, array),
     };
   } catch (reason) {
@@ -82,25 +89,26 @@ function* arrayGenerator<T>(array: T[]): Generator<[T, number, T[]]> {
     yield [currentValue, index, array];
   }
 }
-
+type WT =   <T>() => <U>() => (value: T, index?: number, array?: readonly T[]) => Promise<U>
+type WM<T,U> =    (value: T, index?: number, array?: readonly T[]) => Promise<U>
 async function mapAllSettled<T, U>(
   arr: T[],
   mapFn: Mapper<T,U>,
-  limit: number = arr.length
+  limit: number = arr.length,
+  mainWorker:WT
 ): Promise<U[]> {
   const result: U[] = [];
 
   if (arr.length === 0) {
     return result;
   }
-
   const gen /* :[T,number,T[]] */ = arrayGenerator(arr);
 
   limit = Math.min(limit, arr.length);
-
+const mainWorker_:WM<T,U> = mainWorker<T>()<U>()
   const workers = new Array(limit);
   for (let i = 0; i < limit; i++) {
-    workers.push(worker(gen, mapFn, result));
+    workers.push(worker(gen, mapFn, result,mainWorker_));
   }
 
   await Promise.all(workers);
