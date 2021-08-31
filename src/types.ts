@@ -44,3 +44,17 @@ export type WM<T, U> = (
 ) => Promise<U>;
 
 export type WT_D<T> = Worker_Threads<WorkerData<T>>;
+
+export interface iParallelMappingOptions<T, U> {
+  filename: string;
+  workerThreads: WT_D<T>;
+  list: T[];
+  mappingFn: Mapper<T, U>;
+  limit?: number;
+}
+export interface iParallelMapping {
+  <T, U>(parallelMappingOptions: iParallelMappingOptions<T, U>): [
+    () => Promise<U[]>,
+    () => void
+  ];
+}

@@ -1,7 +1,8 @@
 {
+  "extends": "./tsconfig",
   "compilerOptions": {
     /* Module Resolution Interop Constraints */
-    "target": "es6",
+    "target": "es5",
     "module": "CommonJS",
     "moduleResolution": "node",
     "isolatedModules": false,
@@ -14,11 +15,11 @@
     "newLine": "lf",
     "noEmit": false,
     "rootDir": "./src",
-    "outDir": "./out/src",
+    "outDir": "./dist/src",
     "incremental": true,
     "noEmitOnError": false,
-    "declarationDir": "./out/typings",
-    "tsBuildInfoFile": "./out/ts-out-info.lib",
+    "declarationDir": "./dist/typings",
+    "tsBuildInfoFile": "./dist/ts-build-info.lib",
     "importHelpers": true,
     "noEmitHelpers": false,
     "removeComments": false,
@@ -91,8 +92,8 @@
     // "noLib": true,
     /* Vebosity */
     "pretty": true,
-    // "diagnostics": true,
-    // "extendedDiagnostics": true,
+    "diagnostics": true,
+    "extendedDiagnostics": true,
     // "listEmittedFiles": true,
     // "listFiles": true,
     // "traceResolution": true,

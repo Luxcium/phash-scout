@@ -2,7 +2,13 @@ import * as worker_threads from 'worker_threads';
 import parallelMapping from './parallel-mapping';
 import type { Mapper } from './types';
 
-export const parallelMapperFactory =
+export type ParallelMapperFactory = <T, R>(
+  mappingFn: Mapper<T, R>
+) => (
+  list: T[],
+  limit?: number | undefined
+) => (filename: string) => [() => Promise<R[]>, () => void];
+export const parallelMapperFactory: ParallelMapperFactory =
   <T, R>(mappingFn: Mapper<T, R>) =>
   (list: T[], limit?: number) =>
   /**
@@ -10,7 +16,7 @@ export const parallelMapperFactory =
    * @arg string filename
    * @see https://nodejs.org/dist/latest/docs/api/worker_threads.html#worker_threads_new_worker_filename_options
    */
-  (filename: string) =>
+  filename =>
     parallelMapping<T, R>({
       filename,
       workerThreads: worker_threads,

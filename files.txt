@@ -1,0 +1,26 @@
+./
+../
+dist/
+.editorconfig
+files.txt
+.git/
+.gitignore
+.history/
+luxcium-parallel-mapping-2.4.1.tgz
+luxcium-parallel-mapping-2.4.2.tgz
+luxcium-parallel-mapping-2.4.3.tgz
+node_modules/
+original-index.js
+out/
+.prettierrc
+src/
+tsconfig.build.json
+tsconfig.json
+.vscode/
+
+cp 'LICENSE' './dist'
+cp '.npmignore' './dist'
+cp 'PARADÖX.JPEG' './dist'
+cp 'README.md' './dist'
+cp 'package.json' './dist'
+cp 'package-lock.json' './dist'
