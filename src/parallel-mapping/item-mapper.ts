@@ -1,10 +1,14 @@
-/*----------------------------------------------------------------------
- *  Based on work from @userpixel (https://github.com/userpixel)
- *  Copyright (c) 2020 Alex Ewerlöf
- *  Licensed under the MIT License.
- *  See https://github.com/userpixel/cap-parallel/blob/master/LICENSE.md
- *  for original license information.
- *--------------------------------------------------------------------*/
+/* ------------------------------------------------------------------ */
+// + Licensed under the MIT License.                                  */
+/*------------------------------------------------------------------- */
+/*  Copyright (c) 2021 Benjamin Vincent Kasapoglu (Luxcium)           */
+/*  For license information visit:                                    */
+/*  See https://github.com/Luxcium/parallel-mapping/blob/cbf7e/LICENSE*/
+/*--------------------------------------------------------------------*/
+/*  Based on work from @userpixel (https://github.com/userpixel)      */
+/*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
+/*--------------------------------------------------------------------*/
+
 import { WM } from '../types';
 import { restrainingZalgo } from '../utils';
 

@@ -1,19 +1,13 @@
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 // Copyright (c) 2021 Benjamin Vincent Kasapoglu (Luxcium)
 //
-/* ------------------------------------------------------------------ */
-// + Licensed under the MIT License.                                  */
-/*------------------------------------------------------------------- */
-/*  Copyright (c) 2021 Benjamin Vincent Kasapoglu (Luxcium)           */
-/*  For license information visit:                                    */
-/*  See https://github.com/Luxcium/parallel-mapping/blob/cbf7e/LICENSE*/
-/*--------------------------------------------------------------------*/
 
 // const threadWork: ThreadMapper<number, number> = (
 //   workerdata: WorkerData<number>
 // ): number => workerdata.value + 1;
 
-// WORKERFACTORY -------------------------------------------------------
+// // WORKERFACTORY -------------------------------------------------------
 // export const workerThreadFactory =
 //   (filename: string) =>
 //   <T, R>(threadWork: ThreadMapper<T, R>) =>
@@ -27,10 +21,10 @@
 // const [mainWorker_workPayload, threadWorker_startUnit] =
 //   workerFactory(__filename)(threadWork)(worker_threads);
 
-// THREADWORKER ----- ( implied:  NOT isMainThread ) -------------------
+// // THREADWORKER ----- ( implied:  NOT isMainThread ) -------------------
 // threadWorker_startUnit();
 
-// TEST WORK LOAD ------------------------------------------------------
+// // TEST WORK LOAD ------------------------------------------------------
 // const values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(
 //   mainWorker_workPayload<number>()<number>()
 // );
@@ -41,3 +35,11 @@
 //
 // Copyright (c) 2021 Benjamin Vincent Kasapoglu (Luxcium)
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+/*----------------------------------------------------------------------
+ *  Based on work from @userpixel (https://github.com/userpixel)
+ *  Copyright (c) 2020 Alex Ewerlöf
+ *  Licensed under the MIT License.
+ *  See https://github.com/userpixel/cap-parallel/blob/master/LICENSE.md
+ *  for original license information.
+ *--------------------------------------------------------------------*/
