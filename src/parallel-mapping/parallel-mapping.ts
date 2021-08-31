@@ -5,23 +5,27 @@
  *  See https://github.com/userpixel/cap-parallel/blob/master/LICENSE.md
  *  for original license information.
  *--------------------------------------------------------------------*/
-import * as worker_threads from 'worker_threads';
-import { Mapper, ThreadMapper, WorkerData } from '../types';
-import { workerFactory } from '../worker-thread-mapper-factories/worker-factory';
+// import * as worker_threads from 'worker_threads';
+import { Mapper, WT_D } from '../types';
+import { wf } from '../worker-thread-mapper-factories/worker-factory';
 import { mapAllSettled } from './map-allSettled';
 
 //
 // Copyright (c) 2021 Benjamin Vincent Kasapoglu (Luxcium)
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-export async function parallelMapping<T, U>(
+export function parallelMapping<T, U>(
+  filename: string,
+  worker_threads: WT_D<T>,
   arr: T[],
   mappingFn: Mapper<T, U>,
   limit: number = arr.length
-): Promise<U[]> {
-  const threadJob: ThreadMapper<T, U> = (workerdata: WorkerData<T>): U =>
-    mappingFn(workerdata.value, workerdata.index, workerdata.array);
+): [() => Promise<U[]>, () => void] {
+  // const threadJob: ThreadMapper<T, U> = (workerdata: WorkerData<T>): U =>
+  //   mappingFn(workerdata.value, workerdata.index, workerdata.array);
   const [mainWorker, threadWorker] =
-    workerFactory(__filename)(threadJob)(worker_threads);
-  void mainWorker, threadWorker;
-  return mapAllSettled(arr, /*  mapFn, */ limit, mainWorker);
+    wf.fmw(filename)(mappingFn)(worker_threads);
+  return [
+    async () => mapAllSettled<T, U>(arr, limit, mainWorker()),
+    threadWorker(),
+  ];
 }

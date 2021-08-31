@@ -34,3 +34,5 @@ export type WM<T, U> = (
   index?: number,
   array?: readonly T[]
 ) => Promise<U>;
+
+export type WT_D<T> = Worker_Threads<WorkerData<T>>;

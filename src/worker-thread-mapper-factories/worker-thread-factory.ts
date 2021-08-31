@@ -1,7 +1,3 @@
-import * as worker_threads from 'worker_threads';
-import type { ThreadMapper } from '../types';
-import { workerFactory } from '../worker-thread-mapper-factories/worker-factory';
-
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 // Copyright (c) 2021 Benjamin Vincent Kasapoglu (Luxcium)
 //
@@ -11,15 +7,15 @@ import { workerFactory } from '../worker-thread-mapper-factories/worker-factory'
 // ): number => workerdata.value + 1;
 
 // WORKERFACTORY -------------------------------------------------------
-export const workerThreadFactory =
-  (filename: string) =>
-  <T, R>(threadWork: ThreadMapper<T, R>) =>
-    workerFactory(filename)(threadWork)(worker_threads);
+// export const workerThreadFactory =
+//   (filename: string) =>
+//   <T, R>(threadWork: ThreadMapper<T, R>) =>
+//     workerFactory(filename)(threadWork)(worker_threads);
 
-export const wThreadFactory =
-  <T, R>(threadWork: ThreadMapper<T, R>) =>
-  (filename: string) =>
-    workerFactory(filename)(threadWork)(worker_threads);
+// export const wThreadFactory =
+//   <T, R>(threadWork: ThreadMapper<T, R>) =>
+//   (filename: string) =>
+//     workerFactory(filename)(threadWork)(worker_threads);
 
 // const [mainWorker_workPayload, threadWorker_startUnit] =
 //   workerFactory(__filename)(threadWork)(worker_threads);
