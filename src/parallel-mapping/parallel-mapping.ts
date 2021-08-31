@@ -13,19 +13,22 @@ import { mapAllSettled } from './map-allSettled';
 //
 // Copyright (c) 2021 Benjamin Vincent Kasapoglu (Luxcium)
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-export function parallelMapping<T, U>(
-  filename: string,
-  worker_threads: WT_D<T>,
-  arr: T[],
-  mappingFn: Mapper<T, U>,
-  limit: number = arr.length
-): [() => Promise<U[]>, () => void] {
-  // const threadJob: ThreadMapper<T, U> = (workerdata: WorkerData<T>): U =>
-  //   mappingFn(workerdata.value, workerdata.index, workerdata.array);
-  const [mainWorker, threadWorker] =
-    wf.fmw(filename)(mappingFn)(worker_threads);
+export function parallelMapping<T, U>({
+  filename,
+  workerThreads,
+  list,
+  mappingFn,
+  limit = list.length,
+}: {
+  filename: string;
+  workerThreads: WT_D<T>;
+  list: T[];
+  mappingFn: Mapper<T, U>;
+  limit?: number;
+}): [() => Promise<U[]>, () => void] {
+  const [mainWorker, threadWorker] = wf.fmw(filename)(mappingFn)(workerThreads);
   return [
-    async () => mapAllSettled<T, U>(arr, limit, mainWorker()),
+    async () => mapAllSettled<T, U>(list, limit, mainWorker()),
     threadWorker(),
   ];
 }
