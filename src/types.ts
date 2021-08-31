@@ -1,3 +1,11 @@
+/* ------------------------------------------------------------------ */
+// + Licensed under the MIT License.                                  */
+/*------------------------------------------------------------------- */
+/*  Copyright (c) 2021 Benjamin Vincent Kasapoglu (Luxcium)           */
+/*  For license information visit:                                    */
+/*  See https://github.com/Luxcium/parallel-mapping/blob/cbf7e/LICENSE*/
+/*--------------------------------------------------------------------*/
+
 import type { MessagePort, Worker } from 'worker_threads';
 
 /** Partial interface for `worker_threads` module */
