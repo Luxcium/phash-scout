@@ -7,7 +7,7 @@
  *--------------------------------------------------------------------*/
 import * as worker_threads from 'worker_threads';
 import { Mapper, ThreadMapper, WorkerData } from '../types';
-import { workerFactory } from '../worker-factory';
+import { workerFactory } from '../worker-thread-mapper-factories/worker-factory';
 import { mapAllSettled } from './map-allSettled';
 
 //
