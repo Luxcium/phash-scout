@@ -1,10 +1,10 @@
 {
   "name": "@luxcium/parallel-mapping",
   "private": false,
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "",
-  "main": "dist/src/index.js",
-  "types": "dist/typings/index.d.ts",
+  "main": "./src/index.js",
+  "types": "./typings/index.d.ts",
   "scripts": {
     "postinstall": "rimraf dist; tsc -b ./tsconfig.build.json",
     "prepack": "./scripts/prepack.sh",
