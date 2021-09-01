@@ -13,7 +13,7 @@ import { Mapper, WT_D } from '../types';
 import { wf } from '../worker-thread-mapper-factories/worker-factory';
 import { mapAllSettled } from './map-allSettled';
 
-export function processMapping<T, U>({
+export function processMapper<T, U>({
   filename,
   workerThreads,
   list,

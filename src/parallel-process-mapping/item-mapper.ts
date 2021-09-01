@@ -25,10 +25,12 @@ export async function itemMapper<T>(
       status: 'fulfilled',
       value: await mapper_mainWorker(currentValue, index, array),
     };
-  } catch (reason) {
+  } catch (error: any) {
     return {
       status: 'rejected',
-      reason,
+      type: error.name,
+      reason: error.message,
+      // error,
     };
   }
 }

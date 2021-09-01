@@ -76,11 +76,11 @@ async function mapAllSettled<T, U>(
   return result;
 }
 
-async function IO_Mapping<T, U>(
+async function IO_Map<T, U>(
   arr: T[],
   mapFn: Mapper<T, U>,
   limit: number = arr.length
 ): Promise<U[]> {
   return mapAllSettled(arr, mapFn, limit);
 }
-export { IO_Mapping };
+export { IO_Map };

@@ -7,33 +7,18 @@
 /*--------------------------------------------------------------------*/
 
 import * as worker_threads from 'worker_threads';
-import { IO_Mapping, processMapping } from './';
+import { IO_Map, processMap } from './';
 
-main;
-main2();
+const values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as any;
+main();
 async function main() {
-  const values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const [worker, thread] = processMapping({
-    filename: __filename,
-    workerThreads: worker_threads,
-    list: values,
-    limit: 1,
-    mappingFn: (x: number) => x + 1,
-  });
-  thread();
-  worker_threads.isMainThread ? console.log(await worker()) : void 0;
+  const result = processMap(__filename)(values, (x: any) => x * 200, 1);
+  result.thread();
+  worker_threads.isMainThread ? console.log(await result.mapper()) : void 0;
 }
 
+worker_threads.isMainThread ? main2() : void 0;
 async function main2() {
-  const values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const result = IO_Mapping(values, (x: number) => x * 45, 10);
-  // const [worker, thread] = processMapping({
-  //   filename: __filename,
-  //   workerThreads: worker_threads,
-  //   list: values,
-  //   limit: 1,
-  //   mappingFn: (x: number) => x + 1,
-  // });
-  // thread();
+  const result = IO_Map(values, (x: number) => x * 45, 10);
   console.log(await result);
 }

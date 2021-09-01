@@ -8,4 +8,4 @@
 /*  Based on work from @userpixel (https://github.com/userpixel)      */
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
-export { processMapping } from './parallel-mapping';
+export { processMapper } from './parallel-mapping';
