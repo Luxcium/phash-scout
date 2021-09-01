@@ -8,14 +8,14 @@
 /*  Based on work from @userpixel (https://github.com/userpixel)      */
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
-type Mapper = <T, U>(value: T, index: number, array: readonly T[]) => U;
 
 import { promisify } from 'util';
+import { Mapper } from './types';
 
 const setImmediateP = promisify(setImmediate);
 
 async function mapItem<T>(
-  mapFn: Mapper,
+  mapFn: Mapper<T, unknown>,
   currentValue: T,
   index: number,
   array: T[]
@@ -36,7 +36,7 @@ async function mapItem<T>(
 
 async function worker<T>(
   gen: Generator<[T, number, T[]]>,
-  mapFn: Mapper,
+  mapFn: Mapper<T, unknown>,
   result: any
 ) {
   for (let [currentValue, index, array] of gen) {
@@ -53,7 +53,7 @@ function* arrayGenerator<T>(array: T[]): Generator<[T, number, T[]]> {
 
 async function mapAllSettled<T, U>(
   arr: T[],
-  mapFn: Mapper,
+  mapFn: Mapper<T, U>,
   limit: number = arr.length
 ): Promise<U[]> {
   const result: U[] = [];
@@ -78,7 +78,7 @@ async function mapAllSettled<T, U>(
 
 async function IO_Mapping<T, U>(
   arr: T[],
-  mapFn: Mapper,
+  mapFn: Mapper<T, U>,
   limit: number = arr.length
 ): Promise<U[]> {
   return mapAllSettled(arr, mapFn, limit);

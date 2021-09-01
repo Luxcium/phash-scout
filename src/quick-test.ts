@@ -7,9 +7,10 @@
 /*--------------------------------------------------------------------*/
 
 import * as worker_threads from 'worker_threads';
-import { processMapping } from './parallel-process-mapping';
+import { IO_Mapping, processMapping } from './';
 
-main();
+main;
+main2();
 async function main() {
   const values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const [worker, thread] = processMapping({
@@ -21,4 +22,18 @@ async function main() {
   });
   thread();
   worker_threads.isMainThread ? console.log(await worker()) : void 0;
+}
+
+async function main2() {
+  const values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const result = IO_Mapping(values, (x: number) => x + 1, 10);
+  // const [worker, thread] = processMapping({
+  //   filename: __filename,
+  //   workerThreads: worker_threads,
+  //   list: values,
+  //   limit: 1,
+  //   mappingFn: (x: number) => x + 1,
+  // });
+  // thread();
+  worker_threads.isMainThread ? console.log(await result) : void 0;
 }

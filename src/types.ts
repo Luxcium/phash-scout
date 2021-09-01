@@ -58,3 +58,10 @@ export interface iParallelMapping {
     () => void
   ];
 }
+
+export type ParallelProcessMapperFactory = <T, R>(
+  mappingFn: Mapper<T, R>
+) => (
+  list: T[],
+  limit?: number | undefined
+) => (filename: string) => [() => Promise<R[]>, () => void];
