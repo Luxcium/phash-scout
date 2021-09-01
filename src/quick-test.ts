@@ -35,5 +35,5 @@ async function main2() {
   //   mappingFn: (x: number) => x + 1,
   // });
   // thread();
-  worker_threads.isMainThread ? console.log(await result) : void 0;
+  console.log(await result);
 }
