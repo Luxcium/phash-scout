@@ -27,7 +27,25 @@ async function main2() {
   // await main();
 
   const result = IO_Mapper(values, (x: number) => x * 51, 10);
-  console.log(
-    (await result).map(o => (o.status === 'fulfilled' ? o.value : o.reason))
+  const awaitedResult = await result;
+  const settledResult = awaitedResult.map(o =>
+    o.status === 'fulfilled' ? o.value : o.reason
   );
+  console.log(settledResult);
 }
+
+/*
+
+❯ tsc; node "/home/luxcium/src/parallel-mapping/out/src/quick-test-2.js"
+[
+    0,  51, 102, 153,
+  204, 255, 306, 357,
+  408, 459, 510
+]
+[
+    0, 15,  30,  45,  60,
+   75, 90, 105, 120, 135,
+  150
+]
+
+ */
