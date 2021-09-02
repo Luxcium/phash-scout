@@ -17,16 +17,16 @@ export function processMapper<T, U>({
   filename,
   workerThreads,
   list,
-  mappingFn,
+  mapFn,
   limit = list.length,
 }: {
   filename: string;
   workerThreads: WT_D<T>;
   list: T[];
-  mappingFn: Mapper<T, U>;
+  mapFn: Mapper<T, U>;
   limit?: number;
-}): [() => Promise<U[]>, () => void] {
-  const [mainWorker, threadWorker] = wf.fmw(filename)(mappingFn)(workerThreads);
+}): [() => Promise<PromiseSettledResult<U>[]>, () => void] {
+  const [mainWorker, threadWorker] = wf.fmw(filename)(mapFn)(workerThreads);
   return [
     async () => mapAllSettled<T, U>(list, limit, mainWorker()),
     threadWorker(),

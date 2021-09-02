@@ -10,27 +10,60 @@
 /*--------------------------------------------------------------------*/
 
 import { WM } from '../types';
-import { restrainingZalgo } from '../utils';
+import { immediateZalgo, restrainingZalgo } from '../utils';
+/*
 
-export async function itemMapper<T>(
+import { Mapper } from './types';
+import { immediateZalgo, restrainingZalgo } from './utils';
+
+async function mapItem<T, U>(
+  mapFn: Mapper<T, U>,
+  currentValue: T,
+  index: number,
+  array: T[]
+): Promise<PromiseSettledResult<U>> {
+  try {
+    const value = await immediateZalgo(mapFn(currentValue, index, array));
+
+    const promiseFulfilledResult: PromiseFulfilledResult<U> = {
+      status: 'fulfilled',
+      value,
+    };
+    await restrainingZalgo.immediate();
+    return promiseFulfilledResult;
+  } catch (reason) {
+    const promiseRejectedResult: PromiseRejectedResult = {
+      status: 'rejected',
+      reason,
+    };
+    await restrainingZalgo.immediate();
+    return promiseRejectedResult;
+  }
+}
+ */
+export async function itemMapper<T, U>(
   currentValue: T,
   index: number,
   array: T[],
-  mapper_mainWorker: WM<T, unknown>
+  mapper_mainWorker: WM<T, U>
 ) {
-  await restrainingZalgo();
+  const value = await immediateZalgo(
+    mapper_mainWorker(currentValue, index, array)
+  );
 
   try {
-    return {
+    const promiseFulfilledResult: PromiseFulfilledResult<U> = {
       status: 'fulfilled',
-      value: await mapper_mainWorker(currentValue, index, array),
+      value,
     };
-  } catch (error: any) {
-    return {
+    await restrainingZalgo.immediate();
+    return promiseFulfilledResult;
+  } catch (reason) {
+    const promiseRejectedResult: PromiseRejectedResult = {
       status: 'rejected',
-      type: error.name,
-      reason: error.message,
-      // error,
+      reason,
     };
+    await restrainingZalgo.immediate();
+    return promiseRejectedResult;
   }
 }

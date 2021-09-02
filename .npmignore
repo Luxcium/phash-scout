@@ -8,3 +8,7 @@ node_modules
 .npmignore
 .prettierrc
 .vscode
+PARADÖX.JPEG
+ts-build-info.lib
+src/types.js
+src/quick-test.ts

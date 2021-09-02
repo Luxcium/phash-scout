@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     /* Module Resolution Interop Constraints */
-    "target": "es6",
+    "target": "es5",
     "module": "CommonJS",
     "moduleResolution": "node",
     "isolatedModules": false,
@@ -84,10 +84,10 @@
     /* ALWAYS TRUE STRICT TYPE-CHECKING ADDITIONAL CHECKS MUST ALWAYS BE TRUE */
     /*                */
     /* Extra settings */
-    "baseUrl": "./",
-    "paths": {},
-    "rootDirs": [],
-    "typeRoots": [],
+    // "baseUrl": "./",
+    // "paths": {},
+    // "rootDirs": [],
+    // "typeRoots": [],
     // "noLib": true,
     /* Vebosity */
     "pretty": true,

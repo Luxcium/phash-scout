@@ -64,4 +64,6 @@ export type ParallelProcessMapperFactory = <T, R>(
 ) => (
   list: T[],
   limit?: number | undefined
-) => (filename: string) => [() => Promise<R[]>, () => void];
+) => (
+  filename: string
+) => [() => Promise<PromiseSettledResult<R>[]>, () => void];

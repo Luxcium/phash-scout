@@ -2,7 +2,7 @@
   "extends": "./tsconfig",
   "compilerOptions": {
     /* Module Resolution Interop Constraints */
-    "target": "es5",
+    "target": "es6",
     "module": "CommonJS",
     "moduleResolution": "node",
     "isolatedModules": false,
@@ -20,7 +20,7 @@
     "noEmitOnError": false,
     "declarationDir": "./dist/typings",
     "tsBuildInfoFile": "./dist/ts-build-info.lib",
-    "importHelpers": true,
+    "importHelpers": false,
     "noEmitHelpers": false,
     "removeComments": false,
     "importsNotUsedAsValues": "remove",
@@ -32,9 +32,9 @@
     "emitDecoratorMetadata": true,
     /* Source Map and declaration options */
     "declaration": true,
-    "declarationMap": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
+    "declarationMap": false,
+    "inlineSourceMap": false,
+    "inlineSources": false,
     "sourceMap": false,
     "emitDeclarationOnly": false,
     /* Projects */
@@ -85,10 +85,10 @@
     /* ALWAYS TRUE STRICT TYPE-CHECKING ADDITIONAL CHECKS MUST ALWAYS BE TRUE */
     /*                */
     /* Extra settings */
-    "baseUrl": "./",
-    "paths": {},
-    "rootDirs": [],
-    "typeRoots": [],
+    // "baseUrl": "./",
+    // "paths": {},
+    // "rootDirs": [],
+    // "typeRoots": [],
     // "noLib": true,
     /* Vebosity */
     "pretty": true,

@@ -2,7 +2,7 @@ import * as worker_threads from 'worker_threads';
 import { Mapper, ParallelProcessMapperFactory } from '../types';
 import { processMapper } from './';
 export const processMapperFactory: ParallelProcessMapperFactory =
-  <T, U>(mappingFn: Mapper<T, U>) =>
+  <T, U>(mapFn: Mapper<T, U>) =>
   (list: T[], limit?: number) =>
   /**
    * The path to the Worker's main script or module.
@@ -14,7 +14,7 @@ export const processMapperFactory: ParallelProcessMapperFactory =
       filename,
       workerThreads: worker_threads,
       list,
-      mappingFn,
+      mapFn,
       limit,
     });
 
@@ -29,16 +29,16 @@ export const processMapping =
 
 
     (filename: string) =>
-    <T, R>(list: T[], mappingFn: Mapper<T, R>, limit?: number) =>
+    <T, R>(list: T[], mapFn: Mapper<T, R>, limit?: number) =>
       processMapper<T, R>({
         filename,
         workerThreads: worker_threads,
         list,
-        mappingFn,
+        mapFn,
         limit,
       });
-
-export const processMap =
+// IO_Map<T, U>(arr: T[], mapFn:  Mapper<T, U>, limit?: number): Promise<U[]>
+export const CPU_Mapper =
   /**
    * The path to the Worker's main script or module.
    * @arg string filename
@@ -47,12 +47,12 @@ export const processMap =
 
 
     (filename: string) =>
-    <T, R>(list: T[], mappingFn: Mapper<T, R>, limit?: number) => {
+    <T, R>(list: T[], mapFn: Mapper<T, R>, limit?: number) => {
       const [mapper, thread] = processMapper<T, R>({
         filename,
         workerThreads: worker_threads,
         list,
-        mappingFn,
+        mapFn,
         limit,
       });
 

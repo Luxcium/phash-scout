@@ -9,35 +9,38 @@
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
 
-import { promisify } from 'util';
 import { Mapper } from './types';
+import { immediateZalgo, restrainingZalgo } from './utils';
 
-const setImmediateP = promisify(setImmediate);
-
-async function mapItem<T>(
-  mapFn: Mapper<T, unknown>,
+async function mapItem<T, U>(
+  mapFn: Mapper<T, U>,
   currentValue: T,
   index: number,
   array: T[]
-) {
+): Promise<PromiseSettledResult<U>> {
   try {
-    await setImmediateP();
-    return {
+    const value = await immediateZalgo(mapFn(currentValue, index, array));
+
+    const promiseFulfilledResult: PromiseFulfilledResult<U> = {
       status: 'fulfilled',
-      value: await mapFn(currentValue, index, array),
+      value,
     };
+    await restrainingZalgo.immediate();
+    return promiseFulfilledResult;
   } catch (reason) {
-    return {
+    const promiseRejectedResult: PromiseRejectedResult = {
       status: 'rejected',
       reason,
     };
+    await restrainingZalgo.immediate();
+    return promiseRejectedResult;
   }
 }
 
-async function worker<T>(
+async function worker<T, U>(
   gen: Generator<[T, number, T[]]>,
-  mapFn: Mapper<T, unknown>,
-  result: any
+  mapFn: Mapper<T, U>,
+  result: PromiseSettledResult<U>[]
 ) {
   for (let [currentValue, index, array] of gen) {
     result[index] = await mapItem(mapFn, currentValue, index, array);
@@ -55,14 +58,14 @@ async function mapAllSettled<T, U>(
   arr: T[],
   mapFn: Mapper<T, U>,
   limit: number = arr.length
-): Promise<U[]> {
-  const result: U[] = [];
+): Promise<PromiseSettledResult<U>[]> {
+  const result: PromiseSettledResult<U>[] = [];
 
   if (arr.length === 0) {
     return result;
   }
 
-  const gen /* :[T,number,T[]] */ = arrayGenerator(arr);
+  const gen = arrayGenerator(arr);
 
   limit = Math.min(limit, arr.length);
 
@@ -72,15 +75,16 @@ async function mapAllSettled<T, U>(
   }
 
   await Promise.all(workers);
+  // const item = await Promise.allSettled(workers);; void item
 
   return result;
 }
 
-async function IO_Map<T, U>(
+async function IO_Mapper<T, U>(
   arr: T[],
   mapFn: Mapper<T, U>,
   limit: number = arr.length
-): Promise<U[]> {
+): Promise<PromiseSettledResult<U>[]> {
   return mapAllSettled(arr, mapFn, limit);
 }
-export { IO_Map };
+export { IO_Mapper };

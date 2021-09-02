@@ -18,8 +18,8 @@ export async function mapAllSettled<T, U>(
   // mapFn: Mapper<T,U>,
   limit: number = arr.length,
   mainWorker: WT
-): Promise<U[]> {
-  const result: U[] = [];
+): Promise<PromiseSettledResult<U>[]> {
+  const result: PromiseSettledResult<U>[] = [];
 
   if (arr.length === 0) {
     return result;
