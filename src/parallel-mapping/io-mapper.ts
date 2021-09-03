@@ -8,4 +8,15 @@
 /*  Based on work from @userpixel (https://github.com/userpixel)      */
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
-export { processMapper } from './parallel-mapping';
+
+import type { Mapper } from '../types';
+import { mapAllSettled } from './map-allSettled';
+
+async function IO_Mapper<T, U>(
+  arr: T[],
+  mapFn: Mapper<T, U>,
+  limit: number = arr.length
+): Promise<PromiseSettledResult<U>[]> {
+  return mapAllSettled(arr, mapFn, limit);
+}
+export { IO_Mapper };

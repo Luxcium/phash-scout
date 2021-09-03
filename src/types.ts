@@ -16,32 +16,32 @@ export interface Worker_Threads<W> {
   workerData: W;
 }
 export type WorkerData<V> = { value: V; index: number; array: readonly V[] };
-export type WorkerMapper_<U, R> = (workerData: WorkerData<U>) => R;
+// export type WorkerMapper_<U, R> = (workerData: WorkerData<U>) => R;
 
-export type Mapper<T, R> = (
-  value: T,
-  index?: number,
-  array?: readonly T[]
-) => R;
+// export type ThreadMapper<T, R> = (workerData: WorkerData<T>) => R;
 
-export type ThreadMapper<T, R> = (workerData: WorkerData<T>) => R;
+// // export type WorkerMapper = <R>() => Mapper<TVal> &
+// //   (<T>(value: T, index?: number, array?: readonly T[]) => Promise<R>);
 
-// export type WorkerMapper = <R>() => Mapper<TVal> &
-//   (<T>(value: T, index?: number, array?: readonly T[]) => Promise<R>);
+// export type WorkerMapper = <T>() => <U>() => Mapper<T, Promise<U>>; // /* Mapper<TVal,R> & */
+// // (value: T, index?: number, array?: readonly T[]) => Promise<U>;
 
-export type WorkerMapper = <TVal>() => <R>() => /* Mapper<TVal,R> & */
-(value: TVal, index?: number, array?: readonly TVal[]) => Promise<R>;
-
-export type WT = <T>() => <U>() => (
-  value: T,
-  index?: number,
-  array?: readonly T[]
-) => Promise<U>;
-export type WM<T, U> = (
+// export type WT = <T>() => <U>() => Mapper<T, U>; //(
+// //   value: T,
+// //   index?: number,
+// //   array?: readonly T[]
+// // ) => Promise<U>;
+export type PromiseMapper2<T, U> = (
   value: T,
   index?: number,
   array?: readonly T[]
 ) => Promise<U>;
+export type MapperPromise<T, U> = Mapper<T, Promise<U>>;
+export type Mapper<T, U> = (
+  value: T,
+  index?: number,
+  array?: readonly T[]
+) => U;
 
 export type WT_D<T> = Worker_Threads<WorkerData<T>>;
 

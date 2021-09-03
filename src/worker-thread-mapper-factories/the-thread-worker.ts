@@ -8,6 +8,7 @@
 
 import { parentPort, workerData } from 'worker_threads';
 
+/** isMainThread! === false  */
 export function theThreadWorker(func: any) {
   // !!notIsMainThread
   parentPort?.postMessage(func(workerData));

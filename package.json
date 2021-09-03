@@ -3,11 +3,13 @@
   "private": false,
   "version": "0.0.0-dev-0.0.1",
   "description": "",
-  "main": "./src/index.js",
-  "types": "./typings/index.d.ts",
+  "source": "./src/index.ts",
+  "main": "./dist/main.js",
+  "module": "./dist/module.js",
+  "types": "./dist/typings/index.d.ts",
   "scripts": {
-    "postinstall": "rimraf dist; tsc -b ./tsconfig.build.json",
-    "prepack": "./scripts/prepack.sh",
+    "postinstall": "#rimraf dist; tsc -b ./tsconfig.build.json",
+    "prepublish": "./scripts/prepublish.sh",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [],
@@ -15,13 +17,13 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^16.7.4",
-    "am": "^1.0.2",
-    "got": "^11.7.0",
-    "prettier": "^2.3.2",
-    "ts-node": "^10.2.1",
-    "rimraf": "^3.0.2",
-    "tslib": "^2.3.1",
+    "am": "1.0.2",
+    "got": "11.7.0",
+    "parcel": "latest",
+    "prettier": "latest",
+    "rimraf": "latest",
+    "ts-node": "latest",
+    "tslib": "latest",
     "typescript": "~4.4.2"
-  },
-  "dependencies": {}
+  }
 }

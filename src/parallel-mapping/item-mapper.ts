@@ -9,20 +9,28 @@
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
 
-import { WM } from '../types';
-import { itemMapper } from './item-mapper';
-
-export async function worker<T>(
-  gen: Generator<[T, number, T[]]>,
-  result: any,
-  mapper_mainWorker: WM<T, unknown>
-) {
-  for (let [currentItem, index, array] of gen) {
-    result[index] = await itemMapper(
-      currentItem,
-      index,
-      array,
-      mapper_mainWorker
-    );
+import type { Mapper } from '../types';
+import { immediateZalgo, restrainingZalgo } from '../utils';
+export async function itemMapper<T, U>(
+  mapFn: Mapper<T, U | Promise<U>>,
+  currentValue: T,
+  index: number,
+  array: T[]
+): Promise<PromiseSettledResult<U>> {
+  try {
+    const value = await immediateZalgo(mapFn(currentValue, index, array));
+    const promiseFulfilledResult: PromiseFulfilledResult<U> = {
+      status: 'fulfilled',
+      value,
+    };
+    await restrainingZalgo.immediate();
+    return promiseFulfilledResult;
+  } catch (reason) {
+    const promiseRejectedResult: PromiseRejectedResult = {
+      status: 'rejected',
+      reason,
+    };
+    await restrainingZalgo.immediate();
+    return promiseRejectedResult;
   }
 }

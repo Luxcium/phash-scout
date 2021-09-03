@@ -14,8 +14,8 @@
     /* Emit Options */
     "newLine": "lf",
     "noEmit": false,
-    "rootDir": "./src",
-    "outDir": "./dist/src",
+    "rootDir": "./src/",
+    "outDir": "./dist/",
     "incremental": true,
     "noEmitOnError": false,
     "declarationDir": "./dist/typings",

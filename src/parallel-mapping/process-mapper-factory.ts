@@ -1,5 +1,5 @@
 import * as worker_threads from 'worker_threads';
-import { Mapper, ParallelProcessMapperFactory } from '../types';
+import type { Mapper, ParallelProcessMapperFactory } from '../types';
 import { processMapper } from './';
 export const processMapperFactory: ParallelProcessMapperFactory =
   <T, U>(mapFn: Mapper<T, U>) =>
@@ -17,8 +17,6 @@ export const processMapperFactory: ParallelProcessMapperFactory =
       mapFn,
       limit,
     });
-
-// IO_Mapping<T, U>(arr: T[], mapFn:  Mapper<T, U>, limit?: number): Promise<U[]>
 
 export const processMapping =
   /**

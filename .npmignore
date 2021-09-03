@@ -1,4 +1,5 @@
 dist
+out
 *.tgz
 node_modules
 .editorconfig
@@ -8,7 +9,8 @@ node_modules
 .npmignore
 .prettierrc
 .vscode
-PARADÖX.JPEG
+# PARADÖX.JPEG
 ts-build-info.lib
 src/types.js
 src/quick-test.ts
+scripts
