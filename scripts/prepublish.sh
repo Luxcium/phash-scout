@@ -1,6 +1,7 @@
 #!/bin/env zsh
 pwd
-rm -fr dist
+rm -rf dist
+rm -rf out
 tsc -b ./tsconfig.build.json
 cp 'LICENSE' './dist'
 cp '.npmignore' './dist'
