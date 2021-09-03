@@ -8,8 +8,8 @@
   "module": "./dist/module.js",
   "types": "./dist/typings/index.d.ts",
   "scripts": {
-    "postinstall": "#rimraf dist; tsc -b ./tsconfig.build.json",
-    "prepublish": "./scripts/prepublish.sh",
+    "prerelease": "./scripts/prerelease.sh",
+    "release": "./scripts/release.sh",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [],
