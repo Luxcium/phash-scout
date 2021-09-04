@@ -9,16 +9,17 @@
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
 
-import type { Mapper } from '../types';
+import type { ItemMapperArgs } from '../types';
 import { immediateZalgo, restrainingZalgo } from '../utils';
-export async function itemMapper<T, U>(
-  mapFn: Mapper<T, U | Promise<U>>,
-  currentValue: T,
-  index: number,
-  array: T[]
-): Promise<PromiseSettledResult<U>> {
+
+export async function itemMapper<T, U>({
+  mapFn,
+  currentItem,
+  index,
+  array,
+}: ItemMapperArgs<T, U>): Promise<PromiseSettledResult<U>> {
   try {
-    const value = await immediateZalgo(mapFn(currentValue, index, array));
+    const value = await immediateZalgo(mapFn(currentItem, index, array));
     const promiseFulfilledResult: PromiseFulfilledResult<U> = {
       status: 'fulfilled',
       value,

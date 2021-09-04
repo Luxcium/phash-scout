@@ -6,10 +6,16 @@
 /*  See https://github.com/Luxcium/parallel-mapping/blob/cbf7e/LICENSE*/
 /*--------------------------------------------------------------------*/
 
+export interface WorkerOptions {
+  credentials?: RequestCredentials;
+  name?: string;
+  type?: WorkerType;
+}
+
 import { Worker } from 'worker_threads';
 
 /** isMainThread! === true  */
-export function theMainWorker<Q>(script: any, payload: any): Promise<Q> {
+export function theMainWorker<Q>(script: string, payload: any): Promise<Q> {
   // isMainThread!!
   return new Promise((resolve, reject) => {
     const worker = new Worker(script, payload);

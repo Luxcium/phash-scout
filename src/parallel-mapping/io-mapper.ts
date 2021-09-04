@@ -9,14 +9,15 @@
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
 
-import type { Mapper } from '../types';
+import type { IO_MapperArgs, MapAllSettledArgs } from '../types';
 import { mapAllSettled } from './map-allSettled';
 
-async function IO_Mapper<T, U>(
-  arr: T[],
-  mapFn: Mapper<T, U>,
-  limit: number = arr.length
-): Promise<PromiseSettledResult<U>[]> {
-  return mapAllSettled(arr, mapFn, limit);
+async function IO_Mapper<T, U>({
+  list,
+  mapFn,
+  limit = list.length,
+}: IO_MapperArgs<T, U>): Promise<PromiseSettledResult<U>[]> {
+  const mapAllSettledArgs: MapAllSettledArgs<T, U> = { list, mapFn, limit };
+  return mapAllSettled(mapAllSettledArgs);
 }
 export { IO_Mapper };

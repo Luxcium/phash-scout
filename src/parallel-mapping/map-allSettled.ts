@@ -9,28 +9,30 @@
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
 
-import type { Mapper } from '../types';
+import type { MapAllSettledArgs, WorkerArgs } from '../types';
 import { arrayGenerator } from './arrayGenerator';
 import { worker } from './worker';
 
-export async function mapAllSettled<T, U>(
-  arr: T[],
-  mapFn: Mapper<T, U | Promise<U>>,
-  limit: number = arr.length
-): Promise<PromiseSettledResult<U>[]> {
+export async function mapAllSettled<T, U>({
+  list,
+  mapFn,
+  limit = list.length,
+}: MapAllSettledArgs<T, U>): Promise<PromiseSettledResult<U>[]> {
   const result: PromiseSettledResult<U>[] = [];
 
-  if (arr.length === 0) {
+  if (list.length === 0) {
     return result;
   }
 
-  const gen = arrayGenerator(arr);
+  const gen = arrayGenerator(list);
 
-  limit = Math.min(limit, arr.length);
+  limit = Math.min(limit, list.length);
 
   const workers = new Array(limit);
   for (let i = 0; i < limit; i++) {
-    workers.push(worker(gen, mapFn, result));
+    // !! WORKER MUST BE INTANCIATED HERE
+    const workerArgs: WorkerArgs<T, U> = { gen, mapFn, result };
+    workers.push(worker(workerArgs));
   }
 
   await Promise.all(workers);

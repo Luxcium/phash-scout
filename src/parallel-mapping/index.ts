@@ -9,10 +9,10 @@
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
 
-export { IO_Mapper } from './io-mapper';
-export { processMapper } from './parallel-mapping';
 export {
   CPU_Mapper,
   processMapperFactory,
   processMapping,
-} from './process-mapper-factory';
+} from './cpu-mapper-factory';
+export { IO_Mapper } from './io-mapper';
+export { processMapper } from './parallel-mapping';

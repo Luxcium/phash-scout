@@ -6,10 +6,11 @@
 /*  See https://github.com/Luxcium/parallel-mapping/blob/cbf7e/LICENSE*/
 /*--------------------------------------------------------------------*/
 
-import { parentPort, workerData } from 'worker_threads';
+import * as worker_threads from 'worker_threads';
 
 /** isMainThread! === false  */
-export function theThreadWorker(func: any) {
+export function theThreadWorker<F extends Function>(func: F) {
   // !!notIsMainThread
-  parentPort?.postMessage(func(workerData));
+  const { workerData } = worker_threads;
+  worker_threads.parentPort?.postMessage(func(workerData));
 }

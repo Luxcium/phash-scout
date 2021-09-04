@@ -67,3 +67,39 @@ export type ParallelProcessMapperFactory = <T, R>(
 ) => (
   filename: string
 ) => [() => Promise<PromiseSettledResult<R>[]>, () => void];
+
+// ------------------------------------------------------------------ //
+// Functions Object Literal Arguments Types
+
+export type ItemMapperArgs<T, U> = {
+  mapFn: Mapper<T, U | Promise<U>>;
+  currentItem: T;
+  index: number;
+  array: T[];
+};
+
+export type WorkerArgs<T, U> = {
+  gen: Generator<[T, number, T[]]>;
+  mapFn: Mapper<T, U | Promise<U>>;
+  result: PromiseSettledResult<U>[];
+};
+
+export type MapAllSettledArgs<T, U> = {
+  list: T[];
+  mapFn: Mapper<T, U | Promise<U>>;
+  limit?: number;
+};
+
+export type ProcessMapperArgs<T, U> = {
+  filename: string;
+  workerThreads: WT_D<T>;
+  list: T[];
+  mapFn: Mapper<T, U>;
+  limit?: number;
+};
+
+export type IO_MapperArgs<T, U> = {
+  list: T[];
+  mapFn: Mapper<T, U>;
+  limit: number;
+};

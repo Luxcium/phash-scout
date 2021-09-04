@@ -9,15 +9,24 @@
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
 
-import type { Mapper } from '../types';
+import type { ItemMapperArgs, WorkerArgs } from '../types';
 import { itemMapper } from './item-mapper';
 
-export async function worker<T, U>(
-  gen: Generator<[T, number, T[]]>,
-  mapFn: Mapper<T, U | Promise<U>>,
-  result: PromiseSettledResult<U>[]
-) {
+export async function worker<T, U>({ gen, mapFn, result }: WorkerArgs<T, U>) {
+  // !!
+  // !! !! WORKER MAPPING SHOULD BE AT THIS LEVEL OF ABSTRACTION !
+  // !!
   for (let [currentItem, index, array] of gen) {
-    result[index] = await itemMapper(mapFn, currentItem, index, array);
+    const itemMapperArgs: ItemMapperArgs<T, U> = {
+      mapFn,
+      currentItem,
+      index,
+      array,
+    };
+
+    // !!
+    // !! !! SIDE EFFECTS HERE ↓
+    // !!
+    result[index] = await itemMapper(itemMapperArgs);
   }
 }
