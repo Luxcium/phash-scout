@@ -1,29 +1,39 @@
 {
   "name": "@luxcium/parallel-mapper",
   "private": false,
-  "version": "0.0.0-rc-0.0.0",
+  "version": "0.0.0-rc-0.0.1",
   "description": "",
-  "source": "./src/index.ts",
-  "main": "./dist/main.js",
-  "module": "./dist/module.js",
-  "types": "./dist/typings/index.d.ts",
+  "main": "./index.js",
+  "types": "./typings/index.d.ts",
+  "engines": {
+    "node": ">= 12"
+  },
+  "isLibrary": true,
   "scripts": {
+    "build": "parcel build --no-cache",
     "prerelease": "./scripts/prerelease.sh",
     "release": "./scripts/release.sh",
+    "check": "tsc --noEmit",
+    "lint": "echo \"Error: no linter specified\" && exit 0",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [],
   "author": "Benjamin Vincent (Luxcium)",
   "license": "MIT",
   "devDependencies": {
+    "@parcel/transformer-typescript-tsc": "^2.0.0-nightly.826",
+    "@parcel/transformer-typescript-types": "^2.0.0-nightly.826",
+    "@parcel/validator-typescript": "^2.0.0-nightly.826",
     "@types/node": "^16.7.4",
     "am": "1.0.2",
     "got": "11.7.0",
-    "parcel": "latest",
+    "parcel": "^2.0.0-nightly.824",
     "prettier": "latest",
     "rimraf": "latest",
     "ts-node": "latest",
-    "tslib": "latest",
     "typescript": "~4.4.2"
+  },
+  "dependencies": {
+    "tslib": "^2.3.1"
   }
 }

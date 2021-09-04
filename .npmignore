@@ -7,10 +7,12 @@ node_modules
 .gitignore
 .history
 .npmignore
+.parcelrc
 .prettierrc
 .vscode
-# PARADÖX.JPEG
+PARADÖX.JPEG
 ts-build-info.lib
 src/types.js
-src/quick-test.ts
+**/*quick-test*
 scripts
+tests

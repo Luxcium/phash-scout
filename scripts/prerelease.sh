@@ -11,5 +11,6 @@ cp 'package.json' './dist'
 cp 'package-lock.json' './dist'
 rm -f *.tgz
 cd ./dist;
+rm -rf tests
 pwd
 npm pack --pack-destination ../
