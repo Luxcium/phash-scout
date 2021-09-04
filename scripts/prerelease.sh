@@ -1,5 +1,6 @@
 #!/bin/env zsh
 pwd
+
 rm -rf dist
 rm -rf out
 tsc -b ./tsconfig.build.json

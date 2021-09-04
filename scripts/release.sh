@@ -1,3 +1,7 @@
 #!/bin/env zsh
 pwd
-npm publish *.tgz --tag "$(getstamp)" --access public
+export TAG_=$(getstamp)
+npm publish *.tgz --tag "$TAG_" --access public
+echo ""
+echo "$TAG_"
+echo ""
