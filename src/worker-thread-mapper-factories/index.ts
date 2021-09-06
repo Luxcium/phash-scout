@@ -1,3 +1,3 @@
-export { theMainWorker } from './the-main-worker';
+export { getAsyncWorker } from './the-main-worker';
 export { theThreadWorker } from './the-thread-worker';
-export { workerFactory } from './worker-factory';
+export { makeMainWorker2, workerFactory } from './worker-factory';

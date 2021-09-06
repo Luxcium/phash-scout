@@ -16,6 +16,7 @@ export async function worker<T, U>({ gen, mapFn, result }: WorkerArgs<T, U>) {
   // !!
   // !! !! WORKER MAPPING SHOULD BE AT THIS LEVEL OF ABSTRACTION !
   // !!
+
   for (let [currentItem, index, array] of gen) {
     const itemMapperArgs: ItemMapperArgs<T, U> = {
       mapFn,
@@ -24,9 +25,7 @@ export async function worker<T, U>({ gen, mapFn, result }: WorkerArgs<T, U>) {
       array,
     };
 
-    // !!
-    // !! !! SIDE EFFECTS HERE ↓
-    // !!
+    // SIDE EFFECTS:
     result[index] = await itemMapper(itemMapperArgs);
   }
 }

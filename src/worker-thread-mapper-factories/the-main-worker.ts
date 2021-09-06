@@ -6,18 +6,14 @@
 /*  See https://github.com/Luxcium/parallel-mapping/blob/cbf7e/LICENSE*/
 /*--------------------------------------------------------------------*/
 
-export interface WorkerOptions {
-  credentials?: RequestCredentials;
-  name?: string;
-  type?: WorkerType;
-}
-
 import { Worker } from 'worker_threads';
 
 /** isMainThread! === true  */
-export function theMainWorker<Q>(script: string, payload: any): Promise<Q> {
-  // isMainThread!!
+export function getAsyncWorker<Q, P>(script: string, payload: P): Promise<Q> {
   return new Promise((resolve, reject) => {
+    // &---------------------------------------------------------------+
+    // ++--- getAsyncWorker -------------------------------------------+
+    //
     const worker = new Worker(script, payload);
     worker.on('message', resolve);
     worker.on('error', reject);
@@ -25,5 +21,8 @@ export function theMainWorker<Q>(script: string, payload: any): Promise<Q> {
       if (code !== 0)
         reject(new Error(`Worker stopped with exit code ${code}`));
     });
+    //
+    // ++--------------------------------------------------------------+
+    // &---------------------------------------------------------------+
   });
 }

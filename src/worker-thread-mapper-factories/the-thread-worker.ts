@@ -8,9 +8,18 @@
 
 import * as worker_threads from 'worker_threads';
 
-/** isMainThread! === false  */
-export function theThreadWorker<F extends Function>(func: F) {
-  // !!notIsMainThread
-  const { workerData } = worker_threads;
-  worker_threads.parentPort?.postMessage(func(workerData));
+/** worker_threads.isMainThread! === false  */
+export function theThreadWorker<F extends Function, Z = any>(func: F): boolean {
+  // &-----------------------------------------------------------------+
+  // ++--- theThreadWorker --------------------------------------------+
+  if (worker_threads.isMainThread! === false) {
+    const { workerData }: { workerData: Z } = worker_threads;
+
+    worker_threads.parentPort!.postMessage(func(workerData));
+    return true;
+  }
+  return false;
+  //
+  // ++----------------------------------------------------------------+
+  // &-----------------------------------------------------------------+
 }

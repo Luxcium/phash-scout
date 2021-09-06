@@ -15,7 +15,18 @@ export interface Worker_Threads<W> {
   Worker: typeof Worker;
   workerData: W;
 }
-export type WorkerData<V> = { value: V; index: number; array: readonly V[] };
+
+interface WorkerOptions {
+  credentials?: RequestCredentials;
+  name?: string;
+  type?: WorkerType;
+}
+
+export interface WorkerData<V> extends WorkerOptions {
+  value: V;
+  index: number;
+  array: readonly V[];
+}
 // export type WorkerMapper_<U, R> = (workerData: WorkerData<U>) => R;
 
 // export type ThreadMapper<T, R> = (workerData: WorkerData<T>) => R;

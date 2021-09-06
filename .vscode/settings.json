@@ -136,8 +136,7 @@
   "better-comments.highlightPlainText": true,
   "better-comments.multilineComments": true,
   "better-comments.tags": [
-    // #region: sdsdsdsdsds
-    // #endregion:
+    // #region:
     {
       "tag": "#region",
       "color": "#FF3",
@@ -150,6 +149,7 @@
       "strikethrough": false,
       "backgroundColor": "#F154"
     },
+    // #endregion:
     // SECTIONS
     // {
     //   "tag": "r-egion",
