@@ -56,8 +56,8 @@ export async function miniTest_01b() {
   const limit = 10;
 
   const IOMapperParams: IO_MapperArgs<number, number> & {
-    count: { [K: string]: number };
-  } = { list, mapFn, limit, count: count_IO };
+    inDebugMode: { [K: string]: number };
+  } = { list, mapFn, limit, inDebugMode: count_IO };
 
   const result = IO_Mapper(IOMapperParams);
   const awaitedResult = await result;
@@ -83,8 +83,8 @@ export async function miniTest_02b() {
   const limit = 10;
 
   const IOMapperArgs: IO_MapperArgs<number, number> & {
-    count: { [K: string]: number };
-  } = { list, mapFn, limit, count: count_IO };
+    inDebugMode: { [K: string]: number };
+  } = { list, mapFn, limit, inDebugMode: count_IO };
 
   const result = IO_Mapper(IOMapperArgs);
   const awaitedResult = await result;

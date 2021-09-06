@@ -72,7 +72,7 @@ export interface iParallelMapping {
 
 export type ParallelProcessMapperFactory = <T, R>(
   mappingFn: Mapper<T, R>,
-  count?: { [K: string]: number }
+  inDebugMode?: { [K: string]: number }
 ) => (
   list: T[],
   limit?: number | undefined

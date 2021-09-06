@@ -16,23 +16,23 @@ export async function worker<T, U>({
   gen,
   mapFn,
   result,
-  count,
-}: WorkerArgs<T, U> & { count?: { [K: string]: number } }) {
+  inDebugMode,
+}: WorkerArgs<T, U> & { inDebugMode?: { [K: string]: number } }) {
   // !!
   // !! !! WORKER MAPPING SHOULD BE AT THIS LEVEL OF ABSTRACTION !
   // !!
 
   for (let [currentItem, index, array] of gen) {
     const itemMapperArgs: ItemMapperArgs<T, U> & {
-      count?: { [K: string]: number };
+      inDebugMode?: { [K: string]: number };
     } = {
       mapFn,
       currentItem,
       index,
       array,
-      count,
+      inDebugMode,
     };
-    // if (count) console.log('worker:', count.W++);
+    // if (inDebugMode) console.log('worker:', inDebugMode.W++);
     // SIDE EFFECTS:
     result[index] = await itemMapper(itemMapperArgs);
   }

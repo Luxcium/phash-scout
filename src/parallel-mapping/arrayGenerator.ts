@@ -10,12 +10,12 @@
 /*--------------------------------------------------------------------*/
 export function* arrayGenerator<T>(
   array: T[],
-  count: any
+  inDebugMode: any
 ): Generator<[T, number, T[]]> {
-  if (count) console.log('OUTSIDE GENERATOR LOOP:', count.B++);
+  if (inDebugMode) console.log('OUTSIDE GENERATOR LOOP:', inDebugMode.B++);
 
   for (let index = 0; index < array.length; index++) {
-    if (count) console.log('INSIDE GENERATOR LOOP:', count.C++);
+    if (inDebugMode) console.log('INSIDE GENERATOR LOOP:', inDebugMode.C++);
 
     const currentValue = array[index];
     yield [currentValue, index, array];

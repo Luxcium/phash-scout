@@ -17,17 +17,17 @@ export async function mapAllSettled<T, U>({
   list,
   mapFn,
   limit = list.length,
-  count,
-}: MapAllSettledArgs<T, U> & { count?: { [K: string]: number } }): Promise<
-  PromiseSettledResult<U>[]
-> {
+  inDebugMode,
+}: MapAllSettledArgs<T, U> & {
+  inDebugMode?: { [K: string]: number };
+}): Promise<PromiseSettledResult<U>[]> {
   const result: PromiseSettledResult<U>[] = [];
 
   if (list.length === 0) {
     return result;
   }
 
-  const gen = arrayGenerator(list, count);
+  const gen = arrayGenerator(list, inDebugMode);
 
   limit = Math.min(limit, list.length);
 
@@ -35,11 +35,13 @@ export async function mapAllSettled<T, U>({
   for (let i = 0; i < limit; i++) {
     // !! WORKER MUST BE INTANCIATED HERE
 
-    const workerArgs: WorkerArgs<T, U> & { count?: { [K: string]: number } } = {
+    const workerArgs: WorkerArgs<T, U> & {
+      inDebugMode?: { [K: string]: number };
+    } = {
       gen,
       mapFn,
       result,
-      count,
+      inDebugMode,
     };
     // SIDE EFFECTS:
     workers.push(worker(workerArgs));

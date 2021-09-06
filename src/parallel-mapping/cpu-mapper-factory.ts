@@ -2,7 +2,7 @@ import * as worker_threads from 'worker_threads';
 import { processMapper } from '.';
 import type { Mapper, ParallelProcessMapperFactory } from '../types';
 export const processMapperFactory: ParallelProcessMapperFactory =
-  <T, U>(mapFn: Mapper<T, U>, count?: { [K: string]: number }) =>
+  <T, U>(mapFn: Mapper<T, U>, inDebugMode?: { [K: string]: number }) =>
   (list: T[], limit?: number) =>
   /**
    * The path to the Worker's main script or module.
@@ -16,7 +16,7 @@ export const processMapperFactory: ParallelProcessMapperFactory =
       list,
       mapFn,
       limit,
-      count,
+      inDebugMode,
     });
 
 export const processMapping =
@@ -32,7 +32,7 @@ export const processMapping =
       list: T[],
       mapFn: Mapper<T, R>,
       limit?: number,
-      count?: { [K: string]: number }
+      inDebugMode?: { [K: string]: number }
     ) =>
       processMapper<T, R>({
         filename,
@@ -40,7 +40,7 @@ export const processMapping =
         list,
         mapFn,
         limit,
-        count,
+        inDebugMode,
       });
 // IO_Map<T, U>(arr: T[], mapFn:  Mapper<T, U>, limit?: number): Promise<U[]>
 export const CPU_Mapper =
@@ -56,7 +56,7 @@ export const CPU_Mapper =
       list: T[],
       mapFn: Mapper<T, R>,
       limit?: number,
-      count?: { [K: string]: number }
+      inDebugMode?: { [K: string]: number }
     ) => {
       const [mapper, thread] = processMapper<T, R>({
         filename,
@@ -64,7 +64,7 @@ export const CPU_Mapper =
         list,
         mapFn,
         limit,
-        count,
+        inDebugMode,
       });
 
       return { mapper, thread };

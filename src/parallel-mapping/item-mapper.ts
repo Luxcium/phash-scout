@@ -17,19 +17,19 @@ export async function itemMapper<T, U>({
   currentItem,
   index,
   array,
-  count,
+  inDebugMode,
 }: ItemMapperArgs<T, U> & {
-  count?: { [K: string]: number };
+  inDebugMode?: { [K: string]: number };
 }): Promise<PromiseSettledResult<U>> {
   try {
     let tz = immediateZalgo;
 
-    if (count) {
+    if (inDebugMode) {
       // #region HACK:                                                 !
       // HACK:→  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  !
       //
       let delay = 1000;
-      if (count) delay = count.delay;
+      if (inDebugMode) delay = inDebugMode.delay;
       tz = (value: any) => timeoutZalgo(delay, value);
       //
       // & →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  !

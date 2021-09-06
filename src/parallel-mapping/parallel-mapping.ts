@@ -19,9 +19,9 @@ export function processMapper<T, U>({
   list,
   mapFn,
   limit = list.length,
-  count,
+  inDebugMode,
 }: ProcessMapperArgs<T, U> & {
-  count?: { [K: string]: number };
+  inDebugMode?: { [K: string]: number };
 }): [() => Promise<PromiseSettledResult<U>[]>, () => void] {
   const [mainWorker, threadWorker] = workerFactory(
     filename,
@@ -30,12 +30,12 @@ export function processMapper<T, U>({
   );
   const workerMapFn: Mapper<T, Promise<U>> = mainWorker;
   const mapAllSettledArgs: MapAllSettledArgs<T, U> & {
-    count?: { [K: string]: number };
+    inDebugMode?: { [K: string]: number };
   } = {
     list,
     mapFn: workerMapFn,
     limit,
-    count,
+    inDebugMode,
   };
   return [async () => mapAllSettled<T, U>(mapAllSettledArgs), threadWorker()];
 }
