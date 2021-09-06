@@ -6,7 +6,7 @@
 /*  See https://github.com/Luxcium/parallel-mapping/blob/cbf7e/LICENSE*/
 /*--------------------------------------------------------------------*/
 const delay = 2000;
-const count_CPU = {
+const debugMode_CPU = {
   A: 1,
   B: 1,
   C: 1,
@@ -15,7 +15,17 @@ const count_CPU = {
   W: 1,
   delay,
 };
-const count_IO = {
+const debugMode_IO2b = {
+  A: 1,
+  B: 1,
+  C: 1,
+  D: 1,
+  E: 1,
+  W: 1,
+  delay,
+};
+
+const debugMode_IO1b = {
   A: 1,
   B: 1,
   C: 1,
@@ -43,7 +53,7 @@ export async function main() {
 main();
 export async function miniTest_01a() {
   const processMapper = CPU_Mapper(__filename);
-  const result = processMapper(values, (x: any) => x * 15, 1, count_CPU);
+  const result = processMapper(values, (x: any) => x * 15, 1, debugMode_CPU);
 
   result.thread();
   const awaitedResult = await result.mapper();
@@ -57,7 +67,7 @@ export async function miniTest_01b() {
 
   const IOMapperParams: IO_MapperArgs<number, number> & {
     inDebugMode: { [K: string]: number };
-  } = { list, mapFn, limit, inDebugMode: count_IO };
+  } = { list, mapFn, limit, inDebugMode: debugMode_IO1b };
 
   const result = IO_Mapper(IOMapperParams);
   const awaitedResult = await result;
@@ -84,7 +94,7 @@ export async function miniTest_02b() {
 
   const IOMapperArgs: IO_MapperArgs<number, number> & {
     inDebugMode: { [K: string]: number };
-  } = { list, mapFn, limit, inDebugMode: count_IO };
+  } = { list, mapFn, limit, inDebugMode: debugMode_IO2b };
 
   const result = IO_Mapper(IOMapperArgs);
   const awaitedResult = await result;
