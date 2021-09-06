@@ -32,7 +32,7 @@ export async function worker<T, U>({
       array,
       count,
     };
-    console.log('X');
+    // if (count) console.log('worker:', count.W++);
     // SIDE EFFECTS:
     result[index] = await itemMapper(itemMapperArgs);
   }

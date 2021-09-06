@@ -10,7 +10,7 @@
 /*--------------------------------------------------------------------*/
 
 import type { ItemMapperArgs } from '../types';
-import { immediateZalgo, restrainingZalgo } from '../utils';
+import { immediateZalgo, restrainingZalgo, timeoutZalgo } from '../utils';
 
 export async function itemMapper<T, U>({
   mapFn,
@@ -18,12 +18,25 @@ export async function itemMapper<T, U>({
   index,
   array,
   count,
-}: ItemMapperArgs<T, U> & { count?: { [K: string]: number } }): Promise<
-  PromiseSettledResult<U>
-> {
+}: ItemMapperArgs<T, U> & {
+  count?: { [K: string]: number };
+}): Promise<PromiseSettledResult<U>> {
   try {
-    if (count) console.log(count.A++);
-    const value = await immediateZalgo(mapFn(currentItem, index, array));
+    let tz = immediateZalgo;
+
+    if (count) {
+      // #region HACK:                                                 !
+      // HACK:→  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  !
+      //
+      let delay = 1000;
+      if (count) delay = count.delay;
+      tz = (value: any) => timeoutZalgo(delay, value);
+      //
+      // & →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  →  !
+      // #endregion                                                    !
+    }
+
+    const value = await tz(mapFn(currentItem, index, array));
     const promiseFulfilledResult: PromiseFulfilledResult<U> = {
       status: 'fulfilled',
       value,
@@ -39,3 +52,5 @@ export async function itemMapper<T, U>({
     return promiseRejectedResult;
   }
 }
+// const tz = (value: any) => timeoutZalgo(5000, value);
+//

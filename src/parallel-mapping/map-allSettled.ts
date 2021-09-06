@@ -27,7 +27,7 @@ export async function mapAllSettled<T, U>({
     return result;
   }
 
-  const gen = arrayGenerator(list);
+  const gen = arrayGenerator(list, count);
 
   limit = Math.min(limit, list.length);
 
