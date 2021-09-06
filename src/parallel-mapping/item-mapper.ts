@@ -17,8 +17,12 @@ export async function itemMapper<T, U>({
   currentItem,
   index,
   array,
-}: ItemMapperArgs<T, U>): Promise<PromiseSettledResult<U>> {
+  count,
+}: ItemMapperArgs<T, U> & { count?: { [K: string]: number } }): Promise<
+  PromiseSettledResult<U>
+> {
   try {
+    if (count) console.log(count.A++);
     const value = await immediateZalgo(mapFn(currentItem, index, array));
     const promiseFulfilledResult: PromiseFulfilledResult<U> = {
       status: 'fulfilled',

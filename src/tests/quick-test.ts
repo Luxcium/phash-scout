@@ -5,7 +5,13 @@
 /*  For license information visit:                                    */
 /*  See https://github.com/Luxcium/parallel-mapping/blob/cbf7e/LICENSE*/
 /*--------------------------------------------------------------------*/
-
+const count = {
+  A: 0,
+  B: 0,
+  C: 0,
+  D: 0,
+  E: 0,
+};
 import * as worker_threads from 'worker_threads';
 import { CPU_Mapper, IO_Mapper } from '..';
 import { IO_MapperArgs } from '../types';
@@ -17,7 +23,7 @@ export const values = [
 
 export async function main() {
   await miniTest_01a();
-  // worker_threads.isMainThread ? miniTest_01b() : void null;
+  worker_threads.isMainThread ? miniTest_01b() : void null;
   // await miniTest_02a();
   // worker_threads.isMainThread ? miniTest_02b() : void null;
 }
@@ -36,7 +42,9 @@ export async function miniTest_01b() {
   const mapFn = (x: number) => x * 51;
   const limit = 10;
 
-  const IOMapperParams: IO_MapperArgs<number, number> = { list, mapFn, limit };
+  const IOMapperParams: IO_MapperArgs<number, number> & {
+    count: { [K: string]: number };
+  } = { list, mapFn, limit, count };
 
   const result = IO_Mapper(IOMapperParams);
   const awaitedResult = await result;
@@ -61,7 +69,9 @@ export async function miniTest_02b() {
   const mapFn = (x: number) => x * 51;
   const limit = 10;
 
-  const IOMapperArgs: IO_MapperArgs<number, number> = { list, mapFn, limit };
+  const IOMapperArgs: IO_MapperArgs<number, number> & {
+    count: { [K: string]: number };
+  } = { list, mapFn, limit, count };
 
   const result = IO_Mapper(IOMapperArgs);
   const awaitedResult = await result;

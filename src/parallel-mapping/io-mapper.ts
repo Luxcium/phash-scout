@@ -16,8 +16,13 @@ async function IO_Mapper<T, U>({
   list,
   mapFn,
   limit = list.length,
-}: IO_MapperArgs<T, U>): Promise<PromiseSettledResult<U>[]> {
-  const mapAllSettledArgs: MapAllSettledArgs<T, U> = { list, mapFn, limit };
+  count,
+}: IO_MapperArgs<T, U> & { count: { [K: string]: number } }): Promise<
+  PromiseSettledResult<U>[]
+> {
+  const mapAllSettledArgs: MapAllSettledArgs<T, U> & {
+    count: { [K: string]: number };
+  } = { count, list, mapFn, limit };
   return mapAllSettled(mapAllSettledArgs);
 }
 export { IO_Mapper };

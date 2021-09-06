@@ -17,7 +17,10 @@ export async function mapAllSettled<T, U>({
   list,
   mapFn,
   limit = list.length,
-}: MapAllSettledArgs<T, U>): Promise<PromiseSettledResult<U>[]> {
+  count,
+}: MapAllSettledArgs<T, U> & { count?: { [K: string]: number } }): Promise<
+  PromiseSettledResult<U>[]
+> {
   const result: PromiseSettledResult<U>[] = [];
 
   if (list.length === 0) {
@@ -32,7 +35,12 @@ export async function mapAllSettled<T, U>({
   for (let i = 0; i < limit; i++) {
     // !! WORKER MUST BE INTANCIATED HERE
 
-    const workerArgs: WorkerArgs<T, U> = { gen, mapFn, result };
+    const workerArgs: WorkerArgs<T, U> & { count?: { [K: string]: number } } = {
+      gen,
+      mapFn,
+      result,
+      count,
+    };
     // SIDE EFFECTS:
     workers.push(worker(workerArgs));
   }

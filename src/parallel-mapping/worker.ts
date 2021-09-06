@@ -12,19 +12,27 @@
 import type { ItemMapperArgs, WorkerArgs } from '../types';
 import { itemMapper } from './item-mapper';
 
-export async function worker<T, U>({ gen, mapFn, result }: WorkerArgs<T, U>) {
+export async function worker<T, U>({
+  gen,
+  mapFn,
+  result,
+  count,
+}: WorkerArgs<T, U> & { count?: { [K: string]: number } }) {
   // !!
   // !! !! WORKER MAPPING SHOULD BE AT THIS LEVEL OF ABSTRACTION !
   // !!
 
   for (let [currentItem, index, array] of gen) {
-    const itemMapperArgs: ItemMapperArgs<T, U> = {
+    const itemMapperArgs: ItemMapperArgs<T, U> & {
+      count?: { [K: string]: number };
+    } = {
       mapFn,
       currentItem,
       index,
       array,
+      count,
     };
-
+    console.log('X');
     // SIDE EFFECTS:
     result[index] = await itemMapper(itemMapperArgs);
   }
