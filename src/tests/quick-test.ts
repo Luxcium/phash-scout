@@ -5,7 +5,12 @@
 /*  For license information visit:                                    */
 /*  See https://github.com/Luxcium/parallel-mapping/blob/cbf7e/LICENSE*/
 /*--------------------------------------------------------------------*/
-const delay = 2000;
+import * as worker_threads from 'worker_threads';
+import { CPU_Mapper, IO_Mapper } from '..';
+import { IO_MapperArgs } from '../types';
+
+const delay = 10000;
+
 const debugMode_CPU = {
   A: 1,
   B: 1,
@@ -34,15 +39,17 @@ const debugMode_IO1b = {
   W: 1,
   delay,
 };
-import * as worker_threads from 'worker_threads';
-import { CPU_Mapper, IO_Mapper } from '..';
-import { IO_MapperArgs } from '../types';
+
+const items = 100;
+const steps = Math.floor(items / 1);
 export const values = [
-  1, 2,
-  /* 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-  23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
-  42, 43, 44, 45, 46, 47, 48, 49, 50, */
-];
+  1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+  22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+  41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 50, 49, 48, 47, 46, 45, 44, 43,
+  42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24,
+  23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3,
+  2, 1,
+].slice(0, items);
 
 export async function main() {
   await miniTest_01a();
@@ -53,12 +60,18 @@ export async function main() {
 main();
 export async function miniTest_01a() {
   const processMapper = CPU_Mapper(__filename);
-  const result = processMapper(values, (x: any) => x * 15, 1, debugMode_CPU);
+  const result = processMapper(
+    values,
+    (x: any) => x * 15,
+    steps,
+    debugMode_CPU
+  );
 
   result.thread();
-  const awaitedResult = await result.mapper();
-
-  worker_threads.isMainThread ? console.log(awaitedResult) : void null;
+  if (worker_threads.isMainThread) {
+    const awaitedResult = async () => await result.mapper();
+    console.log(await awaitedResult());
+  }
 }
 export async function miniTest_01b() {
   const list = values;
@@ -90,7 +103,7 @@ export async function miniTest_02a() {
 export async function miniTest_02b() {
   const list = values;
   const mapFn = (x: number) => x * 51;
-  const limit = 10;
+  const limit = steps;
 
   const IOMapperArgs: IO_MapperArgs<number, number> & {
     inDebugMode: { [K: string]: number };
@@ -103,3 +116,10 @@ export async function miniTest_02b() {
   );
   console.log(settledResult);
 }
+
+/*
+
+
+
+
+  */

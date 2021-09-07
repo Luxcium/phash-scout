@@ -6,7 +6,7 @@
 /*  See https://github.com/Luxcium/parallel-mapping/blob/cbf7e/LICENSE*/
 /*--------------------------------------------------------------------*/
 
-import { TimerOptions } from 'timers';
+import type { TimerOptions } from 'timers';
 import { promisify } from 'util';
 
 export const immediateZalgo = <T = void>(

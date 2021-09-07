@@ -24,7 +24,7 @@
     "@parcel/transformer-typescript-tsc": "^2.0.0-nightly.826",
     "@parcel/transformer-typescript-types": "^2.0.0-nightly.826",
     "@parcel/validator-typescript": "^2.0.0-nightly.826",
-    "@types/node": "^16.7.4",
+    "@types/node": "^16.7.13",
     "am": "1.0.2",
     "got": "11.7.0",
     "parcel": "^2.0.0-nightly.824",

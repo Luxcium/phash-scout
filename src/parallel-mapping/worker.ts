@@ -18,10 +18,9 @@ export async function worker<T, U>({
   result,
   inDebugMode,
 }: WorkerArgs<T, U> & { inDebugMode?: { [K: string]: number } }) {
-  // !!
-  // !! !! WORKER MAPPING SHOULD BE AT THIS LEVEL OF ABSTRACTION !
-  // !!
-
+  // &-----------------------------------------------------------------+
+  // ++--- worker -----------------------------------------------------+
+  //
   for (let [currentItem, index, array] of gen) {
     const itemMapperArgs: ItemMapperArgs<T, U> & {
       inDebugMode?: { [K: string]: number };
@@ -36,4 +35,7 @@ export async function worker<T, U>({
     // SIDE EFFECTS:
     result[index] = await itemMapper(itemMapperArgs);
   }
+  //
+  // ++----------------------------------------------------------------+
+  // &-----------------------------------------------------------------+
 }

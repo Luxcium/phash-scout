@@ -21,6 +21,9 @@ export async function mapAllSettled<T, U>({
 }: MapAllSettledArgs<T, U> & {
   inDebugMode?: { [K: string]: number };
 }): Promise<PromiseSettledResult<U>[]> {
+  // &-----------------------------------------------------------------+
+  // ++--- mapAllSettled ----------------------------------------------+
+  //
   const result: PromiseSettledResult<U>[] = [];
 
   if (list.length === 0) {
@@ -33,8 +36,6 @@ export async function mapAllSettled<T, U>({
 
   const workers = new Array(limit);
   for (let i = 0; i < limit; i++) {
-    // !! WORKER MUST BE INTANCIATED HERE
-
     const workerArgs: WorkerArgs<T, U> & {
       inDebugMode?: { [K: string]: number };
     } = {
@@ -50,4 +51,7 @@ export async function mapAllSettled<T, U>({
   await Promise.all(workers);
 
   return result;
+  //
+  // ++----------------------------------------------------------------+
+  // &-----------------------------------------------------------------+
 }

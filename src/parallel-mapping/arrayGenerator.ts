@@ -12,6 +12,9 @@ export function* arrayGenerator<T>(
   array: T[],
   inDebugMode: any
 ): Generator<[T, number, T[]]> {
+  // &-----------------------------------------------------------------+
+  // ++--- arrayGenerator ---------------------------------------------+
+  //
   if (inDebugMode) console.log('OUTSIDE GENERATOR LOOP:', inDebugMode.B++);
 
   for (let index = 0; index < array.length; index++) {
@@ -20,4 +23,7 @@ export function* arrayGenerator<T>(
     const currentValue = array[index];
     yield [currentValue, index, array];
   }
+  //
+  // ++----------------------------------------------------------------+
+  // &-----------------------------------------------------------------+
 }
