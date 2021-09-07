@@ -10,7 +10,6 @@ import { CPU_Mapper, IO_Mapper } from '..';
 import { IO_MapperArgs } from '../types';
 
 const delay = 10000;
-
 const debugMode_CPU = {
   A: 1,
   B: 1,
@@ -51,6 +50,7 @@ export const values = [
   2, 1,
 ].slice(0, items);
 
+// https://git.io/JuC6r
 export async function main() {
   await miniTest_01a();
   // worker_threads.isMainThread ? miniTest_01b() : void null;
