@@ -68,13 +68,20 @@ function CPU_Mapper(
 ) => CPU_MapperRetunType<R>;
 ```
 
-**Or**
+The `CPU_Mapper` function consume first a _filename_ `string` (the `filename` argument is descibe below) and return a function which takes 3 arguments:
+
+- `list: T[]`, A list: an array of element all of the same type `T`.
+- `mapFn: Mapper<T, R>`, A mapping function: a function of type `Mapper<A, B>` used as a mapper which apply a tranformation from the input type `T` to the output of type `R` over each element of the list.
+- `limit?: number` A limit (optional): a number representing the maximum cocurent workers used to splitt the workload of mapping over each element of the list. If the value is not provided the `os.cpus().length` is used instead but will be limited to the length of the list with `Math.min(limit, list.length)`.
+  _or_
 
 ```typescript
 function CPU_Mapper(
   filename: string
 ): <T, R>(cpuMapperArgs: CPU_MapperArgs<T, R>) => CPU_MapperRetunType<R>;
 ```
+
+> All 3 parameter can be combined into a single argument as an object with values of same name and similar type `{list, mapFn, limit}`. The argument object type is `CPU_MapperArgs<TVal, RVal>`. In such case the 2nd and 3rd argument can be passed as _empty_, `null` or `undefined`.
 
 #### Types
 
@@ -96,14 +103,6 @@ type CPU_MapperRetunType<U> = {
   thread: () => void;
 };
 ```
-
-The `CPU_Mapper` function consume first a _filename_ `string` (the `filename` argument is descibe below) and return a function which takes 3 arguments:
-
-- `list: T[]`, A list: an array of element all of the same type `T`.
-- `mapFn: Mapper<T, R>`, A mapping function: a function of type `Mapper<A, B>` used as a mapper which apply a tranformation from the input type `T` to the output of type `R` over each element of the list.
-- `limit?: number` A limit (optional): a number representing the maximum cocurent workers used to splitt the workload of mapping over each element of the list. If the value is not provided the `os.cpus().length` is used instead but will be limited to the length of the list with `Math.min(limit, list.length)`.
-
-> All 3 parameter can be combined into a single argument as an object with values of same name and similar type `{list, mapFn, limit}`. The argument object type is `CPU_MapperArgs<TVal, RVal>`. In such case the 2nd and 3rd argument can be passed as _empty_, `null` or `undefined`.
 
 The `filename` argument is passed to the Worker constructor as is and therefor must be compatible whit the argument of the same name described in nodeJs documentation:
 
