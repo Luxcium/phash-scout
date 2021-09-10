@@ -21,6 +21,7 @@ Using yarn:
 
 ### IO_Mapper
 
+<!--
 #### Signature
 
 ```typescript
@@ -47,6 +48,7 @@ The `filename` argument is passed to the Worker constructor as is and therefor m
 - filename `<string>` | `<URL>` The path to the Worker's main script or module. Must be either an absolute path or a relative path (i.e. relative to the current working directory) starting with ./ or ../, or a WHATWG URL object using file: or data: protocol. When using a data: URL, the data is interpreted based on MIME type using the ECMAScript module loader.
 
 There is a caveat that is, the `filename` parameter canot be a string containing JavaScript code rather than a path. It must point to where the _CPU Mapper_ will be consumed. For more infomarion take a look at the examples below.
+-->
 
 ### CPU_Mapper
 
@@ -65,23 +67,24 @@ type CPU_MapperArgs<TVal, RVal> = {
   limit?: number;
 };
 
-function CPU_Mapper(filename: string): <T, R>(
-  cpuMapperArgs: CPU_MapperArgs<T, R>
-) => {
-  mapper: () => Promise<PromiseSettledResult<R>[]>;
+type CPU_MapperRetunType<U> = {
+  mapper: () => Promise<PromiseSettledResult<U>[]>;
   thread: () => void;
 };
 
-/* **OR** */
-
-function CPU_Mapper(filename: string): <T, R>(
+function CPU_Mapper(
+  filename: string
+): <T, R>(
   list: T[],
   mapFn: Mapper<T, R>,
   limit?: number
-) => {
-  mapper: () => Promise<PromiseSettledResult<R>[]>;
-  thread: () => void;
-};
+) => CPU_MapperRetunType<R>;
+
+/* **OR** */
+
+function CPU_Mapper(
+  filename: string
+): <T, R>(cpuMapperArgs: CPU_MapperArgs<T, R>) => CPU_MapperRetunType<R>;
 ```
 
 The `CPU_Mapper` function consume first a _filename_ `string` (the `filename` argument is descibe below) and return a function which takes 3 arguments:
@@ -89,6 +92,8 @@ The `CPU_Mapper` function consume first a _filename_ `string` (the `filename` ar
 - `list: T[]`, A list: an array of element all of the same type `T`.
 - `mapFn: Mapper<T, R>`, A mapping function: a function of type `Mapper<A, B>` used as a mapper which apply a tranformation from the input type `T` to the output of type `R` over each element of the list.
 - `limit?: number` A limit (optional): a number representing the maximum cocurent workers used to splitt the workload of mapping over each element of the list. If the value is not provided the `os.cpus().length` is used instead but will be limited to the length of the list with `Math.min(limit, list.length)`.
+
+> All 3 parameter can be combined into a single argument as an object with value of same name and similar type `{list, mapFn, limit}`. The argument object type is `CPU_MapperArgs<TVal, RVal>`
 
 The `filename` argument is passed to the Worker constructor as is and therefor must be compatible whit the argument of the same name described in nodeJs documentation:
 

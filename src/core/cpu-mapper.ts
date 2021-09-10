@@ -1,6 +1,6 @@
 import { cpus } from 'os';
 import * as worker_threads from 'worker_threads';
-import type { Mapper } from '../types';
+import type { CPU_MapperRetunType, Mapper } from '../types';
 import { processMapper } from './worker-thread-mapper-factories/parallel-mapping';
 const cpuCount = () => cpus().length;
 type CPU_MapperArgs<T, U> = {
@@ -19,10 +19,7 @@ export interface Icpu_mapper {
 }
 
 // ~&-----------------------------------------------------------------&~
-type CPU_MapperRetunType<R> = {
-  mapper: () => Promise<PromiseSettledResult<R>[]>;
-  thread: () => void;
-};
+
 // ~#----- CPU_Mapper Function Declaration ---------------------------#~
 /**
  * The path to the Worker's main script or module.

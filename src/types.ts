@@ -120,3 +120,8 @@ export type MakeThreadWorkerArgs<T, R> = {
   threadWorkerFn: Mapper<T, R>;
   worker_threads: Worker_Threads<WorkerData<T>>;
 };
+
+export type CPU_MapperRetunType<R> = {
+  mapper: () => Promise<PromiseSettledResult<R>[]>;
+  thread: () => void;
+};
