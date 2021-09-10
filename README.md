@@ -27,8 +27,7 @@ A straight forward approch is used so that you can have similar APIs regardles i
 
 #### Signatures
 
-require('worker threads')
-The CPU*Mapper is a wrapper for *'worker threads'\_ using the [NodeJS Worker class (added in: NodeJS v10.5.0)] (https://nodejs.org/dist/latest/docs/api/worker_threads.html#worker_threads_class_worker)
+The _CPU Mapper_ is a wrapper for _'worker threads'_ using the [NodeJS Worker class (_added in: NodeJS v10.5.0_)](https://nodejs.org/dist/latest/docs/api/worker_threads.html#worker_threads_class_worker)
 
 ```typescript
 function CPU_Mapper(filename: string): <T, R>(
