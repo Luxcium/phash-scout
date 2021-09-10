@@ -60,18 +60,9 @@ The **CPU Mapper API** is a wrapper for _'worker threads'_ using the [NodeJS Wor
 
 ```typescript
 type Mapper<A, B> = (value: A, index?: number, array?: readonly A[]) => B;
+```
 
-type CPU_MapperArgs<TVal, RVal> = {
-  list: T[];
-  mapFn: Mapper<TVal, RVal>;
-  limit?: number;
-};
-
-type CPU_MapperRetunType<U> = {
-  mapper: () => Promise<PromiseSettledResult<U>[]>;
-  thread: () => void;
-};
-
+```typescript
 function CPU_Mapper(
   filename: string
 ): <T, R>(
@@ -79,12 +70,27 @@ function CPU_Mapper(
   mapFn: Mapper<T, R>,
   limit?: number
 ) => CPU_MapperRetunType<R>;
+```
 
-/* **OR** */
+**OR**
+
+```typescript
+type CPU_MapperArgs<TVal, RVal> = {
+  list: T[];
+  mapFn: Mapper<TVal, RVal>;
+  limit?: number;
+};
 
 function CPU_Mapper(
   filename: string
 ): <T, R>(cpuMapperArgs: CPU_MapperArgs<T, R>) => CPU_MapperRetunType<R>;
+```
+
+```typescript
+type CPU_MapperRetunType<U> = {
+  mapper: () => Promise<PromiseSettledResult<U>[]>;
+  thread: () => void;
+};
 ```
 
 The `CPU_Mapper` function consume first a _filename_ `string` (the `filename` argument is descibe below) and return a function which takes 3 arguments:
