@@ -27,7 +27,7 @@ A straight forward approch is used so that you can have similar APIs regardles i
 
 #### Signatures
 
-The _CPU Mapper_ is a wrapper for _'worker threads'_ using the [NodeJS Worker class (_added in: NodeJS v10.5.0_)](https://nodejs.org/dist/latest/docs/api/worker_threads.html#worker_threads_class_worker)
+The **CPU Mapper API** is a wrapper for _'worker threads'_ using the [NodeJS Worker class (_added in: NodeJS v10.5.0_)](https://nodejs.org/dist/latest/docs/api/worker_threads.html#worker_threads_class_worker)
 
 ```typescript
 function CPU_Mapper(filename: string): <T, R>(
@@ -48,7 +48,7 @@ The `CPU_Mapper` function consume first a _filename_ `string` (the `filename` ar
 
 The `filename` argument is passed to the Worker constructor as is and therefor must be compatible whit the argument of the same name described in nodeJs documentation:
 
-- filename `<string> | <URL>` The path to the Worker's main script or module. Must be either an absolute path or a relative path (i.e. relative to the current working directory) starting with ./ or ../, or a WHATWG URL object using file: or data: protocol. When using a data: URL, the data is interpreted based on MIME type using the ECMAScript module loader.
+- filename `<string>` | `<URL>` The path to the Worker's main script or module. Must be either an absolute path or a relative path (i.e. relative to the current working directory) starting with ./ or ../, or a WHATWG URL object using file: or data: protocol. When using a data: URL, the data is interpreted based on MIME type using the ECMAScript module loader.
 
 There is a caveat that is, the `filename` parameter canot be a string containing JavaScript code rather than a path. it must point to where the _CPU Mapper_ will be consumed. For more infomarion take a look at the examples below.
 
@@ -58,9 +58,9 @@ There is a caveat that is, the `filename` parameter canot be a string containing
 
 ### MIT Style Liscense
 
-#### Copyright (c) 2021 Benjamin Vincent Kasapoglu (Luxcium)
+#### Copyright &copy; 2021 Benjamin Vincent Kasapoglu (Luxcium)
 
-based on work by Alex Ewerlöf described in his _Async Map With Limited Parallelism In Node Js_ [blog post](https://medium.com/@alexewerlof/async-map-with-limited-parallelism-in-node-js-2b91bd47af70) on Medium. (Copyright (c) 2020-2021 Alex Ewerlöf)
+based on work by Alex Ewerlöf described in his _Async Map With Limited Parallelism In Node Js_ [blog post](https://medium.com/@alexewerlof/async-map-with-limited-parallelism-in-node-js-2b91bd47af70) on Medium. (Copyright © 2020-2021 Alex Ewerlöf)
 
 <!--
 ```
