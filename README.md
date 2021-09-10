@@ -19,9 +19,13 @@ Using yarn:
 
 ## API
 
+### IO_Mapper
+
+### CPU_Mapper
+
 A straight forward approch is used so that you can have similar APIs regardles if you are using the CPU_Mapper flavour or the IO_Mapper flavour
 
-### Signatures
+#### Signatures
 
 require('worker threads')
 The CPU*Mapper is a wrapper for *'worker threads'\_ using the [NodeJS Worker class (added in: NodeJS v10.5.0)] (https://nodejs.org/dist/latest/docs/api/worker_threads.html#worker_threads_class_worker)
@@ -51,11 +55,11 @@ There is a caveat that is, the `filename` parameter canot be a string containing
 
 ---
 
-#### DOCUMENTATION INCOMPLE ― WORK IN PROGRESS
+## DOCUMENTATION INCOMPLE ― WORK IN PROGRESS
 
-##### MIT Style Liscense
+### MIT Style Liscense
 
-###### Copyright (c) 2021 Benjamin Vincent Kasapoglu (Luxcium)
+#### Copyright (c) 2021 Benjamin Vincent Kasapoglu (Luxcium)
 
 based on work by Alex Ewerlöf described in his _Async Map With Limited Parallelism In Node Js_ [blog post](https://medium.com/@alexewerlof/async-map-with-limited-parallelism-in-node-js-2b91bd47af70) on Medium. (Copyright (c) 2020-2021 Alex Ewerlöf)
 
