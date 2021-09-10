@@ -9,36 +9,6 @@ import * as worker_threads from 'worker_threads';
 import { CPU_Mapper, IO_Mapper } from '..';
 import { IO_MapperArgs } from '../types';
 
-const delay = 10000;
-const debugMode_CPU = {
-  A: 1,
-  B: 1,
-  C: 1,
-  D: 1,
-  E: 1,
-  W: 1,
-  delay,
-};
-const debugMode_IO2b = {
-  A: 1,
-  B: 1,
-  C: 1,
-  D: 1,
-  E: 1,
-  W: 1,
-  delay,
-};
-
-const debugMode_IO1b = {
-  A: 1,
-  B: 1,
-  C: 1,
-  D: 1,
-  E: 1,
-  W: 1,
-  delay,
-};
-
 const items = 100;
 const steps = Math.floor(items / 1);
 export const values = [
@@ -60,12 +30,7 @@ export async function main() {
 main();
 export async function miniTest_01a() {
   const processMapper = CPU_Mapper(__filename);
-  const result = processMapper(
-    values,
-    (x: any) => x * 15,
-    steps,
-    debugMode_CPU
-  );
+  const result = processMapper(values, (x: any) => x * 15, steps);
 
   result.thread();
   if (worker_threads.isMainThread) {
@@ -78,9 +43,7 @@ export async function miniTest_01b() {
   const mapFn = (x: number) => x * 51;
   const limit = 10;
 
-  const IOMapperParams: IO_MapperArgs<number, number> & {
-    inDebugMode: { [K: string]: number };
-  } = { list, mapFn, limit, inDebugMode: debugMode_IO1b };
+  const IOMapperParams: IO_MapperArgs<number, number> = { list, mapFn, limit };
 
   const result = IO_Mapper(IOMapperParams);
   const awaitedResult = await result;
@@ -105,9 +68,7 @@ export async function miniTest_02b() {
   const mapFn = (x: number) => x * 51;
   const limit = steps;
 
-  const IOMapperArgs: IO_MapperArgs<number, number> & {
-    inDebugMode: { [K: string]: number };
-  } = { list, mapFn, limit, inDebugMode: debugMode_IO2b };
+  const IOMapperArgs: IO_MapperArgs<number, number> = { list, mapFn, limit };
 
   const result = IO_Mapper(IOMapperArgs);
   const awaitedResult = await result;
@@ -116,10 +77,3 @@ export async function miniTest_02b() {
   );
   console.log(settledResult);
 }
-
-/*
-
-
-
-
-  */
