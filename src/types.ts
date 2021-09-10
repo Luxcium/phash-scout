@@ -8,6 +8,11 @@
 
 import type { MessagePort, Worker } from 'worker_threads';
 
+export type Mapper<T, U> = (
+  value: T,
+  index?: number,
+  array?: readonly T[]
+) => U;
 /** Partial interface for `worker_threads` module */
 export interface Worker_Threads<W> {
   isMainThread: boolean;
@@ -48,11 +53,6 @@ export type PromiseMapper2<T, U> = (
   array?: readonly T[]
 ) => Promise<U>;
 export type MapperPromise<T, U> = Mapper<T, Promise<U>>;
-export type Mapper<T, U> = (
-  value: T,
-  index?: number,
-  array?: readonly T[]
-) => U;
 
 export type WT_D<T> = Worker_Threads<WorkerData<T>>;
 

@@ -25,11 +25,13 @@ Using yarn:
 
 A straight forward approch is used so that you can have similar APIs regardles if you are using the CPU_Mapper flavour or the IO_Mapper flavour
 
-#### Signatures
-
 The **CPU Mapper API** is a wrapper for _'worker threads'_ using the [NodeJS Worker class (_added in: NodeJS v10.5.0_)](https://nodejs.org/dist/latest/docs/api/worker_threads.html#worker_threads_class_worker)
 
+#### Signature
+
 ```typescript
+type Mapper<A, B> = (value: A, index?: number, array?: readonly A[]) => B;
+
 function CPU_Mapper(filename: string): <T, R>(
   list: T[],
   mapFn: Mapper<T, R>,
@@ -43,7 +45,7 @@ function CPU_Mapper(filename: string): <T, R>(
 The `CPU_Mapper` function consume first a _filename_ `string` (the `filename` argument is descibe below) and return a function which takes 3 arguments:
 
 - `list: T[]`, A list: an array of ellement all of the same type `T`.
-- `mapFn: Mapper<T, R>`, A mapping function: a function used as a mapper which apply a tranformation from the input type `T` to the output of type `R` over each ellement of the list.
+- `mapFn: Mapper<T, R>`, A mapping function: a function of type `Mapper<A, B>` used as a mapper which apply a tranformation from the input type `T` to the output of type `R` over each ellement of the list.
 - `limit?: number` A limit (optional): a number representing the maximum cocurent workers used to splitt the workload of mapping over each ellement of the list. If the value is not provided the `os.cpus().length` is used instead but will be limited to the length of the list with `Math.min(limit, list.length)`.
 
 The `filename` argument is passed to the Worker constructor as is and therefor must be compatible whit the argument of the same name described in nodeJs documentation:
