@@ -42,7 +42,7 @@
     "disableSolutionSearching": false,
     "disableReferencedProjectLoad": false,
     /* Compilation Options */
-    "noErrorTruncation": false,
+    "noErrorTruncation": true,
     "useDefineForClassFields": true,
     "assumeChangesOnlyAffectDirectDependencies": false,
     "generateCpuProfile": "./performance/.cpuprofile",
