@@ -179,6 +179,27 @@
     // },
     // SECTION
     {
+      // ~#-----------------------------------------------------------#~
+      "tag": "~#",
+      "color": "#FC5F",
+      "strikethrough": false,
+      "backgroundColor": "#FC56"
+    },
+    {
+      // ~*-----------------------------------------------------------*~
+      "tag": "~*",
+      "color": "#7C2F",
+      "strikethrough": false,
+      "backgroundColor": "#7C26"
+    },
+    {
+      // ~&-----------------------------------------------------------&~
+      "tag": "~&",
+      "color": "#93F",
+      "strikethrough": false,
+      "backgroundColor": "#93F3"
+    },
+    {
       "tag": "SECTION",
       "color": "#39C",
       "strikethrough": false,
