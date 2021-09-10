@@ -12,14 +12,8 @@
 import type { ItemMapperArgs, WorkerArgs } from '../types';
 import { itemMapper } from './item-mapper';
 
-export async function worker<T, U>({
-  gen,
-  mapFn,
-  result,
-  inDebugMode,
-}: WorkerArgs<T, U> & { inDebugMode?: { [K: string]: number } }) {
-  // &-----------------------------------------------------------------+
-  // ++--- worker -----------------------------------------------------+
+export async function worker<T, U>({ gen, mapFn, result }: WorkerArgs<T, U>) {
+  // ++----- worker ---------------------------------------------------+
   //
   for (let [currentItem, index, array] of gen) {
     const itemMapperArgs: ItemMapperArgs<T, U> & {
@@ -29,7 +23,6 @@ export async function worker<T, U>({
       currentItem,
       index,
       array,
-      inDebugMode,
     };
     // if (inDebugMode) console.log('worker:', inDebugMode.W++);
     // SIDE EFFECTS:
@@ -37,5 +30,4 @@ export async function worker<T, U>({
   }
   //
   // ++----------------------------------------------------------------+
-  // &-----------------------------------------------------------------+
 }

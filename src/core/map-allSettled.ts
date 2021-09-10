@@ -17,12 +17,8 @@ export async function mapAllSettled<T, U>({
   list,
   mapFn,
   limit = list.length,
-  inDebugMode,
-}: MapAllSettledArgs<T, U> & {
-  inDebugMode?: { [K: string]: number };
-}): Promise<PromiseSettledResult<U>[]> {
-  // &-----------------------------------------------------------------+
-  // ++--- mapAllSettled ----------------------------------------------+
+}: MapAllSettledArgs<T, U>): Promise<PromiseSettledResult<U>[]> {
+  // ++----- mapAllSettled --------------------------------------------+
   //
   const result: PromiseSettledResult<U>[] = [];
 
@@ -30,7 +26,7 @@ export async function mapAllSettled<T, U>({
     return result;
   }
 
-  const gen = arrayGenerator(list, inDebugMode);
+  const gen = arrayGenerator(list);
 
   limit = Math.min(limit, list.length);
 
@@ -42,7 +38,6 @@ export async function mapAllSettled<T, U>({
       gen,
       mapFn,
       result,
-      inDebugMode,
     };
     // SIDE EFFECTS:
     workers.push(worker(workerArgs));
@@ -53,5 +48,4 @@ export async function mapAllSettled<T, U>({
   return result;
   //
   // ++----------------------------------------------------------------+
-  // &-----------------------------------------------------------------+
 }

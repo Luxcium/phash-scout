@@ -8,7 +8,6 @@
 
 import { Worker } from 'worker_threads';
 
-/** isMainThread! === true  */
 export function getAsyncWorker<Q, P>(script: string, payload: P): Promise<Q> {
   return new Promise((resolve, reject) => {
     // &---------------------------------------------------------------+

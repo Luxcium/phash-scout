@@ -115,3 +115,8 @@ export type IO_MapperArgs<T, U> = {
   mapFn: Mapper<T, U>;
   limit: number;
 };
+
+export type MakeThreadWorkerArgs<T, R> = {
+  threadWorkerFn: Mapper<T, R>;
+  worker_threads: Worker_Threads<WorkerData<T>>;
+};

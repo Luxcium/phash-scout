@@ -9,20 +9,30 @@
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
 
-import type { IO_MapperArgs, MapAllSettledArgs } from '../types';
-import { mapAllSettled } from './map-allSettled';
+import { workerFactory } from '.';
+import type { MapAllSettledArgs, Mapper, ProcessMapperArgs } from '../../types';
+import { mapAllSettled } from '../map-allSettled';
 
-async function IO_Mapper<T, U>({
+export function processMapper<T, U>({
+  filename,
+  workerThreads,
   list,
   mapFn,
   limit = list.length,
-  inDebugMode,
-}: IO_MapperArgs<T, U> & { inDebugMode: { [K: string]: number } }): Promise<
-  PromiseSettledResult<U>[]
-> {
-  const mapAllSettledArgs: MapAllSettledArgs<T, U> & {
-    inDebugMode: { [K: string]: number };
-  } = { inDebugMode, list, mapFn, limit };
-  return mapAllSettled(mapAllSettledArgs);
+}: ProcessMapperArgs<T, U>): [
+  () => Promise<PromiseSettledResult<U>[]>,
+  () => void
+] {
+  const [mainWorker, threadWorker] = workerFactory(
+    filename,
+    mapFn,
+    workerThreads
+  );
+  const workerMapFn: Mapper<T, Promise<U>> = mainWorker;
+  const mapAllSettledArgs: MapAllSettledArgs<T, U> = {
+    list,
+    mapFn: workerMapFn,
+    limit,
+  };
+  return [async () => mapAllSettled<T, U>(mapAllSettledArgs), threadWorker()];
 }
-export { IO_Mapper };

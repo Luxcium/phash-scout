@@ -6,7 +6,13 @@
 /*  See https://github.com/Luxcium/parallel-mapping/blob/cbf7e/LICENSE*/
 /*--------------------------------------------------------------------*/
 
-import type { Mapper, WorkerData, Worker_Threads, WT_D } from '../types';
+import type {
+  MakeThreadWorkerArgs,
+  Mapper,
+  WorkerData,
+  Worker_Threads,
+  WT_D,
+} from '../../types';
 import { getAsyncWorker } from './the-main-worker';
 import { theThreadWorker } from './the-thread-worker';
 
@@ -50,10 +56,6 @@ function makeMainWorker<T>(
       : (void null as never as Promise<R>);
 }
 
-type MakeThreadWorkerArgs<T, R> = {
-  threadWorkerFn: Mapper<T, R>;
-  worker_threads: Worker_Threads<WorkerData<T>>;
-};
 function makeThreadWorker<T, R>({
   threadWorkerFn,
   worker_threads,

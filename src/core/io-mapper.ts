@@ -9,33 +9,18 @@
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
 
-import type { MapAllSettledArgs, Mapper, ProcessMapperArgs } from '../types';
-import { workerFactory } from '../worker-thread-mapper-factories';
+import type { IO_MapperArgs, MapAllSettledArgs } from '../types';
 import { mapAllSettled } from './map-allSettled';
 
-export function processMapper<T, U>({
-  filename,
-  workerThreads,
+export async function IO_Mapper<T, U>({
   list,
   mapFn,
   limit = list.length,
-  inDebugMode,
-}: ProcessMapperArgs<T, U> & {
-  inDebugMode?: { [K: string]: number };
-}): [() => Promise<PromiseSettledResult<U>[]>, () => void] {
-  const [mainWorker, threadWorker] = workerFactory(
-    filename,
-    mapFn,
-    workerThreads
-  );
-  const workerMapFn: Mapper<T, Promise<U>> = mainWorker;
-  const mapAllSettledArgs: MapAllSettledArgs<T, U> & {
-    inDebugMode?: { [K: string]: number };
-  } = {
-    list,
-    mapFn: workerMapFn,
-    limit,
-    inDebugMode,
-  };
-  return [async () => mapAllSettled<T, U>(mapAllSettledArgs), threadWorker()];
+}: IO_MapperArgs<T, U>): Promise<PromiseSettledResult<U>[]> {
+  // ++----- IO_Mapper ------------------------------------------------+
+  //
+  const mapAllSettledArgs: MapAllSettledArgs<T, U> = { list, mapFn, limit };
+  return mapAllSettled(mapAllSettledArgs);
+  //
+  // ++----------------------------------------------------------------+
 }
