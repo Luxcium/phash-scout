@@ -56,11 +56,7 @@ A straight forward approch is used so that you can have similar APIs regardles i
 
 The **CPU Mapper API** is a wrapper for _'worker threads'_ using the [NodeJS Worker class (_added in: NodeJS v10.5.0_)](https://nodejs.org/dist/latest/docs/api/worker_threads.html#worker_threads_class_worker)
 
-#### Signature
-
-```typescript
-type Mapper<A, B> = (value: A, index?: number, array?: readonly A[]) => B;
-```
+#### Signatures
 
 ```typescript
 function CPU_Mapper(
@@ -72,7 +68,19 @@ function CPU_Mapper(
 ) => CPU_MapperRetunType<R>;
 ```
 
-**OR**
+**Or**
+
+```typescript
+function CPU_Mapper(
+  filename: string
+): <T, R>(cpuMapperArgs: CPU_MapperArgs<T, R>) => CPU_MapperRetunType<R>;
+```
+
+#### Types
+
+```typescript
+type Mapper<A, B> = (value: A, index?: number, array?: readonly A[]) => B;
+```
 
 ```typescript
 type CPU_MapperArgs<TVal, RVal> = {
@@ -80,10 +88,6 @@ type CPU_MapperArgs<TVal, RVal> = {
   mapFn: Mapper<TVal, RVal>;
   limit?: number;
 };
-
-function CPU_Mapper(
-  filename: string
-): <T, R>(cpuMapperArgs: CPU_MapperArgs<T, R>) => CPU_MapperRetunType<R>;
 ```
 
 ```typescript
