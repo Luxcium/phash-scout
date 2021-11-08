@@ -16,9 +16,7 @@ export async function worker<T, U>({ gen, mapFn, result }: WorkerArgs<T, U>) {
   // ++----- worker ---------------------------------------------------+
   //
   for (let [currentItem, index, array] of gen) {
-    const itemMapperArgs: ItemMapperArgs<T, U> & {
-      inDebugMode?: { [K: string]: number };
-    } = {
+    const itemMapperArgs: ItemMapperArgs<T, U> = {
       mapFn,
       currentItem,
       index,

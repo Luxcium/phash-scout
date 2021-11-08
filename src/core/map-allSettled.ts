@@ -32,13 +32,12 @@ export async function mapAllSettled<T, U>({
 
   const workers = new Array(limit);
   for (let i = 0; i < limit; i++) {
-    const workerArgs: WorkerArgs<T, U> & {
-      inDebugMode?: { [K: string]: number };
-    } = {
+    const workerArgs: WorkerArgs<T, U> = {
       gen,
       mapFn,
       result,
     };
+
     // SIDE EFFECTS:
     workers.push(worker(workerArgs));
   }

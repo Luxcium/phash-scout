@@ -1,25 +1,48 @@
 import { cpus } from 'os';
 import * as worker_threads from 'worker_threads';
-import type { CPU_MapperRetunType, Mapper } from '../types';
+import type { CPU_MapperRetunType, Mapper /* , MapperArgs */ } from '../types';
 import { processMapper } from './worker-thread-mapper-factories/parallel-mapping';
 const cpuCount = () => cpus().length;
-type CPU_MapperArgs<T, U> = {
-  list: T[];
-  mapFn: Mapper<T, U>;
-  limit?: number | undefined;
-};
 
 export interface Icpu_mapper {
   cpu_mapper<T, R>(
-    mapperListOrObj: CPU_MapperArgs<T, R>
+    mapperListOrObj: MapperArgs<T, R>
   ): {
     mapper: () => Promise<PromiseSettledResult<R>[]>;
     thread: () => void;
   };
 }
 
-// ~&-----------------------------------------------------------------&~
+export type MapperArgs<T, U> = {
+  list: T[];
+  mapFn: Mapper<T, U>;
+  limit?: number | undefined;
+};
+export function default_Mapper<T, R>(mapperListOrObj: MapperArgs<T, R>): any;
+export function default_Mapper<T, R>(
+  mapperListOrObj: T[],
+  mapFn: Mapper<T, R>,
+  limit?: number
+): any;
+export function default_Mapper<T, R>(
+  mapperListOrObj: T[] | MapperArgs<T, R>,
+  mapFn?: Mapper<T, R> | null,
+  limit: number | null = 0
+): any {
+  //
 
+  if (Array.isArray(mapperListOrObj)) {
+    const returnValue: MapperArgs<T, R> = {
+      list: mapperListOrObj || [],
+      mapFn: mapFn || (x => x as any as R & T),
+      limit: limit || 1,
+    };
+    return returnValue;
+  }
+  return mapperListOrObj;
+}
+
+// ~&-----------------------------------------------------------------&~
 // ~#----- CPU_Mapper Function Declaration ---------------------------#~
 /**
  * The path to the Worker's main script or module.
@@ -27,7 +50,7 @@ export interface Icpu_mapper {
  * @see https://nodejs.org/dist/latest/docs/api/worker_threads.html#worker_threads_new_worker_filename_options
  */
 export function CPU_Mapper(filename: string): {
-  <T, R>(mapperListOrObj: CPU_MapperArgs<T, R>): CPU_MapperRetunType<R>;
+  <T, R>(mapperListOrObj: MapperArgs<T, R>): CPU_MapperRetunType<R>;
   <T, R>(
     list: T[],
     mapFn: Mapper<T, R>,
@@ -37,7 +60,7 @@ export function CPU_Mapper(filename: string): {
   // ~#---------------------------------------------------------------#~
   // ~*----- CPU_Mapper ----------------------------------------------*~
   function cpu_mapper<T, R>(
-    mapperListOrObj: CPU_MapperArgs<T, R>
+    mapperListOrObj: MapperArgs<T, R>
   ): CPU_MapperRetunType<R>;
   function cpu_mapper<T, R>(
     mapperListOrObj: T[],
@@ -45,7 +68,7 @@ export function CPU_Mapper(filename: string): {
     limit?: number
   ): CPU_MapperRetunType<R>;
   function cpu_mapper<T, R>(
-    mapperListOrObj: T[] | CPU_MapperArgs<T, R>,
+    mapperListOrObj: T[] | MapperArgs<T, R>,
     mapFn?: Mapper<T, R> | null,
     limit?: number | null
   ): CPU_MapperRetunType<R> {
@@ -125,10 +148,10 @@ export function processMapperFactory<T, U>(
 // ~&-----------------------------------------------------------------&~
 // ~#----- mapperArgs Function Declaration ---------------------------#~
 function mapperArgs<T, R>(
-  listOrObj: T[] | CPU_MapperArgs<T, R>,
+  listOrObj: T[] | MapperArgs<T, R>,
   mapFn?: Mapper<T, R> | null,
   limit?: number | null
-): CPU_MapperArgs<T, R> {
+): MapperArgs<T, R> {
   // ~#---------------------------------------------------------------#~
   // ~*----- mapperArgs ----------------------------------------------*~
   let list: T[] = [];
@@ -149,3 +172,11 @@ function mapperArgs<T, R>(
   throw new TypeError(errMsg);
 }
 // ~*-----------------------------------------------------------------*~
+// ~&-----------------------------------------------------------------&~
+
+/*
+list of 25, 50, 75 or 100
+limit of 5
+5 per worker or 10, 15, 20 ...
+
+ */

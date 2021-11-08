@@ -9,18 +9,30 @@
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
 
-import type { IO_MapperArgs, MapAllSettledArgs } from '../types';
+import type { MapAllSettledArgs, MapperArgs } from '../types';
 import { mapAllSettled } from './map-allSettled';
 
-export async function IO_Mapper<T, U>({
+export async function IO_Mapper<T, R>({
   list,
   mapFn,
-  limit = list.length,
-}: IO_MapperArgs<T, U>): Promise<PromiseSettledResult<U>[]> {
+  limit,
+}: MapperArgs<T, R>): Promise<PromiseSettledResult<R>[]> {
   // ++----- IO_Mapper ------------------------------------------------+
   //
-  const mapAllSettledArgs: MapAllSettledArgs<T, U> = { list, mapFn, limit };
+  const mapAllSettledArgs: MapAllSettledArgs<T, R> = {
+    list,
+    mapFn,
+    limit: limit || list.length,
+  };
   return mapAllSettled(mapAllSettledArgs);
   //
   // ++----------------------------------------------------------------+
 }
+
+/*
+export type IO_MapperArgs<T, U> = {
+  list: T[];
+  mapFn: Mapper<T, U>;
+  limit?: number;
+};
+*/
