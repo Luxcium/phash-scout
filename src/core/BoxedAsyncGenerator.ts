@@ -36,31 +36,19 @@ export class BoxedAsyncGenerator<T> {
   protected constructor(valueGenerator: () => AsyncGenerator<T>) {
     this.#valueAsyncGenerator = valueGenerator;
   }
-  public mapAwait<TMap>(fn: Mapper<T, TMap>): BoxedAsyncGenerator<TMap> {
+  public mapAwait<R>(
+    fn: Mapper<T, Promise<R> | R>
+  ): BoxedAsyncGenerator<Awaited<R>> {
     const asyncGenerator = this.#valueAsyncGenerator;
-    async function* arrayAsyncGenerator(): AsyncGenerator<TMap> {
+    async function* arrayAsyncGenerator(): AsyncGenerator<Awaited<R>> {
+      let index = 0;
       for await (const item of asyncGenerator()) {
-        yield fn(item);
+        yield fn(item, index++);
       }
     }
     return BoxedAsyncGenerator.from(arrayAsyncGenerator);
   }
-  // public unbox() /* : Promise<T[]> */ {
-  //   // // (await this.#valueGenerator)()
-  //   // const valGen = this.#valueAsyncGenerator;
-  //   // const something =  valGen();
-  //   // void valGen, [... something], something;
-  //   // // something.return('')
-  //   // return something; //Array.from([1, 1, 1]);
-  //   const asyncGenerator = this.#valueAsyncGenerator;
 
-  //   function* arrayGenerator(): Generator<any> {
-  //     yield asyncGenerator().next();
-  //     //  yield (async()=>{for await (const item of asyncGenerator()) {
-  //     //      fn(item);
-  //     //   }})
-  //   }
-  //   return Array.from(arrayGenerator());
   public get asyncGen(): () => AsyncGenerator<T> {
     return this.#valueAsyncGenerator;
   }
@@ -69,17 +57,28 @@ export class BoxedAsyncGenerator<T> {
     return this.asyncGen();
   }
 }
-
+//@ts-ignore
 async function main(): Promise<void> {
+  const box = BoxedAsyncGenerator.of([1, 2, 3, 4]);
+  const asyncGen1 = box
+    .mapAwait<Promise<number>>(item => timeoutZalgo(2000, item * 2))
+    .asyncGen();
+  const asyncGen2 = box.mapAwait<number>(item => item * 2).asyncGen();
+
   const asyncGen = BoxedAsyncGenerator.of([1, 2, 3, 4])
-    .mapAwait(e => timeoutZalgo(2000, e * 2))
-    .mapAwait<number>(e => e * 2)
-    // .map(e => `${e}`)
+    .mapAwait<Promise<number>>(item => timeoutZalgo(2000, item * 2))
+    .mapAwait<number>(item => item * 2)
+    // .map(item => `${item}`)
     .asyncGen();
   for await (const item of asyncGen) {
     console.log(item);
   }
-
+  for await (const item of asyncGen1) {
+    console.log(item);
+  }
+  for await (const item of asyncGen2) {
+    console.log(item);
+  }
   return void 42;
 }
 void main;

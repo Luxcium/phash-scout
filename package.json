@@ -21,17 +21,13 @@
   "author": "Benjamin Vincent (Luxcium)",
   "license": "MIT",
   "devDependencies": {
-    "@parcel/transformer-typescript-tsc": "^2.0.0-nightly.826",
-    "@parcel/transformer-typescript-types": "^2.0.0-nightly.826",
-    "@parcel/validator-typescript": "^2.0.0-nightly.826",
     "@types/node": "latest",
     "am": "1.0.2",
     "got": "11.7.0",
-    "parcel": "^2.0.0-nightly.824",
     "prettier": "latest",
     "rimraf": "latest",
     "ts-node": "latest",
-    "typescript": "latest"
+    "typescript": "next"
   },
   "dependencies": {
     "tslib": "latest"
