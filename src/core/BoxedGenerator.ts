@@ -1,4 +1,5 @@
 import type { Mapper } from '..';
+import { timeoutZalgo } from '../utils';
 
 export class BoxedGenerator<T> {
   #valueGenerator: () => Generator<T>;
@@ -56,12 +57,11 @@ export class BoxedGenerator<T> {
 }
 
 async function main(): Promise<void> {
-  console.log(
-    BoxedGenerator.of([1, 2, 3, 4])
-      .map(e => e * 2)
-      .map(e => `${e}`).values
-  );
+  BoxedGenerator.of([1, 2, 3, 4])
+    .map(e => timeoutZalgo(2000, e * 2))
+    .map(async e => console.log(`${await e}`)).values;
 
   return void 42;
 }
+void main;
 main();
