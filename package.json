@@ -14,6 +14,7 @@
     "prerelease": "./scripts/prerelease.sh",
     "release": "./scripts/release.sh",
     "check": "tsc --noEmit",
+    "check:version": "ts-node -vv;tsc -v",
     "lint": "echo \"Error: no linter specified\" && exit 0",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
@@ -25,11 +26,10 @@
     "am": "1.0.2",
     "got": "11.7.0",
     "prettier": "latest",
-    "rimraf": "latest",
-    "ts-node": "latest",
-    "typescript": "next"
+    "rimraf": "latest"
   },
   "dependencies": {
-    "tslib": "latest"
+    "tslib": "latest",
+    "typescript": "^4.6.0-dev.20211116"
   }
 }

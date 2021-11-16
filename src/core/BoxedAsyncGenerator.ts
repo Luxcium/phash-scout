@@ -1,6 +1,7 @@
 import type { Mapper } from '..';
 import { timeoutZalgo } from '../utils';
 
+/** Create a container to hold a value as an AsyncGenerator on wich you could map */
 export class BoxedAsyncGenerator<T> {
   #valueAsyncGenerator: () => AsyncGenerator<T>;
 
@@ -53,11 +54,10 @@ export class BoxedAsyncGenerator<T> {
     return this.#valueAsyncGenerator;
   }
 
-  public unboxAsyncGen() {
+  public unboxAsyncGen(): AsyncGenerator<T> {
     return this.asyncGen();
   }
 }
-//@ts-ignore
 async function main(): Promise<void> {
   const box = BoxedAsyncGenerator.of([1, 2, 3, 4]);
   const asyncGen1 = box

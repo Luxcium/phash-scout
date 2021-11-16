@@ -32,9 +32,9 @@ export async function nextTickZalgo<T = void>(
  * @see https://blog.izs.me/2013/08/designing-apis-for-asynchrony
  */
 export const restrainingZalgo = {
-  immediate: () => immediateZalgo(void 15),
-  timeout: () => timeoutZalgo(0, void 15),
-  nextTick: () => nextTickZalgo(),
+  immediate: async () => immediateZalgo(void 15),
+  timeout: async () => timeoutZalgo(0, void 15),
+  nextTick: async () => nextTickZalgo(),
 };
 
 /*
