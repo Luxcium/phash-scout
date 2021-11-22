@@ -12,6 +12,7 @@
 import type { MapAllSettledArgs, MapperArgs } from '../types';
 import { mapAllSettled } from './map-allSettled';
 
+// ~#------- IO_Mapper ------------------------------------------------#-~
 export async function IO_Mapper<T, R>({
   list,
   mapFn,
@@ -28,11 +29,4 @@ export async function IO_Mapper<T, R>({
   //
   // ++----------------------------------------------------------------+
 }
-
-/*
-export type IO_MapperArgs<T, U> = {
-  list: T[];
-  mapFn: Mapper<T, U>;
-  limit?: number;
-};
-*/
+// ~#------------------------------------------------------------------#-~

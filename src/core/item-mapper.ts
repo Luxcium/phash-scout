@@ -10,8 +10,9 @@
 /*--------------------------------------------------------------------*/
 
 import type { ItemMapperArgs } from '../types';
-import { immediateZalgo, restrainingZalgo } from '../utils';
+import { immediateZalgo } from '../utils';
 
+// ~#----- itemMapper -------------------------------------------------#-~
 export async function itemMapper<T, U>({
   mapFn,
   currentItem,
@@ -26,15 +27,15 @@ export async function itemMapper<T, U>({
       status: 'fulfilled',
       value,
     };
-    await restrainingZalgo.immediate();
     return promiseFulfilledResult;
-  } catch (reason) {
+  } catch (reason_) {
+    const reason = await immediateZalgo(reason_);
     const promiseRejectedResult: PromiseRejectedResult = {
       status: 'rejected',
       reason,
     };
-    await restrainingZalgo.immediate();
     return promiseRejectedResult;
   }
   // ++----------------------------------------------------------------+
 }
+// ~#------------------------------------------------------------------#-~

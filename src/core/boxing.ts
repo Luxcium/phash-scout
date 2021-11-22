@@ -592,4 +592,60 @@ export function* arrayGenerator<T>(array: T[]): Generator<[T, number, T[]]> {
       fulfilledIndex,
       rejectedIndex,
       length: results.length,
-    };  */
+    };
+
+
+    Chain
+A value that implements the Chain specification must also implement the Apply specification.
+
+m['fantasy-land/chain'](f)['fantasy-land/chain'](g) is equivalent to m['fantasy-land/chain'](x => f(x)['fantasy-land/chain'](g)) (associativity)
+
+fantasy-land/chain method
+fantasy-land/chain :: Chain m => m a ~> (a -> m b) -> m b
+A value which has a Chain must provide a fantasy-land/chain method. The fantasy-land/chain method takes one argument:
+
+m['fantasy-land/chain'](f)
+f must be a function which returns a value
+
+If f is not a function, the behaviour of fantasy-land/chain is unspecified.
+f must return a value of the same Chain
+fantasy-land/chain must return a value of the same Chain
+    */
+
+export type Either<T1, T2> = Just<T1> | Nothing<T2>;
+
+class Nothing<T> {
+  public static of<TVal>(val?: TVal) {
+    return new Nothing(val);
+  }
+
+  #value: T | undefined;
+
+  public constructor(val?: T) {
+    this.#value = val;
+  }
+
+  public map<TMap>(fn: (val: T) => TMap) {
+    if (this.#value !== undefined) {
+      return new Nothing<TMap>(fn(this.#value));
+    } else {
+      return new Nothing<TMap>(this.#value as any);
+    }
+  }
+}
+
+class Just<T> {
+  public static of<TVal>(val: TVal) {
+    return new Just(val);
+  }
+
+  #value: T;
+
+  public constructor(val: T) {
+    this.#value = val;
+  }
+
+  public map<TMap>(fn: (val: T) => TMap) {
+    return new Just<TMap>(fn(this.#value));
+  }
+}

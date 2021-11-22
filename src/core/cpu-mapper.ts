@@ -2,9 +2,10 @@ import { cpus } from 'os';
 import * as worker_threads from 'worker_threads';
 import type { CPU_MapperRetunType, Mapper /* , MapperArgs */ } from '../types';
 import { processMapper } from './worker-thread-mapper-factories/parallel-mapping';
-const cpuCount = () => cpus().length;
 
-export interface Icpu_mapper {
+const cpuCount = (): number => cpus().length;
+
+export interface ICpu_mapper {
   cpu_mapper<T, R>(
     mapperListOrObj: MapperArgs<T, R>
   ): {
