@@ -29,6 +29,7 @@
     "rimraf": "latest"
   },
   "dependencies": {
+    "ts-node": "^10.4.0",
     "tslib": "latest",
     "typescript": "^4.6.0-dev.20211116"
   }
