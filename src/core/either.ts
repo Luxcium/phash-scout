@@ -189,7 +189,7 @@ export function pipe<T>(fnOrValue: T) {
     return (fnOrValue_: any): any => {
       if (typeof fnOrValue_ === 'function') {
         console.log(`pipe called with another function "${fnOrValue_}"`);
-        return pipe((x: any): any => {
+        return pipe((x: any) => {
           const y = fnOrValue(x);
           console.log(`pipe intermediate result "${y}"`);
           return fnOrValue_(y);
@@ -204,10 +204,11 @@ export function pipe<T>(fnOrValue: T) {
     return fnOrValue;
   }
 }
-export function pipe_(fnOrValue: any) {
+export function pipe_<T, R>(fnOrValue: ((arg: T) => R) | T): any {
   if (fnOrValue instanceof Function) {
     console.log(`fnOrValue is a function "${fnOrValue}"`);
-    return (fnOrValue_: any): any => fnOrValue(pipe_(fnOrValue_));
+    return <A = T, B = R>(fnOrValue_: A | ((arg: A) => B)): any =>
+      fnOrValue(pipe_<A, B>(fnOrValue_));
   }
 
   console.log(`fnOrValue is the value "${fnOrValue}"`);
@@ -216,7 +217,7 @@ export function pipe_(fnOrValue: any) {
 console.log('pipe:', pipe_(idx)(idx)(len_)('TOTO'));
 console.log('pipe_x:', pipe(idx)(len_)(idx)('TATA'));
 console.log('pipe:', pipe_(idx)(len_)(idx)('TATA'));
-// <A = T, B = R>
+
 export function idx<T>(value: T): T {
   return value;
 }
