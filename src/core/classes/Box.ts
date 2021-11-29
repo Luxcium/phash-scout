@@ -1,3 +1,3 @@
-export class Box<U> {
-  value: U;
+export class Box1<T> {
+  value: T;
 }
