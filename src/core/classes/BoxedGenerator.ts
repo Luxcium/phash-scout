@@ -1,5 +1,4 @@
 import type { Mapper } from '..';
-import { timeoutZalgo } from '../utils';
 
 export class BoxedGenerator<T> {
   #valueGenerator: () => Generator<T>;
@@ -36,6 +35,7 @@ export class BoxedGenerator<T> {
   }
   public map<TMap>(fn: Mapper<T, TMap>): BoxedGenerator<TMap> {
     const generator = this.#valueGenerator;
+
     function* arrayGenerator(): Generator<TMap> {
       for (const item of generator()) {
         yield fn(item);
@@ -56,12 +56,12 @@ export class BoxedGenerator<T> {
   }
 }
 
-async function main(): Promise<void> {
-  BoxedGenerator.of([1, 2, 3, 4])
-    .map(e => timeoutZalgo(2000, e * 2))
-    .map(async e => console.log(`${await e}`)).values;
+// async function main(): Promise<void> {
+//   BoxedGenerator.of([1, 2, 3, 4])
+//     .map(e => timeoutZalgo(2000, e * 2))
+//     .map(async e => console.log(`${await e}`)).values;
 
-  return void 42;
-}
-void main;
-main();
+//   return void 42;
+// }
+// void main;
+// main();

@@ -183,50 +183,53 @@ void res1;
 
 console.log('pip2', pipe2(...list2)('toto'));
 console.log('pip2', pipe2(...list2)('toto'));
-export function pipe<T>(fnOrValue: T) {
-  if (typeof fnOrValue === 'function') {
-    console.log(`fnOrValue is a function "${fnOrValue}"`);
-    return (fnOrValue_: any): any => {
-      if (typeof fnOrValue_ === 'function') {
-        console.log(`pipe called with another function "${fnOrValue_}"`);
-        return pipe((x: any) => {
-          const y = fnOrValue(x);
-          console.log(`pipe intermediate result "${y}"`);
-          return fnOrValue_(y);
-        });
-      } else {
-        console.log(`pipe called with value "${fnOrValue_}"`);
-        return fnOrValue(fnOrValue_);
-      }
-    };
-  } else {
-    console.log(`fnOrValue is the value "${fnOrValue}"`);
-    return fnOrValue;
-  }
-}
+
 export function pipe_<T, R>(fnOrValue: ((arg: T) => R) | T): any {
-  if (fnOrValue instanceof Function) {
+  if (typeof fnOrValue === 'function' && fnOrValue instanceof Function) {
     console.log(`fnOrValue is a function "${fnOrValue}"`);
-    return <A = T, B = R>(fnOrValue_: A | ((arg: A) => B)): any =>
+    return <A = T, B = R>(fnOrValue_: A | ((arg: A) => B)) =>
       fnOrValue(pipe_<A, B>(fnOrValue_));
   }
 
   console.log(`fnOrValue is the value "${fnOrValue}"`);
   return fnOrValue;
 }
-console.log('pipe:', pipe_(idx)(idx)(len_)('TOTO'));
-console.log('pipe_x:', pipe(idx)(len_)(idx)('TATA'));
-console.log('pipe:', pipe_(idx)(len_)(idx)('TATA'));
+// ( |<A = T>(fnOrValue_: A)=>R)   R | ((val: T) => R) <T, R>
+// <A, B>(val: A) => fnOrValue(protoPipe<A, B>(val));
+export type FMap<T, R> = (val: T) => R;
 
-export function idx<T>(value: T): T {
+export function pipe(fnOrValue: any) {
+  if (typeof fnOrValue === 'function' && fnOrValue instanceof Function) {
+    console.log(`fnOrValue is a function "${fnOrValue}"`);
+    return (fnOrValue_: any) => {
+      if (typeof fnOrValue_ === 'function' && fnOrValue_ instanceof Function) {
+        console.log(`pipe called with another function "${fnOrValue_}"`);
+        return pipe((x: any) => {
+          const y = fnOrValue(x);
+          console.log(`pipe intermediate result "${y}" of type 'R'`);
+          return fnOrValue_(y);
+        });
+      }
+      console.log(`pipe called with value "${fnOrValue_}" of type 'T'`);
+      return fnOrValue(fnOrValue_);
+    };
+  }
+  console.log(`fnOrValue is the value "${fnOrValue}" of type 'T'`);
+  return fnOrValue;
+}
+
+console.log(id_(len_(id_('TATA'))));
+const step1 = pipe(id_);
+const step2 = step1(len_);
+const step3 = step2(id_);
+const step4 = step3('TATA');
+console.log('pipe_x:', step4);
+export function id_<T>(value: T): T {
   return value;
 }
-
-export function len_(value: string): number {
+export function len_(value: any): any {
   return value.length;
 }
-// const list1b = [id, double, len, id];
-// const list2b = [id, len, double, id];
-
-// pipe(id)(double)(len)(id)('toto');
-// void list1b, list2b;
+export function double_(value: any): any {
+  return value * 2;
+}

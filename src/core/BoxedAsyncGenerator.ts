@@ -38,16 +38,23 @@ export class BoxedAsyncGenerator<T> {
     this.#valueAsyncGenerator = valueGenerator;
   }
   public mapAwait<R>(
-    fn: Mapper<T, Promise<R> | R>
+    fn: Mapper<T, Promise<R> | R>,
+    delay: number = 0
   ): BoxedAsyncGenerator<Awaited<R>> {
     const asyncGenerator = this.#valueAsyncGenerator;
-    async function* arrayAsyncGenerator(): AsyncGenerator<Awaited<R>> {
+    async function* asyncGeneratorFn(): AsyncGenerator<Awaited<R>> {
       let index = 0;
+
       for await (const item of asyncGenerator()) {
+        if (delay === 0) {
+          await new Promise(resolve => setImmediate(resolve));
+          yield fn(item, index++);
+        }
+        await new Promise(resolve => setTimeout(resolve, delay));
         yield fn(item, index++);
       }
     }
-    return BoxedAsyncGenerator.from(arrayAsyncGenerator);
+    return BoxedAsyncGenerator.from(asyncGeneratorFn);
   }
 
   public get asyncGen(): () => AsyncGenerator<T> {
