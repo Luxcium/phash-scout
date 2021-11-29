@@ -38,3 +38,23 @@ export class Box4<T> {
     return this.value;
   }
 }
+
+export class Box5<T> {
+  #value: T;
+
+  public static of<TVal>(value: TVal) {
+    return new Box5(value);
+  }
+  protected constructor(value: T) {
+    this.#value = value;
+    return this;
+  }
+
+  public unbox() {
+    return this.#value;
+  }
+
+  public get value() {
+    return this.unbox();
+  }
+}
