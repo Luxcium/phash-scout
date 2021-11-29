@@ -10,3 +10,15 @@ export class Box2<T> {
     return this;
   }
 }
+
+export class Box3<T> {
+  value: T;
+
+  public static of<TVal>(value: TVal) {
+    return new Box3(value);
+  }
+  protected constructor(value: T) {
+    this.value = value;
+    return this;
+  }
+}
