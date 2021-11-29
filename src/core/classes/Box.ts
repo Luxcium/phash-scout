@@ -139,3 +139,41 @@ export class Box8<T> {
     return this.unbox();
   }
 }
+
+export interface IUnbox<T> {
+  unbox(): T;
+}
+export class Box9<T> {
+  #value: T;
+
+  public static of<TVal>(value: TVal) {
+    return new Box9(value);
+  }
+
+  public static from<TVal>(box: IUnbox<TVal>) {
+    return new Box9(box.unbox());
+  }
+  protected constructor(value: T) {
+    this.#value = value;
+    return this;
+  }
+
+  public map<R>(fn: (value: T) => R) {
+    return Box9.of(fn(this.#value));
+  }
+
+  public chain<R>(fn: (value: T) => R) {
+    return this.map(fn).value;
+  }
+
+  public ap<R>(c: Box9<(val: T) => R>) {
+    return c.map(fn => this.map(fn).value);
+  }
+  public unbox() {
+    return this.#value;
+  }
+
+  public get value() {
+    return this.unbox();
+  }
+}
