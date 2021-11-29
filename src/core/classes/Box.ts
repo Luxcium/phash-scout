@@ -58,3 +58,26 @@ export class Box5<T> {
     return this.unbox();
   }
 }
+
+export class Box6<T> {
+  #value: T;
+
+  public static of<TVal>(value: TVal) {
+    return new Box6(value);
+  }
+  protected constructor(value: T) {
+    this.#value = value;
+    return this;
+  }
+
+  public map<R>(fn: (value: T) => R) {
+    return Box6.of(fn(this.#value));
+  }
+  public unbox() {
+    return this.#value;
+  }
+
+  public get value() {
+    return this.unbox();
+  }
+}
