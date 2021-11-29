@@ -1,4 +1,4 @@
-import type { Mapper } from '..';
+import type { Mapper } from '../..';
 
 export class BoxedGenerator<T> {
   #valueGenerator: () => Generator<T>;

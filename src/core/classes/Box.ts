@@ -23,7 +23,11 @@ export class Box3<T> {
   }
 }
 
-export class Box4<T> {
+export interface IUnbox<T> {
+  unbox(): T;
+}
+
+export class Box4<T> implements IUnbox<T> {
   value: T;
 
   public static of<TVal>(value: TVal) {
@@ -39,7 +43,7 @@ export class Box4<T> {
   }
 }
 
-export class Box5<T> {
+export class Box5<T> implements IUnbox<T> {
   #value: T;
 
   public static of<TVal>(value: TVal) {
@@ -58,8 +62,10 @@ export class Box5<T> {
     return this.unbox();
   }
 }
-
-export class Box6<T> {
+export interface IMap<T> extends IUnbox<T> {
+  map<R>(fn: (value: T) => R): IUnbox<R>;
+}
+export class Box6<T> implements IUnbox<T>, IMap<T> {
   #value: T;
 
   public static of<TVal>(value: TVal) {
@@ -69,12 +75,11 @@ export class Box6<T> {
     this.#value = value;
     return this;
   }
-
-  public map<R>(fn: (value: T) => R) {
-    return Box6.of(fn(this.#value));
-  }
   public unbox() {
     return this.#value;
+  }
+  public map<R>(fn: (value: T) => R) {
+    return Box6.of(fn(this.#value));
   }
 
   public get value() {
@@ -82,7 +87,10 @@ export class Box6<T> {
   }
 }
 
-export class Box7<T> {
+export interface IApply<T> extends IMap<T> {
+  ap<R>(c: IMap<(val: T) => R>): IApply<R> & IUnbox<R> & IMap<R>;
+}
+export class Box7<T> implements IUnbox<T>, IMap<T>, IApply<T> {
   #value: T;
 
   public static of<TVal>(value: TVal) {
@@ -92,16 +100,15 @@ export class Box7<T> {
     this.#value = value;
     return this;
   }
-
+  public unbox() {
+    return this.#value;
+  }
   public map<R>(fn: (value: T) => R) {
     return Box7.of(fn(this.#value));
   }
 
-  public ap<R>(c: Box8<(val: T) => R>) {
-    return c.map(fn => this.map(fn).value);
-  }
-  public unbox() {
-    return this.#value;
+  public ap<R>(c: IMap<(val: T) => R>) {
+    return this.map<R>(val => c.map(fn => fn(val)).unbox());
   }
 
   public get value() {
@@ -109,7 +116,10 @@ export class Box7<T> {
   }
 }
 
-export class Box8<T> {
+export interface IChain<T> extends IMap<T> {
+  chain<R>(fn: (value: T) => R): R;
+}
+export class Box8<T> implements IUnbox<T>, IMap<T>, IApply<T>, IChain<T> {
   #value: T;
 
   public static of<TVal>(value: TVal) {
@@ -119,20 +129,17 @@ export class Box8<T> {
     this.#value = value;
     return this;
   }
-
+  public unbox() {
+    return this.#value;
+  }
   public map<R>(fn: (value: T) => R) {
     return Box8.of(fn(this.#value));
   }
-
-  public chain<R>(fn: (value: T) => R) {
-    return this.map(fn).value;
-  }
-
   public ap<R>(c: IMap<(val: T) => R>) {
     return this.map<R>(val => c.map(fn => fn(val)).unbox());
   }
-  public unbox() {
-    return this.#value;
+  public chain<R>(fn: (value: T) => R) {
+    return this.map(fn).value;
   }
 
   public get value() {
@@ -140,14 +147,7 @@ export class Box8<T> {
   }
 }
 
-export interface IUnbox<T> {
-  unbox(): T;
-}
-
-export interface IMap<T> {
-  map<R>(fn: (value: T) => R): IUnbox<R>;
-}
-export class Box9<T> {
+export class Box9<T> implements IUnbox<T>, IMap<T>, IApply<T>, IChain<T> {
   #value: T;
 
   public static of<TVal>(value: TVal) {
@@ -162,19 +162,19 @@ export class Box9<T> {
     return this;
   }
 
-  public map<R>(fn: (value: T) => R) {
-    return Box9.of(fn(this.#value));
+  public unbox() {
+    return this.#value;
   }
 
-  public chain<R>(fn: (value: T) => R) {
-    return this.map(fn).value;
+  public map<R>(fn: (value: T) => R) {
+    return Box9.of(fn(this.#value));
   }
 
   public ap<R>(c: IMap<(val: T) => R>) {
     return this.map<R>(val => c.map(fn => fn(val)).unbox());
   }
-  public unbox() {
-    return this.#value;
+  public chain<R>(fn: (value: T) => R) {
+    return this.map(fn).value;
   }
 
   public get value() {
