@@ -81,3 +81,30 @@ export class Box6<T> {
     return this.unbox();
   }
 }
+
+export class Box7<T> {
+  #value: T;
+
+  public static of<TVal>(value: TVal) {
+    return new Box7(value);
+  }
+  protected constructor(value: T) {
+    this.#value = value;
+    return this;
+  }
+
+  public map<R>(fn: (value: T) => R) {
+    return Box7.of(fn(this.#value));
+  }
+
+  public ap<R>(c: Box8<(val: T) => R>) {
+    return c.map(fn => this.map(fn).value);
+  }
+  public unbox() {
+    return this.#value;
+  }
+
+  public get value() {
+    return this.unbox();
+  }
+}
