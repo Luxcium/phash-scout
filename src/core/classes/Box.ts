@@ -128,8 +128,8 @@ export class Box8<T> {
     return this.map(fn).value;
   }
 
-  public ap<R>(c: Box8<(val: T) => R>) {
-    return c.map(fn => this.map(fn).value);
+  public ap<R>(c: IMap<(val: T) => R>) {
+    return this.map<R>(val => c.map(fn => fn(val)).unbox());
   }
   public unbox() {
     return this.#value;
@@ -142,6 +142,10 @@ export class Box8<T> {
 
 export interface IUnbox<T> {
   unbox(): T;
+}
+
+export interface IMap<T> {
+  map<R>(fn: (value: T) => R): IUnbox<R>;
 }
 export class Box9<T> {
   #value: T;
@@ -166,8 +170,8 @@ export class Box9<T> {
     return this.map(fn).value;
   }
 
-  public ap<R>(c: Box9<(val: T) => R>) {
-    return c.map(fn => this.map(fn).value);
+  public ap<R>(c: IMap<(val: T) => R>) {
+    return this.map<R>(val => c.map(fn => fn(val)).unbox());
   }
   public unbox() {
     return this.#value;
