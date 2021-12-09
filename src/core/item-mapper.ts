@@ -9,6 +9,7 @@
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
 
+import { Either, isLeft, left, right } from 'fp-ts/lib/Either';
 import type { ItemMapperArgs } from '../types';
 import { immediateZalgo } from '../utils';
 
@@ -39,3 +40,23 @@ export async function itemMapper<T, U>({
   // ++----------------------------------------------------------------+
 }
 // ~#------------------------------------------------------------------#-~
+
+/** Convertion from `PromiseSettledResult<U>` to fp-ts `Either<U, any> ` */
+export function eitherSettledResult<U>(
+  result: PromiseSettledResult<U>
+): Either<U, any> {
+  if (result.status === 'fulfilled') {
+    return right<never, U>(result.value);
+  }
+  return left<typeof result.reason, never>(result.reason);
+}
+
+function main() {
+  const myVal = eitherSettledResult({
+    status: 'fulfilled',
+    value: '',
+  });
+
+  console.log(isLeft(myVal));
+}
+void main;

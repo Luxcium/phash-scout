@@ -1,4 +1,6 @@
-export interface IUnboxList<T> {
+import { IUnbox } from '.';
+
+export interface IUnboxList<T> extends IUnbox<T[]> {
   /**
    * The `unbox` _methode_ lift out the value contained inside this functor.  \
    * By default the type `R` is of the same as the type `T` of the elements in the list.  \

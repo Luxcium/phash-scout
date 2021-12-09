@@ -6,5 +6,24 @@
 /*  See https://github.com/Luxcium/parallel-mapping/blob/cbf7e/LICENSE*/
 /*--------------------------------------------------------------------*/
 
+export {
+  Box,
+  BoxedAsyncGenerator,
+  BoxedGenerator,
+  BoxedList,
+  immediateZalgo,
+  nextTickZalgo,
+  restrainingZalgo,
+  timeoutZalgo,
+} from './classes';
+export type {
+  IApply,
+  IChain,
+  IMap,
+  IMapItems,
+  IUnbox,
+  IUnboxList,
+} from './classes';
 export { CPU_Mapper } from './cpu-mapper';
 export { IO_Mapper } from './io-mapper';
+export { eitherSettledResult } from './item-mapper';

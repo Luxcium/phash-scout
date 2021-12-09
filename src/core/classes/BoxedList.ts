@@ -1,9 +1,11 @@
+import { Either, left, right } from 'fp-ts/lib/Either';
 import { Box } from './Box';
-import type { IMapList, IUnbox, IUnboxList } from './types';
+import type { IMapItems, IUnbox, IUnboxList } from './types';
 
-export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapList<T> {
+export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapItems<T> {
   #value: T[];
 
+  // static ==============================================-| of() |-====
   public static of = <TVal>(...values: TVal[] | [TVal[]]): BoxedList<TVal> => {
     if (values.length === 1) {
       const value = values[0];
@@ -15,22 +17,40 @@ export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapList<T> {
     return new BoxedList<TVal>([...(values as TVal[])]);
   };
 
+  // static ============================================-| from() |-====
   public static from<TVal>(box: IUnbox<TVal[] | TVal> | IUnboxList<TVal>) {
     return BoxedList.of(box.unbox());
   }
+  // protected ==================================-| constructor() |-====
   protected constructor(value: T[]) {
     this.#value = value;
     return this;
   }
 
+  // public ===========================================-| unbox() |-====
   public unbox<R_unsafe = T>() {
     return this.#value as any as R_unsafe[];
   }
 
-  public mapList<R>(fn: (value: T) => R) {
+  // public ========================================-| mapItems() |-====
+  public mapItems<R>(fn: (value: T) => R) {
     return BoxedList.of<R>(...this.#value.map(fn));
   }
 
+  // *- ================================================================
+  // public ========================================-| mapLists() |-====
+  public mapLists<R>(fn: (val: T) => R) {
+    const value = this.#value;
+
+    const mapedValues = value.map(item => {
+      const listBox = BoxedList.of(item);
+      return listBox.mapItems(fn).unbox();
+    });
+    return BoxedList.of(...mapedValues);
+  }
+  // *- ================================================================
+
+  // public ==============================================-| ap() |-====
   public ap<R_Unsafe>(
     c: IUnbox<(val: T) => R_Unsafe> | IUnboxList<(val: any) => unknown>
   ) {
@@ -44,19 +64,36 @@ export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapList<T> {
             currentFunct(previousFn(placeHolder)),
         funct
       ) as (val: T) => R_Unsafe;
-      return this.mapList(val => funct(val) as R_Unsafe);
+      return this.mapItems(val => funct(val) as R_Unsafe);
     }
-    return this.mapList(val => unboxed(val) as R_Unsafe);
+    return this.mapItems(val => unboxed(val) as R_Unsafe);
   }
+  // public ===========================================-| chain() |-====
   public chain<R>(fn: (value: T) => R) {
-    return this.mapList<R>(fn).unbox<R>();
+    return this.mapItems<R>(fn).unbox<R>();
   }
+  // public =============================================-| box() |-====
   get box() {
     return Box.of([...this.unbox<T>()]);
   }
+
+  public get isArrayList() {
+    return this.value.every(item => Array.isArray(item));
+  }
+
+  public getArrayList<R>(): Either<T[], R[][]> {
+    if (this.isArrayList) {
+      return right(this.value as never as R[][]);
+    }
+    return left(this.value as T[]);
+
+    // return this.value.every(item => Array.isArray(item));
+  }
+  // get ================================================-| value |-====
   public get value() {
     return this.unbox<T>();
   }
+  // *--================================================================
 }
 
 function main() {
@@ -70,14 +107,15 @@ function main() {
   );
   const results = values.ap<number>(functions);
   const oneMoreTime = Box.of((n: number) => n * 2);
+
+  const value = 2;
+  const pseudoCode = (i: number): number => i;
+  [pseudoCode(value)]
+    .map(x => x * 2)
+    .map(y => y + 3)
+    .map(anything => anything - 7)
+    .map(itWasNotAsTrivialAsThisExample => 0 / itWasNotAsTrivialAsThisExample);
+
   return results.ap(oneMoreTime).chain(v => console.log(v));
 }
 void main; //();
-
-const value = 2;
-const pseudoCode = (i: number): number => i;
-[pseudoCode(value)]
-  .map(x => x * 2)
-  .map(y => y + 3)
-  .map(anything => anything - 7)
-  .map(itWasNotAsTrivialAsThisExample => 0 / itWasNotAsTrivialAsThisExample);

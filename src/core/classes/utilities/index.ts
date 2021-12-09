@@ -10,6 +10,11 @@ import { immediateZalgo } from './immediateZalgo';
 import { nextTickZalgo } from './nextTickZalgo';
 import { timeoutZalgo } from './timeoutZalgo';
 
+export { isAllArrays } from './isAllArrays';
+export { isArray } from './isArray';
+export { immediateZalgo };
+export { nextTickZalgo };
+export { timeoutZalgo };
 /**
  * @see https://blog.izs.me/2013/08/designing-apis-for-asynchrony
  */

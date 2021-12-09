@@ -1,4 +1,23 @@
-export { CPU_Mapper, IO_Mapper } from './core';
+export {
+  Box,
+  BoxedAsyncGenerator,
+  BoxedGenerator,
+  BoxedList,
+  CPU_Mapper,
+  immediateZalgo,
+  IO_Mapper,
+  nextTickZalgo,
+  restrainingZalgo,
+  timeoutZalgo,
+} from './core';
+export type {
+  IApply,
+  IChain,
+  IMap,
+  IMapItems,
+  IUnbox,
+  IUnboxList,
+} from './core';
 export type { CPU_MapperRetunType, Mapper, MapperArgs } from './types';
 
 /*
