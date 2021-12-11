@@ -78,19 +78,19 @@ export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapItems<T> {
   }
 
   public get isArrayList() {
-    return this.value.every(item => Array.isArray(item));
+    return this.values.every(item => Array.isArray(item));
   }
 
   public getArrayList<R>(): Either<T[], R[][]> {
     if (this.isArrayList) {
-      return right(this.value as never as R[][]);
+      return right(this.values as never as R[][]);
     }
-    return left(this.value as T[]);
+    return left(this.values as T[]);
 
     // return this.value.every(item => Array.isArray(item));
   }
-  // get ================================================-| value |-====
-  public get value() {
+  // get ===============================================-| values |-====
+  public get values() {
     return this.unbox<T>();
   }
   // *--================================================================

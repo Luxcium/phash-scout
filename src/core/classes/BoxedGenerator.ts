@@ -1,16 +1,11 @@
-import type { Mapper } from '../..';
+import { Mapper } from '../..';
+import { IUnbox, IUnboxList } from './types';
 
-export class BoxedGenerator<T> {
+export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
   #valueGenerator: () => Generator<T>;
 
-  public static from = <TVal>(
-    generatorFn: () => Generator<TVal>
-  ): BoxedGenerator<TVal> => {
-    return new BoxedGenerator<TVal>(generatorFn);
-  };
-  public static of = <TVal>(
-    ...values: TVal[] | [TVal[]]
-  ): BoxedGenerator<TVal> => {
+  // static ==============================================-| of() |-====
+  public static of<TVal>(...values: TVal[] | [TVal[]]): BoxedGenerator<TVal> {
     const arrayGenerator = (array: TVal[]): (() => Generator<TVal>) =>
       function* (): Generator<TVal> {
         for (let index = 0; index < array.length; index++) {
@@ -28,11 +23,27 @@ export class BoxedGenerator<T> {
     }
 
     return new BoxedGenerator<TVal>(arrayGenerator([...(values as TVal[])]));
-  };
+  }
 
+  // static =========================================-| fromGen() |-====
+  public static fromGen<TVal>(
+    generatorFn: () => Generator<TVal>
+  ): BoxedGenerator<TVal> {
+    return new BoxedGenerator<TVal>(generatorFn);
+  }
+
+  // static ============================================-| from() |-====
+  public static from<TVal>(
+    boxedList: IUnboxList<TVal> | IUnbox<TVal[]>
+  ): BoxedGenerator<TVal> {
+    return BoxedGenerator.of<TVal>(boxedList.unbox());
+  }
+
+  // protected ==================================-| constructor() |-====
   protected constructor(valueGenerator: () => Generator<T>) {
     this.#valueGenerator = valueGenerator;
   }
+  // public =============================================-| map() |-====
   public map<TMap>(fn: Mapper<T, TMap>): BoxedGenerator<TMap> {
     const generator = this.#valueGenerator;
 
@@ -41,16 +52,19 @@ export class BoxedGenerator<T> {
         yield fn(item);
       }
     }
-    return BoxedGenerator.from(arrayGenerator);
+    return BoxedGenerator.fromGen(arrayGenerator);
   }
+  // public ===========================================-| unbox() |-====
   public unbox(): T[] {
     return Array.from(this.#valueGenerator());
   }
 
+  // get ===============================================-| values |-====
   public get values(): T[] {
     return this.unbox();
   }
 
+  // get ==================================================-| gen |-====
   public get gen(): () => Generator<T> {
     return this.#valueGenerator;
   }

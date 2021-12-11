@@ -3,6 +3,8 @@ export {
   BoxedAsyncGenerator,
   BoxedGenerator,
   BoxedList,
+  boxFrom,
+  boxOf,
   CPU_Mapper,
   immediateZalgo,
   IO_Mapper,

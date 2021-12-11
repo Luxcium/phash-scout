@@ -1,15 +1,23 @@
-import type { Mapper } from '../..';
+import type { IUnbox, IUnboxList, Mapper } from '../..';
 import { timeoutZalgo } from '../../utils';
 
 /** Create a container to hold a value as an AsyncGenerator on wich you could map */
 export class BoxedAsyncGenerator<T> {
   #valueAsyncGenerator: () => AsyncGenerator<T>;
 
-  public static from = <TVal>(
+  public static fromGen = <TVal>(
     generatorFn: () => AsyncGenerator<TVal>
   ): BoxedAsyncGenerator<TVal> => {
     return new BoxedAsyncGenerator<TVal>(generatorFn);
   };
+
+  // static ============================================-| from() |-====
+  public static from<TVal>(
+    boxedList: IUnboxList<TVal> | IUnbox<TVal[]>
+  ): BoxedAsyncGenerator<TVal> {
+    return BoxedAsyncGenerator.of<TVal>(boxedList.unbox());
+  }
+  // static ==============================================-| of() |-====
   public static of = <TVal>(
     ...values: TVal[] | [TVal[]]
   ): BoxedAsyncGenerator<TVal> => {
@@ -54,7 +62,7 @@ export class BoxedAsyncGenerator<T> {
         yield fn(item, index++);
       }
     }
-    return BoxedAsyncGenerator.from(asyncGeneratorFn);
+    return BoxedAsyncGenerator.fromGen(asyncGeneratorFn);
   }
 
   public get asyncGen(): () => AsyncGenerator<T> {

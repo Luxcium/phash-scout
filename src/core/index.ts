@@ -11,6 +11,8 @@ export {
   BoxedAsyncGenerator,
   BoxedGenerator,
   BoxedList,
+  boxFrom,
+  boxOf,
   immediateZalgo,
   nextTickZalgo,
   restrainingZalgo,

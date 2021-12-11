@@ -1,4 +1,4 @@
-export { Box } from './Box';
+export { Box, boxFrom, boxOf } from './Box';
 export { BoxedAsyncGenerator } from './BoxedAsyncGenerator';
 export { BoxedGenerator } from './BoxedGenerator';
 export { BoxedList } from './BoxedList';
