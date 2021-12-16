@@ -16,22 +16,25 @@
     "check": "tsc --noEmit",
     "check:version": "ts-node -vv;tsc -v",
     "lint": "echo \"Error: no linter specified\" && exit 0",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "jest"
   },
   "keywords": [],
   "author": "Benjamin Vincent (Luxcium)",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^27.0.3",
     "@types/node": "latest",
     "am": "1.0.2",
     "got": "11.7.0",
+    "jest": "^27.4.5",
     "prettier": "latest",
-    "rimraf": "latest"
+    "rimraf": "latest",
+    "ts-jest": "^27.1.1",
+    "typescript": "^4.5.4"
   },
   "dependencies": {
     "fp-ts": "^2.11.5",
     "ts-node": "^10.4.0",
-    "tslib": "latest",
-    "typescript": "^4.6.0-dev.20211204"
+    "tslib": "latest"
   }
 }

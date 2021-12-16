@@ -97,4 +97,4 @@ async function main(): Promise<void> {
   return void 42;
 }
 void main;
-main();
+// main();

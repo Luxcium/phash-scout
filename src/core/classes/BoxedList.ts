@@ -2,6 +2,13 @@ import { Either, left, right } from 'fp-ts/lib/Either';
 import { Box } from './Box';
 import type { IMapItems, IUnbox, IUnboxList } from './types';
 
+export function boxedListOf<TVal>(value: TVal) {
+  return BoxedList.of(value);
+}
+
+export function boxedListFrom<TVal>(box: IUnbox<TVal>) {
+  return BoxedList.from(box);
+}
 export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapItems<T> {
   #value: T[];
 
@@ -18,8 +25,13 @@ export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapItems<T> {
   };
 
   // static ============================================-| from() |-====
-  public static from<TVal>(box: IUnbox<TVal[] | TVal> | IUnboxList<TVal>) {
-    return BoxedList.of(box.unbox());
+  // TVal[] | [TVal[]] // [] | [TVal[]]
+  // : BoxedList<TVal> // <TVal>
+  public static from<TVal>(
+    box: IUnbox<TVal> | IUnbox<TVal[]> | IUnboxList<TVal>
+  ) {
+    const unbox: TVal | TVal[] = box.unbox();
+    return BoxedList.of<TVal>(unbox as TVal);
   }
   // protected ==================================-| constructor() |-====
   protected constructor(value: T[]) {
@@ -119,3 +131,18 @@ function main() {
   return results.ap(oneMoreTime).chain(v => console.log(v));
 }
 void main; //();
+// function testing_001<T>(...value: T[]) {
+//   return testing_002(value);
+// }
+// function testing_002<TVal>(...values: TVal[] | [TVal[]]) {
+//   if (values.length === 1) {
+//     const value = values[0];
+
+//     if (Array.isArray(value)) {
+//       return [...value];
+//     }
+//   }
+//   return [...(values as TVal[])];
+// }
+
+// console.log(testing_001('a'));

@@ -3,14 +3,18 @@ export {
   BoxedAsyncGenerator,
   BoxedGenerator,
   BoxedList,
+  boxedListFrom,
+  boxedListOf,
   boxFrom,
   boxOf,
   CPU_Mapper,
   immediateZalgo,
   IO_Mapper,
   nextTickZalgo,
+  nullOrDefined,
   restrainingZalgo,
   timeoutZalgo,
+  zalgo,
 } from './core';
 export type {
   IApply,

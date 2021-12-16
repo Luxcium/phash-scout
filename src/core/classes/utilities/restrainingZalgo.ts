@@ -6,30 +6,15 @@
 /*  See https://github.com/Luxcium/parallel-mapping/blob/cbf7e/LICENSE*/
 /*--------------------------------------------------------------------*/
 
-export {
-  Box,
-  BoxedAsyncGenerator,
-  BoxedGenerator,
-  BoxedList,
-  boxedListFrom,
-  boxedListOf,
-  boxFrom,
-  boxOf,
-  immediateZalgo,
-  nextTickZalgo,
-  nullOrDefined,
-  restrainingZalgo,
-  timeoutZalgo,
-  zalgo,
-} from './classes';
-export type {
-  IApply,
-  IChain,
-  IMap,
-  IMapItems,
-  IUnbox,
-  IUnboxList,
-} from './classes';
-export { CPU_Mapper } from './cpu-mapper';
-export { IO_Mapper } from './io-mapper';
-export { eitherSettledResult } from './item-mapper';
+import { immediateZalgo } from './immediateZalgo';
+import { nextTickZalgo } from './nextTickZalgo';
+import { timeoutZalgo } from './timeoutZalgo';
+
+/**
+ * @see https://blog.izs.me/2013/08/designing-apis-for-asynchrony
+ */
+export const restrainingZalgo = {
+  immediate: async () => immediateZalgo(void 15),
+  timeout: async () => timeoutZalgo(0, void 15),
+  nextTick: async () => nextTickZalgo(),
+};

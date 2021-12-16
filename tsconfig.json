@@ -53,7 +53,8 @@
     ],
     /* Specify type package names to be included without being referenced in a source file. */
     "types": [
-      "node"
+      "node",
+      "jest"
     ],
     /* Completeness */
     "skipDefaultLibCheck": false,
