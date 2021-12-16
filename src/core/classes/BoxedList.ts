@@ -45,6 +45,11 @@ export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapItems<T> {
   }
 
   // public ========================================-| mapItems() |-====
+  public map<R>(fn: (value: T[]) => R[]) {
+    return BoxedList.of<R>(...fn(this.#value));
+  }
+
+  // public ========================================-| mapItems() |-====
   public mapItems<R>(fn: (value: T) => R) {
     return BoxedList.of<R>(...this.#value.map(fn));
   }

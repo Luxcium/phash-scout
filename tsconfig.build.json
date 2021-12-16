@@ -111,6 +111,11 @@
   },
   "include": [
     "src/**/*.ts"
+  ],
+  "exclude": [
+    "**/tests/",
+    "**/Untitled*",
+    "**/*unnamed*"
   ]
 }
 /* Visit https://aka.ms/tsconfig.json to read more about this file */
