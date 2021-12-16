@@ -1,7 +1,7 @@
 {
   "name": "@luxcium/parallel-mapper",
   "private": false,
-  "version": "0.0.0-internal-candidate-1.0.0x",
+  "version": "0.0.0-internal-1.0.2x",
   "description": "",
   "main": "./index.js",
   "types": "./typings/index.d.ts",
