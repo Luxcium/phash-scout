@@ -1,6 +1,12 @@
 import { Either, left, right } from 'fp-ts/lib/Either';
 import { Box } from './Box';
-import type { IMapItems, IUnbox, IUnboxList } from './types';
+import type {
+  CallbackfnT,
+  CallbackfnU,
+  IMapItems,
+  IUnbox,
+  IUnboxList,
+} from './types';
 
 export function boxedListOf<TVal>(value: TVal) {
   return BoxedList.of(value);
@@ -9,6 +15,7 @@ export function boxedListOf<TVal>(value: TVal) {
 export function boxedListFrom<TVal>(box: IUnbox<TVal>) {
   return BoxedList.from(box);
 }
+
 export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapItems<T> {
   #value: T[];
 
@@ -20,7 +27,9 @@ export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapItems<T> {
       if (Array.isArray(value)) {
         return new BoxedList<TVal>([...value]);
       }
+      // console.log('length is one not an array inside');
     }
+
     return new BoxedList<TVal>([...(values as TVal[])]);
   };
 
@@ -33,10 +42,173 @@ export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapItems<T> {
     const unbox: TVal | TVal[] = box.unbox();
     return BoxedList.of<TVal>(unbox as TVal);
   }
+
   // protected ==================================-| constructor() |-====
   protected constructor(value: T[]) {
     this.#value = value;
     return this;
+  }
+
+  // public =========================================-| entries() |-====
+  public entries(): IterableIterator<[number, T]> {
+    return this.list.entries();
+  }
+
+  // public ============================================-| keys() |-====
+  // (method) BoxedList<T>.keys(): IterableIterator<number>
+
+  public keys(): IterableIterator<number> {
+    return this.list.keys();
+  }
+
+  // public ==========================================-| values() |-====
+  public values(): IterableIterator<T> {
+    return this.list.values();
+  }
+
+  // ==============================================-| [n: number] |-====
+  readonly [n: number]: T;
+
+  // iterator ============================-| *[Symbol.iterator]() |-====
+  public *[Symbol.iterator](): Generator<T, void, undefined> {
+    yield* this.#value;
+  }
+
+  // void Array.prototype.every; //+
+  // void Array.prototype.filter; //+
+  // void Array.prototype.find; //+
+  // void Array.prototype.findIndex; //+
+  // void Array.prototype.forEach; //+
+  // void Array.prototype.map; //!!
+  // void Array.prototype.reduce; //+
+  // void Array.prototype.reduceRight; //+
+  // void Array.prototype.some; //+
+
+  // public ===========================================-| every() |-====
+  public every<S extends T>(
+    predicate: (val: T, index: number, array: T[]) => val is S,
+    thisArg?: any
+  ): this is S[];
+
+  every(
+    predicate: (val: T, index: number, array: T[]) => unknown,
+    thisArg?: any
+  ): boolean {
+    return this.list.every(predicate, thisArg);
+  }
+
+  // public ==========================================-| filter() |-====
+  public filter<S extends T>(
+    predicate: (val: T, index: number, array: T[]) => val is S,
+    thisArg?: any
+  ): BoxedList<S>;
+
+  filter(
+    predicate: (val: T, index: number, array: T[]) => unknown,
+    thisArg?: any
+  ): BoxedList<T> {
+    return BoxedList.of(...this.list.filter(predicate, thisArg));
+  }
+
+  // public ============================================-| find() |-====
+  public find<S extends T>(
+    predicate: (this: T, val: T, index: number, obj: T[]) => val is S,
+    thisArg?: any
+  ): S | undefined; // MaybeList<undefined>;
+
+  find(
+    predicate: (val: T, index: number, obj: T[]) => unknown,
+    thisArg?: any
+  ): T | undefined {
+    // MaybeList<T | undefined>
+    return this.list.find(predicate, thisArg);
+  }
+
+  // public =======================================-| findIndex() |-====
+  findIndex(
+    predicate: (val: T, index: number, obj: T[]) => unknown,
+    thisArg?: any
+  ): number {
+    return this.list.findIndex(predicate, thisArg);
+  }
+
+  // public =========================================-| forEach() |-====
+  public forEach(
+    callbackfn: (val: T, index: number, array: T[]) => void,
+    thisArgument?: any
+  ): void {
+    return this.list.forEach(callbackfn, thisArgument);
+  }
+
+  // public map<U>(
+  //   callbackfn: (val: T, index: number, array: T[]) => U,
+  //   thisArg?: any,
+  // ): BoxedList<U> {
+  //   return BoxedList.of<U>(
+  //     super.map<U[]>(values => values.map<U>(callbackfn, thisArg)).values,
+  //   );
+  // }
+
+  // public ==========================================-| reduce() |-====
+  public reduce<U>(
+    callbackfn:
+      | ((
+          previousValue: U,
+          currentValue: T,
+          currentIndex: number,
+          array: T[]
+        ) => U)
+      | ((
+          previousValue: T,
+          currentValue: T,
+          currentIndex: number,
+          array: T[]
+        ) => T),
+    initialValue?: U | T
+  ): U | T {
+    if (!initialValue) {
+      return this.list.reduce(callbackfn as CallbackfnT<T>);
+    }
+
+    return this.list.reduce<T | U>(
+      callbackfn as CallbackfnU<U, T>,
+      initialValue
+    );
+  }
+
+  // public =====================================-| reduceRight() |-====
+  public reduceRight<U>(
+    callbackfn:
+      | ((
+          previousValue: U,
+          currentValue: T,
+          currentIndex: number,
+          array: T[]
+        ) => U)
+      | ((
+          previousValue: T,
+          currentValue: T,
+          currentIndex: number,
+          array: T[]
+        ) => T),
+    initialValue?: U | T
+  ): U | T {
+    if (!initialValue) {
+      return this.list.reduceRight(callbackfn as CallbackfnT<T>);
+    }
+
+    return this.list.reduceRight<T | U>(
+      callbackfn as CallbackfnU<U, T>,
+      initialValue
+    );
+  }
+
+  // public ============================================-| some() |-====
+  public some(
+    predicate: (val: T, index: number, array: T[]) => unknown,
+    thisArg?: any
+  ): boolean {
+    return this.list.some(predicate, thisArg);
   }
 
   // public ===========================================-| unbox() |-====
@@ -65,6 +237,7 @@ export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapItems<T> {
     });
     return BoxedList.of(...mapedValues);
   }
+
   // *- ================================================================
 
   // public ==============================================-| ap() |-====
@@ -83,71 +256,38 @@ export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapItems<T> {
       ) as (val: T) => R_Unsafe;
       return this.mapItems(val => funct(val) as R_Unsafe);
     }
+
     return this.mapItems(val => unboxed(val) as R_Unsafe);
   }
+
   // public ===========================================-| chain() |-====
   public chain<R>(fn: (value: T) => R) {
     return this.mapItems<R>(fn).unbox<R>();
   }
+
   // public =============================================-| box() |-====
   get box() {
     return Box.of([...this.unbox<T>()]);
   }
 
   public get isArrayList() {
-    return this.values.every(item => Array.isArray(item));
+    return this.list.every(item => Array.isArray(item));
   }
 
   public getArrayList<R>(): Either<T[], R[][]> {
     if (this.isArrayList) {
-      return right(this.values as never as R[][]);
+      return right(this.list as never as R[][]);
     }
-    return left(this.values as T[]);
+
+    return left(this.list as T[]);
 
     // return this.value.every(item => Array.isArray(item));
   }
+
   // get ===============================================-| values |-====
-  public get values() {
+  public get list() {
     return this.unbox<T>();
   }
+
   // *--================================================================
 }
-
-function main() {
-  const values = BoxedList.of(1, 2, 3, 4, 5);
-  const functions = BoxedList.of(
-    (i: number) => i,
-    (n: number) => n + 1,
-    (n: number) => n * 2,
-    (n: number) => n - 2,
-    (n: number) => n + n
-  );
-  const results = values.ap<number>(functions);
-  const oneMoreTime = Box.of((n: number) => n * 2);
-
-  const value = 2;
-  const pseudoCode = (i: number): number => i;
-  [pseudoCode(value)]
-    .map(x => x * 2)
-    .map(y => y + 3)
-    .map(anything => anything - 7)
-    .map(itWasNotAsTrivialAsThisExample => 0 / itWasNotAsTrivialAsThisExample);
-
-  return results.ap(oneMoreTime).chain(v => console.log(v));
-}
-void main; //();
-// function testing_001<T>(...value: T[]) {
-//   return testing_002(value);
-// }
-// function testing_002<TVal>(...values: TVal[] | [TVal[]]) {
-//   if (values.length === 1) {
-//     const value = values[0];
-
-//     if (Array.isArray(value)) {
-//       return [...value];
-//     }
-//   }
-//   return [...(values as TVal[])];
-// }
-
-// console.log(testing_001('a'));

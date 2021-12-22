@@ -11,6 +11,7 @@ export type {
   IUnboxList,
 } from './types/';
 export {
+  cpuCount,
   immediateZalgo,
   nextTickZalgo,
   nullOrDefined,

@@ -7,6 +7,7 @@ export {
   boxedListOf,
   boxFrom,
   boxOf,
+  cpuCount,
   CPU_Mapper,
   immediateZalgo,
   IO_Mapper,

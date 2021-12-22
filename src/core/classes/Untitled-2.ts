@@ -48,34 +48,34 @@ function isAllArray<T>(specimen: T[]) {
   return specimen.every(item => Array.isArray(item));
 }
 
-export function getinto<T>(value: T) {
-  if (Array.isArray(value)) {
-    if (isAllArray(value)) {
-      return {
-        value,
-        map<R>(fn: any, thisArg: any) {
-          return this.value.map<R[]>(item => item.map<R>(fn, thisArg));
-        },
-      };
-    }
-    return {
-      value,
-      map<R>(fn: any, thisArg: any) {
-        return this.value.map<R>(fn, thisArg);
-      },
-    };
-  }
+// export function getinto<T>(value: T) {
+//   if (Array.isArray(value)) {
+//     if (isAllArray(value)) {
+//       return {
+//         value,
+//         map<R>(fn: any, thisArg: any) {
+//           return this.value.map<R[]>(item => item.map<R>(fn, thisArg));
+//         },
+//       };
+//     }
+//     return {
+//       value,
+//       map<R>(fn: any, thisArg: any) {
+//         return this.value.map<R>(fn, thisArg);
+//       },
+//     };
+//   }
 
-  return {
-    value: [value],
-    map<R>(fn: any, thisArg: any) {
-      return this.value.map<R>(fn, thisArg);
-    },
-    isallArray() {
-      return isAllArray(this.value);
-    },
-  };
-}
+//   return {
+//     value: [value],
+//     map<R>(fn: any, thisArg: any) {
+//       return this.value.map<R>(fn, thisArg);
+//     },
+//     isallArray() {
+//       return isAllArray(this.value);
+//     },
+//   };
+// }
 
 export function getoutof<T>(): T[] {
   return [];

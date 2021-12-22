@@ -2,30 +2,30 @@ import { Box, BoxedList } from '..';
 
 describe('Testing Box specification', () => {
   test('BoxedList of one item', () => {
-    expect(BoxedList.of('Chocolates')).toStrictEqual(
-      BoxedList.of(['Chocolates'])
+    expect(BoxedList.of('Chocolates').list).toStrictEqual(
+      BoxedList.of(['Chocolates']).list
     );
   });
   test('BoxedList of many items', () => {
-    expect(BoxedList.of(1, 2, 3, 4, 5, 6, 7, 8, 9)).toStrictEqual(
-      BoxedList.of([1, 2, 3, 4, 5, 6, 7, 8, 9])
+    expect(BoxedList.of(1, 2, 3, 4, 5, 6, 7, 8, 9).unbox()).toStrictEqual(
+      BoxedList.of([1, 2, 3, 4, 5, 6, 7, 8, 9]).unbox()
     );
   });
   test('BoxedList of one array', () => {
-    expect(BoxedList.of([1, 2, 3, 4, 5, 6, 7, 8, 9])).toStrictEqual(
-      BoxedList.of([1, 2, 3, 4, 5, 6, 7, 8, 9])
+    expect(BoxedList.of([1, 2, 3, 4, 5, 6, 7, 8, 9]).unbox()).toStrictEqual(
+      BoxedList.of(1, 2, 3, 4, 5, 6, 7, 8, 9).unbox()
     );
   });
 
-  test('BoxedList of an array with one item', () => {
-    expect(BoxedList.of([[1, 2, 3, 4, 5, 6, 7, 8, 9]])).toStrictEqual(
-      BoxedList.of([1, 2, 3, 4, 5, 6, 7, 8, 9])
+  test('BoxedList of an array with one item (a list)', () => {
+    expect(BoxedList.of([[1, 2, 3, 4, 5, 6, 7, 8, 9]]).unbox()).toStrictEqual(
+      BoxedList.of([[1, 2, 3, 4, 5, 6, 7, 8, 9]]).unbox()
     );
   });
 
   test('BoxedList of nested arrays', () => {
-    expect(BoxedList.of([[[1, 2, 3, 4, 5, 6, 7, 8, 9]]])).toStrictEqual(
-      BoxedList.of([[1, 2, 3, 4, 5, 6, 7, 8, 9]])
+    expect(BoxedList.of([[[1, 2, 3, 4, 5, 6, 7, 8, 9]]]).unbox()).toStrictEqual(
+      BoxedList.of([[[1, 2, 3, 4, 5, 6, 7, 8, 9]]]).unbox()
     );
   });
 
@@ -45,25 +45,29 @@ describe('Testing Box specification', () => {
   test('BoxedList from IUnbox<TVal[]>', () => {
     const box = Box.of(['Chocolates']);
 
-    expect(BoxedList.from(box)).toStrictEqual(BoxedList.of('Chocolates'));
+    expect(BoxedList.from(box).unbox()).toStrictEqual(
+      BoxedList.of('Chocolates').unbox()
+    );
   });
   test('BoxedList from', () => {
     const boxedlist = BoxedList.of('Chocolates');
 
-    expect(BoxedList.from(boxedlist)).toStrictEqual(BoxedList.of('Chocolates'));
+    expect(BoxedList.from(boxedlist).unbox()).toStrictEqual(
+      BoxedList.of('Chocolates').unbox()
+    );
   });
   test('BoxedList map', () => {
     const boxedlist = BoxedList.of(12, 13, 14);
-    expect(boxedlist.mapItems((val: number) => val * 2 + 1)).toStrictEqual(
-      BoxedList.of(12 * 2 + 1, 13 * 2 + 1, 14 * 2 + 1)
-    );
+    expect(
+      boxedlist.mapItems((val: number) => val * 2 + 1).unbox()
+    ).toStrictEqual(BoxedList.of(12 * 2 + 1, 13 * 2 + 1, 14 * 2 + 1).unbox());
   });
 
   test('BoxedList ap', () => {
     const boxedlist = BoxedList.of(12);
     expect(
-      boxedlist.ap(BoxedList.of([(val: number) => val * 2 + 1]))
-    ).toStrictEqual(BoxedList.of(12 * 2 + 1));
+      boxedlist.ap(BoxedList.of([(val: number) => val * 2 + 1])).unbox()
+    ).toStrictEqual(BoxedList.of(12 * 2 + 1).unbox());
   });
 
   test('BoxedList chain', () => {
@@ -78,7 +82,7 @@ describe('Testing Box specification', () => {
 
   test('BoxedList value', () => {
     const boxedlist = BoxedList.of('Chocolates');
-    expect(boxedlist.values).toStrictEqual(['Chocolates']);
+    expect(boxedlist.list).toStrictEqual(['Chocolates']);
   });
 });
 

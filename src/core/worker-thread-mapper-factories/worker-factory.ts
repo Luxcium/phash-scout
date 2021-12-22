@@ -6,15 +6,9 @@
 /*  See https://github.com/Luxcium/parallel-mapping/blob/cbf7e/LICENSE*/
 /*--------------------------------------------------------------------*/
 
-import type {
-  MakeThreadWorkerArgs,
-  Mapper,
-  WorkerData,
-  Worker_Threads,
-  WT_D,
-} from '../../types';
-import { getAsyncWorker } from './the-main-worker';
-import { theThreadWorker } from './the-thread-worker';
+import type { Mapper, WT_D } from '../../types';
+import { makeMainWorker } from './makeMainWorker';
+import { makeThreadWorker } from './makeThreadWorker';
 
 export function workerFactory<T, R>(
   filename: string,
@@ -31,39 +25,4 @@ export function workerFactory<T, R>(
   return intermediateItems;
 }
 
-export function makeMainWorker2<T>(
-  filename: string,
-  worker_threads: Worker_Threads<WorkerData<T>>
-) {
-  return <R>(workerData: WorkerData<T>): Promise<R> =>
-    worker_threads.isMainThread
-      ? getAsyncWorker<R, unknown>(filename, {
-          workerData,
-          worker_threads,
-        })
-      : (void null as never as Promise<R>);
-}
-function makeMainWorker<T>(
-  filename: string,
-  worker_threads: Worker_Threads<WorkerData<T>>
-): <R>(value: T, index?: number, array?: readonly T[]) => Promise<R> {
-  return <R>(value: T, index?: number, array?: readonly T[]): Promise<R> =>
-    worker_threads.isMainThread
-      ? getAsyncWorker<R, unknown>(filename, {
-          workerData: { value, index, array },
-          worker_threads,
-        })
-      : (void null as never as Promise<R>);
-}
 
-function makeThreadWorker<T, R>({
-  threadWorkerFn,
-  worker_threads,
-}: MakeThreadWorkerArgs<T, R>) {
-  const threadWorker_MappingFn = (workerdata: WorkerData<T>): R =>
-    threadWorkerFn(workerdata.value, workerdata.index, workerdata.array);
-  return () =>
-    !worker_threads.isMainThread
-      ? theThreadWorker(threadWorker_MappingFn)
-      : void null;
-}

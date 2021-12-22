@@ -15,6 +15,7 @@ export {
   boxedListOf,
   boxFrom,
   boxOf,
+  cpuCount,
   immediateZalgo,
   nextTickZalgo,
   nullOrDefined,

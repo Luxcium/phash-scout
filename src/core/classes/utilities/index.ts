@@ -1,3 +1,4 @@
+export { cpuCount } from './cpuCount';
 export { getSign } from './getSign';
 export { immediateZalgo } from './immediateZalgo';
 export { isAllArrays } from './isAllArrays';

@@ -26,19 +26,19 @@ export const someName = {
   },
 };
 
-export const genPageUrls =
-  pageUrlFn =>
-  (delay = 1) =>
-  ([userName, userID]) =>
-  (b, a = 1) => ({
-    from: a,
-    to: b,
-    async *[Symbol.asyncIterator]() {
-      // called once, in the beginning of for..of,
-      for (let value = this.from; value <= this.to; value++) {
-        // make a pause between values, wait for something
-        await new Promise(resolve => setTimeout(resolve, delay));
-        yield pageUrlFn([userName, userID])(value);
-      }
-    },
-  });
+// export const genPageUrls =
+//   pageUrlFn =>
+//   (delay = 1) =>
+//   ([userName, userID]) =>
+//   (b, a = 1) => ({
+//     from: a,
+//     to: b,
+//     async *[Symbol.asyncIterator]() {
+//       // called once, in the beginning of for..of,
+//       for (let value = this.from; value <= this.to; value++) {
+//         // make a pause between values, wait for something
+//         await new Promise(resolve => setTimeout(resolve, delay));
+//         yield pageUrlFn([userName, userID])(value);
+//       }
+//     },
+//   });
