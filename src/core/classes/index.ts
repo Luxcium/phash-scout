@@ -12,10 +12,18 @@ export type {
 } from './types/';
 export {
   cpuCount,
+  getSign,
   immediateZalgo,
+  isAllArrays,
+  isArray,
   nextTickZalgo,
   nullOrDefined,
   restrainingZalgo,
+  splitedHead,
+  splitedTail,
+  splitHead,
+  splitTail,
   timeoutZalgo,
+  utils,
   zalgo,
 } from './utilities';

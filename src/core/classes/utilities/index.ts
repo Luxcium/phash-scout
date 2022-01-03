@@ -1,10 +1,53 @@
-export { cpuCount } from './cpuCount';
-export { getSign } from './getSign';
-export { immediateZalgo } from './immediateZalgo';
-export { isAllArrays } from './isAllArrays';
-export { isArray } from './isArray';
-export { nextTickZalgo } from './nextTickZalgo';
-export { nullOrDefined } from './nullOrDefined';
-export { restrainingZalgo } from './restrainingZalgo';
-export { timeoutZalgo } from './timeoutZalgo';
-export { zalgo } from './zalgo';
+import { cpuCount } from './cpuCount';
+import { getDevFilename } from './getDevFileName';
+import { getSign } from './getSign';
+import { immediateZalgo } from './immediateZalgo';
+import { isAllArrays } from './isAllArrays';
+import { isArray } from './isArray';
+import { isDevEnv } from './isDevEnv';
+import { nextTickZalgo } from './nextTickZalgo';
+import { NODE_ENV } from './NODE_ENV';
+import { nullOrDefined } from './nullOrDefined';
+import { restrainingZalgo } from './restrainingZalgo';
+import { splitedHead, splitedTail, splitHead, splitTail } from './split';
+import { timeoutZalgo } from './timeoutZalgo';
+import { zalgo } from './zalgo';
+export {
+  cpuCount,
+  getDevFilename,
+  getSign,
+  immediateZalgo,
+  isAllArrays,
+  isArray,
+  isDevEnv,
+  nextTickZalgo,
+  NODE_ENV,
+  nullOrDefined,
+  restrainingZalgo,
+  splitedHead,
+  splitedTail,
+  splitHead,
+  splitTail,
+  timeoutZalgo,
+  zalgo,
+};
+
+export const utils = {
+  cpuCount,
+  getDevFilename,
+  getSign,
+  immediateZalgo,
+  isAllArrays,
+  isArray,
+  isDevEnv,
+  nextTickZalgo,
+  NODE_ENV,
+  nullOrDefined,
+  restrainingZalgo,
+  splitedHead,
+  splitedTail,
+  splitHead,
+  splitTail,
+  timeoutZalgo,
+  zalgo,
+};

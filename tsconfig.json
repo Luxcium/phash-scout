@@ -110,7 +110,8 @@
     // "reactNamespace": "",
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    // "scripts/scripts/*.ts",
   ]
 }
 /* Visit https://aka.ms/tsconfig.json to read more about this file */

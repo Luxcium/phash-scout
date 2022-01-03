@@ -49,7 +49,9 @@ class Box<T> implements IUnbox<T>, IMap<T>, IApply<T>, IChain<T> {
   public unbox() {
     return this.#value;
   }
-
+  public get box() {
+    return Box.of(this.unbox());
+  }
   // get ===============================================-| values |-====
   public get value() {
     return this.unbox();

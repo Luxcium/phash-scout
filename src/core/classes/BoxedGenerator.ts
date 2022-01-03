@@ -1,4 +1,4 @@
-import { BoxedList } from '.';
+import { Box, BoxedList } from '.';
 import { Mapper } from '../..';
 import { IUnbox, IUnboxList } from './types';
 
@@ -59,8 +59,12 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
   public unbox(): T[] {
     return Array.from(this.#valueGenerator());
   }
+
+  get box() {
+    return Box.of(this.unbox());
+  }
   // public ===========================================-| unbox() |-====
-  public unBoxedList(): BoxedList<T> {
+  public get boxedList(): BoxedList<T> {
     return BoxedList.of<T>(Array.from(this.#valueGenerator()));
   }
 

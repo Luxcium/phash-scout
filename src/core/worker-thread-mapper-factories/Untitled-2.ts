@@ -9,20 +9,22 @@ import {
   workerData,
 } from 'worker_threads';
 import { cpuCount } from '..';
+import { getDevFilename } from '../classes/utilities';
 
-const CPU_COUNT = cpuCount();
-export function getAsyncWorker<Q, P>(
+export function getAsyncWorker<P>(
   script: string,
   initialPayload: P[],
-  limit = CPU_COUNT
+  limit = 0
 ) {
+  const initialLimit = limit || cpuCount();
   const [mainPort, workerPort] = createMessagePorts();
   const willWork = new Promise((resolve, reject) => {
     // &---------------------------------------------------------------+
     // ++--- getAsyncWorker -------------------------------------------+
     //
     const lengthPerThread =
-      initialPayload.length / (Math.floor(limit / 2) || 1);
+      initialPayload.length / (Math.floor(initialLimit / 2) || 1);
+
     lengthPerThread;
     const worker = new Worker(script, {
       workerData: {
@@ -42,7 +44,7 @@ export function getAsyncWorker<Q, P>(
     // &---------------------------------------------------------------+
   });
   // HACK: (temporary)
-  return [willWork, mainPort] as any as Q;
+  return [willWork, mainPort];
 }
 
 export function theThreadWorker<F extends Function, Z = any>(func: F): boolean {
@@ -65,6 +67,18 @@ export function createMessagePorts(): [MessagePort, MessagePort] {
   return [port1, port2];
 }
 
+export function fnMain() {
+  const list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  getAsyncWorker(getDevFilename()(), list, 3);
+
+  const mapFn = (x: number) => x * x;
+  void list, mapFn;
+
+  return 0;
+}
+if (isMainThread! === true) {
+  fnMain();
+}
 export function mainAssingmentVOID() {
   if (isMainThread === false) {
     // const { workerData }: { workerData: Z } = worker_threads;
@@ -93,7 +107,6 @@ export function mainAssingmentVOID() {
   }
 
   if (!isMainThread) {
-    // const { parse } = require('some-js-parsing-library');
     const script = workerData;
     parentPort!.postMessage(vm.runInNewContext(script));
   }
@@ -115,6 +128,36 @@ export function mainAssingmentVOID() {
   console.log(Object === ContextObject); // 2;
   console.log(new Object() instanceof ContextObject); // 3;
   console.log(ContextObject.name); // 4;
+
+  return false;
+
+  //  const someconst: PromiseConstructor = Promise;
+  //  type Resolve<T> = (value: T | PromiseLike<T>) => void;
+  //  type PromiseRejector = (reason?: any) => void;
+  //  type PromiseExecutor<T> = (
+  //   resolve: Resolve<T>,
+  //   reject: PromiseRejector
+  // ) => void;
+
+  //  type Resolever<T> = (resolve: Resolve<T>) => Resolve<T>;
+
+  //  function resolever<T>(resolve: Resolve<T>) {
+  //   return resolve;
+  // }
+  //  type MyPromiseConstructor<T> = (
+  //   executor: PromiseExecutor<T>
+  // ) => Promise<T>;
+  // let boo: boolean = true;
+  //  function makePromiseOf<T>(resolever: Resolever<T>) {
+  //   return new Promise((resolve, reject) => {
+  //     if (boo) {
+  //       const rslv = resolever(resolve);
+  //       return rslv(0 as any as T);
+  //     }
+  //     return void reject(1);
+  //   });
+  // }
+
   /*
 
 reciving diferent items to process in a single function mapping each
@@ -129,5 +172,17 @@ const { MessageChannel } = require('worker_threads');
 const { port1, port2 } = new MessageChannel();
 
  */
-  return false;
+  // console.log(
+  //   `${splitedHead(
+  //     __filename,
+  //     'parallel-mapping/'
+  //   )}parallel-mapping/out/${splitedHead(
+  //     splitedTail(__filename, 'parallel-mapping/'),
+  //     '.ts'
+  //   )}.js`
+  // );
+  // /home/luxcium/.local/src/parallel-mapping
+  // /src/core/worker-thread-mapper-factories/Untitled-2.ts
+  // /home/luxcium/.local/src/parallel-mapping/out/src/core/worker-thread-mapper-factories/Untitled-2.js
+  // NODE_ENV=development
 }

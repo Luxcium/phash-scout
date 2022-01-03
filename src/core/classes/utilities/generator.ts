@@ -1,4 +1,4 @@
-import { zalgo } from '.';
+import { zalgo } from './zalgo';
 zalgo;
 
 export function fromTo(from: number, to: number) {
