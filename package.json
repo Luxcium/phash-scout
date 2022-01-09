@@ -23,7 +23,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^27.0.3",
-    "@types/node": "latest",
+    "@types/node": "^17.0.7",
     "am": "1.0.2",
     "got": "11.7.0",
     "jest": "^27.4.5",
@@ -33,7 +33,14 @@
     "typescript": "^4.5.4"
   },
   "dependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/glob": "^7.2.0",
+    "dotenv": "^10.0.0",
     "fp-ts": "^2.11.5",
+    "fs-extra": "^10.0.0",
+    "glob": "^7.2.0",
+    "jimp": "^0.16.1",
+    "tedis": "^0.1.12",
     "ts-node": "^10.4.0",
     "tslib": "latest"
   }
