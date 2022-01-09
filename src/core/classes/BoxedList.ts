@@ -20,7 +20,7 @@ export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapItems<T> {
   #value: T[];
 
   // static ==============================================-| of() |-====
-  public static of = <TVal>(...values: TVal[] | [TVal[]]): BoxedList<TVal> => {
+  public static of = <TVal>(...values: TVal[] | [TVal[]]) => {
     if (values.length === 1) {
       const value = values[0];
 

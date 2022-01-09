@@ -15,9 +15,7 @@ const PKG = 'package.json';
 export const copyPackageJson: Build<void> = C =>
   pipe(
     C.readFile(PKG),
-    TE.chain((s: string) =>
-      TE.fromEither(pipe(J.parse(s), E.mapLeft(E.toError)))
-    ),
+    TE.chain(s => TE.fromEither(pipe(J.parse(s), E.mapLeft(E.toError)))),
     TE.map(json => {
       const clone = Object.assign({}, json as any);
 
@@ -94,7 +92,7 @@ function makePkgJson(module: string): TE.TaskEither<Error, string> {
 const fixHKT = (folder: string): Build<void> =>
   pipe(
     (C: FileSystem) => C.mkdir(path.join(OUTPUT_FOLDER, folder, 'HKT')),
-    RTE.chain<FileSystem, Error, unknown, void>(
+    RTE.chain(
       () => C =>
         C.writeFile(
           path.join(OUTPUT_FOLDER, folder, 'HKT', 'package.json'),
@@ -107,14 +105,14 @@ const fixHKT = (folder: string): Build<void> =>
           )
         )
     ),
-    RTE.chain<FileSystem, Error, unknown, void>(
+    RTE.chain(
       () => C =>
         C.moveFile(
           path.join(OUTPUT_FOLDER, folder, 'HKT.js'),
           path.join(OUTPUT_FOLDER, folder, 'HKT', 'index.js')
         )
     ),
-    RTE.chain<FileSystem, Error, unknown, void>(
+    RTE.chain(
       () => C =>
         C.moveFile(
           path.join(OUTPUT_FOLDER, folder, 'HKT.d.ts'),

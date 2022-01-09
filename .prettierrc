@@ -11,5 +11,16 @@
   "htmlWhitespaceSensitivity": "css",
   "insertPragma": false,
   "proseWrap": "preserve",
-  "trailingComma": "es5"
+  "trailingComma": "es5",
+  "overrides": [
+    {
+      "files": [
+        "scripts/*.ts",
+        "src/core/classes/utilities/files/fs.ts"
+      ],
+      "options": {
+        "printWidth": 120
+      }
+    }
+  ]
 }
