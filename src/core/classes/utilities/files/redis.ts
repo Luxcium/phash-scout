@@ -1,34 +1,52 @@
-import * as fs from 'fs';
 import { Tedis } from 'tedis';
-import { BASE_SRC_PATH } from './devePaths';
+import { BASE_SRC_PATH2 } from './devePaths';
 import { getDirs } from './fs';
-export const REDIS_PREFIX = 'GBT_PATH';
+import { getStat } from './getStats';
+export const REDIS_PREFIX = 'JSON:GBT_PATH';
 
-const tedis_ = new Tedis({
+export const tedis_ = new Tedis({
   host: '127.0.0.1',
   port: 6382,
 });
 
 export async function tedisStuff(tedis: Tedis) {
-  const dirList = getDirs(BASE_SRC_PATH);
-  const tedisDirListing = dirList
-    .map(dirname => [
-      `${REDIS_PREFIX}::${BASE_SRC_PATH}/${dirname}`,
-      `${BASE_SRC_PATH}/${dirname}`,
-    ])
-    .map(([k, p]) => tedis.sadd(k, JSON.stringify(fs.statSync(p))) /*  */);
+  try {
+    const dirList = getDirs(BASE_SRC_PATH2);
+    const tedisDirListing = dirList
+      .map(dirname => [
+        `${REDIS_PREFIX}::${BASE_SRC_PATH2}/${dirname}`,
+        `${BASE_SRC_PATH2}/${dirname}`,
+      ])
 
-  await Promise.all(tedisDirListing);
-  tedis.close();
-  return;
-}
-// tedisStuff(tedis_);
+      .map(([k, p]) => {
+        const key = k;
+        const path = '.';
+        const json = `'${JSON.stringify(getStat(p))}'`;
+        try {
+          return tedis.command('JSON.SET', key, path, json);
+        } catch (error: any) {
+          console.log(`tedis.command('JSON.SET', ${key}, ${path}, ${json})`);
+          return error.message;
+        }
+      });
+    //  tedis.command('JSON.SET', k, p)
+    await Promise.all(tedisDirListing);
+    tedis.close();
 
-async function tedisStuff2(tedis: Tedis) {
-  console.log(await tedis.command('SET', 'mykey', 'hello tedis'));
-  return tedis.close();
+    return;
+  } catch (error) {
+    tedis.close();
+    console.log(error);
+    return;
+  }
 }
-tedisStuff2(tedis_);
+tedisStuff(tedis_);
+
+// async function tedisStuff2(tedis: Tedis) {
+//   console.log(await tedis.command('JSON.SET', 'mykey', 'hello tedis'));
+//   return tedis.close();
+// }
+// tedisStuff2(tedis_);
 // fs.statSync(p);
 //
 

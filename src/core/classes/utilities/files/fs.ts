@@ -4,13 +4,12 @@ import * as fs from 'fs';
 import fse from 'fs-extra';
 import * as fsPromises from 'fs/promises';
 import { BoxedList } from '../..';
-import { BASE_SRC_PATH, BASE_SRC_PATH2, BASE_SRC_PATH3 } from './devePaths';
-import { getStat } from './getStats';
+import { BASE_SRC_PATH } from './devePaths';
 void fse;
 
 path.extname('index.html');
-console.log(getStat(BASE_SRC_PATH2));
-console.log(getStat(BASE_SRC_PATH3));
+// console.log(getStat(BASE_SRC_PATH2));
+// console.log(getStat(BASE_SRC_PATH3));
 
 /*
   fileDetailsLength: 0,

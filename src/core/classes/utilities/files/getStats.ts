@@ -1,15 +1,15 @@
-import { statSync } from 'fs';
+import { stat } from 'fs/promises';
 import path from 'path';
 import { getFilesDetails } from './getFilesDetails';
 
-export function getStat(pathStr: string) {
+export async function getStat(pathStr: string) {
   const dirname = path.dirname(pathStr);
   const extname = path.extname(pathStr);
   const isAbsolute = path.isAbsolute(pathStr);
   const normalize = path.normalize(pathStr);
   const parse = path.parse(pathStr);
   const toNamespacedPath = path.toNamespacedPath(pathStr);
-  const fileDetails = getFilesDetails(pathStr);
+  const fileDetails = await getFilesDetails(pathStr);
   const basename = path.basename(pathStr);
   const delimiter = path.delimiter;
   // const format =  path.format(pathObject)
@@ -20,7 +20,7 @@ export function getStat(pathStr: string) {
   const sep = path.sep;
   // const win32 = path.win32;
 
-  const stats = statSync(pathStr);
+  const stats = await stat(pathStr);
   const isDirectory = stats.isDirectory();
   const isFile = stats.isFile();
   const isBlockDevice = stats.isBlockDevice();
