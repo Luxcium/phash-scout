@@ -9,7 +9,7 @@ export type {
   IMapItems,
   IUnbox,
   IUnboxList,
-} from './types/';
+} from './types';
 export {
   cpuCount,
   getSign,
@@ -26,4 +26,7 @@ export {
   timeoutZalgo,
   utils,
   zalgo,
+  zalgo1,
+  zalgo2,
+  zalgo3,
 } from './utilities';

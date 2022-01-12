@@ -1,6 +1,6 @@
 import { stat } from 'fs/promises';
 import path from 'path';
-import { getFilesDetails } from './getFilesDetails';
+import { getDirListing } from './getDirListing';
 
 export async function getStat(pathStr: string) {
   const dirname = path.dirname(pathStr);
@@ -9,7 +9,9 @@ export async function getStat(pathStr: string) {
   const normalize = path.normalize(pathStr);
   const parse = path.parse(pathStr);
   const toNamespacedPath = path.toNamespacedPath(pathStr);
-  const fileDetails = await getFilesDetails(pathStr);
+  console.error('will getFilesDetails');
+  const fileDetails = await getDirListing(pathStr);
+  console.error('after getFilesDetails');
   const basename = path.basename(pathStr);
   const delimiter = path.delimiter;
   // const format =  path.format(pathObject)
@@ -20,7 +22,9 @@ export async function getStat(pathStr: string) {
   const sep = path.sep;
   // const win32 = path.win32;
 
+  console.error('will get stat');
   const stats = await stat(pathStr);
+  console.error('after get stat');
   const isDirectory = stats.isDirectory();
   const isFile = stats.isFile();
   const isBlockDevice = stats.isBlockDevice();

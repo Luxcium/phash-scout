@@ -45,9 +45,21 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
     this.#valueGenerator = valueGenerator;
   }
   // public =============================================-| map() |-====
-  public map<TMap>(fn: Mapper<T, TMap>): BoxedGenerator<TMap> {
+  public map<TMap>(
+    fn: Mapper<T, TMap>,
+    delay: undefined | null | number | boolean = false
+  ): BoxedGenerator<TMap> {
     const generator = this.#valueGenerator;
+    delay;
 
+    let zalgo = <T>(id: T) => id;
+    if (delay === null) zalgo = <T>(id: T) => id;
+    if (delay != null && delay <= 0) zalgo = <T>(id: T) => id;
+    if (delay != null && delay > 0) zalgo = <T>(id: T) => id;
+    if (delay != null && delay === true) zalgo = <T>(id: T) => id;
+    if (delay != null && delay === false) zalgo = <T>(id: T) => id;
+
+    zalgo;
     function* arrayGenerator(): Generator<TMap> {
       for (const item of generator()) {
         yield fn(item);

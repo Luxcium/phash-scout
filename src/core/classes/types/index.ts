@@ -1,4 +1,5 @@
 export type { CallbackfnT, CallbackfnU } from './CallbackfnT';
+export type { DirentWithFileType } from './DirentWithFileType';
 export type { IApply } from './IApply';
 export type { IChain } from './IChain';
 export type { IMap } from './IMap';

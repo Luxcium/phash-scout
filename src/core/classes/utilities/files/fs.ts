@@ -105,7 +105,6 @@ export function getFiles(pathSrc: string = '') {
 }
 export function getDirs(pathSrc: string = '') {
   const readdir = fs.readdirSync(pathSrc, { withFileTypes: true });
-  // readdir.filter(i => !i.isDirectory()).map(i => i.name);
   try {
     return readdir.filter(i => i.isDirectory()).map(i => i.name);
   } catch (error: any) {

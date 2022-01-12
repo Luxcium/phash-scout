@@ -11,7 +11,7 @@ import { nullOrDefined } from './nullOrDefined';
 import { restrainingZalgo } from './restrainingZalgo';
 import { splitedHead, splitedTail, splitHead, splitTail } from './split';
 import { timeoutZalgo } from './timeoutZalgo';
-import { zalgo } from './zalgo';
+import { zalgo, zalgo1, zalgo2, zalgo3 } from './zalgo';
 export {
   cpuCount,
   getDevFilename,
@@ -30,6 +30,9 @@ export {
   splitTail,
   timeoutZalgo,
   zalgo,
+  zalgo1,
+  zalgo2,
+  zalgo3,
 };
 
 export const utils = {
@@ -50,4 +53,7 @@ export const utils = {
   splitTail,
   timeoutZalgo,
   zalgo,
+  zalgo1,
+  zalgo2,
+  zalgo3,
 };

@@ -11,23 +11,117 @@ import { nextTickZalgo } from './nextTickZalgo';
 import { nullOrDefined } from './nullOrDefined';
 import { timeoutZalgo } from './timeoutZalgo';
 
-export function zalgo<T>(
-  delay: number | null = 0
-): (value?: T | undefined) => Promise<T | null> {
-  if (delay === null) {
-    return async (value?: T | undefined): Promise<T | null> =>
-      nextTickZalgo(nullOrDefined(value) || null);
+type TimeoutDelayType = undefined | null | number | boolean;
+
+const identiqueZalgo = <T>(id: T) => id;
+identiqueZalgo;
+
+export function zalgo_<T>(delay?: TimeoutDelayType) {
+  if (delay == null) {
+    return async (value: T | undefined): Promise<T | null> =>
+      immediateZalgo(nullOrDefined(value));
   }
+
+  // if (delay === null) {
+  //   return async (value: T | undefined): Promise<T | null> =>
+  //     nullOrDefined(value);
+  // }
+
+  if (delay === false) {
+    return async (value: T | undefined): Promise<T | null> =>
+      identiqueZalgo(nullOrDefined(value));
+  }
+
+  if (delay === true) {
+    return async (value: T | undefined): Promise<T | null> =>
+      nextTickZalgo(nullOrDefined(value));
+  }
+
   if (delay <= 0) {
-    return async (value?: T | undefined): Promise<T | null> => {
-      await immediateZalgo();
-      return nullOrDefined(value);
-    };
+    return async (value: T | undefined): Promise<T | null> =>
+      timeoutZalgo(0, nullOrDefined(value));
   }
-  return async (value?: T | undefined): Promise<T | null> =>
+
+  return async (value: T | undefined): Promise<T | null> =>
     timeoutZalgo(delay, nullOrDefined(value));
 }
 
+// prettier-ignore
+export const zalgo = <T>(value:T | undefined, delay?:TimeoutDelayType ): Promise<T | null> => zalgo_<T>(delay)(value);
+// prettier-ignore
+export const zalgo1 = (delay?:TimeoutDelayType) => <T>(value?:T | undefined): Promise<T | null> => zalgo_<T>(delay)(value);
+// prettier-ignore
+export const zalgo2 = <T>(value?:T | undefined) => (delay?:TimeoutDelayType ): Promise<T | null> => zalgo_<T>(delay)(value);
+
+// prettier-ignore
+export const zalgo3 = <T>(delay:TimeoutDelayType, value?:T | undefined): Promise<T | null> => zalgo_<T>(delay)(value);
+
+/*
+
+  const nullOrValue = nullOrDefined(value);
+: Promise<T | null>
+  if (delay === undefined) return async (value:T|undefined): Promise<T | null> =>immediateZalgo(nullOrDefined(value))
+  if (delay === null) return async (value:T|undefined): Promise<T | null> =>nullOrDefined(value)
+  if (delay != null && delay <= 0) return async (value:T|undefined): Promise<T | null> =>timeoutZalgo(0,nullOrDefined(value))
+  if (delay != null && delay > 0) return async (value:T|undefined): Promise<T | null> =>timeoutZalgo(delay, nullOrDefined(value))
+  if (delay != null && delay === true) return async (value:T|undefined): Promise<T | null> =>nextTickZalgo(nullOrDefined(value))
+  if (delay != null && delay === false) return async (value:T|undefined): Promise<T | null> => identiqueZalgo(nullOrDefined(value))
+
+timeoutZalgo // 0
+timeoutZalgo // number
+
+immediateZalgo // undefined
+identiqueZalgo // false
+nextTickZalgo // true
+
+nullOrDefined(value) // null
+
+undefined | null | number | treue | false
+ */
+// export function zalgo<T>(
+//   value?: T | undefined,
+//   delay: undefined | null | number | boolean = false
+// ): (value?: T | undefined) => Promise<T | null> {
+//   const nullOrDefinedValue = nullOrDefined(value);
+//   nullOrDefinedValue;
+//   let zalgo_ = <T>(id: T) => id;
+//   if (delay === undefined) zalgo_ = <T>(id: T) => id;
+//   if (delay === null) zalgo_ = <T>(id: T) => id;
+//   if (delay != null && delay <= 0) zalgo_ = <T>(id: T) => id;
+//   if (delay != null && delay > 0) zalgo_ = <T>(id: T) => id;
+//   if (delay != null && delay === true) zalgo_ = <T>(id: T) => id;
+//   if (delay != null && delay === false) zalgo_ = <T>(id: T) => id;
+
+//   zalgo_;
+
+//   if (delay === null) {
+//     return async (value?: T | undefined): Promise<T | null> =>
+//       nextTickZalgo(nullOrDefined(value));
+//   }
+
+//   if (delay <= 0) {
+//     return async (value?: T | undefined): Promise<T | null> => {
+//       await immediateZalgo();
+//       return nullOrDefined(value);
+//     }
+
+//   }
+
+//   return async (value?: T | undefined): Promise<T | null> =>
+//     timeoutZalgo(delay, nullOrDefined(value));
+// }
+
+/*
+
+    let zalgo_ = <T>(id: T) => id;
+    if (delay === null) zalgo_ = <T>(id: T) => id;
+    if (delay != null && delay <= 0) zalgo_ = <T>(id: T) => id;
+    if (delay != null && delay > 0) zalgo_ = <T>(id: T) => id;
+    if (delay != null && delay === true) zalgo_ = <T>(id: T) => id;
+    if (delay != null && delay === false) zalgo_ = <T>(id: T) => id;
+
+    zalgo_;
+ */
 /*
 WITHOUT PERMISSION ― NOT UNDER MIT LICENSE
 

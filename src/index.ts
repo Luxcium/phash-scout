@@ -16,6 +16,9 @@ export {
   restrainingZalgo,
   timeoutZalgo,
   zalgo,
+  zalgo1,
+  zalgo2,
+  zalgo3,
 } from './core';
 export type {
   IApply,

@@ -22,6 +22,9 @@ export {
   restrainingZalgo,
   timeoutZalgo,
   zalgo,
+  zalgo1,
+  zalgo2,
+  zalgo3,
 } from './classes';
 export type {
   IApply,
