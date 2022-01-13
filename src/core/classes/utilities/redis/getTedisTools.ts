@@ -1,5 +1,5 @@
 import { getNewTedis } from '.';
-import { get, init, set } from './redisJson';
+import { init, tedis_jsonGet, tedis_jsonSet } from './redisJson';
 
 export const getTedisTools = (
   port = 6379,
@@ -17,10 +17,9 @@ export const getTedisTools = (
   return {
     tedis,
     json: {
-      get: get(tedis),
-      set: set(tedis),
+      get: tedis_jsonGet(tedis),
+      set: tedis_jsonSet(tedis),
       init: init(tedis),
     },
-    close: tedis.close,
   };
 };

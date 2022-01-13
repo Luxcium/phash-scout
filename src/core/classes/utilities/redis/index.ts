@@ -1,3 +1,3 @@
 export { getNewTedis } from './getNewTedis';
 export { getTedisTools } from './getTedisTools';
-export { tedisTools } from './redisJson';
+export const REDIS_PREFIX = 'JSON::GBT_PATH::';

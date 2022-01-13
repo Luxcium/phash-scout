@@ -3,24 +3,19 @@ import path from 'path';
 import { Tedis } from 'tedis';
 import { immediateZalgo } from '..';
 import { BoxedAsyncGenerator, BoxedGenerator } from '../..';
-import { tedisTools } from '../redis';
+import { getTedisTools } from '../redis';
 import { BASE_SRC_PATH5 } from './devePaths';
 import { getDirs } from './fs';
 import { getDirListing } from './getDirListing';
 
 export const REDIS_PREFIX = 'JSON::un-named::GBT_PATH:';
 
-const getNewTedis = (port = 6382, host = '127.0.0.1') =>
-  new Tedis({
-    host,
-    port,
-  });
 // tedisStuff2(BASE_SRC_PATH5);
 export async function tedisStuff2(basePath: string) {
-  const tedis = getNewTedis();
   const {
+    tedis,
     json: { get, set, init },
-  } = tedisTools(tedis);
+  } = getTedisTools(6382);
   get;
   set;
   init;
@@ -49,13 +44,13 @@ export async function tedisStuff2(basePath: string) {
   return tedis.close();
 }
 
-tedisStuff(BASE_SRC_PATH5, getNewTedis());
+tedisStuff(BASE_SRC_PATH5, getTedisTools(6382).tedis);
 
 export async function tedisStuff(path_: string, tedis: Tedis) {
   const dirList = getDirs(path_);
   const {
     json: { get, set, init },
-  } = tedisTools(tedis);
+  } = getTedisTools(6382);
   get;
   set;
   init;
