@@ -11,11 +11,19 @@ import { Tedis } from 'tedis';
  **********************************************************************/
 export const tedis_jsonGet =
   (prefix: string) =>
-  (jsonPath: string = '.') =>
+  <R = any>(jsonPath: string = '.') =>
+  /**
+   * @param RDSServer - Redis Data Structures Server
+   */
   (RDSServer: Tedis) =>
-  (key: string) =>
-    (async () =>
-      RDSServer.command('JSON.GET', `${prefix}::${key}`, jsonPath))();
+  (key: string, close: 'close' | boolean = false) =>
+    (async (): Promise<R> =>
+      RDSServer.command('JSON.GET', `${prefix}::${key}`, jsonPath).then(
+        value => {
+          close === 'close' || close ? RDSServer.close() : null;
+          return value;
+        }
+      ))();
 
 /**********************************************************************
  * In a prefix space (name space) activated for a specific RDSS create
@@ -24,9 +32,17 @@ export const tedis_jsonGet =
  **********************************************************************/
 export const tedis_jsonSet =
   (prefix: string) =>
+  (jsonPath: string) =>
+  /**
+   * @param RDSServer - Redis Data Structures Server
+   */
   (RDSServer: Tedis) =>
   (key: string) =>
-  (jsonPath: string) =>
-  (value: string) =>
-    (async () =>
-      RDSServer.command('JSON.SET', `${prefix}::${key}`, jsonPath, value))();
+  (value: string | number, close: 'close' | boolean = false) =>
+    (async <R>(): Promise<R> =>
+      RDSServer.command('JSON.SET', `${prefix}::${key}`, jsonPath, value).then(
+        value => {
+          close === 'close' || close ? RDSServer.close() : null;
+          return value;
+        }
+      ))();
