@@ -1,5 +1,5 @@
 import { Tedis } from 'tedis';
-import { BASE_SRC_PATH2 } from './devePaths';
+import { BASE_SRC_PATH2 } from '../constants/devPaths';
 import { getDirs } from './fs';
 import { getStat } from './getStats';
 export const REDIS_PREFIX = 'JSON:GBT_PATH';

@@ -38,11 +38,14 @@ export const tedis_jsonSet =
    */
   (RDSServer: Tedis) =>
   (key: string) =>
-  (value: string | number, close: 'close' | boolean = false) =>
-    (async <R>(): Promise<R> =>
-      RDSServer.command('JSON.SET', `${prefix}::${key}`, jsonPath, value).then(
-        value => {
-          close === 'close' || close ? RDSServer.close() : null;
-          return value;
-        }
-      ))();
+  <R>(value: string | number | Date, close: 'close' | boolean = false) =>
+    (async (): Promise<R> =>
+      RDSServer.command(
+        'JSON.SET',
+        `${prefix}::${key}`,
+        jsonPath,
+        `${value}`
+      ).then((result: R) => {
+        close === 'close' || close ? RDSServer.close() : null;
+        return result;
+      }))();

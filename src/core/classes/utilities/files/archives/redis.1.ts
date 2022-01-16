@@ -1,10 +1,10 @@
 import { stat } from 'fs/promises';
 import path from 'path';
 import { Tedis } from 'tedis';
-import { immediateZalgo } from '..';
-import { BoxedAsyncGenerator, BoxedGenerator } from '../..';
-import { getTedisTools } from '../redis';
-import { BASE_SRC_PATH5 } from './devePaths';
+import { immediateZalgo } from '../..';
+import { BoxedAsyncGenerator, BoxedGenerator } from '../../..';
+// import { getTedisTools } from '../redis';
+import { BASE_SRC_PATH5 } from '../constants/devPaths';
 import { getDirs } from './fs';
 import { getDirListing } from './getDirListing';
 
@@ -15,6 +15,7 @@ export async function tedisStuff2(basePath: string) {
   const {
     tedis,
     json: { get, set, init },
+    //@ts-ignore
   } = getTedisTools(6382);
   get;
   set;
@@ -43,13 +44,16 @@ export async function tedisStuff2(basePath: string) {
   await Promise.all(cGenBox.unbox());
   return tedis.close();
 }
-
+// #HACK:
+//@ts-ignore
 tedisStuff(BASE_SRC_PATH5, getTedisTools(6382).tedis);
 
 export async function tedisStuff(path_: string, tedis: Tedis) {
   const dirList = getDirs(path_);
   const {
     json: { get, set, init },
+    // #HACK:
+    //@ts-ignore
   } = getTedisTools(6382);
   get;
   set;

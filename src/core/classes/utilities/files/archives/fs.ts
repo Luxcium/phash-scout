@@ -3,8 +3,8 @@ var path = require('path');
 import * as fs from 'fs';
 import fse from 'fs-extra';
 import * as fsPromises from 'fs/promises';
-import { BoxedList } from '../..';
-import { BASE_SRC_PATH } from './devePaths';
+import { BoxedList } from '../../..';
+import { BASE_SRC_PATH1 } from '../constants/devPaths';
 void fse;
 
 path.extname('index.html');
@@ -113,10 +113,10 @@ export function getDirs(pathSrc: string = '') {
   }
 }
 export function main() {
-  console.log(getFiles(BASE_SRC_PATH + '/un-named' + '/zoom-x088727222')); //.map(i => console.log(i));
-  console.log(getDirs(BASE_SRC_PATH + '/un-named' + '/zoom-x088727222')); //.map(i => console.log(i));
+  console.log(getFiles(BASE_SRC_PATH1 + '/un-named' + '/zoom-x088727222')); //.map(i => console.log(i));
+  console.log(getDirs(BASE_SRC_PATH1 + '/un-named' + '/zoom-x088727222')); //.map(i => console.log(i));
 
-  const atPath = getListings(BASE_SRC_PATH);
+  const atPath = getListings(BASE_SRC_PATH1);
   atPath.dirs.mapItems<any>(i => {
     console.log(`${i}`);
     return i;

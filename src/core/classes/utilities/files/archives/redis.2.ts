@@ -1,4 +1,4 @@
-import { getTedisTools } from '../redis';
+// import { getTedisTools } from '../redis';
 
 export const REDIS_PREFIX = 'JSON::GBT_PATH::';
 
@@ -17,6 +17,8 @@ export async function tedisStuff3() {
   const {
     tedis,
     json: { get },
+    // #HACK:
+    //@ts-ignore
   } = getTedisTools(6382);
   const setRedisPrefix_getDirInfos =
     (redis_prefix: string) => (dirname_: string, optionalJsonPath?: string) =>
