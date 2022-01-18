@@ -73,8 +73,12 @@ const shorthenTo = '${X004D}';
 const srtPath = replaceStr(pathToShorten, shorthenTo);
 
 main;
-main().then(fulfilled => fulfilled.spark());
+main();
 async function main() {
+  workingFunction().then(fulfilled => fulfilled.spark());
+}
+
+async function workingFunction() {
   console.log(__filename);
   let count = 0;
   let count2 = 0;
