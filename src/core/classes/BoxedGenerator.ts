@@ -46,20 +46,20 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
   }
   // public =============================================-| map() |-====
   public map<TMap>(
-    fn: Mapper<T, TMap>,
-    delay: undefined | null | number | boolean = false
+    fn: Mapper<T, TMap>
+    // delay: undefined | null | number | boolean = false
   ): BoxedGenerator<TMap> {
     const generator = this.#valueGenerator;
-    delay;
+    // delay;
 
-    let zalgo = <T>(id: T) => id;
-    if (delay === null) zalgo = <T>(id: T) => id;
-    if (delay != null && delay <= 0) zalgo = <T>(id: T) => id;
-    if (delay != null && delay > 0) zalgo = <T>(id: T) => id;
-    if (delay != null && delay === true) zalgo = <T>(id: T) => id;
-    if (delay != null && delay === false) zalgo = <T>(id: T) => id;
+    // let zalgo = <T>(id: T) => id;
+    // if (delay === null) zalgo = <T>(id: T) => id;
+    // if (delay != null && delay <= 0) zalgo = <T>(id: T) => id;
+    // if (delay != null && delay > 0) zalgo = <T>(id: T) => id;
+    // if (delay != null && delay === true) zalgo = <T>(id: T) => id;
+    // if (delay != null && delay === false) zalgo = <T>(id: T) => id;
 
-    zalgo;
+    // zalgo;
     function* arrayGenerator(): Generator<TMap> {
       for (const item of generator()) {
         yield fn(item);
@@ -72,8 +72,16 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
     return Array.from(this.#valueGenerator());
   }
 
+  public spark() {
+    return BoxedGenerator.of(...this.unbox());
+  }
+
   get box() {
     return Box.of(this.unbox());
+  }
+
+  get length() {
+    return this.unbox().length;
   }
   // public ===========================================-| unbox() |-====
   public get boxedList(): BoxedList<T> {

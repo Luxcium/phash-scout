@@ -1,6 +1,7 @@
 import { statSync } from 'fs-extra';
 import path from 'path';
 import { Tedis } from 'tedis';
+import { BoxedGenerator } from '../../BoxedGenerator';
 import { devPaths } from '../files';
 import {
   dirListWithFileTypeSync,
@@ -9,7 +10,8 @@ import {
   getListingsSync,
 } from '../files/tools';
 import { jsonGet, jsonSet } from './jsonRedis';
-const SUBSET = 100;
+export const SUBSET = 1000;
+const DEBUG = true;
 type SetJsonArgs = {
   prefix: string;
   jsonPath: string;
@@ -62,81 +64,143 @@ export async function setJson(A: SetJsonArgs) {
   return results;
 }
 
-main1;
-main1();
-async function main1() {
+export function replaceStr(searchValue: string, replaceValue: string) {
+  return (testString: string) => testString.replace(searchValue, replaceValue);
+}
+
+const pathToShorten = devPaths.X004D;
+const shorthenTo = '${X004D}';
+const srtPath = replaceStr(pathToShorten, shorthenTo);
+
+main;
+main().then(fulfilled => fulfilled.spark());
+async function main() {
+  console.log(__filename);
   let count = 0;
   let count2 = 0;
   let count3 = 0;
-  return [devPaths.PATH1]
-    .flatMap(p =>
-      getDirsSync(p).map(
-        dir => ({ full: `${p}/${dir}`, short: dir }) /* `${p}/${dir}` */
-      )
+
+  const userPathsGen = BoxedGenerator.of(
+    ...[devPaths.PATH1].flatMap(p =>
+      getDirsSync(p).map(dir => ({ fullPath: `${p}/${dir}`, shortName: dir }))
     )
-    .slice(0, SUBSET)
-    .map(user => {
-      const dirsSync = getDirsSync(user.full);
-      const length = dirsSync.length;
-      const displaycount = `¹${++count} ²${(count2 += length)}`;
-      return dirsSync
-        .map(dir => ({ full: `${user.full}/${dir}`, short: dir }))
-        .map(collectionDir => {
-          console.log(displaycount, { ...collectionDir, userDir: user.short });
-          count3;
-          return collectionDir;
-        })
-        .map(collctn => {
-          const getFile = getFilesSync(collctn.full);
-          const somedirListWithFileTypeSync = [
-            ...dirListWithFileTypeSync(collctn.full),
-          ];
-          const listings = getListingsSync(collctn.full);
-          const getThisFileType = (f: string) =>
-            somedirListWithFileTypeSync.filter(item => item.fileName === f)[0];
-          getFile.map(f => {
-            const pathStr = `${collctn.full}/${f}`;
-            const dirname = path.dirname(pathStr);
-            const stats = statSync(pathStr);
-            const displaycount = `¹${count} ²${count2} ³${count3++}`;
-            const fInfo = {
-              // dirname:collctn,
-              ...stats,
-              ...listings.count,
-              ...getThisFileType(f),
-              dirname,
-              extname: path.extname(pathStr),
-              isAbsolute: path.isAbsolute(pathStr),
-              normalized: path.normalize(pathStr),
-              ...path.parse(pathStr),
-              toNamespacedPath: path.toNamespacedPath(pathStr),
-              userDirName: user.short,
-              collectionDirName: collctn.short,
-              keywords: collctn.short
-                .split('-')
-                .filter(csn => csn !== '')
-                .sort()
-                .slice(0, -1),
-              xDir: collctn.short
-                .split('-')
-                .filter(csn => csn !== '')
-                .slice(-1)[0],
-              fileName: f,
-              displaycount,
-            };
-            console.log(`${f}:`, fInfo);
-            return fInfo;
-          });
-        });
-      // return user.full;
+  );
+
+  const collectionsPathsGen = userPathsGen.map(user => {
+    const dirsSync = BoxedGenerator.of(...getDirsSync(user.fullPath));
+    const length = dirsSync.length;
+    ++count;
+    count2 += length;
+
+    const collectionLevelGen = dirsSync.map(dir => {
+      const collctn = {
+        fullPath: `${user.fullPath}/${dir}`,
+        shortName: dir,
+      };
+
+      const somedirListWithFileTypeSync = [
+        ...dirListWithFileTypeSync(collctn.fullPath),
+      ];
+
+      const listings = getListingsSync(collctn.fullPath);
+      const getThisFileType = (f: string) =>
+        somedirListWithFileTypeSync.filter(item => item.fileName === f)[0];
+
+      /**
+       * for each collections list contained files f
+       */
+      const filesPathsGen = BoxedGenerator.of(
+        ...getFilesSync(collctn.fullPath)
+      );
+
+      const filesInfoGenerator = filesPathsGen.map(f => {
+        //
+        const pathStr = `${collctn.fullPath}/${f}`;
+        //
+        const stats = statSync(pathStr);
+        const dirname = path.dirname(pathStr);
+        const parsed = path.parse(pathStr);
+        const dir = srtPath(parsed.dir);
+        const displaycount = `¹${count} ²${count2} ³${count3++}`;
+        //
+        const fileInfo = {
+          ...stats,
+          ...listings.count,
+          ...getThisFileType(f),
+          dirname: srtPath(dirname),
+          extname: path.extname(pathStr),
+          isAbsolute: path.isAbsolute(pathStr),
+          normalized: srtPath(path.normalize(pathStr)),
+          ...parsed,
+          dir,
+          toNamespacedPath: srtPath(path.toNamespacedPath(pathStr)),
+          userDirName: user.shortName,
+          collectionDirName: collctn.shortName,
+          keywords: collctn.shortName
+            .split('-')
+            .filter(csn => csn !== '')
+            .filter(csn => isNaN(csn as unknown as number))
+            .filter(csn => csn.length > 1)
+            .slice(0, -1)
+            .sort()
+            .sort((a, b) => b.length - a.length),
+          xDir: collctn.shortName
+            .split('-')
+            .filter(csn => csn !== '')
+            .slice(-1)[0],
+          fileName: f,
+          displaycount,
+        };
+
+        if (DEBUG) console.log(`${f}:`, fileInfo);
+        return fileInfo;
+      });
+      // const sparkedStep2a_1 = step2a_1.spark();
+      // return sparkedStep2a_1;
+      return filesInfoGenerator;
     });
-  // getDirs(k.full).length
-  // dirListWithFileTypeSync;
-  // getRawDirListSync;
-  // getStatsSync;
-  // getListingsSync;
-  // getFilesSync;
-  // getDirsSync;
+    // ++-----------------------------------------------------------------------
+
+    return collectionLevelGen;
+    // return user.full;
+  });
+
+  const sparkedStatus = {
+    unSparkedGen: false,
+    sparkedGen: false,
+    inerGen: false,
+    inermostGen: false,
+  };
+
+  const inerMostSparkedGen = () =>
+    collectionsPathsGen.map(iner =>
+      iner.map(inermost => {
+        sparkedStatus.inermostGen = true;
+        return inermost.spark();
+      })
+    );
+
+  const inerSparkedGen = () =>
+    inerMostSparkedGen().map(iner => {
+      sparkedStatus.inerGen = true;
+      return iner.spark();
+    });
+
+  const spark = () => {
+    sparkedStatus.sparkedGen = true;
+    return inerSparkedGen().spark();
+  };
+  const unSparkedGen = () => {
+    sparkedStatus.unSparkedGen = true;
+    return collectionsPathsGen;
+  };
+  return {
+    unSparkedGen,
+    inerMostSparkedGen,
+    inerSparkedGen,
+    spark,
+    sparkedStatus,
+  };
 }
 
 // ++ VERRY IMPORTANT STUFF MUST NOT REMOVE ++++++++++++++++++++++++++++
@@ -325,3 +389,22 @@ async function main1() {
 //   (jsonPath: string) =>
 //   (value: string | number) =>
 //     setJson({ jsonPath, prefix, keyID, value, RDSServer: RDSServer });
+
+// ++-------------------------------------------------------------------
+// const step1b = step1a
+//   .map(collectionDir => {
+//   console.log({ ...collectionDir, userDir: user.shortName });
+//   count3;
+//   return collectionDir;
+// });
+// ++-------------------------------------------------------------------
+
+// ++-------------------------------------------------------------------
+/**
+ * for each user list contained collections full(path) and short(name)
+ */
+// const step1a = dirsSync.map(dir => ({
+//   fullPath: `${user.fullPath}/${dir}`,
+//   shortName: dir,
+// }));
+// ++-------------------------------------------------------------------
