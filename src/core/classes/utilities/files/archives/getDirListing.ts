@@ -9,7 +9,7 @@ export async function getDirListing(pathSrc: string = '', debug = false) {
       withFileTypes: true,
     });
     const withFileTypeList = dirListing.map(d => {
-      const curent = { name: d.name };
+      const curent = { fileName: d.name };
       //@ts-ignore
       filesTypes.map(method => (curent[method] = d[method]()));
 

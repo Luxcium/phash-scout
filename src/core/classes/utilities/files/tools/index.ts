@@ -1,5 +1,16 @@
-export { asyncDirListWithFileType } from './asyncDirListWithFileType';
-export { getDirListWithFileType } from './getDirListWithFileType';
+export {
+  asyncDirListWithFileType,
+  dirListWithFileTypeSync,
+} from './asyncDirListWithFileType';
+export {
+  getDirs,
+  getDirsSync,
+  getFiles,
+  getFilesSync,
+  getListings,
+  getListingsSync,
+} from './fsTools';
+export { getDirListFileTypes } from './getDirListWithFileType';
 export { getPathInfos } from './getPathInfos';
-export { getRawDirList } from './getRawDirList';
-export { getStats } from './getStats';
+export { getRawDirList, getRawDirListSync } from './getRawDirList';
+export { getStats, getStatsSync } from './getStats';

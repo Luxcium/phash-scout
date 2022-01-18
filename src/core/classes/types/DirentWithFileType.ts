@@ -1,5 +1,5 @@
 export type DirentWithFileType = {
-  name: string;
+  fileName: string;
   isBlockDevice: boolean;
   isCharacterDevice: boolean;
   isDirectory: boolean;
