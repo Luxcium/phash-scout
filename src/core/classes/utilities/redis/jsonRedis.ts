@@ -1,11 +1,12 @@
 import { Tedis } from 'tedis';
 
-const RDSServer_6382 = (): [Tedis, () => void] => {
+const RDSServer_6382 = () => {
   const tedis = new Tedis({
     port: 6382,
+    host: '0.0.0.0',
   });
 
-  return [tedis, tedis.close];
+  return { tedis, tedisClose: tedis.close };
 };
 
 const jsonGetForFullKey =
@@ -43,9 +44,12 @@ function jsonSet(RDSServer: Tedis, fullKey: string, jsonPath: string) {
     if (value === 'true' || value === true) val = `true`;
     if (typeof value === 'number') val = `${value}`;
     // TODO: figureout for strings later
-    if (typeof value === 'string') val = `'${value}'`;
+    if (typeof value === 'string') val = `${value}`;
 
-    return RDSServer.command('JSON.SET', fullKey, jsonPath, val);
+    const jset = await RDSServer.command('JSON.SET', fullKey, jsonPath, val);
+    // LOG:
+    console.log('inside json.set');
+    return jset;
   };
 }
 
@@ -53,3 +57,14 @@ jsonSet.forFullKey = jsonSetForFullKey;
 jsonSet.forJsonPath = jsonSetForJsonPath;
 
 export { jsonGet, jsonSet, RDSServer_6382 };
+
+// main()
+main;
+function main() {
+  const redis6382 = RDSServer_6382();
+  jsonSet(
+    redis6382.tedis,
+    'key00',
+    '.'
+  )('{"dev":2066,"mode":33279,"nlink":1}').then(() => redis6382.tedis.close());
+}
