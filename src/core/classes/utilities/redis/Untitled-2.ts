@@ -10,8 +10,8 @@ import {
   getListingsSync,
 } from '../files/tools';
 import { jsonGet, jsonSet } from './jsonRedis';
-export const SUBSET = 1000;
-const DEBUG = true;
+// export const SUBSET = 1000;
+// const DEBUG = true;
 type SetJsonArgs = {
   prefix: string;
   jsonPath: string;
@@ -20,8 +20,8 @@ type SetJsonArgs = {
   RDSServer: Tedis;
 };
 
-export const prefix_: string = 'test_123b';
 export async function setJson(A: SetJsonArgs) {
+  //  const prefix_: string = 'test_123b';
   const { prefix, jsonPath, keyID, value, RDSServer } = A;
   const shortKey = `${prefix}::${keyID}`;
   console.log(shortKey);
@@ -64,7 +64,7 @@ export async function setJson(A: SetJsonArgs) {
   return results;
 }
 
-export function replaceStr(searchValue: string, replaceValue: string) {
+function replaceStr(searchValue: string, replaceValue: string) {
   return (testString: string) => testString.replace(searchValue, replaceValue);
 }
 
@@ -75,10 +75,11 @@ const srtPath = replaceStr(pathToShorten, shorthenTo);
 main;
 main();
 async function main() {
-  workingFunction().then(fulfilled => fulfilled.spark());
+  workingFunction({ DEBUG: true }).then(fulfilled => fulfilled.spark());
 }
 
-async function workingFunction() {
+async function workingFunction(opts: { DEBUG: boolean }) {
+  opts;
   console.log(__filename);
   let count = 0;
   let count2 = 0;
@@ -156,7 +157,7 @@ async function workingFunction() {
           displaycount,
         };
 
-        if (DEBUG) console.log(`${f}:`, fileInfo);
+        if (opts.DEBUG) console.log(`${f}:`, fileInfo);
         return fileInfo;
       });
       // const sparkedStep2a_1 = step2a_1.spark();
