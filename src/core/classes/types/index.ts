@@ -17,3 +17,4 @@ export type {
   RedisJson_PathStatsTuple,
   RedisJson_StatsInfoGetterFunct,
 } from './PathStatsGetter';
+export type { RedisCStrOptions } from './RedisCStrOptions';

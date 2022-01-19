@@ -1,11 +1,14 @@
 import { Box, BoxedList } from '.';
 import { Mapper } from '../..';
 import { IUnbox, IUnboxList } from './types';
-
+const DEBUG = true;
+let count1 = 0;
+let count3 = 0;
+if (DEBUG) console.error('DEBUG = true in:', __filename);
 export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
   #valueGenerator: () => Generator<T>;
-
   // static ==============================================-| of() |-====
+  count2 = 0;
   public static of<TVal>(...values: TVal[] | [TVal[]]): BoxedGenerator<TVal> {
     const arrayGenerator = (array: TVal[]): (() => Generator<TVal>) =>
       function* (): Generator<TVal> {
@@ -51,7 +54,7 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
   ): BoxedGenerator<TMap> {
     const generator = this.#valueGenerator;
     // delay;
-
+    const _that = this;
     // let zalgo = <T>(id: T) => id;
     // if (delay === null) zalgo = <T>(id: T) => id;
     // if (delay != null && delay <= 0) zalgo = <T>(id: T) => id;
@@ -60,8 +63,20 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
     // if (delay != null && delay === false) zalgo = <T>(id: T) => id;
 
     // zalgo;
+    // BUG:
+    if (DEBUG) console.log('outside of generator', ++count1);
+
     function* arrayGenerator(): Generator<TMap> {
       for (const item of generator()) {
+        // BUG:
+
+        if (DEBUG)
+          console.log(
+            'inside of generator',
+            count1,
+            ++_that.count2,
+            ++count3 - count1 - _that.count2
+          );
         yield fn(item);
       }
     }

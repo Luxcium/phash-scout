@@ -68,7 +68,7 @@ function replaceStr(searchValue: string, replaceValue: string) {
   return (testString: string) => testString.replace(searchValue, replaceValue);
 }
 
-const pathToShorten = devPaths.X004D;
+const pathToShorten = devPaths.X004Da;
 const shorthenTo = '${X004D}';
 const srtPath = replaceStr(pathToShorten, shorthenTo);
 

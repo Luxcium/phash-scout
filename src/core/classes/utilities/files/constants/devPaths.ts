@@ -7,7 +7,8 @@ export const BASE_SRC_PATH4 = process.env.BASE_SRC_PATH4 || '';
 export const BASE_SRC_PATH5 = process.env.BASE_SRC_PATH5 || '';
 export const BASE_SRC_PATH6a = process.env.BASE_SRC_PATH6a || '';
 export const BASE_SRC_PATH6b = process.env.BASE_SRC_PATH6b || '';
-export const X004D = process.env.X004D || '';
+export const X004Da = process.env.X004Da || '';
+export const X004Db = process.env.X004Db || '';
 
 export const devPaths = {
   PATH1: BASE_SRC_PATH1,
@@ -17,5 +18,6 @@ export const devPaths = {
   PATH5: BASE_SRC_PATH5,
   PATH6a: BASE_SRC_PATH6a,
   PATH6b: BASE_SRC_PATH6b,
-  X004D,
+  X004Da,
+  X004Db,
 };
