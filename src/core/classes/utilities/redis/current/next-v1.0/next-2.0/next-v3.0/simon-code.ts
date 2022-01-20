@@ -31,7 +31,6 @@ export function getSpiderFolder(
 export const WriterTool: WriterTool = async (
   redisClient: RedisClientType,
   filePath: string
-  // fileContents: Buffer | string
 ) => {
   const fileContents = await readFile(filePath);
   const result = await redisClient.json.set(
@@ -49,7 +48,7 @@ export const WriterTool: WriterTool = async (
 async function runApplication(port: number, _path: string) {
   try {
     const client = createClient(redisConnectionString({ port }));
-    await client.connect(); // localhost:6379
+    await client.connect();
 
     const spiderFolder = getSpiderFolder(client, WriterTool);
     await spiderFolder(_path);
