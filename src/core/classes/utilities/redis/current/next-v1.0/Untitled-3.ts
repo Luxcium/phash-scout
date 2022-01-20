@@ -2,16 +2,11 @@ import path from 'path';
 import { immediateZalgo } from '../../../../../../utils';
 import { BoxedGenerator } from '../../../../BoxedGenerator';
 import { devPaths } from '../../../files';
-import {
-  dirListWithFileTypeSync,
-  getDirsSync,
-  getFilesSync,
-  getListingsSync,
-} from '../../../files/tools';
+import { getDirsSync, getFilesSync } from '../../../files/tools';
 import { replaceStr } from '../replaceStr';
 const PREFIX = 'TESTING:001::JSON:REDIS';
-const STEPS = 100000;
-const DEBUG = 0;
+const STEPS = 1;
+const DEBUG = 1;
 let COUNT = 0;
 
 function setTheSith() {
@@ -40,7 +35,6 @@ function setTheSith() {
           jsonPath,
           jsonFinfo,
         });
-        // return server_6382.tedis.close();
       }
     })();
   };
@@ -48,10 +42,6 @@ function setTheSith() {
 main;
 main().then(fulfilledResult => fulfilledResult.spark());
 async function main() {
-  // console.log(__filename);
-  // const server_6382 = RDSServer_6382();
-  // const jsonSet6382 = jsonSet.forFullKey(server_6382.tedis);
-
   const fulfilled = await workingFunction({ DEBUG });
 
   const fulfilledResult = fulfilled
@@ -87,9 +77,7 @@ async function workingFunction(opts: { DEBUG: number }) {
   const shorthenTo = '${X004D}';
   const srtPath = (testString: string) =>
     replaceStr(X004Da, shorthenTo)(replaceStr(X004Db, shorthenTo)(testString));
-  // let count = 0;
-  // let count2 = 0;
-  // let count3 = 0;
+
   opts;
   const userPathsGen = BoxedGenerator.of(
     ...[devPaths.PATH1]
@@ -106,108 +94,53 @@ async function workingFunction(opts: { DEBUG: number }) {
       .slice(0, STEPS)
   );
 
+  // -------------------------------------------------------------------//!!-----
+  // ++ USERS LEVEL ----------------------------------------------------
   const collectionsPathsGen = userPathsGen.map(user => {
     const dirsSync = BoxedGenerator.of(...getDirsSync(user.fullPath));
     // const length = dirsSync.length;
 
+    // -----------------------------------------------------------------//!!-----
+    // ++ COLLECTION LEVEL ---------------------------------------------
     const collectionLevelGen = dirsSync.map(dir => {
       const collctn = {
         fullPath: `${user.fullPath}/${dir}`,
         shortName: dir,
       };
 
-      const somedirListWithFileTypeSync = [
-        ...dirListWithFileTypeSync(collctn.fullPath),
-      ];
-      // HACK: remove teh dummy ()=>
-      const listings = () => getListingsSync(collctn.fullPath);
-      const getThisFileType = (f: string) =>
-        somedirListWithFileTypeSync.filter(item => item.fileName === f)[0];
-      void getThisFileType, listings;
       /**
        * for each collections list contained files f
        */
+      // ---------------------------------------------------------------//!!-----
+      // ++ INNERMOST: FILLES LEVEL ------------------------------------
       const filesPathsGen = BoxedGenerator.of(
         ...getFilesSync(collctn.fullPath)
       );
-
-      const filesInfoGenerator = filesPathsGen.map(
-        f => {
-          const pathStr = `${collctn.fullPath}/${f}`;
-          const parsed = path.parse(pathStr);
-          const dir = srtPath(parsed.dir);
-          return {
-            user: user.shortName,
-            collectionName: collctn.shortName,
-            fileName: f,
-            ...parsed,
-            dir,
-            xDir: collctn.shortName
-              .split('-')
-              .filter(csn => csn !== '')
-              .slice(-1)[0],
-          };
-        }
-        // {
-        //   //
-        //   const pathStr = `${collctn.fullPath}/${f}`;
-        //   //
-        //   const stats = statSync(pathStr);
-        //   const dirname = path.dirname(pathStr);
-        //   const parsed = path.parse(pathStr);
-        //   const dir = srtPath(parsed.dir);
-        //   const displaycount = `¹${count} ²${count2} ³${count3++}`;
-        //   //
-        //   const fileInfo = {
-        //     ...stats,
-        //     ...listings.count,
-        //     ...getThisFileType(f),
-        //     dirname: srtPath(dirname),
-        //     extname: path.extname(pathStr),
-        //     isAbsolute: path.isAbsolute(pathStr),
-        //     normalized: srtPath(path.normalize(pathStr)),
-        //     ...parsed,
-        //     dir,
-        //     toNamespacedPath: srtPath(path.toNamespacedPath(pathStr)),
-        //     userDirName: user.shortName,
-        //     collectionDirName: collctn.shortName,
-        //     keywords: collctn.shortName
-        //       .split('-')
-        //       .filter(csn => csn !== '')
-        //       .filter(csn => isNaN(csn as unknown as number))
-        //       .filter(csn => csn.length > 1)
-        //       .slice(0, -1)
-        //       .sort()
-        //       .sort((a, b) => b.length - a.length),
-        //     xDir: collctn.shortName
-        //       .split('-')
-        //       .filter(csn => csn !== '')
-        //       .slice(-1)[0],
-        //     fileName: f,
-        //     displaycount,
-        //   };
-
-        //   if (opts.DEBUG > 5) console.log(`${f}:`, fileInfo);
-        //   return fileInfo;
-        // }
-      );
+      // ---------------------------------------------------------------//!!-----
+      const filesInfoGenerator = filesPathsGen.map(f => {
+        const pathStr = `${collctn.fullPath}/${f}`;
+        const parsed = path.parse(pathStr);
+        const dir = srtPath(parsed.dir);
+        return {
+          user: user.shortName,
+          collectionName: collctn.shortName,
+          fileName: f,
+          ...parsed,
+          dir,
+          xDir: collctn.shortName
+            .split('-')
+            .filter(csn => csn !== '')
+            .slice(-1)[0],
+        };
+      });
 
       return filesInfoGenerator;
     });
 
     return collectionLevelGen;
-    // return user.full;
   });
 
-  const sparkedStatus = {
-    unSparkedGen: false,
-    sparkedGen: false,
-    inerGen: false,
-    inermostGen: false,
-  };
-
   const unSparkedGen = () => {
-    sparkedStatus.unSparkedGen = true;
     return collectionsPathsGen;
   };
   return {

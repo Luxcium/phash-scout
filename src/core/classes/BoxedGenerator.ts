@@ -1,7 +1,7 @@
 import { Box, BoxedList } from '.';
 import { Mapper } from '../..';
 import { IUnbox, IUnboxList } from './types';
-const DEBUG = true;
+const DEBUG = false;
 let count1 = 0;
 let count3 = 0;
 if (DEBUG) console.error('DEBUG = true in:', __filename);
@@ -64,19 +64,21 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
 
     // zalgo;
     // BUG:
-    if (DEBUG) console.log('outside of generator', ++count1);
+    if (DEBUG) {
+      console.log('outside of generator', ++count1);
+    }
 
     function* arrayGenerator(): Generator<TMap> {
       for (const item of generator()) {
         // BUG:
-
-        if (DEBUG)
+        if (DEBUG) {
           console.log(
             'inside of generator',
             count1,
             ++_that.count2,
             ++count3 - count1 - _that.count2
           );
+        }
         yield fn(item);
       }
     }
@@ -87,20 +89,23 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
     return Array.from(this.#valueGenerator());
   }
 
+  // public ===========================================-| spark() |-====
   public spark() {
     return BoxedGenerator.of(...this.unbox());
   }
 
+  // get ================================================-| box() |-====
   get box() {
     return Box.of(this.unbox());
   }
 
+  // get =============================================-| length() |-====
   get length() {
     return this.unbox().length;
   }
-  // public ===========================================-| unbox() |-====
+  // get ============================================-| boxedList |-====
   public get boxedList(): BoxedList<T> {
-    return BoxedList.of<T>(Array.from(this.#valueGenerator()));
+    return BoxedList.of<T>(...this.unbox());
   }
 
   // get ===============================================-| values |-====
