@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as fsp from 'fs/promises';
 import { BoxedList } from '../../../BoxedList';
-import { BASE_SRC_PATH1 } from '../constants/devPaths';
+import { BASE_SRC_PATH1 } from '../../../constants/devPaths';
 
 export function getListingsSync(pathSrc: string = '') {
   const files = getFilesSync(pathSrc);

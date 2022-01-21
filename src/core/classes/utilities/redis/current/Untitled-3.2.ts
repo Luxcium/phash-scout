@@ -1,6 +1,6 @@
 import path from 'path';
-import { BoxedGenerator } from '../../../../../BoxedGenerator';
-import { getDirsSync, getFilesSync } from '../../../../files/tools';
+import { BoxedGenerator } from '../../../BoxedGenerator';
+import { getDirsSync, getFilesSync } from '../../files/tools';
 import { getUserPathsGen, srtPath, withPrefix } from './extra';
 
 const PREFIX = 'TESTING:001::JSON:REDIS';

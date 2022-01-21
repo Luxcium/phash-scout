@@ -1,6 +1,9 @@
-import { readdir, readFile } from 'fs/promises';
+import { readdir, stat } from 'fs/promises';
+import path from 'path';
 import { createClient } from 'redis';
-import { redisConnectionString } from '../../../../tools';
+import { BASE_SRC_PATH1, devPaths } from './../../../constants/devPaths';
+import { redisConnectionString } from './../tools';
+import { replaceStr } from './replaceStr';
 
 type RedisClientType = ReturnType<typeof createClient>;
 type WriterTool = (
@@ -32,15 +35,35 @@ export const WriterTool: WriterTool = async (
   redisClient: RedisClientType,
   filePath: string
 ) => {
-  const fileContents = await readFile(filePath);
-  const result = await redisClient.json.set(
-    `file:${filePath}`,
-    '$',
-    JSON.parse(fileContents.toString())
-  );
+  const { X004Da, X004Db } = devPaths;
+  const shorthenTo = '${X004D}';
+  const srtPath = (testString: string) =>
+    replaceStr(X004Db, shorthenTo)(replaceStr(X004Da, shorthenTo)(testString));
+  const pathStr = filePath;
+  const stats = await stat(filePath);
+  const dirname = srtPath(path.dirname(pathStr));
+  const shortFilePath = srtPath(filePath);
+  const parsed = path.parse(pathStr);
 
+  const displaycount = `¹${'dummy'} ²${'dummy'} ³${'dummy'}`;
+  const infosAboutFile = {
+    ...stats,
+    dirname,
+    extname: path.extname(pathStr),
+    isAbsolute: path.isAbsolute(pathStr),
+    normalized: srtPath(path.normalize(pathStr)),
+    ...parsed,
+    dir: srtPath(parsed.dir),
+    displaycount,
+  };
   console.log(filePath);
-  console.log(fileContents.toString());
+  console.log(infosAboutFile);
+
+  const result = await redisClient.json.set(
+    `file:${shortFilePath}`,
+    '$',
+    infosAboutFile as any as string
+  );
 
   return result;
 };
@@ -52,15 +75,13 @@ async function runApplication(port: number, _path: string) {
 
     const spiderFolder = getSpiderFolder(client, WriterTool);
     await spiderFolder(_path);
-
     await client.disconnect();
   } catch (e) {
     console.error(e);
   }
 }
 
-const PATH =
-  '/home/luxcium/src/parallel-mapping/src/core/classes/utilities/redis/current/next-v1.0/nest-2.0/next-v3.0/data';
+const PATH = BASE_SRC_PATH1;
 const PORT = 6382;
 runApplication(PORT, PATH);
 

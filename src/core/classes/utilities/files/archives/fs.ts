@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import fse from 'fs-extra';
 import * as fsPromises from 'fs/promises';
 import { BoxedList } from '../../..';
-import { BASE_SRC_PATH1 } from '../constants/devPaths';
+import { BASE_SRC_PATH1 } from '../../../constants/devPaths';
 void fse;
 
 path.extname('index.html');

@@ -1,6 +1,6 @@
 import type { Dirent } from 'fs';
+import { filesTypes } from '../../../constants/filesTypes';
 import type { DirentWithFileType } from '../../../types';
-import { filesTypes } from '../constants/filesTypes';
 
 export function getDirListFileTypes(
   rawDirListing: Dirent[],
