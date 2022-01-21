@@ -5,5 +5,5 @@ export type RedisCStrOptions = {
   ssl?: boolean;
   username?: string;
   password?: string;
-  dbNumber?: string;
+  dbNumber?: number;
 };

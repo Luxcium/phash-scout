@@ -1,6 +1,6 @@
-import { devPaths } from '../../../../files';
-import { getDirsSync } from '../../../../files/tools';
-import { replaceStr } from '../../replaceStr';
+import { devPaths } from '../../files';
+import { getDirsSync } from '../../files/tools';
+import { replaceStr } from './replaceStr';
 
 export const getShortKey = ({ xDir, name }: { xDir: string; name: string }) =>
   `${xDir}::${name}`;

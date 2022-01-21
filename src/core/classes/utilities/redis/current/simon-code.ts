@@ -56,7 +56,7 @@ export const WriterTool: WriterTool = async (
     dir: srtPath(parsed.dir),
     displaycount,
   };
-  console.log(filePath);
+  // console.log(shortFilePath);
   console.log(infosAboutFile);
 
   const result = await redisClient.json.set(

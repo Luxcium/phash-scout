@@ -15,7 +15,7 @@ export const redisConnectionString = (options?: RedisCStrOptions) => {
     ssl: false,
     username: '',
     password: '',
-    dbNumber: '',
+    dbNumber: 0,
     ...options,
   };
   return {

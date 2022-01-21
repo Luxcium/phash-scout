@@ -1,9 +1,9 @@
 import path from 'path';
-import { immediateZalgo } from '../../../../../../utils';
-import { BoxedGenerator } from '../../../../BoxedGenerator';
-import { devPaths } from '../../../files';
-import { getDirsSync, getFilesSync } from '../../../files/tools';
-import { replaceStr } from '../replaceStr';
+import { immediateZalgo } from '../../../../../utils';
+import { BoxedGenerator } from '../../../BoxedGenerator';
+import { devPaths } from '../../files';
+import { getDirsSync, getFilesSync } from '../../files/tools';
+import { replaceStr } from './replaceStr';
 const PREFIX = 'TESTING:001::JSON:REDIS';
 const STEPS = 1;
 const DEBUG = 1;
