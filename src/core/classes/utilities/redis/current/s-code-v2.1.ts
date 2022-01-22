@@ -5,9 +5,10 @@ import { BASE_SRC_PATH1 } from '../../../constants/devPaths';
 import { redisConnectionString } from '../tools';
 
 let smallCount = 0;
-const turns = 100;
+const turns = 1000;
 export const tooShort = getTooShortWords(); // ['in'];
 let first = true;
+const X4D = '${X4D}';
 
 type RedisClientType = ReturnType<typeof createClient>;
 type WriterTool = (
@@ -20,23 +21,26 @@ const count = {
   coll: 0,
   filles: 0,
 };
+
 const total = {
   users: 0,
   coll: 0,
   filles: 0,
 };
+
 export function getSpiderFolder(
   redisClient: RedisClientType,
   writerTool: WriterTool
 ) {
   return async function spiderFolder(folderPath: string) {
     count.users = 1;
-    try {
-      const users = await readdir(folderPath, {
-        withFileTypes: true,
-      });
+    const users = await readdir(folderPath, {
+      withFileTypes: true,
+    });
 
-      for (const _user of users) {
+    // -----------------------------------------------------------------//!!-----
+    for (const _user of users) {
+      try {
         if (_user.isDirectory()) {
           count.coll = 0;
           count.users++;
@@ -45,12 +49,16 @@ export function getSpiderFolder(
             fullPath: `${folderPath}/${_user.name}`,
             shortName: _user.name,
           };
+
+          redisClient.SET(`${X4D}:PATH:USERS:${user.shortName}`, user.fullPath);
           await redisClient.SADD('${X4D}:SETS:USERS', user.shortName);
           const collections = await readdir(user.fullPath, {
             withFileTypes: true,
           });
-          try {
-            for (const _collctn of collections) {
+
+          // -----------------------------------------------------------//!!-----
+          for (const _collctn of collections) {
+            try {
               if (_collctn.isDirectory()) {
                 count.filles = 0;
                 count.coll++;
@@ -60,19 +68,28 @@ export function getSpiderFolder(
                   shortName: _collctn.name,
                 };
 
+                redisClient.SET(
+                  `${X4D}:PATH:COLLECTIONS:${collctn.shortName}`,
+                  collctn.fullPath
+                );
                 const elements = await readdir(collctn.fullPath, {
                   withFileTypes: true,
                 });
                 first = true;
 
-                try {
-                  for (const _element of elements) {
+                // -----------------------------------------------------//!!-----
+                for (const _element of elements) {
+                  try {
                     if (_element.isFile()) {
                       const filePath = `${collctn.fullPath}/${_element.name}`;
                       const fileName = _element.name;
                       const countTotal = `¹${total.users} ²${total.coll}(${
                         count.coll
                       }) ³${++total.filles}(${++count.filles})`;
+                      redisClient.SET(
+                        `${X4D}:PATH:FILES:${fileName}`,
+                        filePath
+                      );
                       await writerTool(redisClient, {
                         filePath,
                         collctn,
@@ -81,28 +98,28 @@ export function getSpiderFolder(
                         countTotal,
                       });
                     }
+                  } catch (error) {
+                    console.error('at unfolding files elements:\n\n', error);
+                    console.error(
+                      '\n-----------------------------------------------\n'
+                    );
                   }
-                } catch (error) {
-                  console.error('at unfolding files elements:\n\n', error);
-                  console.error(
-                    '\n-----------------------------------------------\n'
-                  );
                 }
               }
+            } catch (error) {
+              console.error('at unfolding collections:\n\n', error);
+              console.error(
+                '\n-----------------------------------------------------\n'
+              );
             }
-          } catch (error) {
-            console.error('at unfolding collections:\n\n', error);
-            console.error(
-              '\n-----------------------------------------------------\n'
-            );
           }
         }
+      } catch (error) {
+        console.error('at unfolding users:\n\n', error);
+        console.error(
+          '\n-----------------------------------------------------------\n'
+        );
       }
-    } catch (error) {
-      console.error('at unfolding users:\n\n', error);
-      console.error(
-        '\n-----------------------------------------------------------\n'
-      );
     }
   };
 }
@@ -123,22 +140,7 @@ export const WriterTool: WriterTool = async (
   // const dirname = srtPath(path.dirname(pathStr));
   // const shortFilePath = srtPath(o.filePath);
   const parsed = path.parse(pathStr);
-  /*
-  blocks:
-  dev: 2066,
-  mode: 33279,
-  nlink: 1,
-  uid: 1000,
-  gid: 1000,
-  rdev: 0,
-  blksize: 4096,
-  ino: 2726787,
-  atime,
-  mtime,
-  ctime,
-  birthtime
- */
-  // remove unused information
+
   const {
     size,
     blocks,
@@ -164,7 +166,7 @@ export const WriterTool: WriterTool = async (
     .filter(csn => isNaN(csn as unknown as number))
     .filter(csn => csn.length > 1)
     .slice(0, -1)
-    // .filter(notIn => !tooShort.some(isIn => isIn === notIn))
+    .filter(notIn => !tooShort.some(isIn => isIn === notIn))
     .sort()
     .sort((a, b) => a.length - b.length);
 
@@ -191,17 +193,17 @@ export const WriterTool: WriterTool = async (
         console.error('\n-----------------------------------------------\n');
         first = false;
       }
+
       //ZINCRBY
       console.error(`in unfolding files elements:`);
       console.error(
-        `at redisClient.SADD('\${X4D}:SETS:KEYWORDS', ${
-          keywords || ['']
-        }):\n\n`,
+        `at redisClient.SADD('${X4D}:SETS:KEYWORDS', ${keywords || ['']}):\n\n`,
         error
       );
       console.error('\n-----------------------------------------------\n');
     }
   }
+
   const { name, ext } = parsed;
   const fileInfo = {
     keywords,
@@ -215,22 +217,12 @@ export const WriterTool: WriterTool = async (
     size: stats.size,
     currentCount: o.countTotal,
   };
-  const X4D = '${X4D}';
-  const newKey = `${X4D}:DATA:${fileInfo.xDir}:${fileInfo.ext}:${fileInfo.name}`;
 
-  // const shortKeyParts = `${shortFilePath.replaceAll('/', ':')}`
-  //   // .replaceAll('-', ':') // :x_
-  //   // .replaceAll('.', ':')
-  //   .replaceAll(':x_', ':x_x_')
-  //   .split(':x_');
+  const newKey = `${X4D}:INFO:${fileInfo.xDir}:${fileInfo.ext}:${fileInfo.name}`;
 
-  // const fileExt = `${shortKeyParts[1].split('.')[1]}`;
-
-  // const shortKey = `${shortKeyParts[0]}:${fileExt}:${shortKeyParts[1]}`;
   smallCount++;
-  // console.log(shortKey);
   if (smallCount % turns === 1) console.log(fileInfo);
-  // shortKey
+
   const result = await redisClient.json.set(
     `${newKey}`,
     '$',
@@ -239,6 +231,7 @@ export const WriterTool: WriterTool = async (
 
   return result;
 };
+
 async function runApplication(port: number, dbNumber: number, _path: string) {
   try {
     const client = createClient(redisConnectionString({ port, dbNumber }));
@@ -248,7 +241,7 @@ async function runApplication(port: number, dbNumber: number, _path: string) {
     await spiderFolder(_path);
     await client.quit();
   } catch (e) {
-    console.error(e);
+    console.error('at runApplication:\n\n', e);
   }
 }
 
@@ -565,6 +558,7 @@ function getTooShortWords() {
 //   const filePath = `${folderPath}/${dirEntry.name}`;
 //   await writerTool(redisClient, filePath, user.shortName);
 // }
+
 /* else if (dirEntry.isDirectory()) {
             await spiderFolder(`${folderPath}/${dirEntry.name}`);
           } */
