@@ -1,13 +1,12 @@
 import { readdir, stat } from 'fs/promises';
 import path from 'path';
 import { createClient } from 'redis';
-import { BASE_SRC_PATH1, devPaths } from '../../../constants/devPaths';
+import { BASE_SRC_PATH1 } from '../../../constants/devPaths';
 import { redisConnectionString } from '../tools';
-import { replaceStr } from './replaceStr';
 
 let smallCount = 0;
 const turns = 100;
-const tooShort = getTooShortWords(); // ['in'];
+export const tooShort = getTooShortWords(); // ['in'];
 let first = true;
 
 type RedisClientType = ReturnType<typeof createClient>;
@@ -60,10 +59,7 @@ export function getSpiderFolder(
                   fullPath: `${user.fullPath}/${_collctn.name}`,
                   shortName: _collctn.name,
                 };
-                await redisClient.SADD(
-                  '${X4D}:SETS:COLLECTIONS',
-                  collctn.shortName
-                );
+
                 const elements = await readdir(collctn.fullPath, {
                   withFileTypes: true,
                 });
@@ -117,15 +113,15 @@ export const WriterTool: WriterTool = async (
   options: any
 ) => {
   const o = options;
-  const { X004Da, X004Db } = devPaths;
+  // const { X004Da, X004Db } = devPaths;
   // HACK: Uniform Resource Identifier
   const shorthenTo = '${X004D}';
-  const srtPath = (testString: string) =>
-    replaceStr(X004Db, shorthenTo)(replaceStr(X004Da, shorthenTo)(testString));
+  // const srtPath = (testString: string) =>
+  // replaceStr(X004Db, shorthenTo)(replaceStr(X004Da, shorthenTo)(testString));
   const pathStr = o.filePath;
   const stats = await stat(o.filePath);
   // const dirname = srtPath(path.dirname(pathStr));
-  const shortFilePath = srtPath(o.filePath);
+  // const shortFilePath = srtPath(o.filePath);
   const parsed = path.parse(pathStr);
   /*
   blocks:
@@ -168,8 +164,8 @@ export const WriterTool: WriterTool = async (
     .filter(csn => isNaN(csn as unknown as number))
     .filter(csn => csn.length > 1)
     .slice(0, -1)
+    // .filter(notIn => !tooShort.some(isIn => isIn === notIn))
     .sort()
-    .filter(notIn => !tooShort.some(isIn => isIn === notIn))
     .sort((a, b) => a.length - b.length);
 
   const xDir = (o.collctn.shortName as string)
@@ -207,35 +203,38 @@ export const WriterTool: WriterTool = async (
     }
   }
   const { name, ext } = parsed;
-  const infosAboutFile = {
-    uriRoot: shorthenTo,
-    userDirName: o.user.shortName,
-    collctn: o.collctn.shortName,
+  const fileInfo = {
     keywords,
+    collctn: o.collctn.shortName,
+    userDirName: o.user.shortName,
+    uriRoot: shorthenTo,
     xDir,
     name,
-    ext,
+    ext: ext.slice(1),
     ...moreStats,
     size: stats.size,
     currentCount: o.countTotal,
   };
-  const shortKeyParts = `${shortFilePath.replaceAll('/', ':')}`
-    // .replaceAll('-', ':') // :x_
-    // .replaceAll('.', ':')
-    .replaceAll(':x_', ':x_x_')
-    .split(':x_');
+  const X4D = '${X4D}';
+  const newKey = `${X4D}:DATA:${fileInfo.xDir}:${fileInfo.ext}:${fileInfo.name}`;
 
-  const fileExt = `${shortKeyParts[1].split('.')[1]}`;
+  // const shortKeyParts = `${shortFilePath.replaceAll('/', ':')}`
+  //   // .replaceAll('-', ':') // :x_
+  //   // .replaceAll('.', ':')
+  //   .replaceAll(':x_', ':x_x_')
+  //   .split(':x_');
 
-  const shortKey = `${shortKeyParts[0]}:${fileExt}:${shortKeyParts[1]}`;
+  // const fileExt = `${shortKeyParts[1].split('.')[1]}`;
+
+  // const shortKey = `${shortKeyParts[0]}:${fileExt}:${shortKeyParts[1]}`;
   smallCount++;
   // console.log(shortKey);
-  if (smallCount % turns === 1) console.log(infosAboutFile);
-
+  if (smallCount % turns === 1) console.log(fileInfo);
+  // shortKey
   const result = await redisClient.json.set(
-    `${shortKey}`,
+    `${newKey}`,
     '$',
-    infosAboutFile as any as string
+    fileInfo as any as string
   );
 
   return result;
