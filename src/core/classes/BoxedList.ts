@@ -1,12 +1,12 @@
 import { Either, left, right } from 'fp-ts/lib/Either';
-import { Box } from './Box';
 import type {
   CallbackfnT,
   CallbackfnU,
   IMapItems,
   IUnbox,
   IUnboxList,
-} from './types';
+} from '../types';
+import { Box } from './Box';
 
 export function boxedListOf<TVal>(value: TVal) {
   return BoxedList.of(value);

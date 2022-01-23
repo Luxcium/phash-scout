@@ -4,7 +4,7 @@ import { Tedis } from 'tedis';
 import { immediateZalgo } from '../..';
 import { BoxedAsyncGenerator, BoxedGenerator } from '../../..';
 // import { getTedisTools } from '../redis';
-import { BASE_SRC_PATH5 } from '../../../constants/devPaths';
+import { BASE_SRC_PATH5 } from '../../../../../constants/devPaths';
 import { getDirs } from './fs';
 import { getDirListing } from './getDirListing';
 

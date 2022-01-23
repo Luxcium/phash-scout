@@ -1,5 +1,5 @@
-import { devPaths } from '../../constants/devPaths';
-import { filesTypes } from '../../constants/filesTypes';
+import { devPaths } from '../../../../constants/devPaths';
+import { filesTypes } from '../../../../constants/filesTypes';
 import {
   asyncDirListWithFileType,
   getDirListFileTypes,

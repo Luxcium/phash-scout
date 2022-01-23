@@ -1,5 +1,5 @@
 import { createClient } from 'redis';
-import { RedisCStrOptions } from '../../../types';
+import { RedisCStrOptions } from '../../../../types';
 /*
 
   The code below connects to localhost on port 6379. To connect to a

@@ -111,7 +111,7 @@
   },
   "include": [
     "src/**/*.ts",
-    "src/core/classes/types",
+    "src/core/types",
     // "scripts/scripts/*.ts",
   ]
 }

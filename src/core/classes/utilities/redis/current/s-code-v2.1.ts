@@ -1,7 +1,7 @@
 import { readdir, stat } from 'fs/promises';
 import path from 'path';
-import { BASE_SRC_PATH1 } from '../../../constants/devPaths';
-import type { RedisClientType } from '../../../types/';
+import { BASE_SRC_PATH1 } from '../../../../../constants/devPaths';
+import type { RedisClientType } from '../../../../types';
 import { redisCreateClient } from '../tools';
 import { getKeywords } from './getKeywords.1';
 import { getShortWordList } from './getShortWordList';

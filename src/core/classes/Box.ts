@@ -1,4 +1,4 @@
-import type { IApply, IChain, IMap, IUnbox } from './types';
+import type { IApply, IChain, IMap, IUnbox } from '../types';
 
 const debug = false;
 export function boxOf<TVal>(value: TVal) {

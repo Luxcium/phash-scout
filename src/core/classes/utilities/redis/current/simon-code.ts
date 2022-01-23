@@ -1,7 +1,7 @@
 import { readdir, stat } from 'fs/promises';
 import path from 'path';
 import { createClient } from 'redis';
-import { BASE_SRC_PATH1, devPaths } from './../../../constants/devPaths';
+import { BASE_SRC_PATH1, devPaths } from '../../../../../constants/devPaths';
 import { redisConnectionString } from './../tools';
 import { replaceStr } from './replaceStr';
 

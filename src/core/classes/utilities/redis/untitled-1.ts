@@ -7,7 +7,7 @@ import {
   MyPInfos,
   MyStats,
   RedisJson_InfoGetterFunct,
-} from '../../types';
+} from '../../../types';
 import { devPaths, fsTools } from '../files';
 import { getPathStatsInfos } from './tools';
 import { tedis_jsonGet, tedis_jsonSet } from './tools/tedis_json';

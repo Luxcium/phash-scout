@@ -1,4 +1,4 @@
-import { IApply, IChain, IMap, IUnbox } from '../core/classes/types';
+import { IApply, IChain, IMap, IUnbox } from '../core/types';
 class Box1<T> {
   value: T;
   constructor(value: T) {

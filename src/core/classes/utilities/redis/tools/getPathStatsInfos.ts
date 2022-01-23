@@ -8,7 +8,7 @@ import type {
   RedisJson_PathInfoGetterFunct,
   RedisJson_PathStatsTuple,
   RedisJson_StatsInfoGetterFunct,
-} from '../../../types';
+} from '../../../../types';
 import { asyncDirListWithFileType, getPathInfos, getStats } from '../../files';
 
 type PathStatsTuple<T> = RedisJson_PathStatsTuple<T>;
