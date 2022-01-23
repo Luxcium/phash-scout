@@ -2,12 +2,13 @@ import { readdir, stat } from 'fs/promises';
 import path from 'path';
 import { BASE_SRC_PATH1 } from '../../../../../constants/devPaths';
 import type { RedisClientType } from '../../../../types';
+import { isArray } from '../../../utils/isArray';
 import { redisCreateClient } from '../tools';
 import { getKeywords } from './getKeywords.1';
 import { getShortWordList } from './getShortWordList';
 import { getxDir } from './getxDir';
 import { statsReducer } from './statsReducer';
-let STEPS = 1000000;
+let STEPS = 100;
 let smallCount = 0;
 let turns = 10000;
 export const tooShort = getShortWordList(); // ['in'];
@@ -203,11 +204,9 @@ async function runApplication(port: number, dbNumber: number, _path: string) {
       (
         await getSpiderFolder(client, WriterTool)(_path)
       ).flatMap(
-        async item => (Array.isArray(item) && (await Promise.all(item))) || item
+        async item => (isArray(item) && (await Promise.all(item))) || item
       )
-    );
-    //
-    await client.quit();
+    ).then(async () => await client.quit());
     //
   } catch (e) {
     //

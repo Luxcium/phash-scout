@@ -1,3 +1,25 @@
+import {
+  getSign,
+  nullOrDefined,
+  splitedHead,
+  splitedTail,
+  splitHead,
+  splitTail,
+  utils,
+} from './utilities';
+import {
+  cpuCount,
+  immediateZalgo,
+  isAllArrays,
+  isArray,
+  nextTickZalgo,
+  restrainingZalgo,
+  timeoutZalgo,
+  zalgo,
+  zalgo1,
+  zalgo2,
+  zalgo3,
+} from './utils';
 export type {
   IApply,
   IChain,
@@ -29,4 +51,4 @@ export {
   zalgo1,
   zalgo2,
   zalgo3,
-} from './utilities';
+};

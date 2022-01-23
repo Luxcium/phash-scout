@@ -1,5 +1,4 @@
 import type { ParsedPath, PlatformPath } from 'path';
-import { immediateZalgo } from '../..';
 import type {
   DirentWithFileType,
   MyPInfos,
@@ -9,6 +8,7 @@ import type {
   RedisJson_PathStatsTuple,
   RedisJson_StatsInfoGetterFunct,
 } from '../../../../types';
+import { immediateZalgo } from '../../../utils';
 import { asyncDirListWithFileType, getPathInfos, getStats } from '../../files';
 
 type PathStatsTuple<T> = RedisJson_PathStatsTuple<T>;

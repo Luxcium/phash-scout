@@ -1,8 +1,7 @@
 import { stat } from 'fs/promises';
 import path from 'path';
 import { Tedis } from 'tedis';
-import { immediateZalgo } from '../..';
-import { BoxedAsyncGenerator, BoxedGenerator } from '../../..';
+import { BoxedAsyncGenerator, BoxedGenerator, immediateZalgo } from '../../..';
 // import { getTedisTools } from '../redis';
 import { BASE_SRC_PATH5 } from '../../../../../constants/devPaths';
 import { getDirs } from './fs';
