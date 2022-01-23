@@ -40,18 +40,18 @@ export function redisCreateClient(
 .on('reconnecting',()=>{console.log('Redis Client reconnecting')})
      */
     return client
-      .on('error', err => console.log('Redis Client Error', err))
+      .on('error', err => console.error('Redis Client Error', err))
       .on('connect', () => {
-        console.log('Redis Client connect');
+        console.error('Redis Client connect');
       })
       .on('ready', () => {
-        console.log('Redis Client ready');
+        console.error('Redis Client ready');
       })
       .on('end', () => {
-        console.log('Redis Client end');
+        console.error('Redis Client end');
       })
       .on('reconnecting', () => {
-        console.log('Redis Client reconnecting');
+        console.error('Redis Client reconnecting');
       });
   }
   return client;
