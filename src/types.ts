@@ -13,6 +13,9 @@ export type Mapper<T, U> = (
   index?: number,
   array?: readonly T[]
 ) => U;
+
+export type ThenMapper<S, U> = (val: S) => U | PromiseLike<U>;
+
 /** Partial interface for `worker_threads` module */
 export interface Worker_Threads<W> {
   isMainThread: boolean;

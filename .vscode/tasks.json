@@ -22,7 +22,8 @@
         "isDefault": true
       },
       "args": [
-        "--build",
+        "-b",
+        "${workspaceFolder}/src/tsconfig.json",
         "--verbose"
       ],
       "isBackground": false,

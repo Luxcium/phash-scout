@@ -1,10 +1,10 @@
 import { Box, BoxedList } from '.';
-import { Mapper } from '../..';
+import { Mapper, ThenMapper } from '../..';
 import { IUnbox, IUnboxList } from '../types';
+import { immediateZalgo } from './utils';
 const DEBUG = false;
-let count1 = 0;
-let count3 = 0;
 if (DEBUG) console.error('DEBUG = true in:', __filename);
+
 export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
   #valueGenerator: () => Generator<T>;
   // static ==============================================-| of() |-====
@@ -29,17 +29,15 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
     return new BoxedGenerator<TVal>(arrayGenerator([...(values as TVal[])]));
   }
 
+  /* [... PARTIAL ...] */
+
   // static =========================================-| fromGen() |-====
-  public static fromGen<TVal>(
-    generatorFn: () => Generator<TVal>
-  ): BoxedGenerator<TVal> {
+  public static fromGen<TVal>(generatorFn: () => Generator<TVal>): BoxedGenerator<TVal> {
     return new BoxedGenerator<TVal>(generatorFn);
   }
 
   // static ============================================-| from() |-====
-  public static from<TVal>(
-    boxedList: IUnboxList<TVal> | IUnbox<TVal[]>
-  ): BoxedGenerator<TVal> {
+  public static from<TVal>(boxedList: IUnboxList<TVal> | IUnbox<TVal[]>): BoxedGenerator<TVal> {
     return BoxedGenerator.of<TVal>(boxedList.unbox());
   }
 
@@ -53,33 +51,60 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
     // delay: undefined | null | number | boolean = false
   ): BoxedGenerator<TMap> {
     const generator = this.#valueGenerator;
-    // delay;
-    const _that = this;
-    // let zalgo = <T>(id: T) => id;
-    // if (delay === null) zalgo = <T>(id: T) => id;
-    // if (delay != null && delay <= 0) zalgo = <T>(id: T) => id;
-    // if (delay != null && delay > 0) zalgo = <T>(id: T) => id;
-    // if (delay != null && delay === true) zalgo = <T>(id: T) => id;
-    // if (delay != null && delay === false) zalgo = <T>(id: T) => id;
-
-    // zalgo;
-    // BUG:
-    if (DEBUG) {
-      console.log('outside of generator', ++count1);
-    }
 
     function* arrayGenerator(): Generator<TMap> {
       for (const item of generator()) {
-        // BUG:
-        if (DEBUG) {
-          console.log(
-            'inside of generator',
-            count1,
-            ++_that.count2,
-            ++count3 - count1 - _that.count2
-          );
-        }
         yield fn(item);
+      }
+    }
+    return BoxedGenerator.fromGen(arrayGenerator);
+  }
+
+  // public =========================================-| thenMap() |-====
+  public thenMap<TMap1, TMap2 = never>(
+    onfulfilled?: ThenMapper<T, TMap1> | null,
+    onrejected?: ((reason: any) => TMap2 | PromiseLike<TMap2>) | null
+  ): BoxedGenerator<Promise<TMap1 | TMap2>> {
+    const generator = this.#valueGenerator;
+
+    function* arrayGenerator(): Generator<Promise<TMap1 | TMap2>> {
+      for (const item of generator()) {
+        const _item = immediateZalgo(item);
+
+        yield _item.then(onfulfilled, onrejected);
+      }
+    }
+    return BoxedGenerator.fromGen(arrayGenerator);
+  }
+
+  // public ========================================-| catchMap() |-====
+  public catchMap<TMap2 = never>(
+    onrejected?: ((reason: any) => TMap2 | PromiseLike<TMap2>) | null
+  ): BoxedGenerator<Promise<T | TMap2>> {
+    const generator = this.#valueGenerator;
+
+    function* arrayGenerator(): Generator<Promise<T | TMap2>> {
+      for (const item of generator()) {
+        const _item = immediateZalgo(item);
+
+        yield _item.catch(onrejected); // .then(onfulfilled, onrejected);
+      }
+    }
+    return BoxedGenerator.fromGen(arrayGenerator);
+  }
+
+  // public ======================================-| finallyMap() |-====
+  public finallyMap(
+    onfinally: (() => void) | null // ThenMapper<T, TMap1> | null,
+    // onrejected?: ((reason: any) => TMap2 | PromiseLike<TMap2>) | null
+  ): BoxedGenerator<Promise<T>> {
+    const generator = this.#valueGenerator;
+
+    function* arrayGenerator(): Generator<Promise<T>> {
+      for (const item of generator()) {
+        const _item = immediateZalgo(item);
+
+        yield _item.finally(onfinally);
       }
     }
     return BoxedGenerator.fromGen(arrayGenerator);
@@ -128,3 +153,49 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
 // }
 // void main;
 // main();
+
+export class PseudoCode<T> {
+  public static of<TVal>(...values: TVal[]|[TVal[]]): PseudoCode<TVal>  {
+    if (values.length === 1) {
+      const list = values[0];
+      if (Array.isArray(list)) {
+        return new PseudoCode<TVal>(list); /* as PseudoCode<TVal>; */
+      } else {
+        // not Array.isArray(list)
+        return new PseudoCode<TVal>([list]); /* as PseudoCode<TVal>; */
+      }
+    } else {
+      // values.length !== 1
+      // PseudoCode.of(1, 2, 3);
+      const list = [...values];
+      return   PseudoCode.of<TVal>(list as any as TVal); /* as PseudoCode<TVal>; */
+      // return null;
+    }
+  }
+
+  public value: T[];
+
+  constructor(value: T[]) {
+    this.value = value;
+  }
+}
+
+const pseudoCode1 = PseudoCode.of([1, 2, 3]);
+const pseudoCode2 = PseudoCode.of(1);
+const pseudoCode3 = PseudoCode.of(1, 2, 3);
+const pseudoCode4 = PseudoCode.of([1, 2, 3],[1, 2, 3]);
+const pseudoCode5 = PseudoCode.of([[1, 2, 3], [1, 2, 3]]);
+
+
+pseudoCode1;
+pseudoCode2;
+pseudoCode3;
+pseudoCode4;
+pseudoCode5;
+// 1,
+
+// 1,2,3 --> [1,2,3] (*inside my of function)
+// [1,2,3]
+
+// [1,2,3][4,5,6]
+// [[1,2,3][4,5,6]]

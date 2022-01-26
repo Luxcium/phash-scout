@@ -150,59 +150,152 @@
       "backgroundColor": "#F154"
     },
     // #endregion:
-    // SECTIONS
-    // {
-    //   "tag": "r-egion",
-    //   "color": "#FF3",
-    //   "strikethrough": false,
-    //   // "backgroundColor": "#FF34"
-    // },
-    // {
-    //   "tag": "e-ndregion",
-    //   "color": "#F15",
-    //   "strikethrough": false,
-    //   // "backgroundColor": "#F154"
-    // },
-    // // FB DEFINE: blblblblblblblblb,
-    // {
-    //   "tag": "DEFINE",
-    //   "color": "#FB0",
-    //   "strikethrough": false,
-    //   // "backgroundColor": "#FB04"
-    // },
-    // // CALL: blblblblblblblblb,
-    // {
-    //   "tag": "CALL",
-    //   "color": "#39C",
-    //   "strikethrough": false,
-    //   // "backgroundColor": "#39C4"
-    // },
-    // SECTION
     {
-      // ~#-----------------------------------------------------------#~
-      "tag": "~#",
-      "color": "#FC5F",
+      // ~!-----------------------------------------------------------!~
+      "tag": "~!",
+      "color": "#F36",
       "strikethrough": false,
-      "backgroundColor": "#FC56"
+      "backgroundColor": "#F365"
+    },
+    {
+      // ~$-----------------------------------------------------------$~
+      "tag": "~$",
+      "color": "#F80",
+      "strikethrough": false,
+      "backgroundColor": "#F806"
+    },
+    {
+      // ~+-----------------------------------------------------------+~
+      "tag": "~+",
+      "color": "#7C2F",
+      "strikethrough": false,
+      "backgroundColor": "#7C25"
     },
     {
       // ~*-----------------------------------------------------------*~
       "tag": "~*",
-      "color": "#7C2F",
+      "color": "#FF0B",
       "strikethrough": false,
-      "backgroundColor": "#7C26"
+      "backgroundColor": "#FF05"
+    },
+    {
+      // ~#-----------------------------------------------------------#~
+      "tag": "~#",
+      "color": "#39F",
+      "strikethrough": false,
+      "backgroundColor": "#39F5"
     },
     {
       // ~&-----------------------------------------------------------&~
       "tag": "~&",
       "color": "#93F",
       "strikethrough": false,
-      "backgroundColor": "#93F3"
+      "backgroundColor": "#93F5"
     },
     {
-      "tag": "SECTION",
-      "color": "#39C",
+      // ~@-----------------------------------------------------------@~
+      "tag": "~@",
+      "color": "#F36",
       "strikethrough": false,
+      "backgroundColor": "#39C3"
+    },
+    {
+      // ~%-----------------------------------------------------------%~
+      "tag": "~%",
+      "color": "#4EF",
+      "strikethrough": false,
+      "backgroundColor": "#4EF5"
+    },
+    {
+      // ~?-----------------------------------------------------------?~
+      "tag": "~?",
+      "color": "#5AF",
+      "strikethrough": false,
+      "backgroundColor": "#4EF3"
+    },
+    // SECTION
+    {
+      "tag": "SECTION",
+      "color": "#4EF",
+      "strikethrough": false,
+    },
+    /*
+~ #F36F
+~ #F80B
+~ #FF0B
+~ #0F0B
+~ #39FB
+~ #93FB
+    */
+    // :!
+    {
+      "tag": ":!",
+      "color": "#F20",
+      "strikethrough": false,
+      "backgroundColor": "#F203"
+    },
+    // :~
+    {
+      "tag": ":~",
+      "color": "#FB3",
+      "strikethrough": false,
+      "backgroundColor": "#39C3"
+    },
+    // :@
+    {
+      "tag": ":@",
+      "color": "#F36",
+      "strikethrough": false,
+      "backgroundColor": "#39C6"
+    },
+    // :#
+    {
+      "tag": ":#",
+      "color": "#4AE",
+      "strikethrough": false,
+      "backgroundColor": "#4AE3"
+    },
+    // :$
+    {
+      "tag": ":$",
+      "color": "#F84",
+      "strikethrough": false,
+      "backgroundColor": "#F843"
+    },
+    // :%
+    {
+      "tag": ":%",
+      "color": "#4EF",
+      "strikethrough": false,
+      "backgroundColor": "#4EF3"
+    },
+    // :?
+    {
+      "tag": ":?",
+      "color": "#39F",
+      "strikethrough": false,
+      "backgroundColor": "#39F3"
+    },
+    // :&
+    {
+      "tag": ":&",
+      "color": "#93F",
+      "strikethrough": false,
+      "backgroundColor": "#93F3"
+    },
+    // :*
+    {
+      "tag": ":*",
+      "color": "#9C7",
+      "strikethrough": false,
+      "backgroundColor": "#9C73"
+    },
+    // :+
+    {
+      "tag": ":+",
+      "color": "#CF2",
+      "strikethrough": false,
+      "backgroundColor": "#CF23"
     },
     // !-
     {
@@ -313,608 +406,6 @@
       "strikethrough": false,
       "backgroundColor": "transparent"
     },
-    // {
-    //   // </
-    //   "tag": "</",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // </>
-    //   "tag": "</>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // />
-    //   "tag": "/>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ~-
-    //   "tag": "~-",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // -~
-    //   "tag": "-~",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ~@
-    //   "tag": "~@",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <~
-    //   "tag": "<~",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <~>
-    //   "tag": "<~>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ~~
-    //   "tag": "~~",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <~~
-    //   "tag": "<~~",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ~~
-    //   "tag": "~~",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ~>
-    //   "tag": "~>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ~~
-    //   "tag": "~~",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ~~>
-    //   "tag": "~~>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // >=
-    //   "tag": ">=",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <=
-    //   "tag": "<=",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <!--
-    //   "tag": "<!--",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ##
-    //   "tag": "##",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ###
-    //   "tag": "###",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ####
-    //   "tag": "####",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // |-
-    //   "tag": "|-",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // -|
-    //   "tag": "-|",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // |->
-    //   "tag": "|->",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <-|
-    //   "tag": "<-|",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // >-|
-    //   "tag": ">-|",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // |-<
-    //   "tag": "|-<",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // |=
-    //   "tag": "|=",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // |=>
-    //   "tag": "|=>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // >-
-    //   "tag": ">-",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <-
-    //   "tag": "<-",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <--
-    //   "tag": "<--",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // -->
-    //   "tag": "-->",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ->
-    //   "tag": "->",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // -<
-    //   "tag": "-<",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // >->
-    //   "tag": ">->",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // >>-
-    //   "tag": ">>-",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <<-
-    //   "tag": "<<-",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <->
-    //   "tag": "<->",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ->>
-    //   "tag": "->>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // -<<
-    //   "tag": "-<<",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <-<
-    //   "tag": "<-<",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ==>
-    //   "tag": "==>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // =>
-    //   "tag": "=>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // =/=
-    //   "tag": "=/=",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // !==
-    //   "tag": "!==",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // !=
-    //   "tag": "!=",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <==
-    //   "tag": "<==",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // >>=
-    //   "tag": ">>=",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // =>>
-    //   "tag": "=>>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // >=>
-    //   "tag": ">=>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <=>
-    //   "tag": "<=>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <=<
-    //   "tag": "<=<",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <<=
-    //   "tag": "<<=",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // =<<
-    //   "tag": "=<<",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // .-
-    //   "tag": ".-",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // .=
-    //   "tag": ".=",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // =:=
-    //   "tag": "=:=",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // =!=
-    //   "tag": "=!=",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ==
-    //   "tag": "==",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ===
-    //   "tag": "===",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ::
-    //   "tag": "::",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // :
-    //   "tag": ":",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // :=
-    //   "tag": ":=",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // :>
-    //   "tag": ":>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // :<
-    //   "tag": ":<",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // >:
-    //   "tag": ">:",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ;;
-    //   "tag": ";;",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <|
-    //   "tag": "<|",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <|>
-    //   "tag": "<|>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    {
-      // |>
-      "tag": "|>",
-      "color": "#6CBC",
-      "strikethrough": false,
-      "backgroundColor": "transparent"
-    },
-    // {
-    //   // <>
-    //   "tag": "<>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <$
-    //   "tag": "<$",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <$>
-    //   "tag": "<$>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    {
-      // $>
-      "tag": "$>",
-      "color": "#c54442",
-      "strikethrough": false,
-      "backgroundColor": "transparent"
-    },
-    // {
-    //   // <+
-    //   "tag": "<+",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // <+>
-    //   "tag": "<+>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // +>
-    //   "tag": "+>",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ?=
-    //   "tag": "?=",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // /=
-    //   "tag": "/=",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // /==
-    //   "tag": "/==",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // /\
-    //   "tag": "/\\",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // \/
-    //   "tag": "\\/",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // __
-    //   "tag": "__",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // &&
-    //   "tag": "&&",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // ++
-    //   "tag": "++",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // +++
-    //   "tag": "+++",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
     {
       // ‽
       "tag": "‽",
@@ -981,13 +472,6 @@
     {
       // https
       "tag": "https:",
-      "color": "#FB3F",
-      "strikethrough": false,
-      "backgroundColor": "transparent"
-    },
-    {
-      // http:
-      "tag": "http:",
       "color": "#FB3F",
       "strikethrough": false,
       "backgroundColor": "transparent"

@@ -28,7 +28,12 @@ export type {
   IUnbox,
   IUnboxList,
 } from './core';
-export type { CPU_MapperRetunType, Mapper, MapperArgs } from './types';
+export type {
+  CPU_MapperRetunType,
+  Mapper,
+  MapperArgs,
+  ThenMapper,
+} from './types';
 
 /*
 (alias) function CPU_Mapper(filename: string): <T, R>(list: T[], mapFn: Mapper<T, R>, limit?: number | undefined) => {
