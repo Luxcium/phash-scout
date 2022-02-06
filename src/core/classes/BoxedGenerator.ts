@@ -8,8 +8,30 @@ if (DEBUG) console.error('DEBUG = true in:', __filename);
 export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
   #valueGenerator: () => Generator<T>;
   // static ==============================================-| of() |-====
-  count2 = 0;
+
   public static of<TVal>(...values: TVal[] | [TVal[]]): BoxedGenerator<TVal> {
+    const arrayGenerator = (array: TVal[]): (() => Generator<TVal>) =>
+      function* (): Generator<TVal> {
+        for (let index = 0; index < array.length; index++) {
+          const currentValue = array[index];
+          yield currentValue;
+        }
+      };
+    if (values.length === 1) {
+      const list = values[0];
+      if (Array.isArray(list)) {
+        return new BoxedGenerator<TVal>(arrayGenerator(list)); /* as BoxedGenerator<TVal>; */
+      } else {
+        return new BoxedGenerator<TVal>(arrayGenerator([list])); /* as BoxedGenerator<TVal>; */
+      }
+    } else {
+      const list: TVal = [...values] as any;
+      return BoxedGenerator.of<TVal>(list); /* as PseudoCode<TVal>; */
+    }
+  }
+
+  /** @deprecated */
+  public static of2<TVal>(...values: TVal[] | [TVal[]]): BoxedGenerator<TVal> {
     const arrayGenerator = (array: TVal[]): (() => Generator<TVal>) =>
       function* (): Generator<TVal> {
         for (let index = 0; index < array.length; index++) {
@@ -28,8 +50,6 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
 
     return new BoxedGenerator<TVal>(arrayGenerator([...(values as TVal[])]));
   }
-
-  /* [... PARTIAL ...] */
 
   // static =========================================-| fromGen() |-====
   public static fromGen<TVal>(generatorFn: () => Generator<TVal>): BoxedGenerator<TVal> {
@@ -155,7 +175,7 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
 // main();
 
 export class PseudoCode<T> {
-  public static of<TVal>(...values: TVal[]|[TVal[]]): PseudoCode<TVal>  {
+  public static of<TVal>(...values: TVal[] | [TVal[]]): PseudoCode<TVal> {
     if (values.length === 1) {
       const list = values[0];
       if (Array.isArray(list)) {
@@ -168,7 +188,7 @@ export class PseudoCode<T> {
       // values.length !== 1
       // PseudoCode.of(1, 2, 3);
       const list = [...values];
-      return   PseudoCode.of<TVal>(list as any as TVal); /* as PseudoCode<TVal>; */
+      return PseudoCode.of<TVal>(list as any as TVal); /* as PseudoCode<TVal>; */
       // return null;
     }
   }
@@ -183,9 +203,11 @@ export class PseudoCode<T> {
 const pseudoCode1 = PseudoCode.of([1, 2, 3]);
 const pseudoCode2 = PseudoCode.of(1);
 const pseudoCode3 = PseudoCode.of(1, 2, 3);
-const pseudoCode4 = PseudoCode.of([1, 2, 3],[1, 2, 3]);
-const pseudoCode5 = PseudoCode.of([[1, 2, 3], [1, 2, 3]]);
-
+const pseudoCode4 = PseudoCode.of([1, 2, 3], [1, 2, 3]);
+const pseudoCode5 = PseudoCode.of([
+  [1, 2, 3],
+  [1, 2, 3],
+]);
 
 pseudoCode1;
 pseudoCode2;

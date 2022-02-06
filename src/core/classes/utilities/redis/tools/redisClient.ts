@@ -1,5 +1,9 @@
 import { createClient } from 'redis';
 import { RedisCStrOptions } from '../../../../types';
+
+const DEBUG = false;
+if (DEBUG) console.log('DEBUG = true in:', __filename);
+
 /*
 
   The code below connects to localhost on port 6379. To connect to a
@@ -55,6 +59,19 @@ export function redisCreateClient(
       });
   }
   return client;
+}
+
+// export const redisConnTest = () => redisCreateClient({ port: 6382 });
+
+// if (DEBUG) main();
+
+export async function redis6382Test(verbosa: boolean = false) {
+  const R = redisCreateClient({ port: 6382 });
+  await R.connect();
+  const result = await R.PING();
+  if (verbosa) console.warn(result);
+  await R.QUIT();
+  return result === 'pong';
 }
 
 /*

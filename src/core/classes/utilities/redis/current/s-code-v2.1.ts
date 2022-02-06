@@ -59,11 +59,14 @@ export function getSpiderFolder(r: RedisClientType, writerTool: WriterTool) {
       });
 
       const boxedUsers = BoxedGenerator.of(...users.slice(0, STEPS));
-      boxedUsers.map(_user => {
-        if (_user.isDirectory()) {
-          stageInfos(folderPath, _user.name);
-        }
-      }).thenMap();
+      boxedUsers
+        .map(_user => {
+          if (_user.isDirectory()) {
+            return stageInfos(folderPath, _user.name);
+          }
+          return undefined;
+        })
+        .thenMap();
       // ---------------------------------------------------------------//!!-----
       for (const _user of users.slice(0, STEPS)) {
         try {
@@ -80,18 +83,14 @@ export function getSpiderFolder(r: RedisClientType, writerTool: WriterTool) {
               try {
                 if (_coll.isDirectory()) {
                   [C.c++, C.t.c++, (C.f = 0)];
-                  const [coll, elements] = await stageInfos(
-                    user.path,
-                    _coll.name
-                  );
-                  A.push(
-                    R.SET(`${X4D}:PATH:COLLECTIONS:${coll.name}`, coll.path)
-                  );
+                  const [coll, items] = await stageInfos(user.path, _coll.name);
+                  A.push(R.SET(`${X4D}:PATH:COLL:${coll.name}`, coll.path));
+                  A.push(R.SADD('${X4D}:SETS:COLL:PATHS', coll.path));
                   // ---------------------------------------------------//!!-----
-                  for (const _element of elements) {
+                  for (const _file of items) {
                     try {
-                      if (_element.isFile()) {
-                        const file = getPathsObj(coll.path, _element.name);
+                      if (_file.isFile()) {
+                        const file = getPathsObj(coll.path, _file.name);
                         const countTotal = `¹${C.t.u} ²${C.t.c}(${C.c}) ³${++C.t
                           .f}(${++C.f})`;
                         A.push(

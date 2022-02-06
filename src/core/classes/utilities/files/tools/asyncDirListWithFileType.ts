@@ -1,5 +1,5 @@
 import { getRawDirList } from '.';
-import { DirentWithFileType } from '../../../../types';
+import type { DirentWithFileType } from '../../../../types';
 import { getDirListFileTypes } from './getDirListWithFileType';
 import { getRawDirListSync } from './getRawDirList';
 
