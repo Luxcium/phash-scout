@@ -1,65 +1,129 @@
 import { RedisCommandRawReply } from '@node-redis/client/dist/lib/commands';
 import fs from 'fs';
+import { immediateZalgo } from '../../../utils';
 import { asyncDirListWithFileType } from '../../files';
 import { redisCreateClient } from '../tools';
-import { shortBit64 } from './shortBit64';
-
 const phash = require('sharp-phash');
 
+const RADIUS = '10';
 const CURRENT_PATH = '/home/luxcium/WSD_250/jpgs_ipn_impt_2022-02-04';
+const QUERY = 'IMGSCOUT.QUERY';
+const ADD = 'IMGSCOUT.ADD';
 
+// type RawReply = RedisCommandRawReply;
+// type Reply = P<RawReply>;
+
+type P<T> = Promise<T>;
+type S = string;
 type FilePath = {
-  folder: string;
-  path: string;
-  name: string;
+  folder: S;
+  path: S;
+  name: S;
 };
 
-main3; //();
-async function main3(
-  folder = CURRENT_PATH,
-  port = 6383,
-  dbNumber = 0,
-  host = '0.0.0.0'
-) {
-  const R = redisCreateClient({ port, dbNumber, host });
-  await R.connect();
+type TX = P<{
+  transact: P<{
+    rawQueryResult: P<null | RedisCommandRawReply>;
+    insertResult: P<null | RedisCommandRawReply>;
+  }>;
+  name: S;
+  phash_: P<S>;
+  path: S;
+  index: number;
+}>;
 
-  const images = await fs.promises.readdir(folder, {
-    withFileTypes: true,
-  });
-  const addPhash = (k: string, phash_: string, title: string) =>
-    R.sendCommand(['IMGSCOUT.ADD', k, phash_, title]);
-  const getExt = (fileName: string) =>
-    fileName.split('.').slice(-1)[0].toLowerCase();
+type QueryResultItem = [path: S, id: number, radius: S];
+function isQueryResultItem(item: unknown): item is QueryResultItem {
+  return (
+    Array.isArray(item) &&
+    item.length === 3 &&
+    typeof item[0] === 'string' &&
+    typeof item[1] === 'number' &&
+    typeof item[2] === 'string'
+  );
+}
 
-  for (const image of images.slice(0)) {
-    if (image.isFile()) {
-      const imgPath = `${folder}/${image.name}`;
-      const imgExt = getExt(image.name);
+export type QueryResult = [path: S, id: number, radius: S][];
+function isQueryResult(
+  contender: unknown
+): contender is Array<QueryResultItem> {
+  return Array.isArray(contender) && contender.every(isQueryResultItem);
+}
 
-      const imgFullPath = {
-        imgPath,
-        imgExt,
-      };
+// const willR = void 'R';
 
-      const isValidExt = ['jpg', 'jpeg', 'png'].some(
-        ex => ex === imgFullPath.imgExt
-      );
+const queryPhash = (R: any) => async (k: S, phash_: P<S>) => {
+  const P = bigString(await phash_);
+  return R.sendCommand([QUERY, k, P, RADIUS]);
+};
 
-      if (isValidExt) {
-        const thisImage = await fs.promises.readFile(imgPath);
-        const phash_ = await phash(thisImage);
-        // HACK:%----------------------------------------------------------------
-        console.log(`${await addPhash(`TEST:${image.name}`, phash_, imgPath)}`);
+const addPhash =
+  (R: any) =>
+  async (k: S, p: P<S>, t: S): P<RedisCommandRawReply> =>
+    R.sendCommand([ADD, k, bigString(await p), t]);
 
-        console.log();
-        console.log(shortBit64(phash_));
-        console.log(imgPath);
-        console.log(phash_);
-        console.log(image.name);
+// export async function addAndQuerry(
+//   R: any,
+//   k: S,
+//   phash_: P<string>,
+//   title: S
+// ) {
+//   const insertResult: P<RedisCommandRawReply> = addPhash(R)(
+//     k,
+//     phash_,
+//     title
+//   );
+//   const rawQueryResult: P<RedisCommandRawReply> = queryPhash(R)(
+//     k,
+//     phash_,
+//     insertResult
+//   );
+//   const awaitedQuery = await rawQueryResult;
+//   if (awaitedQuery) {
+//     const strQuery = String(awaitedQuery);
+//     strQuery;
+//     console.log('\n', strQuery, '\n', awaitedQuery, '\n');
+//   }
+//   return { insertResult, rawQueryResult };
+// }
+
+// P<RedisCommandRawReply | null>
+// type QueryResult__ = [string, number, string][];
+
+export async function querryAndAdd(
+  R: any,
+  k: S,
+  phash_: P<S>,
+  title: S
+): P<{
+  rawQueryResult: P<RedisCommandRawReply>;
+  insertResult: P<null> | P<null | RedisCommandRawReply>;
+}> {
+  const rawQueryResult: P<RedisCommandRawReply> = queryPhash(R)(k, phash_);
+  const awaitedQuery = await rawQueryResult;
+  if (awaitedQuery) {
+    if (isQueryResult(awaitedQuery)) {
+      if (awaitedQuery.length > 0) {
+        return {
+          insertResult: immediateZalgo(null),
+          rawQueryResult,
+        };
       }
+      const insertResult: P<RedisCommandRawReply> = addPhash(R)(
+        k,
+        phash_,
+        title
+      );
+      return {
+        insertResult,
+        rawQueryResult,
+      };
     }
   }
+  return {
+    insertResult: immediateZalgo(null),
+    rawQueryResult,
+  };
 }
 
 main().then().catch(console.error);
@@ -74,11 +138,8 @@ async function main(
   const filesList = asyncDirListWithFileType(folder);
   const R = redisCreateClient({ port, dbNumber, host });
   await R.connect();
+  // function(k: S, phash_: P<string>, title: S): P<RedisCommandRawReply>
 
-  const addPhash = async (k: string, phash_: Promise<string>, title: string) =>
-    R.sendCommand(['IMGSCOUT.ADD', k, await phash_, title]);
-
-  addPhash;
   const filesPathList = (await filesList)
     .filter(i => i.isFile)
     .map(f => ({ folder, path: `${folder}/${f.fileName}`, name: f.fileName }))
@@ -86,18 +147,23 @@ async function main(
     .map(async r => {
       const awaited = await r;
       const { name, phash_, path, index, folder } = awaited;
-      const transact = addPhash(`TEST:${folder}`, phash_, path);
+      // XXX: BROKEN
+      const transact = querryAndAdd(R, `TEST:${folder}`, phash_, path);
       return { transact, name, phash_, path, index, folder };
     })
     .map(async tx => {
-      willLog(tx);
+      // XXX: BROKEN
+      // willLog(tx);
       return tx;
     })
     .map(async r => {
       const awaited = await r;
       const { transact, name, phash_, path, index } = awaited;
       return {
-        transact: await transact,
+        transact: {
+          insertResult: await (await transact).insertResult,
+          rawQueryResult: await (await transact).rawQueryResult,
+        },
         name,
         phash_: await phash_,
         path,
@@ -106,19 +172,6 @@ async function main(
       };
     });
 
-  type TX = Promise<{
-    transact: Promise<RedisCommandRawReply>;
-    name: string;
-    phash_: Promise<string>;
-    path: string;
-    index: number;
-  }>;
-
-  async function willLog(tx: TX) {
-    const awaited = await tx;
-    const { transact, name, phash_ } = awaited;
-    console.log(await phash_, name, await transact);
-  }
   const allfilesPathList = Promise.all(filesPathList);
 
   return await allfilesPathList.then(async val => {
@@ -127,65 +180,30 @@ async function main(
   });
 }
 
+export async function willLog(tx: TX) {
+  const awaited = await tx;
+  const { transact, name, phash_, path } = awaited;
+  const transact_ = await transact;
+  console.log(
+    path,
+    bigString(await phash_),
+    name,
+    await transact_.insertResult,
+    '\n rawQueryResult:',
+    await transact_.rawQueryResult
+  );
+}
+
 export async function phashNow(imgFile: FilePath, index: number) {
   const thisImage = await fs.promises.readFile(imgFile.path);
-  const phash_: Promise<string> = phash(thisImage);
+  const phash_: P<string> = phash(thisImage);
   return { phash_, index, ...imgFile };
 }
 
-// const currentMs = Date.now() - timeMS;
-//   count.totalCount++;
-//   count.totalTime += currentMs;
-//   timeMS = Date.now();
-// index;
-// const currentAvg = count.totalTime / count.totalCount;
-// currentAvg;
+export function bigString(str: S): S {
+  if (str.length === 64) return BigInt(`0b${str}`).toString();
 
-// const diff = `${Math.round(currentMs - currentAvg)}`.padStart(5);
-// `${currentMs}ms (${Math.round(currentAvg)} ms)`,
-// diff
-// console.log(phash_, imgFile.name.toLowerCase().padEnd(35), index);
-// }
-main2; //();
-function main2() {
-  const img1 = fs.readFileSync(
-    '/home/luxcium/WSD_250/images/full-14564-for-ian/jpgs/5d65f45e97830.jpeg'
+  throw new Error(
+    'Something bad happened. because the string was not 64 bit long'
   );
-  const img2 = fs.readFileSync(
-    '/home/luxcium/WSD_250/images/full-14564-for-ian/jpgs/5d309a40f2014.jpeg'
-  );
-  const img3 = fs.readFileSync(
-    '/home/luxcium/.local/src/parallel-mapping/scripts/assets/Lenna-sepia.jpg'
-  );
-  const img4 = fs.readFileSync(
-    '/home/luxcium/src/parallel-mapping/scripts/assets/xing.jpg'
-  );
-  // 1110011001111011100110011000110011110001011010100100111100100101
-  Promise.all([phash(img1), phash(img2), phash(img3), phash(img4)]).then(
-    ([hash1, hash2, hash3, hash4]) => {
-      // hash returned is 64 characters length string with 0 and 1 only
-      // assert(dist(hash1, hash2) < 5);
-      // assert(dist(hash2, hash3) < 5);
-      // assert(dist(hash3, hash1) < 5);
-      // assert(dist(hash3, hash4) < 5);
-      // (async () => console.log(await phash(img1)))();
-      (async () => console.log(hash1))();
-      (async () => console.log(hash2))();
-      (async () => console.log(hash4))();
-      (async () => console.log(distance(hash1, hash2)))();
-      (async () => console.log(distance(hash2, hash3)))();
-      (async () => console.log(distance(hash3, hash1)))();
-      (async () => console.log(distance(hash3, hash4)))();
-    }
-  );
-}
-
-export function distance(a: string, b: string) {
-  let count = 0;
-  for (let i = 0; i < a.length; i++) {
-    if (a[i] !== b[i]) {
-      count++;
-    }
-  }
-  return count;
 }

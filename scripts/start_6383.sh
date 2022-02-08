@@ -1,6 +1,6 @@
 #!/bin/sh
 source "${CORE_FUNCTIONS}/04000-shelltype.sh"
-/home/luxcium/.local/src/Redis-ImageScout/docker_run_redis
+/usr/src/Redis-ImageScout-back/docker_run_redis
 # isloginorinteractive ||  exit
 
 # Boost v1.67
