@@ -24,7 +24,7 @@ type FilePath = {
 type TX = P<{
   transact: P<{
     rawQueryResult: P<null | RedisCommandRawReply>;
-    insertResult: P<null | RedisCommandRawReply>;
+    addResult: P<null | RedisCommandRawReply>;
   }>;
   name: S;
   phash_: P<S>;
@@ -43,7 +43,7 @@ function isQueryResultItem(item: unknown): item is QueryResultItem {
   );
 }
 
-export type QueryResult = [path: S, id: number, radius: S][];
+export type QueryResult = QueryResultItem[];
 function isQueryResult(
   contender: unknown
 ): contender is Array<QueryResultItem> {
@@ -52,15 +52,13 @@ function isQueryResult(
 
 // const willR = void 'R';
 
-const queryPhash = (R: any) => async (k: S, phash_: P<S>) => {
+const queryPhash = async (R: any, k: S, phash_: P<S>) => {
   const P = bigString(await phash_);
   return R.sendCommand([QUERY, k, P, RADIUS]);
 };
 
-const addPhash =
-  (R: any) =>
-  async (k: S, p: P<S>, t: S): P<RedisCommandRawReply> =>
-    R.sendCommand([ADD, k, bigString(await p), t]);
+const addPhash = async (R: any, k: S, p: P<S>, t: S): P<RedisCommandRawReply> =>
+  R.sendCommand([ADD, k, bigString(await p), t]);
 
 export async function querryAndAdd(
   R: any,
@@ -69,32 +67,27 @@ export async function querryAndAdd(
   title: S
 ): P<{
   rawQueryResult: P<RedisCommandRawReply>;
-  insertResult: P<null> | P<null | RedisCommandRawReply>;
+  addResult: P<null> | P<null | RedisCommandRawReply>;
 }> {
-  const rawQueryResult: P<RedisCommandRawReply> = queryPhash(R)(k, phash_);
-  const awaitedQuery = await rawQueryResult;
-  if (awaitedQuery) {
-    if (isQueryResult(awaitedQuery)) {
-      if (awaitedQuery.length > 0) {
+  try {
+    const rawQueryResult: P<RedisCommandRawReply> = queryPhash(R, k, phash_);
+    const awaitedQuery = await rawQueryResult;
+    if (awaitedQuery) {
+      if (isQueryResult(awaitedQuery) && awaitedQuery.length > 0) {
         return {
-          insertResult: immediateZalgo(null),
+          addResult: immediateZalgo(null),
           rawQueryResult,
         };
       }
-      const insertResult: P<RedisCommandRawReply> = addPhash(R)(
-        k,
-        phash_,
-        title
-      );
-      return {
-        insertResult,
-        rawQueryResult,
-      };
     }
+  } catch (error) {
+    console.log(error);
   }
+
+  const addResult: P<RedisCommandRawReply> = addPhash(R, k, phash_, title);
   return {
-    insertResult: immediateZalgo(null),
-    rawQueryResult,
+    addResult,
+    rawQueryResult: immediateZalgo(null),
   };
 }
 
@@ -106,42 +99,51 @@ async function main(
   host = '0.0.0.0'
 ) {
   console.error('IN FUNCTION MAIN at:', __filename, '\n');
-
   const filesList = asyncDirListWithFileType(folder);
   const R = redisCreateClient({ port, dbNumber, host });
   await R.connect();
-  // function(k: S, phash_: P<string>, title: S): P<RedisCommandRawReply>
-
   const filesPathList = (await filesList)
     .filter(i => i.isFile)
     .map(f => ({ folder, path: `${folder}/${f.fileName}`, name: f.fileName }))
     .map(phashNow)
-    .map(async r => {
-      const awaited = await r;
+    .map(async r1 => {
+      const awaited = await r1;
       const { name, phash_, path, index, folder } = awaited;
-      // XXX: BROKEN
       const transact = querryAndAdd(R, `TEST:${folder}`, phash_, path);
       return { transact, name, phash_, path, index, folder };
     })
     .map(async tx => {
-      // XXX: BROKEN
-      // willLog(tx);
-      return tx;
+      const log: Promise<
+        | {
+            pHash: string;
+            name: string;
+            list: [path: string, id: number, radius: string][];
+          }
+        | (string | number)[]
+      > = willLog(tx);
+      const r = { log, tx };
+      return r;
     })
-    .map(async r => {
-      const awaited = await r;
-      const { transact, name, phash_, path, index } = awaited;
+    .map(async r2 => {
+      const awaited = await r2;
+
+      const { transact, name, phash_, path, index } = await awaited.tx;
       return {
         transact: {
-          insertResult: await (await transact).insertResult,
           rawQueryResult: await (await transact).rawQueryResult,
+          addResult: await (await transact).addResult,
         },
         name,
         phash_: await phash_,
         path,
         index,
         folder,
+        log: await awaited.log,
       };
+    })
+    .map(async r => {
+      console.log(await r);
+      return r;
     });
 
   const allfilesPathList = Promise.all(filesPathList);
@@ -152,24 +154,36 @@ async function main(
   });
 }
 
-export async function willLog(tx: TX) {
-  const awaited = await tx;
-  const { transact, name, phash_, path } = awaited;
+export async function willLog(tx: TX, log: boolean = false) {
+  const awaitedTx = await tx;
+  const { transact, name, phash_, path } = awaitedTx;
   const transact_ = await transact;
-  console.log(
-    path,
-    bigString(await phash_),
-    name,
-    await transact_.insertResult,
-    '\n rawQueryResult:',
-    await transact_.rawQueryResult
-  );
+  const addResult = await transact_.addResult;
+  const rawQueryResult = await transact_.rawQueryResult;
+  const pHash = bigString(await phash_);
+  if (addResult != null) {
+    const list: [path: S, id: number, radius: S][] = [
+      [path, addResult as number, '-2'],
+    ];
+
+    const result = { pHash, name, list };
+    if (log) console.log(result);
+    return result;
+  }
+  if (isQueryResult(rawQueryResult)) {
+    rawQueryResult.unshift([path, 0, '-1']);
+    const list: [path: S, id: number, radius: S][] = rawQueryResult;
+    const result = { pHash, name, list };
+    if (log) console.log(result);
+    return result;
+  }
+  return [path, 0, 'NaN'];
 }
 
 export async function phashNow(imgFile: FilePath, index: number) {
   const thisImage = await fs.promises.readFile(imgFile.path);
   const phash_: P<string> = phash(thisImage);
-  return { phash_, index, ...imgFile };
+  return { phash_, index: index + 1, ...imgFile };
 }
 
 export function bigString(str: S): S {
