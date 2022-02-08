@@ -62,34 +62,6 @@ const addPhash =
   async (k: S, p: P<S>, t: S): P<RedisCommandRawReply> =>
     R.sendCommand([ADD, k, bigString(await p), t]);
 
-// export async function addAndQuerry(
-//   R: any,
-//   k: S,
-//   phash_: P<string>,
-//   title: S
-// ) {
-//   const insertResult: P<RedisCommandRawReply> = addPhash(R)(
-//     k,
-//     phash_,
-//     title
-//   );
-//   const rawQueryResult: P<RedisCommandRawReply> = queryPhash(R)(
-//     k,
-//     phash_,
-//     insertResult
-//   );
-//   const awaitedQuery = await rawQueryResult;
-//   if (awaitedQuery) {
-//     const strQuery = String(awaitedQuery);
-//     strQuery;
-//     console.log('\n', strQuery, '\n', awaitedQuery, '\n');
-//   }
-//   return { insertResult, rawQueryResult };
-// }
-
-// P<RedisCommandRawReply | null>
-// type QueryResult__ = [string, number, string][];
-
 export async function querryAndAdd(
   R: any,
   k: S,
