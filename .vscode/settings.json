@@ -21,7 +21,7 @@
   "editor.codeActionsOnSave": [
     "source.addMissingImports",
     "source.organizeImports",
-    "source.fixAll",
+    "source.fixAll"
     // "source.eslint",
   ],
   /*
@@ -217,7 +217,7 @@
     {
       "tag": "SECTION",
       "color": "#4EF",
-      "strikethrough": false,
+      "strikethrough": false
     },
     /*
 ~ #F36F
@@ -842,7 +842,8 @@
       "strikethrough": false,
       "backgroundColor": "transparent"
     },
-    { // ¬
+    {
+      // ¬
       "tag": "¬",
       "color": "#FF0B",
       "strikethrough": false,
@@ -927,8 +928,7 @@
       "color": "#E22",
       "strikethrough": false,
       "backgroundColor": "transparent"
-    },
-  ],
-  "jest.jestCommandLine": "npx jest",
+    }
+  ]
   // #endregion: BETTER COMMENTS                                                !
 }
