@@ -1,5 +1,8 @@
 {
   "extends": "../tsconfig.json",
+  "include": [
+    "."
+  ],
   "exclude": [],
   "compilerOptions": {
     // "rootDir": ".",
@@ -98,9 +101,6 @@
     /*                */
     /* Extra settings */
   },
-  "include": [
-    "."
-  ]
 }
 /* Visit https://aka.ms/tsconfig.json to read more about this file */
 /* Projects */
