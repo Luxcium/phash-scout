@@ -929,6 +929,9 @@
       "strikethrough": false,
       "backgroundColor": "transparent"
     }
-  ]
+  ],
+  "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  }
   // #endregion: BETTER COMMENTS                                                !
 }
