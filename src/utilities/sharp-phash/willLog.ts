@@ -5,15 +5,16 @@ export async function willLog(
   tx: TX,
   log: boolean = false
 ): Promise<{
-  pHash: string;
+  pHash: string | null;
   fileName: string;
   list: [fullPath: string, id: number, radius: string][];
 }> {
   const awaitedTx = await tx;
   const { transact, fileName, phash_, fullPath } = awaitedTx;
   const transact_ = await transact;
-  const addResult = await transact_.addResult;
-  const rawQueryResult = await transact_.rawQueryResult;
+
+  const addResult = (await transact_?.addResult) || null;
+  const rawQueryResult = (await transact_?.rawQueryResult) || null;
   const pHash = phash_;
   if (addResult != null) {
     const list: [path: S, id: number, radius: S][] = [

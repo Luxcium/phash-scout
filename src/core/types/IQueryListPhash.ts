@@ -8,11 +8,13 @@ export type P<T> = Promise<T>;
 export type S = string;
 export type N = number;
 export type TX = P<{
-  transact: P<{
-    rawQueryResult: P<null | RedisCommandRawReply>;
-    addResult: P<null | RedisCommandRawReply>;
-  }>;
-  phash_: S;
+  transact:
+    | P<null>
+    | P<{
+        rawQueryResult: P<null | RedisCommandRawReply>;
+        addResult: P<null | RedisCommandRawReply>;
+      }>;
+  phash_: S | null;
   absolutePathToFile: S;
   fileName: S;
   fullPath: S;

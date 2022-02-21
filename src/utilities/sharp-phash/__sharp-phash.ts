@@ -1,6 +1,6 @@
 import { DirentWithFileType } from '../../core/types';
 import { S } from '../../core/types/IQueryListPhash';
-import { filter, getCurrentPath } from '../../core/utils';
+import { filter, getCurrentPath, immediateZalgo } from '../../core/utils';
 import { asyncDirListWithFileType } from '../files';
 import { redisCreateClient } from '../redis/tools';
 import { CURRENT_PATH } from './constants';
@@ -31,14 +31,7 @@ async function main(
       const awaited = await r1;
       const { fileName, phash_, fullPath, index, absolutePathToFile, type } =
         awaited;
-      const transact = querryAndAdd(
-        R,
-        `TEST:${absolutePathToFile}`,
-        phash_,
-        fullPath
-      );
-      return {
-        transact,
+      const result = {
         fileName,
         phash_,
         fullPath,
@@ -46,10 +39,23 @@ async function main(
         absolutePathToFile,
         type,
       };
+
+      if (phash_ != null) {
+        const transact = querryAndAdd(
+          R,
+          `TEST:${absolutePathToFile}`,
+          phash_,
+          fullPath
+        );
+
+        return { transact, ...result };
+      }
+
+      return { transact: immediateZalgo(null), ...result };
     })
     .map(async tx => {
       const log: Promise<{
-        pHash: string;
+        pHash: string | null;
         fileName: string;
         list: [fullPath: string, id: number, radius: string][];
       }> = willLog(tx);
@@ -62,8 +68,8 @@ async function main(
       const { transact, fileName, phash_, fullPath, index } = await awaited.tx;
       return {
         transact: {
-          rawQueryResult: await (await transact).rawQueryResult,
-          addResult: await (await transact).addResult,
+          rawQueryResult: (await (await transact)?.rawQueryResult) || null,
+          addResult: (await (await transact)?.addResult) || null,
         },
         fileName,
         phash_,
