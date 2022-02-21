@@ -9,7 +9,7 @@ release
 !.*
 !**/*
 !**/.*
-
+!typings
 ## FOLDERS and FOLDER infos files
 node_modules/
 web_modules/
