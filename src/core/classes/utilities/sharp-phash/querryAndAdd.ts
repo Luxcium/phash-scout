@@ -1,5 +1,5 @@
 import { RedisCommandRawReply } from '@node-redis/client/dist/lib/commands';
-import { immediateZalgo } from '../../utils';
+import { immediateZalgo } from '../../../utils';
 import { addPhash } from './addPhash';
 import { P, S } from './IQueryListPhash';
 import { isQueryResult } from './isQueryResult';

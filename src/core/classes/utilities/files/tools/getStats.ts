@@ -1,7 +1,7 @@
 import { statSync } from 'fs';
 import { Stats } from 'fs-extra';
 import { stat } from 'fs/promises';
-import { immediateZalgo } from '../../../utils';
+import { immediateZalgo } from '../../../../utils';
 
 export function getStats(pathStr: string) {
   let stats: null | Promise<Stats> = null;

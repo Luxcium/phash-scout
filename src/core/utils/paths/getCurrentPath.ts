@@ -8,9 +8,9 @@ import {
   SocketPath,
   SymbolicLinkPath,
   UnknownTypePath,
-} from '../../../types/CurrentPath';
-import { DirentWithFileType } from '../../../types/DirentWithFileType';
-import { FileType } from '../../../types/Enums/FileTypeEnum';
+} from '../../types/CurrentPath';
+import { DirentWithFileType } from '../../types/DirentWithFileType';
+import { FileType } from '../../types/Enums/FileTypeEnum';
 
 export function getCurrentPath(f: DirentWithFileType, folderPath: string) {
   const fullPath: CurrentPath = {

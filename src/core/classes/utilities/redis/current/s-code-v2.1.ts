@@ -1,8 +1,8 @@
 import { readdir } from 'fs/promises';
 import { BASE_SRC_PATH1 } from '../../../../../constants/devPaths';
 import type { RedisClientType } from '../../../../types';
+import { isArray } from '../../../../utils/isArray';
 import { BoxedGenerator } from '../../../BoxedGenerator';
-import { isArray } from '../../../utils/isArray';
 import { redisCreateClient } from '../tools';
 import { getFileInfos } from './getFileInfos';
 import { getPathsObj } from './getPathsObj';

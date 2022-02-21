@@ -1,4 +1,4 @@
-import { DirentWithFileType } from '../../../types';
+import { DirentWithFileType } from '../../types';
 
 export function filterDirs(
   element: DirentWithFileType | DirentWithFileType[]

@@ -1,4 +1,4 @@
-import { isAllArrays, isArray } from '../utils';
+import { isAllArrays, isArray } from '../../utils';
 import { getDevFilename } from './getDevFileName';
 import { getSign } from './getSign';
 import { isDevEnv } from './isDevEnv';

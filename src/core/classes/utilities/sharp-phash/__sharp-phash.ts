@@ -1,4 +1,4 @@
-import { filter } from '../../utils';
+import { filter } from '../../../utils';
 import { asyncDirListWithFileType } from '../files';
 import { redisCreateClient } from '../redis/tools';
 import { CURRENT_PATH } from './constants';

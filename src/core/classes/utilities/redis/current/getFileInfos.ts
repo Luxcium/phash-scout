@@ -1,10 +1,9 @@
 import { stat } from 'fs/promises';
 import path from 'path';
-import { immediateZalgo } from '../../../utils';
+import { immediateZalgo } from '../../../../utils';
 import { getKeywords } from './getKeywords.1';
 import { getxDir } from './getxDir';
 import { statsReducer } from './statsReducer';
-
 
 export async function getFileInfos(o: any) {
   const keywords = getKeywords(o.coll.name);

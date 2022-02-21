@@ -1,4 +1,4 @@
-import { DirentWithFileType } from '../../../types';
+import { DirentWithFileType } from '../../types';
 
 // const = require('sharp-phash');
 export function filterFiles(
