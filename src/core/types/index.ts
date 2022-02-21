@@ -1,5 +1,17 @@
 export type { CallbackfnT, CallbackfnU } from './CallbackfnT';
+export type {
+  BlockDevicePath,
+  CharacterDevicePath,
+  CurrentPath,
+  DirectoryPath,
+  FIFOPath,
+  FilePath,
+  SocketPath,
+  SymbolicLinkPath,
+  UnknownTypePath,
+} from './CurrentPath';
 export type { DirentWithFileType } from './DirentWithFileType';
+export type { FileType } from './Enums/FileTypeEnum';
 export type { IApply } from './IApply';
 export type { IChain } from './IChain';
 export type { IMap } from './IMap';

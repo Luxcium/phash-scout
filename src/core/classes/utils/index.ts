@@ -23,6 +23,7 @@ export {
   filterSockets,
   filterSymbolicLinks,
 } from './filter';
+export { getCurrentPath } from './paths/getCurrentPath';
 export {
   cpuCount,
   immediateZalgo,
