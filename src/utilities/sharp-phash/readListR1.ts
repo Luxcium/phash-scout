@@ -1,5 +1,5 @@
+import { IQueryListPhash } from '../../core/types/IQueryListPhash';
 import { TARGET } from './constants';
-import { IQueryListPhash } from './IQueryListPhash';
 
 export async function readListR1(
   listing: IQueryListPhash,

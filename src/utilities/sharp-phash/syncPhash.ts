@@ -1,5 +1,5 @@
+import { S } from '../../core/types/IQueryListPhash';
 import { SYNC } from './constants';
-import { S } from './IQueryListPhash';
 
 export async function syncPhash(R: any, k: S, failSilently: boolean = true) {
   try {

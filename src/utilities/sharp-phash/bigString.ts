@@ -1,4 +1,4 @@
-import { S } from './IQueryListPhash';
+import { S } from '../../core/types/IQueryListPhash';
 
 export function bigString(str: S): S {
   const strSplit = str.split('');

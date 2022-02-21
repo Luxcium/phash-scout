@@ -2,8 +2,8 @@ import type { FileType } from './Enums/FileTypeEnum';
 
 export type CurrentPath = {
   fileName: string;
-  absolutePathTo: string;
-  fullPathTo: string;
+  absolutePathToFile: string;
+  fullPath: string;
   type: FileType;
 };
 

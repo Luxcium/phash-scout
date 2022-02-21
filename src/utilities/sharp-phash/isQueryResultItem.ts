@@ -1,4 +1,4 @@
-import type { S } from './IQueryListPhash';
+import type { S } from '../../core/types/IQueryListPhash';
 
 export type QueryResultItem = [path: S, id: number, radius: S];
 export function isQueryResultItem(item: unknown): item is QueryResultItem {

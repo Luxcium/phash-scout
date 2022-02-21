@@ -1,9 +1,9 @@
 import { DirentWithFileType } from '../../core/types';
+import { S } from '../../core/types/IQueryListPhash';
 import { filter, getCurrentPath } from '../../core/utils';
 import { asyncDirListWithFileType } from '../files';
 import { redisCreateClient } from '../redis/tools';
 import { CURRENT_PATH } from './constants';
-import { S } from './IQueryListPhash';
 import { phashNow } from './phashNow';
 import { querryAndAdd } from './querryAndAdd';
 import { readListR1 } from './readListR1';
@@ -29,15 +29,29 @@ async function main(
     .map(phashNow)
     .map(async r1 => {
       const awaited = await r1;
-      const { name, phash_, path, index, folder } = awaited;
-      const transact = querryAndAdd(R, `TEST:${folder}`, phash_, path);
-      return { transact, name, phash_, path, index, folder };
+      const { fileName, phash_, fullPath, index, absolutePathToFile, type } =
+        awaited;
+      const transact = querryAndAdd(
+        R,
+        `TEST:${absolutePathToFile}`,
+        phash_,
+        fullPath
+      );
+      return {
+        transact,
+        fileName,
+        phash_,
+        fullPath,
+        index,
+        absolutePathToFile,
+        type,
+      };
     })
     .map(async tx => {
       const log: Promise<{
         pHash: string;
-        name: string;
-        list: [path: string, id: number, radius: string][];
+        fileName: string;
+        list: [fullPath: string, id: number, radius: string][];
       }> = willLog(tx);
       const r = { log, tx };
       return r;
@@ -45,15 +59,15 @@ async function main(
     .map(async r2 => {
       const awaited = await r2;
 
-      const { transact, name, phash_, path, index } = await awaited.tx;
+      const { transact, fileName, phash_, fullPath, index } = await awaited.tx;
       return {
         transact: {
           rawQueryResult: await (await transact).rawQueryResult,
           addResult: await (await transact).addResult,
         },
-        name,
+        fileName,
         phash_,
-        path,
+        fullPath,
         index,
         folder,
         listing: await awaited.log,
@@ -62,7 +76,7 @@ async function main(
 
     .map(async r => {
       const awaitedR = await r;
-      readListR1(awaitedR.listing, awaitedR.path, awaitedR.index);
+      readListR1(awaitedR.listing, awaitedR.fullPath, awaitedR.index);
       return r;
     });
 

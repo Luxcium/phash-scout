@@ -12,8 +12,10 @@ export type TX = P<{
     rawQueryResult: P<null | RedisCommandRawReply>;
     addResult: P<null | RedisCommandRawReply>;
   }>;
-  name: S;
   phash_: S;
-  path: S;
-  index: number;
+  absolutePathToFile: S;
+  fileName: S;
+  fullPath: S;
+  type: S;
+  index: N;
 }>;
