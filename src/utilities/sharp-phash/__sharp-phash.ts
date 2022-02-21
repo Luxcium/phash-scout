@@ -24,8 +24,8 @@ async function main(
   const R = redisCreateClient({ port, dbNumber, host });
   await R.connect();
   const filesPathList = (await filesList)
-    .filter(filter.fileType.file)
     .map(currentPath(folder))
+    .filter(filter.fileType.file)
     .map(phashNow)
     .map(async r1 => {
       const awaited = await r1;
