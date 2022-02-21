@@ -6,7 +6,7 @@
 /*  See https://github.com/Luxcium/parallel-mapping/blob/cbf7e/LICENSE*/
 /*--------------------------------------------------------------------*/
 
-import { nullOrDefined } from '../../classes/utilities/nullOrDefined';
+import { nullOrDefined } from '../../../utilities/nullOrDefined';
 import { immediateZalgo } from './immediateZalgo';
 import { nextTickZalgo } from './nextTickZalgo';
 import { timeoutZalgo } from './timeoutZalgo';

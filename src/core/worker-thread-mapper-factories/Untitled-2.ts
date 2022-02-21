@@ -9,7 +9,7 @@ import {
   workerData,
 } from 'worker_threads';
 import { cpuCount } from '..';
-import { getDevFilename } from '../classes/utilities';
+import { getDevFilename } from '../../utilities';
 
 export function getAsyncWorker<P>(
   script: string,

@@ -1,4 +1,13 @@
 import {
+  getSign,
+  nullOrDefined,
+  splitedHead,
+  splitedTail,
+  splitHead,
+  splitTail,
+  utils,
+} from '../../utilities';
+import {
   cpuCount,
   immediateZalgo,
   isAllArrays,
@@ -11,15 +20,6 @@ import {
   zalgo2,
   zalgo3,
 } from '../utils';
-import {
-  getSign,
-  nullOrDefined,
-  splitedHead,
-  splitedTail,
-  splitHead,
-  splitTail,
-  utils,
-} from './utilities';
 export type {
   IApply,
   IChain,
