@@ -1,7 +1,6 @@
 import { filterBlockDevices } from './filterBlockDevices';
 import { filterCharacterDevices } from './filterCharacterDevices';
-import { filterDirectorys } from './filterDirectorys';
-import { filterDirs } from './filterDirs';
+import { filterDirectories } from './filterDirectories';
 import { filterFIFOs } from './filterFIFOs';
 import { filterFiles } from './filterFiles';
 import { filterSockets } from './filterSockets';
@@ -11,8 +10,7 @@ const filter = {
   fileType: {
     blockDevice: filterBlockDevices,
     characterDevice: filterCharacterDevices,
-    directory: filterDirectorys,
-    dir: filterDirs,
+    directory: filterDirectories,
     fIFO: filterFIFOs,
     file: filterFiles,
     socket: filterSockets,
@@ -24,8 +22,7 @@ export {
   filter,
   filterBlockDevices,
   filterCharacterDevices,
-  filterDirectorys,
-  filterDirs,
+  filterDirectories,
   filterFIFOs,
   filterFiles,
   filterSockets,
