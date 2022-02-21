@@ -10,15 +10,3 @@ export function filterFiles(
 
   return element.isFile;
 }
-
-/*
-export {filterBlockDevices} from './filterBlockDevices';
-export {filterCharacterDevices} from './filterCharacterDevices';
-export {filterDirectorys} from './filterDirectorys';
-export {filterDirs} from './filterDirs';
-export {filterFIFOs} from './filterFIFOs';
-export {filterFiles} from './filterFiles';
-export {filterSockets} from './filterSockets';
-export {filterSymbolicLinks} from './filterSymbolicLinks';
-
- */

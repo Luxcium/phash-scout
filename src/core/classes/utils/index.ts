@@ -13,6 +13,17 @@ import {
 } from './restrainingZalgo';
 
 export {
+  filter,
+  filterBlockDevices,
+  filterCharacterDevices,
+  filterDirectorys,
+  filterDirs,
+  filterFIFOs,
+  filterFiles,
+  filterSockets,
+  filterSymbolicLinks,
+} from './filter';
+export {
   cpuCount,
   immediateZalgo,
   isAllArrays,

@@ -1,4 +1,4 @@
-import { filterFiles } from '../../utils/filter/filterFiles';
+import { filter } from '../../utils';
 import { asyncDirListWithFileType } from '../files';
 import { redisCreateClient } from '../redis/tools';
 import { CURRENT_PATH } from './constants';
@@ -18,7 +18,7 @@ async function main(
   const R = redisCreateClient({ port, dbNumber, host });
   await R.connect();
   const filesPathList = (await filesList)
-    .filter(filterFiles)
+    .filter(filter.fileType.file)
     .map(f => ({ folder, path: `${folder}/${f.fileName}`, name: f.fileName }))
     .map(phashNow)
     .map(async r1 => {
