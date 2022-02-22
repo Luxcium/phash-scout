@@ -21,6 +21,7 @@ async function main(
 ) {
   console.error('IN FUNCTION MAIN at:', __filename, '\n');
   const filesList = asyncDirListWithFileType(folder);
+  /** REDIS CLIENT */
   const R = redisCreateClient({ port, dbNumber, host });
   await R.connect();
   const filesPathList = (await filesList)
@@ -28,30 +29,28 @@ async function main(
     .filter(filter.fileType.file)
     .map(phashNow)
     .map(async r1 => {
-      const awaited = await r1;
       const { fileName, phash_, fullPath, index, absolutePathToFile, type } =
-        awaited;
+        await r1;
       const result = {
         fileName,
-        phash_,
         fullPath,
-        index,
         absolutePathToFile,
         type,
+        phash_,
+        index,
       };
 
-      if (phash_ != null) {
-        const transact = querryAndAdd(
-          R,
-          `TEST:${absolutePathToFile}`,
-          phash_,
-          fullPath
-        );
-
-        return { transact, ...result };
+      if (phash_ == null) {
+        return { transact: immediateZalgo(null), ...result };
       }
+      const transact = querryAndAdd(
+        R,
+        `TEST:${absolutePathToFile}`,
+        phash_,
+        fullPath
+      );
 
-      return { transact: immediateZalgo(null), ...result };
+      return { transact, ...result };
     })
     .map(async tx => {
       const log: Promise<{
