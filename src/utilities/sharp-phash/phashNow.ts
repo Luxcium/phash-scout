@@ -1,18 +1,22 @@
 import fs from 'fs';
 import { CurrentPath } from '../../core/types';
+import { immediateZalgo } from '../../utils';
 import { bigString } from './bigString';
 const phash = require('sharp-phash');
 
-export async function phashNow(imgFile: CurrentPath, index: number) {
-  const thisImage = await fs.promises.readFile(imgFile.fullPath);
+export function phashNow(imgFile: CurrentPath, index: number) {
+  const thisImage = fs.promises.readFile(imgFile.fullPath);
   try {
-    const pHash = phash(thisImage) as Promise<string>;
-    const phash_: string = bigString(await pHash);
-    return { phash_, index: index + 1, ...imgFile };
+    const pHash = async () => {
+      return bigString(phash(await thisImage));
+    };
+    return { willPhash_: pHash, index: index + 1, ...imgFile };
   } catch (r) {
     console.error(r, 'Error with file at:', imgFile);
-    return { phash_: null, index: index + 1, ...imgFile };
+    return {
+      willPhash_: async () => immediateZalgo(null),
+      index: index + 1,
+      ...imgFile,
+    };
   }
-  // const catched = pHash.catch(r =>
-  // );
 }
