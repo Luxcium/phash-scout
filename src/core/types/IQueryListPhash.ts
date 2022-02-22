@@ -15,7 +15,7 @@ export type TX = P<{
         addResult: P<null | RedisCommandRawReply>;
       }>;
   phash_: S | null;
-  absPathToFile: S;
+  pathToFile: S;
   fileName: S;
   fullPath: S;
   type: S;

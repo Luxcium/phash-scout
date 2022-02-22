@@ -14,7 +14,7 @@ import { FileType } from '../../types/Enums/FileTypeEnum';
 
 export function getCurrentPath(f: DirentWithFileType, folderPath: string) {
   const fullPath: CurrentPath = {
-    absPathToFile: folderPath,
+    pathToFile: folderPath,
     fullPath: `${folderPath}/${f.fileName}`,
     fileName: f.fileName,
     type: FileType.Unknown,

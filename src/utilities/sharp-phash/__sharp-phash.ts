@@ -29,12 +29,11 @@ async function main(
     .filter(filter.fileType.file)
     .map(phashNow)
     .map(async r1 => {
-      const { fileName, phash_, fullPath, index, absPathToFile, type } =
-        await r1;
+      const { fileName, phash_, fullPath, index, pathToFile, type } = await r1;
       const result = {
         fileName,
         fullPath,
-        absPathToFile,
+        pathToFile,
         type,
         phash_,
         index,
@@ -43,12 +42,7 @@ async function main(
       if (phash_ == null) {
         return { transact: immediateZalgo(null), ...result };
       }
-      const transact = querryAndAdd(
-        R,
-        `TEST:${absPathToFile}`,
-        phash_,
-        fullPath
-      );
+      const transact = querryAndAdd(R, `TEST:${pathToFile}`, phash_, fullPath);
 
       return { transact, ...result };
     })

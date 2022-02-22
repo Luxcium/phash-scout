@@ -82,7 +82,7 @@
   ―― PATH-INTELLISENSE
   */
   "path-intellisense.extensionOnImport": false,
-  "path-intellisense.absPathToFileWorkspace": false,
+  "path-intellisense.pathToFileWorkspace": false,
   "path-intellisense.autoSlashAfterDirectory": false,
   "path-intellisense.showHiddenFiles": true,
   // #endregion: PATH INTELLISENSE                                              !
