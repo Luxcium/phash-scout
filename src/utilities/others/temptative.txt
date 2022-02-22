@@ -1,0 +1,41 @@
+// export function asyncOrNot(fn: any) {
+export function asyncOrNot_<T, R>(fn: FnAtoB<R>, item: T): R;
+export function asyncOrNot_<T, R>(fn: FnAtoB<R>, item: Promise<T>): Promise<R>;
+export function asyncOrNot_<T, R>(
+  fn: FnAtoB<R>,
+  item: T | Promise<T>
+): R | Promise<R> {
+  if (typeof item === 'object' && item instanceof Promise) {
+    return (async () => fn(await item))();
+  }
+  return fn(item);
+}
+// }
+
+export type FnAtoB<ReturnType> = (value: any) => ReturnType;
+export function fnItemToResult<R>(fn: FnAtoB<R>) {
+  return function itemToResult<T>(item: T) {
+    return fn(item);
+  };
+}
+
+const strToLen = fnItemToResult((i: string) => i.length);
+strToLen('');
+
+/*
+export function asyncOrNot<T, R>(item: T | Promise<T>): R | Promise<R> {
+  return item as any as R;
+}
+ */
+
+export function nameIt<T>(item: Promise<T>): Promise<T>;
+export function nameIt<T>(item: T): T;
+export function nameIt<T>(item: T | Promise<T>): T | Promise<T> {
+  return function fnItemToResult_<R>(fn: FnAtoB<R>) {
+    return fn(item);
+  };
+}
+
+export function fnItemToResult_<R>(fn: FnAtoB<R>) {
+  return fn;
+}
