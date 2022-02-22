@@ -1,18 +1,18 @@
 import { DirentWithFileType } from '../../core/types';
 import { S } from '../../core/types/IQueryListPhash';
 import { filter, getCurrentPath, immediateZalgo } from '../../core/utils';
-import { asyncDirListWithFileType } from '../files';
+import { dirListWithFileType } from '../files/tools/asyncDirListWithFileType';
 import { redisCreateClient } from '../redis/tools';
 import { CURRENT_PATH } from './constants';
 import { phashNow } from './phashNow';
 import { querryAndAdd } from './querryAndAdd';
 import { readListR1 } from './readListR1';
 import { willLog } from './willLog';
-main().then().catch(console.error);
-// f => ({ folder, path: `${folder}/${f.fileName}`, name: f.fileName
-// (parameter) f: DirentWithFileType
+
 const currentPath = (folder: S) => (f: DirentWithFileType) =>
   getCurrentPath(f, folder);
+
+main().then().catch(console.error);
 async function main(
   folder = CURRENT_PATH,
   port = 6383,
@@ -25,7 +25,7 @@ async function main(
   const R = redisCreateClient({ port, dbNumber, host });
   await R.connect();
 
-  const step0 = await asyncDirListWithFileType(folder);
+  const step0 = await dirListWithFileType(immediateZalgo(folder));
   const step1 = step0.map(currentPath(folder));
   const step2 = step1.filter(filter.fileType.file);
   const step3 = step2.map(phashNow);

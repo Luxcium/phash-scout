@@ -14,3 +14,20 @@ export function dirListWithFileTypeSync(pathSrc: string): DirentWithFileType[] {
   const rawDirList = getRawDirListSync(pathSrc);
   return getDirListFileTypes(rawDirList);
 }
+
+export function dirListWithFileType(pathSrc: string): DirentWithFileType[];
+export function dirListWithFileType(
+  pathSrc: Promise<string>
+): Promise<DirentWithFileType[]>;
+export function dirListWithFileType(
+  pathSrc: string | Promise<string>
+): DirentWithFileType[] | Promise<DirentWithFileType[]> {
+  if (
+    typeof pathSrc !== 'string' &&
+    typeof pathSrc === 'object' &&
+    pathSrc instanceof Promise
+  ) {
+    return (async () => asyncDirListWithFileType(await pathSrc))();
+  }
+  return dirListWithFileTypeSync(pathSrc);
+}
