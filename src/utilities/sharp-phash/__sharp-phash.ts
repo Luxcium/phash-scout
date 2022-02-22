@@ -29,12 +29,12 @@ async function main(
     .filter(filter.fileType.file)
     .map(phashNow)
     .map(async r1 => {
-      const { fileName, phash_, fullPath, index, absolutePathToFile, type } =
+      const { fileName, phash_, fullPath, index, absPathToFile, type } =
         await r1;
       const result = {
         fileName,
         fullPath,
-        absolutePathToFile,
+        absPathToFile,
         type,
         phash_,
         index,
@@ -45,7 +45,7 @@ async function main(
       }
       const transact = querryAndAdd(
         R,
-        `TEST:${absolutePathToFile}`,
+        `TEST:${absPathToFile}`,
         phash_,
         fullPath
       );
