@@ -2,6 +2,7 @@ import { RedisCommandRawReply } from '@node-redis/client/dist/lib/commands';
 import { S } from '../../core/types/IQueryListPhash';
 import { immediateZalgo } from '../../core/utils';
 import { addPhash } from './addPhash';
+import { RADIUS } from './constants';
 import { isQueryResult } from './isQueryResult';
 import { queryPhash } from './queryPhash';
 import { syncPhash } from './syncPhash';
@@ -10,7 +11,8 @@ export async function querryAndAdd(
   R: any,
   k: S,
   phash_: S,
-  title: S
+  title: S,
+  radius: string = RADIUS
 ): Promise<{
   rawQueryResult: Promise<RedisCommandRawReply>;
   addResult: Promise<null | RedisCommandRawReply>;
@@ -21,7 +23,7 @@ export async function querryAndAdd(
       R,
       k,
       phash_,
-      '3'
+      radius
     );
     const awaitedQuery = await rawQueryResult;
     if (awaitedQuery) {
@@ -33,7 +35,7 @@ export async function querryAndAdd(
       }
     }
   } catch (error) {
-    console.error(error);
+    console.error('Not yet similar have been indexed', title);
   }
   const addResult: Promise<RedisCommandRawReply> = addPhash(
     R,

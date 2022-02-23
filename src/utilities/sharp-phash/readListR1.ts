@@ -10,12 +10,15 @@ export async function readListRx(
   const queryList = listing.list;
   const step2 = queryList.map(([path, , radius]) => {
     const result = parseInt(radius) === parseInt(radius_) ? path : null;
-    if (path_ !== path) {
-      if (result) console.log(` mv '${result}' '${TARGET}' #`, index);
+
+    if (result == null || typeof result !== 'string') {
       return [result];
     }
-    if (result) console.log('#', 'mv', result, TARGET, '#', index);
-
+    if (path_ !== path) {
+      console.log(` mv '${result}' '${TARGET}' #`, index);
+      return [result];
+    }
+    console.log('#', ` mv '${result}' '${TARGET}' #`, index);
     return [result];
   });
   const lastStep = step2;
