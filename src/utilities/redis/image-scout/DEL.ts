@@ -14,9 +14,11 @@ IMGSCOUT.DEL key id
 key: string ,hashvalue: string ,title: string
 key ,hashvalue ,title
 */
-export function transformArguments(key: string, id: number): Array<string | number> {
+export function transformArguments(
+  key: string,
+  id: number
+): Array<string | number> {
   return ['GRAPH.DEL', key, id];
 }
-
 
 export declare function transformReply(): 'OK';

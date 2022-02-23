@@ -1,8 +1,8 @@
-'IMGSCOUT.ADD'
-'IMGSCOUT.SYNC'
-'IMGSCOUT.QUERY'
-'IMGSCOUT.LOOKUP'
-'IMGSCOUT.SIZE'
+'IMGSCOUT.ADD';
+'IMGSCOUT.SYNC';
+'IMGSCOUT.QUERY';
+'IMGSCOUT.LOOKUP';
+'IMGSCOUT.SIZE';
 'IMGSCOUT.DEL';
 /*
 IMGSCOUT.ADD key hashvalue title [id]
@@ -14,10 +14,8 @@ IMGSCOUT.DEL key id
 key: string ,hashvalue: string ,title: string
 key ,hashvalue ,title
 */
-export function transformArguments(key: string  ): Array<string> {
+export function transformArguments(key: string): Array<string> {
   return ['GRAPH.SYNC', key];
-
 }
-
 
 export declare function transformReply(): 'OK';

@@ -14,7 +14,12 @@ IMGSCOUT.DEL key id
 key: string ,hashvalue: string ,title: string
 key ,hashvalue ,title
 */
-export function transformArguments(key: string, hashvalue: string, title: string, id?: number): Array<string | number> {
+export function transformArguments(
+  key: string,
+  hashvalue: string,
+  title: string,
+  id?: number
+): Array<string | number> {
   const args: (string | number)[] = ['GRAPH.ADD', key, hashvalue, title];
 
   if (id != null) {
@@ -23,6 +28,5 @@ export function transformArguments(key: string, hashvalue: string, title: string
 
   return args;
 }
-
 
 export declare function transformReply(): number;

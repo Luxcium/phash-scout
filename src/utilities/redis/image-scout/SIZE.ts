@@ -15,8 +15,7 @@ key: string ,hashvalue: string ,title: string
 key ,hashvalue ,title
 */
 export function transformArguments(key: string): Array<string> {
-  return ['GRAPH.SIZE', key,];
+  return ['GRAPH.SIZE', key];
 }
-
 
 export declare function transformReply(): number;

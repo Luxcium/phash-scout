@@ -24,5 +24,3 @@ export function workerFactory<T, R>(
   intermediateItems = [mainWorker, threadWorker];
   return intermediateItems;
 }
-
-

@@ -14,9 +14,12 @@ IMGSCOUT.DEL key id
 key: string ,hashvalue: string ,title: string
 key ,hashvalue ,title
 */
-export function transformArguments(key: string, targetHash: string, radius: number): Array<string | number> {
+export function transformArguments(
+  key: string,
+  targetHash: string,
+  radius: number
+): Array<string | number> {
   return ['GRAPH.QUERY', key, targetHash, radius];
 }
-
 
 export declare function transformReply(): number;

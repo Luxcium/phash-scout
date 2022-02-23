@@ -1,8 +1,6 @@
 {
   "extends": "../tsconfig.json",
-  "include": [
-    "."
-  ],
+  "include": ["."],
   "exclude": [],
   "compilerOptions": {
     // "rootDir": ".",
@@ -62,15 +60,9 @@
     "assumeChangesOnlyAffectDirectDependencies": false,
     "generateCpuProfile": "../performance/.cpuprofile",
     /* Specify a set of bundled library declaration files that describe the target runtime environment. */
-    "lib": [
-      "dom",
-      "esnext"
-    ],
+    "lib": ["dom", "esnext"],
     /* Specify type package names to be included without being referenced in a source file. */
-    "types": [
-      "node",
-      "jest"
-    ],
+    "types": ["node", "jest"],
     /* Completeness */
     "skipDefaultLibCheck": false,
     "skipLibCheck": false,
@@ -96,11 +88,11 @@
     /*  ALWAYS TRUE  */ "noFallthroughCasesInSwitch": true /*    ALWAYS TRUE  */,
     /*  ALWAYS TRUE  */ "noImplicitReturns": true /*             ALWAYS TRUE  */,
     /*  ALWAYS TRUE  */ "noUnusedLocals": true /*                ALWAYS TRUE  */,
-    /*  ALWAYS TRUE  */ "noUnusedParameters": true /*            ALWAYS TRUE  */,
+    /*  ALWAYS TRUE  */ "noUnusedParameters": true /*            ALWAYS TRUE  */
     /* ALWAYS TRUE STRICT TYPE-CHECKING ADDITIONAL CHECKS MUST ALWAYS BE TRUE */
     /*                */
     /* Extra settings */
-  },
+  }
 }
 /* Visit https://aka.ms/tsconfig.json to read more about this file */
 /* Projects */
