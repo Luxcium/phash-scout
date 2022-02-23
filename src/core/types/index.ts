@@ -29,5 +29,6 @@ export type {
   RedisJson_PathStatsTuple,
   RedisJson_StatsInfoGetterFunct,
 } from './PathStatsGetter';
+export type { PhashNow } from './PhashNow';
 export type { RedisClientType } from './RedisClientType';
 export type { RedisCStrOptions } from './RedisCStrOptions';

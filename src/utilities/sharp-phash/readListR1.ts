@@ -14,7 +14,7 @@ export async function readListRx(
       if (result) console.log(` mv '${result}' '${TARGET}' #`, index);
       return [result];
     }
-    // if (result) console.log('#', 'mv', result, TARGET, '#', index);
+    if (result) console.log('#', 'mv', result, TARGET, '#', index);
 
     return [result];
   });

@@ -1,10 +1,13 @@
 import fs from 'fs';
-import { CurrentPath } from '../../core/types';
+import { CurrentPath, PhashNow } from '../../core/types';
 import { immediateZalgo } from '../../utils';
 import { bigString } from './bigString';
 const phash = require('sharp-phash');
 
-export function phashNow(imgFile: CurrentPath, index: number) {
+export function phashNow(
+  imgFile: CurrentPath,
+  index: number
+): { path: CurrentPath; phash: PhashNow } {
   // TODO: implement a non hardcoded version with possibly more exclusisons
   // HACK:
   if (imgFile.fileName !== '.directory') {
@@ -17,12 +20,18 @@ export function phashNow(imgFile: CurrentPath, index: number) {
         return immediateZalgo(null);
       }
     };
-    return { willPhash_, index: index + 1, ...imgFile };
+    return { path: imgFile, phash: { willPhash_, index: index + 1 } };
   }
 
   return {
-    willPhash_: async () => immediateZalgo(null),
-    index: index + 1,
-    ...imgFile,
+    path: imgFile,
+    phash: { willPhash_: async () => immediateZalgo(null), index: index + 1 },
   };
 }
+
+/*
+: CurrentPath &  {
+    willPhash_: () => Promise<string | null>;
+    index: number;
+}
+ */
