@@ -17,7 +17,12 @@ export async function querryAndAdd(
 }> {
   try {
     await syncPhash(R, k);
-    const rawQueryResult: P<RedisCommandRawReply> = queryPhash(R, k, phash_);
+    const rawQueryResult: P<RedisCommandRawReply> = queryPhash(
+      R,
+      k,
+      phash_,
+      '3'
+    );
     const awaitedQuery = await rawQueryResult;
     if (awaitedQuery) {
       if (isQueryResult(awaitedQuery) && awaitedQuery.length > 0) {

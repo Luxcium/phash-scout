@@ -1,4 +1,6 @@
-export const CURRENT_PATH = '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/jpgs_ipn_impt_2022-02-04';
+export const CURRENT_PATH =
+  '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/jpgs_ipn_impt_2022-02-04';
+export const RADIUS = '1';
 export const RADIUS0 = '0';
 export const RADIUS1 = '1';
 export const RADIUS2 = '2';
@@ -8,4 +10,6 @@ export const RADIUS5 = '5';
 export const QUERY = 'IMGSCOUT.QUERY';
 export const ADD = 'IMGSCOUT.ADD'; // imgscout.sync key
 export const SYNC = 'IMGSCOUT.SYNC'; //  key
-export const TARGET = '/home/luxcium/WSD_250/jpgs_ipn_impt_2022-02-04/radius3';
+export const TARGET =
+  '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/jpgs_ipn_impt_2022-02-04/radius' +
+  RADIUS;

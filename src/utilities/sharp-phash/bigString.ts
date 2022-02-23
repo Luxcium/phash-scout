@@ -1,16 +1,21 @@
+import { immediateZalgo } from '../../core';
 import { S } from '../../core/types/IQueryListPhash';
 
 export function bigString(str: S): S;
 export function bigString(str: Promise<S>): Promise<S>;
 export function bigString(str: S | Promise<S>): S | Promise<S> {
   if (typeof str === 'object' && str instanceof Promise) {
-    return intermediate(str);
+    return immediate(str);
   }
   return bigString_(str);
 }
 
-async function intermediate(str: Promise<S>): Promise<S> {
-  return bigString_(await str);
+async function immediate(str: Promise<S>): Promise<S> {
+  try {
+    return immediateZalgo(bigString_(await str));
+  } catch (error) {
+    throw Error(error as any);
+  }
 }
 function bigString_(str: S): S {
   const strSplit = str.split('');
