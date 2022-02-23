@@ -62,14 +62,6 @@ async function main(
   });
 
   const step6 = step5.map(async r2 => {
-    // const ar2 = await r2;
-    // const atx = await ar2.tx;
-    // const aTransact = await atx.transact;
-    // const transact = {
-    //   rawQueryResult: aTransact?.rawQueryResult || immediateZalgo<null>(null),
-    //   addResult: aTransact?.addResult || immediateZalgo<null>(null),
-    // };
-
     const { path, pHash, transact } = await (await r2).tx;
 
     return {
