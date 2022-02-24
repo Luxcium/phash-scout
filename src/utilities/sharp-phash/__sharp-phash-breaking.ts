@@ -28,36 +28,6 @@ async function main(
   const filesList = currentPathList.filter(filter.fileType.file);
   const pHashList = filesList.map(phashNow);
   const transactionResult = pHashList.map(redisTransact(R));
-  // const step5 = transactionResult.map(async tx => {
-  //   const log: Promise<{
-  //     pHash: {
-  //       willPhash_: () => Promise<string | null>;
-  //       index: number;
-  //       value: string | null;
-  //     };
-  //     path: CurrentPath;
-  //     list: [fullPath: string, id: number, radius: string][];
-  //   }> = willLog(tx);
-  //   const r = { log, tx };
-  //   return r;
-  // });
-
-  // const step6 = step5.map(async r2 => {
-  //   const { path, pHash, transact } = await (await r2).tx;
-
-  //   return {
-  //     transact,
-  //     path,
-  //     pHash,
-  //     listing: (await r2).log,
-  //   };
-  // });
-
-  // const stepFinal = step6.map(async r => {
-  //   const ar = await r;
-  //   readListRx(await ar.listing, ar.path.fullPath, ar.pHash.index);
-  //   return r;
-  // });
 
   const awaitAll = transactionResult.map(async item => {
     const { pHash, path, transact } = await item;
