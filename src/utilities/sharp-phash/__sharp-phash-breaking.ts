@@ -8,8 +8,6 @@ import { CURRENT_PATH } from './constants';
 import { isQueryResult } from './isQueryResult';
 import { phashNow } from './phashNow';
 import { querryAndAdd } from './querryAndAdd';
-import { readListRx } from './readListR1';
-import { willLog } from './willLog-breaking';
 
 // const currentPath = (folder: S) => (f: DirentWithFileType) =>
 //   getCurrentPath(f, folder);
@@ -30,39 +28,61 @@ async function main(
   const filesList = currentPathList.filter(filter.fileType.file);
   const pHashList = filesList.map(phashNow);
   const transactionResult = pHashList.map(redisTransact(R));
-  const step5 = transactionResult.map(async tx => {
-    const log: Promise<{
-      pHash: {
-        willPhash_: () => Promise<string | null>;
-        index: number;
-        value: string | null;
-      };
-      path: CurrentPath;
-      list: [fullPath: string, id: number, radius: string][];
-    }> = willLog(tx);
-    const r = { log, tx };
-    return r;
-  });
+  // const step5 = transactionResult.map(async tx => {
+  //   const log: Promise<{
+  //     pHash: {
+  //       willPhash_: () => Promise<string | null>;
+  //       index: number;
+  //       value: string | null;
+  //     };
+  //     path: CurrentPath;
+  //     list: [fullPath: string, id: number, radius: string][];
+  //   }> = willLog(tx);
+  //   const r = { log, tx };
+  //   return r;
+  // });
 
-  const step6 = step5.map(async r2 => {
-    const { path, pHash, transact } = await (await r2).tx;
+  // const step6 = step5.map(async r2 => {
+  //   const { path, pHash, transact } = await (await r2).tx;
 
+  //   return {
+  //     transact,
+  //     path,
+  //     pHash,
+  //     listing: (await r2).log,
+  //   };
+  // });
+
+  // const stepFinal = step6.map(async r => {
+  //   const ar = await r;
+  //   readListRx(await ar.listing, ar.path.fullPath, ar.pHash.index);
+  //   return r;
+  // });
+
+  const awaitAll = transactionResult.map(async item => {
+    const { pHash, path, transact } = await item;
+    transact;
+    pHash;
+    path;
+    let rawQueryResult: RedisCommandRawReply | null = await immediateZalgo(
+      null
+    );
+    let addResult: RedisCommandRawReply | null = await immediateZalgo(null);
+    const transact_ = await transact;
+    if (transact_ != null) {
+      rawQueryResult = await transact_.rawQueryResult;
+      addResult = await transact_.addResult;
+    }
     return {
-      transact,
       path,
-      pHash,
-      listing: (await r2).log,
+      phash: pHash.value,
+      index: pHash.index,
+      rawQueryResult,
+      addResult,
     };
   });
 
-  const stepFinal = step6.map(async r => {
-    const ar = await r;
-    readListRx(await ar.listing, ar.path.fullPath, ar.pHash.index);
-    return r;
-  });
-
-  const allfilesPathList = Promise.all(stepFinal);
-
+  const allfilesPathList = Promise.all(awaitAll);
   return await allfilesPathList.then(async val => {
     await R.QUIT();
     return val;
