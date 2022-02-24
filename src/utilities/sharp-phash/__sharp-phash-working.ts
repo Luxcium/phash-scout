@@ -6,7 +6,7 @@ import { CURRENT_PATH } from './constants';
 import { phashNow } from './phashNow';
 import { querryAndAdd } from './querryAndAdd';
 import { readListRx } from './readListR1';
-import { willLog } from './willLog';
+import { willLog } from './willLog-working';
 
 // const currentPath = (folder: S) => (f: DirentWithFileType) =>
 //   getCurrentPath(f, folder);

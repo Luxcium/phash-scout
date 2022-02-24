@@ -9,7 +9,7 @@ import { isQueryResult } from './isQueryResult';
 import { phashNow } from './phashNow';
 import { querryAndAdd } from './querryAndAdd';
 import { readListRx } from './readListR1';
-import { willLog } from './willLog.1';
+import { willLog } from './willLog-breaking';
 
 // const currentPath = (folder: S) => (f: DirentWithFileType) =>
 //   getCurrentPath(f, folder);
