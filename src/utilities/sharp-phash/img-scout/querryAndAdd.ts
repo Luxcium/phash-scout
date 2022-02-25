@@ -18,7 +18,7 @@ export async function querryAndAdd(
   addResult: Promise<null | RedisCommandRawReply>;
 }> {
   try {
-    await syncPhash(R, k, false);
+    await syncPhash(R, k);
     const rawQueryResult: Promise<RedisCommandRawReply> = queryPhash(
       R,
       k,
@@ -43,7 +43,7 @@ export async function querryAndAdd(
     phash_,
     title
   );
-  await syncPhash(R, k, false);
+  await syncPhash(R, k);
   const rawQueryResult: Promise<RedisCommandRawReply> = queryPhash(
     R,
     k,
