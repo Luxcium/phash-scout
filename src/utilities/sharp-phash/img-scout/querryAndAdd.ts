@@ -1,11 +1,11 @@
 import { RedisCommandRawReply } from '@node-redis/client/dist/lib/commands';
-import { S } from '../../core/types/IQueryListPhash';
-import { immediateZalgo } from '../../core/utils';
-import { addPhash } from './addPhash';
-import { RADIUS } from './constants';
-import { isQueryResult } from './isQueryResult';
-import { queryPhash } from './queryPhash';
-import { syncPhash } from './syncPhash';
+import { S } from '../../../core/types/IQueryListPhash';
+import { immediateZalgo } from '../../../core/utils';
+import { addPhash } from '../addPhash';
+import { RADIUS } from '../constants';
+import { isQueryResult } from '../isQueryResult';
+import { queryPhash } from '../queryPhash';
+import { syncPhash } from '../syncPhash';
 
 export async function querryAndAdd(
   R: any,
@@ -18,7 +18,7 @@ export async function querryAndAdd(
   addResult: Promise<null | RedisCommandRawReply>;
 }> {
   try {
-    await syncPhash(R, k);
+    await syncPhash(R, k, false);
     const rawQueryResult: Promise<RedisCommandRawReply> = queryPhash(
       R,
       k,
@@ -43,7 +43,7 @@ export async function querryAndAdd(
     phash_,
     title
   );
-  await syncPhash(R, k);
+  await syncPhash(R, k, false);
   const rawQueryResult: Promise<RedisCommandRawReply> = queryPhash(
     R,
     k,
