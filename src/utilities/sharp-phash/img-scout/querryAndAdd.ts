@@ -54,3 +54,51 @@ export async function querryAndAdd(
     rawQueryResult,
   };
 }
+
+export async function querryAndAdd2(
+  R: any,
+  k: S,
+  phash_: S,
+  title: S,
+  radius: string = RADIUS
+): Promise<{
+  rawQueryResult: Promise<RedisCommandRawReply>;
+  addResult: Promise<null | RedisCommandRawReply>;
+}> {
+  try {
+    await syncPhash(R, k);
+    const rawQueryResult: Promise<RedisCommandRawReply> = queryPhash(
+      R,
+      k,
+      phash_,
+      radius
+    );
+    const awaitedQuery = await rawQueryResult;
+    if (awaitedQuery) {
+      if (isQueryResult(awaitedQuery) && awaitedQuery.length > 0) {
+        return {
+          addResult: immediateZalgo(null),
+          rawQueryResult,
+        };
+      }
+    }
+  } catch (error) {
+    console.error('Not yet similar have been indexed', title);
+  }
+  const addResult: Promise<RedisCommandRawReply> = addPhash(
+    R,
+    k,
+    phash_,
+    title
+  );
+  await syncPhash(R, k);
+  const rawQueryResult: Promise<RedisCommandRawReply> = queryPhash(
+    R,
+    k,
+    phash_
+  );
+  return {
+    addResult,
+    rawQueryResult,
+  };
+}
