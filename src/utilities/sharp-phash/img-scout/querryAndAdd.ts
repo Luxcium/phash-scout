@@ -1,11 +1,11 @@
 import { RedisCommandRawReply } from '@node-redis/client/dist/lib/commands';
 import { S } from '../../../core/types/IQueryListPhash';
 import { immediateZalgo } from '../../../core/utils';
-import { addPhash } from '../addPhash';
 import { RADIUS } from '../constants';
 import { isQueryResult } from '../isQueryResult';
-import { queryPhash } from '../queryPhash';
-import { syncPhash } from '../syncPhash';
+import { addPhash } from './addPhash';
+import { queryPhash } from './queryPhash';
+import { syncPhash } from './syncPhash';
 
 export async function querryAndAdd(
   R: any,

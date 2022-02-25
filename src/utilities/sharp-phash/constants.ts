@@ -7,9 +7,7 @@ export const RADIUS2 = '2';
 export const RADIUS3 = '3';
 export const RADIUS4 = '4';
 export const RADIUS5 = '5';
-export const QUERY = 'IMGSCOUT.QUERY';
-export const ADD = 'IMGSCOUT.ADD'; // imgscout.sync key
-export const SYNC = 'IMGSCOUT.SYNC'; //  key
+
 export const TARGET =
   '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/jpgs_ipn_impt_2022-02-04/radius' +
   RADIUS +

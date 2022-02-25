@@ -1,6 +1,6 @@
 import { RedisCommandRawReply } from '@node-redis/client/dist/lib/commands';
-import { P, S } from '../../core/types/IQueryListPhash';
-import { ADD } from './constants';
+import { ADD } from '.';
+import { P, S } from '../../../core/types/IQueryListPhash';
 
 export async function addPhash(
   R: any,

@@ -1,5 +1,6 @@
-import type { S } from '../../core/types/IQueryListPhash';
-import { QUERY, RADIUS } from './constants';
+import { QUERY } from '.';
+import type { S } from '../../../core/types/IQueryListPhash';
+import { RADIUS } from '../constants';
 
 export async function queryPhash(
   R: any,
