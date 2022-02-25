@@ -3,8 +3,8 @@ import { filter, immediateZalgo } from '../../core/utils';
 import { getCurrentPaths } from '../files/tools/asyncDirListWithFileType';
 import { redisCreateClient } from '../redis/tools';
 import { CURRENT_PATH } from './constants';
+import { querryAndAdd } from './img-scout/querryAndAdd';
 import { phashNow } from './phashNow';
-import { querryAndAdd } from './querryAndAdd';
 import { readListRx } from './readListR1';
 import { willLog } from './willLog-working';
 

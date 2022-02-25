@@ -5,9 +5,9 @@ import { filter, immediateZalgo } from '../../core/utils';
 import { getCurrentPaths } from '../files/tools/asyncDirListWithFileType';
 import { redisCreateClient } from '../redis/tools';
 import { CURRENT_PATH } from './constants';
+import { querryAndAdd } from './img-scout/querryAndAdd';
 import { isQueryResult } from './isQueryResult';
 import { phashNow } from './phashNow';
-import { querryAndAdd } from './querryAndAdd';
 
 // const currentPath = (folder: S) => (f: DirentWithFileType) =>
 //   getCurrentPath(f, folder);
