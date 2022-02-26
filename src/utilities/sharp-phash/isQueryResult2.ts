@@ -1,4 +1,4 @@
-import { QueryResult } from './isQueryResult';
+import { QueryResult } from './isQueryResultItem';
 
 export type QueryResult2 = [path: string, id: number, radius: string][];
 export function isQueryResult2(contender: unknown): contender is QueryResult {
