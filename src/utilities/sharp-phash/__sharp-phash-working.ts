@@ -1,9 +1,10 @@
 import { CurrentPath, PhashNow } from '../../core/types';
+import { TX } from '../../core/types/IQueryListPhash';
 import { filter, immediateZalgo } from '../../core/utils';
 import { getCurrentPaths } from '../files/tools/asyncDirListWithFileType';
 import { redisCreateClient } from '../redis/tools';
 import { CURRENT_PATH } from './constants';
-import { querryAndAdd } from './img-scout/querryAndAdd';
+import { uniqueAdd } from './img-scout/querryAndAdd';
 import { phashNow } from './phashNow';
 import { readListRx } from './readListR1';
 import { willLog } from './willLog-working';
@@ -28,26 +29,27 @@ async function main(
   const step2 = step1.filter(filter.fileType.file);
   const step3 = step2.map(phashNow);
   const step4 = step3.map(
-    async (hash: { path: CurrentPath; phash: PhashNow }) => {
+    async (hash: { path: CurrentPath; phash: PhashNow }): TX => {
       const { path, phash } = hash;
       const phash_ = await phash.willPhash_();
       if (phash_ == null) {
         return {
-          transact: immediateZalgo(null),
+          transact: immediateZalgo([]),
           path,
           pHash: { value: phash_, ...phash },
         };
       }
-      const transact = querryAndAdd(
+      const transact = uniqueAdd({
         R,
-        `TEST:${path.pathToFile}`,
+        k: `TEST:${path.pathToFile}`,
         phash_,
-        path.fullPath
-      );
+        title: path.fullPath,
+        radius: '3',
+      });
       return { transact, path, pHash: { value: phash_, ...phash } };
     }
   );
-  const step5 = step4.map(async tx => {
+  const step5 = step4.map(async (tx: TX) => {
     const log: Promise<{
       pHash: {
         willPhash_: () => Promise<string | null>;

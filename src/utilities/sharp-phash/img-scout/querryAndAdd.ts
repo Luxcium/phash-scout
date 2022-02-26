@@ -1,104 +1,46 @@
-import { RedisCommandRawReply } from '@node-redis/client/dist/lib/commands';
-import { S } from '../../../core/types/IQueryListPhash';
 import { immediateZalgo } from '../../../core/utils';
-import { RADIUS } from '../constants';
-import { isQueryResult } from '../isQueryResult';
+import {
+  isQueryResultList,
+  PQuerryAndAdd,
+  QueryResultItem,
+  RawQueryResult,
+} from '../isQueryResultItem';
 import { addPhash } from './addPhash';
 import { queryPhash } from './queryPhash';
-import { syncPhash } from './syncPhash';
 
-export async function querryAndAdd(
-  R: any,
-  k: S,
-  phash_: S,
-  title: S,
-  radius: string = RADIUS
-): Promise<{
-  rawQueryResult: Promise<RedisCommandRawReply>;
-  addResult: Promise<null | RedisCommandRawReply>;
-}> {
-  try {
-    await syncPhash(R, k);
-    const rawQueryResult: Promise<RedisCommandRawReply> = queryPhash(
-      R,
-      k,
-      phash_,
-      radius
-    );
-    const awaitedQuery = await rawQueryResult;
-    if (awaitedQuery) {
-      if (isQueryResult(awaitedQuery) && awaitedQuery.length > 0) {
-        return {
-          addResult: immediateZalgo(null),
-          rawQueryResult,
-        };
-      }
+const hasSomeTitleInclude = (title: string, queryResult: QueryResultItem[]) =>
+  queryResult.some(i => i[0] === title);
+
+const shiftTitle =
+  (title: string, level = '-1') =>
+  (i: QueryResultItem) => {
+    if (i[0] === title) {
+      i[2] = level;
     }
-  } catch (error) {
-    console.error('Not yet similar have been indexed', title);
-  }
-  const addResult: Promise<RedisCommandRawReply> = addPhash(
+    return i;
+  };
+export async function uniqueAdd(
+  querryAndAddParam: PQuerryAndAdd
+): Promise<QueryResultItem[]> {
+  const { R, k, phash_, title, radius } = querryAndAddParam;
+
+  const rawQueryResult: RawQueryResult = queryPhash(
     R,
     k,
     phash_,
-    title
+    radius || '0'
   );
-  await syncPhash(R, k);
-  const rawQueryResult: Promise<RedisCommandRawReply> = queryPhash(
-    R,
-    k,
-    phash_
-  );
-  return {
-    addResult,
-    rawQueryResult,
-  };
-}
+  const queryResultList = await rawQueryResult;
 
-export async function querryAndAdd2(
-  R: any,
-  k: S,
-  phash_: S,
-  title: S,
-  radius: string = RADIUS
-): Promise<{
-  rawQueryResult: Promise<RedisCommandRawReply>;
-  addResult: Promise<null | RedisCommandRawReply>;
-}> {
-  try {
-    await syncPhash(R, k);
-    const rawQueryResult: Promise<RedisCommandRawReply> = queryPhash(
-      R,
-      k,
-      phash_,
-      radius
-    );
-    const awaitedQuery = await rawQueryResult;
-    if (awaitedQuery) {
-      if (isQueryResult(awaitedQuery) && awaitedQuery.length > 0) {
-        return {
-          addResult: immediateZalgo(null),
-          rawQueryResult,
-        };
-      }
+  let id = 0;
+  if (isQueryResultList(queryResultList) && queryResultList.length > 0) {
+    if (hasSomeTitleInclude(title, queryResultList)) {
+      return immediateZalgo(queryResultList.map(shiftTitle(title, '-1')));
     }
-  } catch (error) {
-    console.error('Not yet similar have been indexed', title);
+    id = await addPhash(R, k, phash_, title);
+    queryResultList.unshift([title, id, '-2']);
+    return immediateZalgo(queryResultList);
   }
-  const addResult: Promise<RedisCommandRawReply> = addPhash(
-    R,
-    k,
-    phash_,
-    title
-  );
-  await syncPhash(R, k);
-  const rawQueryResult: Promise<RedisCommandRawReply> = queryPhash(
-    R,
-    k,
-    phash_
-  );
-  return {
-    addResult,
-    rawQueryResult,
-  };
+  id = await addPhash(R, k, phash_, title);
+  return immediateZalgo([[title, id, '-3']]);
 }

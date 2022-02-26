@@ -9,9 +9,9 @@
 import { TimerOptions } from 'timers';
 import { promisify } from 'util';
 
-export function immediateZalgo<T = void>(
-  value?: T | undefined,
+export function immediateZalgo<ß = void>(
+  value?: ß | undefined,
   options?: TimerOptions | undefined
-): Promise<T> {
+): Promise<ß> {
   return promisify(setImmediate)(value, options);
 }

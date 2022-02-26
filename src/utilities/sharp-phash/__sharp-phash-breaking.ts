@@ -5,8 +5,8 @@ import { filter, immediateZalgo } from '../../core/utils';
 import { getCurrentPaths } from '../files/tools/asyncDirListWithFileType';
 import { redisCreateClient } from '../redis/tools';
 import { CURRENT_PATH } from './constants';
-import { querryAndAdd } from './img-scout/querryAndAdd';
-import { isQueryResult } from './isQueryResult';
+import { uniqueAdd } from './img-scout/querryAndAdd';
+import { isQueryResultList } from './isQueryResult';
 import { phashNow } from './phashNow';
 
 // const currentPath = (folder: S) => (f: DirentWithFileType) =>
@@ -71,12 +71,13 @@ function redisTransact(R: any) {
         pHash: { value: phash_, ...phash },
       };
     }
-    const transact = querryAndAdd(
+    const transact = uniqueAdd({
       R,
-      `TEST:${path.pathToFile}`,
+      k: `TEST:${path.pathToFile}`,
       phash_,
-      path.fullPath
-    );
+      title: path.fullPath,
+      radius: '3',
+    });
     return { transact, path, pHash: { value: phash_, ...phash } };
   };
 }
@@ -87,7 +88,7 @@ export async function younameit(tx: TX): Promise<any> {
   const rawQueryResult = (await (await transact)?.rawQueryResult) || null;
   if (addResult != null) {
   }
-  if (isQueryResult(rawQueryResult)) {
+  if (isQueryResultList(rawQueryResult)) {
   }
 
   const r = { tx, addResult, rawQueryResult, path, pHash };

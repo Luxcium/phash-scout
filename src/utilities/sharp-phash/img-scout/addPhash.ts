@@ -1,12 +1,10 @@
-import { RedisCommandRawReply } from '@node-redis/client/dist/lib/commands';
 import { ADD } from '.';
-import { P, S } from '../../../core/types/IQueryListPhash';
 
 export async function addPhash(
   R: any,
-  k: S,
-  p: S,
-  t: S
-): P<RedisCommandRawReply> {
+  k: string,
+  p: string,
+  t: string
+): Promise<number> {
   return R.sendCommand([ADD, k, p, t]);
 }

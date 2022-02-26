@@ -1,6 +1,6 @@
 import { CurrentPath } from '../../core/types';
 import { S, TX } from '../../core/types/IQueryListPhash';
-import { isQueryResult } from './isQueryResult';
+import { isQueryResultList } from './isQueryResult';
 
 export async function willLog(
   tx: TX,
@@ -29,7 +29,7 @@ export async function willLog(
     if (log) console.log(result);
     return result;
   }
-  if (isQueryResult(rawQueryResult)) {
+  if (isQueryResultList(rawQueryResult)) {
     rawQueryResult.unshift([path.fullPath, 0, '-1']);
     const list: [path: S, id: number, radius: S][] = rawQueryResult;
     const result = { pHash, path, list };

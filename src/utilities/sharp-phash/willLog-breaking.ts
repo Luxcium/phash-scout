@@ -1,10 +1,8 @@
 import type { CurrentPath } from '../../core/types';
 import type { S, TX } from '../../core/types/IQueryListPhash';
-import { isQueryResult } from './isQueryResult';
+import { isQueryResultList } from './isQueryResult';
 
-export async function willLog(
-  tx: TX,
-): Promise<{
+export async function willLog(tx: TX): Promise<{
   pHash: {
     willPhash_: () => Promise<string | null>;
     index: number;
@@ -28,14 +26,14 @@ export async function willLog(
     return result;
   }
 
-  if (isQueryResult(rawQueryResult)) {
+  if (isQueryResultList(rawQueryResult)) {
     rawQueryResult.unshift([path.fullPath, 0, '-1']);
     // XXX:-----------------------------------------------------------
     const list: [path: S, id: number, radius: S][] = rawQueryResult;
     const result = { pHash, path, list };
     return result;
   }
-    // XXX:-----------------------------------------------------------
+  // XXX:-----------------------------------------------------------
   const list: [path: string, id: number, radius: string][] = [
     [path.fullPath, 0, 'NaN'],
   ];
