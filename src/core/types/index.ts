@@ -12,6 +12,8 @@ export type {
 } from './CurrentPath';
 export type { DirentWithFileType } from './DirentWithFileType';
 export type { FileType } from './Enums/FileTypeEnum';
+// /home/luxcium/projects/parallel-mapping/src/utilities/sharp-phash/types/index.ts
+export type { FALSY } from './Falsy';
 export type { IApply } from './IApply';
 export type { IChain } from './IChain';
 export type { IMap } from './IMap';
@@ -32,3 +34,4 @@ export type {
 export type { PhashNow } from './PhashNow';
 export type { RedisClientType } from './RedisClientType';
 export type { RedisCStrOptions } from './RedisCStrOptions';
+export type { TX } from './TX';
