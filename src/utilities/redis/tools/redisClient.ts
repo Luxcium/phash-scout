@@ -33,6 +33,7 @@ export const redisConnectionString = (options?: RedisCStrOptions) => {
 
 export function redisCreateClient(
   options?: RedisCStrOptions,
+  errorLoger: (...par: any[]) => void = console.error,
   verbosa: boolean = true
 ) {
   const client = createClient(redisConnectionString(options));
@@ -44,7 +45,7 @@ export function redisCreateClient(
 .on('reconnecting',()=>{console.log('Redis Client reconnecting')})
      */
     return client
-      .on('error', err => console.error('Redis Client Error', err))
+      .on('error', err => errorLoger('Redis Client Error', err))
       .on('connect', () => {
         console.error('Redis Client connect');
       })
