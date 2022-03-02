@@ -17,10 +17,10 @@ async function main(
   console.error('IN FUNCTION MAIN at:', __filename, '\n');
 
   /** REDIS CLIENT */
-  const R = redisCreateClient({ port, dbNumber, host }, () => null);
+  const R = redisCreateClient({ port, dbNumber, host });
   await R.connect();
 
-  const step1 = await getCurrentPaths(immediateZalgo(folder));
+  const step1 = (await getCurrentPaths(immediateZalgo(folder))).slice(0);
   const step2 = step1.filter(filter.fileType.file);
   const step3 = step2.map(phashNow);
   const step4 = step3.map(
@@ -34,15 +34,6 @@ async function main(
           pHash: { value: phash_, ...phash },
         };
       }
-      // pQuerryAndAdd?: PQuerryAndAdd;
-      //
-      //       export type PQuerryAndAdd = {
-      //   R: any;
-      //   k: S;
-      //   phash_: S;
-      //   title: S;
-      //   radius?: string;
-      // };
       const pQuerryAndAdd = {
         R,
         k: `TEST:${path.pathToFile}`,
@@ -59,39 +50,7 @@ async function main(
       };
     }
   );
-  // const step5 = step4.map(async (tx: TX) => {
-  //   const log: Promise<{
-  //     pHash: {
-  //       willPhash_: () => Promise<string | null>;
-  //       index: number;
-  //       value: string | null;
-  //     };
-  //     path: CurrentPath;
-  //     list: [fullPath: string, id: number, radius: string][];
-  //   }> = willLog(tx);
-  //   const r = { log, tx };
-  //   return r;
-  // });
 
-  // const step5 = step4.map(async r2 => {
-  //   const { path, pHash, transact } = await (await r2).tx;
-
-  //   return {
-  //     transact,
-  //     path,
-  //     pHash,
-  //     listing: (await r2).log,
-  //   };
-  // });  // const step5 = step4.map(async r2 => {
-  //   const { path, pHash, transact } = await (await r2).tx;
-
-  //   return {
-  //     transact,
-  //     path,
-  //     pHash,
-  //     listing: (await r2).log,
-  //   };
-  // });
   const step5 = step4.map(async tx => {
     await readListRx(tx);
     return tx;
