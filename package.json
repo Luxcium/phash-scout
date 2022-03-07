@@ -15,6 +15,9 @@
     "prerelease": "./scripts/prerelease.sh",
     "release": "./scripts/release.sh",
     "check": "tsc --noEmit",
+    "prestart": "rm -fr ./out; tsc -b src/tsconfig.json",
+    "start": "node ./out/src/utilities/sharp-phash/__sharp-phash-working.js",
+    "quick:start": "node ./out/src/utilities/sharp-phash/__sharp-phash-working.js",
     "check:version": "ts-node -vv;tsc -v",
     "lint": "echo \"Error: no linter specified\" && exit 0",
     "test": "jest"
