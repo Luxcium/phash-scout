@@ -1,4 +1,4 @@
 export type PhashNow = {
-  willPhash_: () => Promise<string | null>;
+  get: () => Promise<string | null>;
   index: number;
 };

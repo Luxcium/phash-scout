@@ -12,7 +12,7 @@ export function phashNow(
   // HACK:
   if (imgFile.fileName !== '.directory') {
     const thisImage = fs.promises.readFile(imgFile.fullPath);
-    const willPhash_ = async () => {
+    const get = async () => {
       try {
         return await bigString(immediateZalgo(phash(await thisImage)));
       } catch (error) {
@@ -20,12 +20,12 @@ export function phashNow(
         return immediateZalgo(null);
       }
     };
-    return { path: imgFile, phash: { willPhash_, index: index + 1 } };
+    return { path: imgFile, phash: { get, index: index + 1 } };
   }
 
   return {
     path: imgFile,
-    phash: { willPhash_: async () => immediateZalgo(null), index: index + 1 },
+    phash: { get: async () => immediateZalgo(null), index: index + 1 },
   };
 }
 

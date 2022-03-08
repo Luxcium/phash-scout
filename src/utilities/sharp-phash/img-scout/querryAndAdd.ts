@@ -44,3 +44,21 @@ export async function uniqueAdd(
   id = await addPhash(R, k, phash_, title);
   return immediateZalgo([[title, id, '-3']]);
 }
+
+// [path: string, id: number, radius: string]
+export const toObj = (queryItem: QueryResultItem) => ({
+  path: queryItem[0],
+  id: queryItem[1],
+  radius: queryItem[2],
+});
+export const toTup = (queryItem: QueryResultObject) => [
+  queryItem.path,
+  queryItem.id,
+  queryItem.radius,
+];
+
+export type QueryResultObject = {
+  path: string;
+  id: number;
+  radius: string;
+};

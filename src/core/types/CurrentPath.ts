@@ -1,12 +1,41 @@
 import type { FileType } from './Enums/FileTypeEnum';
 
-export type CurrentPath = {
+export type WithIndex = {
+  title: number;
+};
+export type WithTitle = {
+  title: string;
+};
+export type WithRadius = {
+  radius: string;
+};
+export type WithID = {
+  id: number;
+};
+
+export type WithPhash = {
+  pHash: string;
+};
+export type WithFileName = {
   fileName: string;
+};
+
+export type WithPathToFile = {
   pathToFile: string;
+};
+
+export type WithFullPath = {
   fullPath: string;
+};
+
+export type WithFileType = {
   type: FileType;
 };
 
+export type CurrentPath = WithFileName &
+  WithPathToFile &
+  WithFullPath &
+  WithFileType;
 export type BlockDevicePath = CurrentPath & {
   readonly type: FileType.BlockDevice;
 };

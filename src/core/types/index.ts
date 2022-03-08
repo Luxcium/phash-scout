@@ -11,7 +11,8 @@ export type {
   UnknownTypePath,
 } from './CurrentPath';
 export type { DirentWithFileType } from './DirentWithFileType';
-export type { FileType } from './Enums/FileTypeEnum';
+export { FileType } from './Enums/FileTypeEnum';
+export type { FileType as FileTypes } from './Enums/FileTypeEnum';
 // /home/luxcium/projects/parallel-mapping/src/utilities/sharp-phash/types/index.ts
 export type { FALSY } from './Falsy';
 export type { IApply } from './IApply';
