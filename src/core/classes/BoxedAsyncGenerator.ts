@@ -1,5 +1,5 @@
 import type { IUnbox, IUnboxList, Mapper } from '../..';
-import { timeoutZalgo } from '../../utils';
+import { timeoutZalgo } from '../../utilities/utils';
 
 /** Create a container to hold a value as an AsyncGenerator on wich you could map */
 export class BoxedAsyncGenerator<T> {

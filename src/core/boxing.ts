@@ -1,6 +1,6 @@
 import { IO_Mapper } from '.';
 import { Mapper } from '..';
-import { immediateZalgo } from '../utils';
+import { immediateZalgo } from '../utilities/utils';
 
 class Box<T> {
   #value: T[];

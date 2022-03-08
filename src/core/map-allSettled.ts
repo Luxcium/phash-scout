@@ -9,8 +9,8 @@
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
 
-import type { MapAllSettledArgs, WorkerArgs } from '../types';
 import { arrayGenerator } from './arrayGenerator';
+import type { MapAllSettledArgs, WorkerArgs } from './types/types';
 import { worker } from './worker';
 
 export async function mapAllSettled<T, U>({

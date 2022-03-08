@@ -9,8 +9,8 @@
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
 
-import type { MapAllSettledArgs, MapperArgs } from '../types';
 import { mapAllSettled } from './map-allSettled';
+import type { MapAllSettledArgs, MapperArgs } from './types/types';
 
 // ~#------- IO_Mapper ------------------------------------------------#-~
 export async function IO_Mapper<T, R>({

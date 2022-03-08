@@ -1,8 +1,8 @@
 import path from 'path';
 import { BoxedGenerator } from '../../../core/classes/BoxedGenerator';
-import { immediateZalgo } from '../../../utils';
 import { devPaths } from '../../files';
 import { getDirsSync, getFilesSync } from '../../files/tools';
+import { immediateZalgo } from '../../utils';
 import { replaceStr } from './replaceStr';
 const PREFIX = 'TESTING:001::JSON:REDIS';
 const STEPS = 1;

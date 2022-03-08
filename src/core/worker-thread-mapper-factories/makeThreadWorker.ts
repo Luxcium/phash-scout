@@ -1,4 +1,4 @@
-import { MakeThreadWorkerArgs, WorkerData } from '../../types';
+import { MakeThreadWorkerArgs, WorkerData } from '../types/types';
 import { theThreadWorker } from './the-thread-worker';
 
 export function makeThreadWorker<T, R>({

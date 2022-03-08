@@ -10,8 +10,12 @@
 /*--------------------------------------------------------------------*/
 
 import { workerFactory } from '.';
-import type { MapAllSettledArgs, Mapper, ProcessMapperArgs } from '../../types';
 import { mapAllSettled } from '../map-allSettled';
+import type {
+  MapAllSettledArgs,
+  Mapper,
+  ProcessMapperArgs,
+} from '../types/types';
 
 export function processMapper<T, U>({
   filename,

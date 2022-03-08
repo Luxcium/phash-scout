@@ -6,7 +6,7 @@
 /*  See https://github.com/Luxcium/parallel-mapping/blob/cbf7e/LICENSE*/
 /*--------------------------------------------------------------------*/
 
-import type { Mapper, WT_D } from '../../types';
+import type { Mapper, WT_D } from '../types/types';
 import { makeMainWorker } from './makeMainWorker';
 import { makeThreadWorker } from './makeThreadWorker';
 

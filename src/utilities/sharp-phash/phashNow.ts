@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { CurrentPath, PhashNow } from '../../core/types';
-import { immediateZalgo } from '../../utils';
+import { immediateZalgo } from '../utils';
 import { bigString } from './bigString';
 const phash = require('sharp-phash');
 

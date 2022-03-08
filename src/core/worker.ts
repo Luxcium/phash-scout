@@ -9,8 +9,8 @@
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
 
-import type { ItemMapperArgs, WorkerArgs } from '../types';
 import { itemMapper } from './item-mapper';
+import type { ItemMapperArgs, WorkerArgs } from './types/types';
 
 export async function worker<T, U>({ gen, mapFn, result }: WorkerArgs<T, U>) {
   // ++----- worker ---------------------------------------------------+
