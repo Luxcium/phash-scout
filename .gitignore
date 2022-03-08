@@ -49,3 +49,4 @@ _Pvt_Extensions
 _ReSharper*/
 _TeamCity*
 _UpgradeReport_Files/
+.tmp/tsc/root/tsconfig.tsbuildinfo
