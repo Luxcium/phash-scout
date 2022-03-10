@@ -1,5 +1,6 @@
 import type { IUnbox, IUnboxList, Mapper } from '../..';
 import { timeoutZalgo } from '../../utilities/utils';
+import { immediateZalgo } from '../utils';
 
 /** Create a container to hold a value as an AsyncGenerator on wich you could map */
 export class BoxedAsyncGenerator<T> {
@@ -11,21 +12,21 @@ export class BoxedAsyncGenerator<T> {
     return new BoxedAsyncGenerator<TVal>(generatorFn);
   };
 
-  // static ============================================-| from() |-====
+  // static ==========================================-| from() |-====
   public static from<TVal>(
     boxedList: IUnboxList<TVal> | IUnbox<TVal[]>
   ): BoxedAsyncGenerator<TVal> {
     return BoxedAsyncGenerator.of<TVal>(boxedList.unbox());
   }
-  // static ==============================================-| of() |-====
+  // static ============================================-| of() |-====
   public static of = <TVal>(
-    ...values: TVal[] | [TVal[]]
+    ...values: TVal[] | TVal[][]
   ): BoxedAsyncGenerator<TVal> => {
     const arrayGenerator = (array: TVal[]): (() => AsyncGenerator<TVal>) =>
       async function* (): AsyncGenerator<TVal> {
-        for (let index = 0; index < array.length; index++) {
-          const currentValue = array[index];
-          yield currentValue;
+        const array_ = array.map(i => immediateZalgo(i));
+        for await (const iterator of array_) {
+          yield iterator;
         }
       };
 
@@ -42,6 +43,7 @@ export class BoxedAsyncGenerator<T> {
     );
   };
 
+  // constructor ======================-| BoxedAsyncGenerator() |-====
   protected constructor(valueGenerator: () => AsyncGenerator<T>) {
     this.#valueAsyncGenerator = valueGenerator;
   }
@@ -73,6 +75,9 @@ export class BoxedAsyncGenerator<T> {
     return this.asyncGen();
   }
 }
+
+void main;
+main();
 async function main(): Promise<void> {
   const box = BoxedAsyncGenerator.of([1, 2, 3, 4]);
   const asyncGen1 = box
@@ -96,5 +101,3 @@ async function main(): Promise<void> {
   }
   return void 42;
 }
-void main;
-// main();

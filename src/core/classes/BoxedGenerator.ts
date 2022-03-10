@@ -7,7 +7,7 @@ if (DEBUG) console.error('DEBUG = true in:', __filename);
 
 export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
   #valueGenerator: () => Generator<T>;
-  // static ==============================================-| of() |-====
+  // static ============================================-| of() |-====
 
   public static of<TVal>(...values: TVal[] | [TVal[]]): BoxedGenerator<TVal> {
     const arrayGenerator = (array: TVal[]): (() => Generator<TVal>) =>
@@ -51,36 +51,37 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
     return new BoxedGenerator<TVal>(arrayGenerator([...(values as TVal[])]));
   }
 
-  // static =========================================-| fromGen() |-====
+  // static =======================================-| fromGen() |-====
   public static fromGen<TVal>(generatorFn: () => Generator<TVal>): BoxedGenerator<TVal> {
     return new BoxedGenerator<TVal>(generatorFn);
   }
 
-  // static ============================================-| from() |-====
+  // static ==========================================-| from() |-====
   public static from<TVal>(boxedList: IUnboxList<TVal> | IUnbox<TVal[]>): BoxedGenerator<TVal> {
     return BoxedGenerator.of<TVal>(boxedList.unbox());
   }
 
-  // protected ==================================-| constructor() |-====
+  // protected ================================-| constructor() |-====
   protected constructor(valueGenerator: () => Generator<T>) {
     this.#valueGenerator = valueGenerator;
   }
-  // public =============================================-| map() |-====
+  // public ===========================================-| map() |-====
+  public mapIndex: number = 0;
   public map<TMap>(
     fn: Mapper<T, TMap>
     // delay: undefined | null | number | boolean = false
   ): BoxedGenerator<TMap> {
     const generator = this.#valueGenerator;
-
+    const that = this;
     function* arrayGenerator(): Generator<TMap> {
       for (const item of generator()) {
-        yield fn(item);
+        yield fn(item, that.mapIndex++);
       }
     }
     return BoxedGenerator.fromGen(arrayGenerator);
   }
 
-  // public =========================================-| thenMap() |-====
+  // public =======================================-| thenMap() |-====
   public thenMap<TMap1, TMap2 = never>(
     onfulfilled?: ThenMapper<T, TMap1> | null,
     onrejected?: ((reason: any) => TMap2 | PromiseLike<TMap2>) | null
@@ -97,7 +98,7 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
     return BoxedGenerator.fromGen(arrayGenerator);
   }
 
-  // public ========================================-| catchMap() |-====
+  // public ======================================-| catchMap() |-====
   public catchMap<TMap2 = never>(
     onrejected?: ((reason: any) => TMap2 | PromiseLike<TMap2>) | null
   ): BoxedGenerator<Promise<T | TMap2>> {
@@ -113,7 +114,7 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
     return BoxedGenerator.fromGen(arrayGenerator);
   }
 
-  // public ======================================-| finallyMap() |-====
+  // public ====================================-| finallyMap() |-====
   public finallyMap(
     onfinally: (() => void) | null // ThenMapper<T, TMap1> | null,
     // onrejected?: ((reason: any) => TMap2 | PromiseLike<TMap2>) | null
@@ -129,36 +130,36 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
     }
     return BoxedGenerator.fromGen(arrayGenerator);
   }
-  // public ===========================================-| unbox() |-====
+  // public =========================================-| unbox() |-====
   public unbox(): T[] {
     return Array.from(this.#valueGenerator());
   }
 
-  // public ===========================================-| spark() |-====
+  // public =========================================-| spark() |-====
   public spark() {
     return BoxedGenerator.of(...this.unbox());
   }
 
-  // get ================================================-| box() |-====
+  // get ==============================================-| box() |-====
   get box() {
     return Box.of(this.unbox());
   }
 
-  // get =============================================-| length() |-====
+  // get ===========================================-| length() |-====
   get length() {
     return this.unbox().length;
   }
-  // get ============================================-| boxedList |-====
+  // get ==========================================-| boxedList |-====
   public get boxedList(): BoxedList<T> {
     return BoxedList.of<T>(...this.unbox());
   }
 
-  // get ===============================================-| values |-====
+  // get =============================================-| values |-====
   public get values(): T[] {
     return this.unbox();
   }
 
-  // get ==================================================-| gen |-====
+  // get ================================================-| gen |-====
   public get gen(): () => Generator<T> {
     return this.#valueGenerator;
   }
