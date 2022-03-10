@@ -1,6 +1,5 @@
 node_modules
 dist
-out
 release
 .env
 
@@ -16,6 +15,7 @@ web_modules/
 .history
 .directory
 .DS_Store
+out/
 # dist/
 # publish/
 # bin/
