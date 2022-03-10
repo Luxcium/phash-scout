@@ -1,1 +1,1 @@
-export {};
+export { getPathWithStats } from './getPathWithStats';

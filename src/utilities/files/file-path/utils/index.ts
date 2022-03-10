@@ -1,3 +1,4 @@
+export { getPathWithStats } from '../getPathWithStats';
 export {
   filter,
   filterBlockDevices,

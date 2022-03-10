@@ -7,4 +7,5 @@ export enum FileType {
   Socket = 'Socket',
   SymbolicLink = 'SymbolicLink',
   Unknown = 'Unknown',
+  Error = 'Error',
 }

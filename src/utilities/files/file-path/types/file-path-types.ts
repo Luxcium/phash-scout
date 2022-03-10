@@ -20,6 +20,13 @@ export type CurrentPath = WithFileName &
   WithPathToFile &
   WithFullPath &
   WithFileType;
+
+export type CurrentPathError = ErrorTypePath & {
+  fileName: '';
+  pathToFile: '';
+  fullPath: '';
+  type: FileType.Error;
+};
 export type BlockDevicePath = CurrentPath & {
   readonly type: FileType.BlockDevice;
 };
@@ -44,4 +51,8 @@ export type SymbolicLinkPath = CurrentPath & {
 
 export type UnknownTypePath = CurrentPath & {
   readonly type: FileType.Unknown;
+};
+
+export type ErrorTypePath = CurrentPath & {
+  readonly type: FileType.Error;
 };

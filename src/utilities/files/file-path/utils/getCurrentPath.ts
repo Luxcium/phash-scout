@@ -14,9 +14,9 @@ import {
 
 export function getCurrentPath(f: DirentWithFileType, folderPath: string) {
   const fullPath: CurrentPath = {
-    pathToFile: folderPath,
-    fullPath: `${folderPath}/${f.fileName}`,
     fileName: f.fileName,
+    pathToFile: folderPath,
+    fullPath: `${folderPath}/${f.fileName}`.replaceAll('//', '/'),
     type: FileTypes.Unknown,
   };
 
