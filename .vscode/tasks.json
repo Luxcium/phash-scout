@@ -16,12 +16,13 @@
       "label": "TSC Build Task",
       "type": "shell",
       "detail": "Output watcher for this Type-Script project",
-      "command": "tsc",
+      "command": "npx",
       "group": {
         "kind": "build",
         "isDefault": true
       },
       "args": [
+        "tsc",
         "-b",
         "${workspaceFolder}/src/tsconfig.json",
         "--verbose"

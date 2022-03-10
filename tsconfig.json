@@ -16,6 +16,9 @@
     "out"
   ],
   "compilerOptions": {
+    "target": "es6",
+    "module": "CommonJS",
+    "moduleResolution": "node",
     "composite": true,
     "rootDir": ".",
     // We can't pass "noEmit" in incremental mode, but this is close enough.
