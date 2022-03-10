@@ -50,3 +50,5 @@ _ReSharper*/
 _TeamCity*
 _UpgradeReport_Files/
 .tmp/tsc/root/tsconfig.tsbuildinfo
+.tmp/tsc/root/archives/Box.d.ts
+.tmp/
