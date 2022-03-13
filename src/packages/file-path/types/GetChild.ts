@@ -1,4 +1,4 @@
-import { Stats } from 'fs-extra';
+import { Stats } from 'fs';
 import { CurrentPath } from '.';
 import { FileType } from '../tools';
 import { CurrentPathAndStats } from './CurrentPathAndStats';
