@@ -1,1 +1,1 @@
-../../../../../core/classes/types/CallbackfnT.ts
+../../../../core/classes/types/CallbackfnT.ts

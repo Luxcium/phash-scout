@@ -1,1 +1,1 @@
-../../../../../core/classes/types/IMap.ts
+../../../../core/classes/types/IMap.ts

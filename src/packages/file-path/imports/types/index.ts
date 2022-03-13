@@ -1,1 +1,1 @@
-../../../../../core/classes/types/index.ts
+../../../../core/classes/types/index.ts

@@ -1,1 +1,1 @@
-../../../../../core/classes/types/IMapList.ts
+../../../../core/classes/types/IMapList.ts

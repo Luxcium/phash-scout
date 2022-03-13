@@ -1,1 +1,1 @@
-../../../../../core/classes/types/IChain.ts
+../../../../core/classes/types/IChain.ts

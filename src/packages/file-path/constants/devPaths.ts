@@ -1,1 +1,1 @@
-../../../../constants/devPaths.ts
+../../../constants/devPaths.ts

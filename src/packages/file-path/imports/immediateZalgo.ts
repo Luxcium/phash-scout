@@ -1,1 +1,1 @@
-../../../../core/utils/restrainingZalgo/immediateZalgo.ts
+../../../core/utils/restrainingZalgo/immediateZalgo.ts

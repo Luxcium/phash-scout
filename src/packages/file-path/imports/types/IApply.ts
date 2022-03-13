@@ -1,1 +1,1 @@
-../../../../../core/classes/types/IApply.ts
+../../../../core/classes/types/IApply.ts
