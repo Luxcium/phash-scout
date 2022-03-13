@@ -1,13 +1,13 @@
 import { statSync } from 'fs-extra';
 import path from 'path';
 import { BoxedGenerator } from '../../../core/classes/BoxedGenerator';
-import { devPaths } from '../../files';
 import {
   dirListWithFileTypeSync,
   getDirsSync,
   getFilesSync,
   getListingsSync,
-} from '../../files/file-path/tools';
+} from '../../../packages/file-path/tools';
+import { devPaths } from '../../files';
 import { immediateZalgo } from '../../utils';
 import { redisCreateClient } from '../tools';
 import { replaceStr } from './replaceStr';

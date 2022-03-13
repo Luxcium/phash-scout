@@ -1,5 +1,5 @@
 import { N, S } from '../../core/types/IQueryListPhash';
-import { CurrentPath } from '../files/file-path/types';
+import { CurrentPath } from '../../packages/file-path/types';
 import { QueryResultItem } from './isQueryResultItem';
 import { TX } from './types';
 

@@ -1,7 +1,7 @@
 import type { Dirent } from 'fs';
 import { readdir } from 'fs/promises';
 import type { DirentWithFileType } from '../../../core/types';
-import { filesTypes } from '../file-path/constants/filesTypes';
+import { filesTypes } from '../../../packages/file-path/constants/filesTypes';
 
 export async function getDirListing(pathSrc: string = '', debug = false) {
   try {

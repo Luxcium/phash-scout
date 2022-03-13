@@ -1,4 +1,4 @@
-import { CurrentPath } from '../../utilities/files/file-path/types';
+import { CurrentPath } from '../../packages/file-path/types';
 import {
   PQuerryAndAdd,
   QueryResultItem,

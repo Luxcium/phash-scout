@@ -21,7 +21,7 @@ export {
   filterFiles,
   filterSockets,
   filterSymbolicLinks,
-} from '../../utilities/files/file-path/tools/filter';
+} from '../../packages/file-path/tools/filter';
 export { getCurrentPath } from './paths/getCurrentPath';
 export {
   cpuCount,
