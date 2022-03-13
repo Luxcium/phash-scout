@@ -1,9 +1,9 @@
 import { Stats } from 'fs-extra';
+import { CurrentPath } from '.';
 import { FileType } from '../tools';
-import { CurrentPath } from '../types';
-import { CurrentPathError } from '../types/file-path-types';
 import { CurrentPathAndStats } from './CurrentPathAndStats';
 import { CurrentPathWithStats } from './CurrentPathWithStats';
+import { CurrentPathError } from './file-path-types';
 
 export type GetChild =
   | {
