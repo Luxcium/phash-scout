@@ -2,7 +2,7 @@ import {
   getDirListFileTypes,
   getRawDirList,
   getRawDirListSync,
-} from '../../tools';
+} from '../tools';
 import { DirentWithFileType } from '../types';
 
 export async function asyncDirListWithFileType(

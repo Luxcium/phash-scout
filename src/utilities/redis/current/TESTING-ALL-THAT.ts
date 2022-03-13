@@ -7,7 +7,7 @@ import {
   getDirsSync,
   getFilesSync,
   getListingsSync,
-} from '../../files/tools';
+} from '../../files/file-path/tools';
 import { immediateZalgo } from '../../utils';
 import { redisCreateClient } from '../tools';
 import { replaceStr } from './replaceStr';

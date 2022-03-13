@@ -8,7 +8,7 @@ import {
   SocketPath,
   SymbolicLinkPath,
   UnknownTypePath,
-} from '../../types/CurrentPath';
+} from '../../../utilities/files/file-path/types';
 import { DirentWithFileType } from '../../types/DirentWithFileType';
 import { FileType } from '../../types/Enums/FileTypeEnum';
 

@@ -8,7 +8,7 @@ import {
   getDirsSync,
   getFilesSync,
   getListingsSync,
-} from '../files/tools';
+} from '../files/file-path/tools';
 import { jsonGet, jsonSet } from './jsonRedis';
 // export const SUBSET = 1000;
 // const DEBUG = true;

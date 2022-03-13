@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as fsp from 'fs/promises';
-import { BASE_SRC_PATH1 } from '../../../constants/devPaths';
-import { BoxedList } from '../../../core/classes/BoxedList';
+import { BASE_SRC_PATH1 } from '../constants/devPaths';
+import { BoxedList } from '../imports';
 
 export function getListingsSync(pathSrc: string = '') {
   const files = getFilesSync(pathSrc);
@@ -110,7 +110,8 @@ export async function getDirs(pathSrc: string = '') {
     return [];
   }
 }
-export function main() {
+main; //();
+function main() {
   console.log(getFilesSync(BASE_SRC_PATH1 + '/un-named' + '/zoom-x088727222')); //.map(i => console.log(i));
   console.log(getDirsSync(BASE_SRC_PATH1 + '/un-named' + '/zoom-x088727222')); //.map(i => console.log(i));
 

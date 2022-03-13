@@ -1,6 +1,6 @@
-import type { CurrentPath, DirentWithFileType } from '../../types';
-
 // const = require('sharp-phash');
+
+import { CurrentPath, DirentWithFileType } from '../../types';
 
 export function filterFiles(element: CurrentPath): boolean;
 export function filterFiles(

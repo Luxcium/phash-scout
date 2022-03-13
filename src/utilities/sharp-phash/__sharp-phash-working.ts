@@ -1,7 +1,8 @@
 import { BoxedGenerator } from '../../core';
-import { CurrentPath, PhashNow, TX } from '../../core/types';
+import { PhashNow, TX } from '../../core/types';
 import { filter, immediateZalgo } from '../../core/utils';
-import { getCurrentPaths } from '../files/tools/asyncDirListWithFileType';
+import { getCurrentPaths } from '../files/file-path/tools/asyncDirListWithFileType';
+import type { CurrentPath } from '../files/file-path/types';
 import { redisCreateClient } from '../redis/tools';
 import { CURRENT_PATH } from './constants';
 import { uniqueAdd } from './img-scout/querryAndAdd';

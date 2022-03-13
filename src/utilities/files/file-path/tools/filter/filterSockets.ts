@@ -1,4 +1,4 @@
-import type { CurrentPath, DirentWithFileType } from '../../types';
+import { CurrentPath, DirentWithFileType } from '../../types';
 
 export function filterSockets(element: CurrentPath): boolean;
 export function filterSockets(

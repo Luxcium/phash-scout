@@ -1,6 +1,7 @@
-import { CurrentPath, TX } from '../../core/types';
 import { N, S } from '../../core/types/IQueryListPhash';
+import { CurrentPath } from '../files/file-path/types';
 import { QueryResultItem } from './isQueryResultItem';
+import { TX } from './types';
 
 export function getTransact(
   queryResults: QueryResultItem[],

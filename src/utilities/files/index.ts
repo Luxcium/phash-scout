@@ -1,12 +1,12 @@
 import { devPaths } from '../../constants/devPaths';
-import { filesTypes } from '../../constants/filesTypes';
+import { filesTypes } from './file-path/constants/filesTypes';
 import {
   asyncDirListWithFileType,
   getDirListFileTypes,
   getPathInfos,
   getRawDirList,
   getStats,
-} from './tools';
+} from './file-path/tools';
 
 export const fsTools = {
   devPaths,

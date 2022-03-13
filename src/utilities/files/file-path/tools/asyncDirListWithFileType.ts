@@ -1,6 +1,6 @@
 import { getRawDirList } from '.';
-import type { CurrentPath, DirentWithFileType } from '../../../core/types';
-import { getCurrentPath } from '../../../core/utils';
+import type { CurrentPath, DirentWithFileType } from '../types';
+import { getCurrentPath } from '../utils';
 import { getDirListFileTypes } from './getDirListWithFileType';
 import { getRawDirListSync } from './getRawDirList';
 

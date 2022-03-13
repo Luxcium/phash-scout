@@ -1,4 +1,4 @@
-import type { CurrentPath, DirentWithFileType } from '../../types';
+import { CurrentPath, DirentWithFileType } from '../../types';
 
 export function filterDirectories(element: CurrentPath): boolean;
 export function filterDirectories(

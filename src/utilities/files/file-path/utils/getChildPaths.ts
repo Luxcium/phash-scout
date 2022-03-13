@@ -1,5 +1,5 @@
-import { immediateZalgo } from '../../../utils';
 import { getPathWithStats } from '../getPathWithStats';
+import { immediateZalgo } from '../imports';
 import { FileType, FileTypes } from '../tools';
 import {
   CurrentPathAndStats,

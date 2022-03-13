@@ -1,8 +1,11 @@
-import { CurrentPath, FALSY } from '.';
+import { CurrentPath } from '../../utilities/files/file-path/types';
 import {
   PQuerryAndAdd,
   QueryResultItem,
 } from '../../utilities/sharp-phash/isQueryResultItem';
+// /home/luxcium/projects/parallel-mapping/src/utilities/files/file-path/types/index.ts
+// /home/luxcium/projects/parallel-mapping/src/../../utilities/files/file-path/types
+import { FALSY } from './Falsy';
 import { N, S } from './IQueryListPhash';
 
 export type TX = Promise<{

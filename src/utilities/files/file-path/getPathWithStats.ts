@@ -1,5 +1,5 @@
 import { stat } from 'fs/promises';
-import { immediateZalgo } from '../../utils';
+import { immediateZalgo } from './imports';
 import { FileTypes } from './tools';
 import type {
   CurrentPathAndStats,

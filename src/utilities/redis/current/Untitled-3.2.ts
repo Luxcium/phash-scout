@@ -1,6 +1,6 @@
 import path from 'path';
 import { BoxedGenerator } from '../../../core/classes/BoxedGenerator';
-import { getDirsSync, getFilesSync } from '../../files/tools';
+import { getDirsSync, getFilesSync } from '../../files/file-path/tools';
 import { getUserPathsGen } from './getUserPathsGen';
 import { srtPath } from './srtPath';
 import { withPrefix } from './withPrefix';

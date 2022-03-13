@@ -1,9 +1,9 @@
 {
-  "name": "@luxcium/parallel-mapper",
-  "version": "0.0.0-unsafe-v1.0.4x",
-  "license": "MIT",
-  "private": false,
   "description": "",
-  "main": "./index.js",
-  "types": "./typings/index.d.ts"
+  "license": "MIT",
+  "main": "./out/index.js",
+  "name": "@luxcium/parallel-mapper",
+  "private": false,
+  "types": "./out/typings/index.d.ts",
+  "version": "0.0.0-unsafe-v1.0.4x"
 }

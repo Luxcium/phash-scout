@@ -1,4 +1,5 @@
 export { getPathWithStats } from '../getPathWithStats';
+export { immediateZalgo } from '../imports/immediateZalgo';
 export {
   filter,
   filterBlockDevices,
@@ -9,3 +10,4 @@ export {
   filterSockets,
   filterSymbolicLinks,
 } from './filter';
+export { getCurrentPath } from './getCurrentPath';

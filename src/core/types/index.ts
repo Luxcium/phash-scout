@@ -1,15 +1,15 @@
 export type { CallbackfnT, CallbackfnU } from './CallbackfnT';
-export type {
-  BlockDevicePath,
-  CharacterDevicePath,
-  CurrentPath,
-  DirectoryPath,
-  FIFOPath,
-  FilePath,
-  SocketPath,
-  SymbolicLinkPath,
-  UnknownTypePath,
-} from './CurrentPath';
+// export type {
+//   BlockDevicePath,
+//   CharacterDevicePath,
+//   CurrentPath,
+//   DirectoryPath,
+//   FIFOPath,
+//   FilePath,
+//   SocketPath,
+//   SymbolicLinkPath,
+//   UnknownTypePath,
+// } from './CurrentPath-bak.ts-bak';
 export type { DirentWithFileType } from './DirentWithFileType';
 export { FileType } from './Enums/FileTypeEnum';
 export type { FileType as FileTypes } from './Enums/FileTypeEnum';
