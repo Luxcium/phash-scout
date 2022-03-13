@@ -4,14 +4,14 @@ export {
 } from './asyncDirListWithFileType';
 export { FileType as FileTypes } from './FileTypeEnum';
 export type { FileType } from './FileTypeEnum';
-// export {
-//   getDirs,
-//   getDirsSync,
-//   getFiles,
-//   getFilesSync,
-//   getListings,
-//   getListingsSync,
-// } from './fsTools.ts-bak';
+export {
+  getDirs,
+  getDirsSync,
+  getFiles,
+  getFilesSync,
+  getListings,
+  getListingsSync,
+} from './fsTools';
 export { getDirListFileTypes } from './getDirListWithFileType';
 export { getPathInfos } from './getPathInfos';
 export { getRawDirList, getRawDirListSync } from './getRawDirList';
