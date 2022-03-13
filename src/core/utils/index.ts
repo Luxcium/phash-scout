@@ -12,16 +12,16 @@ import {
   zalgo3,
 } from './restrainingZalgo';
 
-export {
-  filter,
-  filterBlockDevices,
-  filterCharacterDevices,
-  filterDirectories,
-  filterFIFOs,
-  filterFiles,
-  filterSockets,
-  filterSymbolicLinks,
-} from '../../packages/file-path/tools/filter';
+// export {
+//   filter,
+//   filterBlockDevices,
+//   filterCharacterDevices,
+//   filterDirectories,
+//   filterFIFOs,
+//   filterFiles,
+//   filterSockets,
+//   filterSymbolicLinks,
+// } from '../../packages/file-path/tools/filter8';
 export { getCurrentPath } from './paths/getCurrentPath';
 export {
   cpuCount,
