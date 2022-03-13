@@ -20,6 +20,10 @@ import {
   zalgo2,
   zalgo3,
 } from '../utils';
+export { Box, boxFrom, boxOf } from './Box';
+export { BoxedAsyncGenerator } from './BoxedAsyncGenerator';
+export { BoxedGenerator } from './BoxedGenerator';
+export { BoxedList, boxedListFrom, boxedListOf } from './BoxedList';
 export type {
   IApply,
   IChain,
@@ -27,11 +31,7 @@ export type {
   IMapItems,
   IUnbox,
   IUnboxList,
-} from '../types';
-export { Box, boxFrom, boxOf } from './Box';
-export { BoxedAsyncGenerator } from './BoxedAsyncGenerator';
-export { BoxedGenerator } from './BoxedGenerator';
-export { BoxedList, boxedListFrom, boxedListOf } from './BoxedList';
+} from './types';
 export {
   cpuCount,
   getSign,

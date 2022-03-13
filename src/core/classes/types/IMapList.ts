@@ -1,4 +1,4 @@
-import { IUnbox } from '.';
+import { IUnbox } from './IUnbox';
 import { IUnboxList } from './IUnboxList';
 
 export interface IMapItems<S> extends IUnboxList<S>, IUnbox<S[]> {

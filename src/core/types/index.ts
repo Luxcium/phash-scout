@@ -1,4 +1,4 @@
-export type { CallbackfnT, CallbackfnU } from './CallbackfnT';
+export type { CallbackfnT, CallbackfnU } from '../classes/types/CallbackfnT';
 // export type {
 //   BlockDevicePath,
 //   CharacterDevicePath,
@@ -15,12 +15,6 @@ export { FileType } from './Enums/FileTypeEnum';
 export type { FileType as FileTypes } from './Enums/FileTypeEnum';
 // /home/luxcium/projects/parallel-mapping/src/utilities/sharp-phash/types/index.ts
 export type { FALSY } from './Falsy';
-export type { IApply } from './IApply';
-export type { IChain } from './IChain';
-export type { IMap } from './IMap';
-export type { IMapItems } from './IMapList';
-export type { IUnbox } from './IUnbox';
-export type { IUnboxList } from './IUnboxList';
 // export type { MyPInfos } from './MyPathInfos';
 // export type { MyStats } from './MyStats';
 export type {
