@@ -1,6 +1,7 @@
 import { statSync } from 'fs-extra';
 import path from 'path';
 import { Tedis } from 'tedis';
+import { devPaths } from '../../constants/devPaths';
 import { BoxedGenerator } from '../../core/classes/BoxedGenerator';
 import {
   dirListWithFileTypeSync,
@@ -8,7 +9,6 @@ import {
   getFilesSync,
   getListingsSync,
 } from '../../packages/file-path/tools';
-import { devPaths } from '../files';
 import { jsonGet, jsonSet } from './jsonRedis';
 // export const SUBSET = 1000;
 // const DEBUG = true;

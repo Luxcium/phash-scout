@@ -1,5 +1,6 @@
 import { statSync } from 'fs-extra';
 import path from 'path';
+import { devPaths } from '../../../constants/devPaths';
 import { BoxedGenerator } from '../../../core/classes/BoxedGenerator';
 import {
   dirListWithFileTypeSync,
@@ -7,19 +8,16 @@ import {
   getFilesSync,
   getListingsSync,
 } from '../../../packages/file-path/tools';
-import { devPaths } from '../../files';
 import { immediateZalgo } from '../../utils';
 import { redisCreateClient } from '../tools';
 import { replaceStr } from './replaceStr';
 
 const SPARK = true;
-// const SPARK = false;
 const PREFIX = '1001:TESTING:1001::JSON:REDIS';
 const steps = 1;
 const offset = 0;
 const STEPS = [offset, offset + steps];
 const DEBUG = 4;
-// const DEBUG = 3000;
 
 process
   .on('uncaughtException', err => {

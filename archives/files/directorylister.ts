@@ -1,4 +1,4 @@
-import { BoxedGenerator } from '../../../core/classes';
+import { BoxedGenerator } from '../../src/core/classes';
 
 export function redis_getDirectoriesGenerator(
   path_: string,
