@@ -77,7 +77,7 @@ export class BoxedAsyncGenerator<T> {
 }
 
 void main;
-main();
+// main();
 async function main(): Promise<void> {
   const box = BoxedAsyncGenerator.of([1, 2, 3, 4]);
   const asyncGen1 = box

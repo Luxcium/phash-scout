@@ -21,5 +21,3 @@ export const devPaths = {
   X004Da,
   X004Db,
 };
-
-// /home/luxcium/projects/parallel-mapping/src/constants/devPaths.ts
