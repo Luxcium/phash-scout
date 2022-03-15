@@ -1,15 +1,15 @@
 import { devPaths } from '../constants/devPaths';
 import { filesTypes } from '../constants/filesTypes';
-import { asyncDirListWithFileType } from './asyncDirListWithFileType';
+import {
+  currentPath,
+  dirListWithFileType,
+  getCurrentPaths,
+} from './dirListWithFileType';
 import { getDirListFileTypes } from './getDirListWithFileType';
 import { getPathInfos } from './getPathInfos';
 import { getRawDirList } from './getRawDirList';
 import { getStats } from './getStats';
 
-export {
-  asyncDirListWithFileType,
-  dirListWithFileTypeSync,
-} from './asyncDirListWithFileType';
 export { FileType as FileTypes } from './FileTypeEnum';
 export type { FileType } from './FileTypeEnum';
 export {
@@ -32,5 +32,7 @@ export const fsTools = {
   getPathInfos,
   getRawDirList,
   getStats,
-  asyncDirListWithFileType,
+  currentPath,
+  dirListWithFileType,
+  getCurrentPaths,
 };

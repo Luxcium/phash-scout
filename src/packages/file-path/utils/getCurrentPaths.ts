@@ -1,5 +1,5 @@
-import { dirListWithFileType } from '../tools/asyncDirListWithFileType';
-import { isA_Promise } from '../tools/isA_Promise';
+import { dirListWithFileType } from '../tools/dirListWithFileType';
+import { isA_Promise } from '../tools/dirListWithFileType/isA_Promise';
 import { CurrentPath, DirentWithFileType } from '../types';
 import { getCurrentPath } from './getCurrentPath';
 
