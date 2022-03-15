@@ -1,13 +1,13 @@
+import { CURRENT_PATH } from '../../constants/radius';
 import { BoxedGenerator } from '../../core';
 import { PhashNow, TX } from '../../core/types';
 import { immediateZalgo } from '../../core/utils';
-import { getCurrentPaths } from '../../packages/file-path/tools/asyncDirListWithFileType';
+import { getCurrentPaths } from '../../packages/file-path/tools/dirListWithFileType';
 import type { CurrentPath } from '../../packages/file-path/types';
 import { filter } from '../../packages/file-path/utils';
+import { phashNow } from '../../packages/phash-now/phashNow';
 import { redisCreateClient } from '../redis/tools';
-import { CURRENT_PATH } from './constants';
 import { uniqueAdd } from './img-scout/querryAndAdd';
-import { phashNow } from './phashNow';
 import { readListRx } from './readListR1';
 
 const count = { index1: 1 };
@@ -24,16 +24,15 @@ export async function main2(
   /** REDIS CLIENT */
   const R = redisCreateClient({ port, dbNumber, host });
   await R.connect();
-  await R.QUIT();
   const step1 = (await getCurrentPaths(immediateZalgo(folder))).slice(0);
   const step2 = step1.filter(filter.fileType.file);
-  const step3 = BoxedGenerator.of(...step2);
+  const step3 = Array.of(...step2);
   const step4 = step3.map((paths, index) => {
     console.log(count.index1);
     return phashNow(paths, index || 0);
   });
   const step5 = step4.map(
-    async (hash: { path: CurrentPath; phash: PhashNow }) /* : TX */ => {
+    async (hash: { path: CurrentPath; phash: PhashNow }) => {
       const { path, phash } = hash;
       const phash_ = await phash.get();
       const result = [phash_, path, count.index1++];
@@ -82,8 +81,9 @@ export async function main2(
     })();
     console.log('step5', count.index1);
   });
-  const finalStep = step6.spark();
-  // console.log(finalStep.values);
+  const finalStep = step6;
+  await R.QUIT();
+
   return finalStep;
 }
 

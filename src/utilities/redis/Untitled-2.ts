@@ -4,11 +4,11 @@ import { Tedis } from 'tedis';
 import { devPaths } from '../../constants/devPaths';
 import { BoxedGenerator } from '../../core/classes/BoxedGenerator';
 import {
-  dirListWithFileTypeSync,
   getDirsSync,
   getFilesSync,
   getListingsSync,
 } from '../../packages/file-path/tools';
+import { dirListWithFileType } from '../../packages/file-path/utils/dirListWithFileType';
 import { jsonGet, jsonSet } from './jsonRedis';
 // export const SUBSET = 1000;
 // const DEBUG = true;
@@ -104,7 +104,7 @@ async function workingFunction(opts: { DEBUG: boolean }) {
       };
 
       const somedirListWithFileTypeSync = [
-        ...dirListWithFileTypeSync(collctn.fullPath),
+        ...dirListWithFileType(collctn.fullPath),
       ];
 
       const listings = getListingsSync(collctn.fullPath);

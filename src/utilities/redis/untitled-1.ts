@@ -10,10 +10,9 @@ import {
 } from '../../core/types';
 import { immediateZalgo } from '../../core/utils';
 import { fsTools } from '../../packages/file-path/tools';
+import { dirListWithFileType } from '../../packages/file-path/utils/dirListWithFileType';
 import { getPathStatsInfos } from './tools';
 import { tedis_jsonGet, tedis_jsonSet } from './tools/tedis_json';
-
-// type PathStatsTuple<T> = RedisJson_PathStatsGetter<T>;
 
 const CLOSE = 'close';
 const PREFIX = 'TESTING:JSON:REDIS';
@@ -111,11 +110,9 @@ const {
   get_toNamespacedPath,
   get_uid,
   get_win32,
-  asyncDirListWithFileType,
   getPathInfos,
   getStats,
 } = getPathStatsInfos;
-asyncDirListWithFileType;
 getPathInfos;
 getStats;
 
@@ -204,8 +201,7 @@ export function getEachStats(path_str: string) {
     ],
     [
       '.dirList',
-      async (): Promise<DirentWithFileType[]> =>
-        fsTools.asyncDirListWithFileType(path_str),
+      async (): Promise<DirentWithFileType[]> => dirListWithFileType(path_str),
     ],
     [
       '.posix.',
@@ -280,8 +276,7 @@ export function getEachStats2(path_str: string) {
   ];
   const dirList = [
     '.dirList',
-    async (): Promise<DirentWithFileType[]> =>
-      fsTools.asyncDirListWithFileType(path_str),
+    async (): Promise<DirentWithFileType[]> => dirListWithFileType(path_str),
   ];
   const posix = [
     '.posix.',

@@ -7,13 +7,15 @@ import {
   FilePath,
   SocketPath,
   SymbolicLinkPath,
-  UnknownTypePath,
+  UnknownTypePath
 } from '../../../packages/file-path/types';
 import { DirentWithFileType } from '../../types/DirentWithFileType';
 import { FileType } from '../../types/Enums/FileTypeEnum';
 
-export const currentPath = (folder: string) => (f: DirentWithFileType) =>
-  getCurrentPath(f, folder);
+/** @deprecated */
+export const currentPath =
+  (folder: string) => (f: DirentWithFileType) =>
+    getCurrentPath(f, folder);
 
 /*
     pathToFile: folderPath,
@@ -21,7 +23,7 @@ export const currentPath = (folder: string) => (f: DirentWithFileType) =>
     fileName: f.fileName,
     type: FileType.Unknown,
  */
-
+/** @deprecated */
 export function getCurrentPath(f: DirentWithFileType, folderPath: string) {
   const fullPath: CurrentPath = {
     pathToFile: folderPath,

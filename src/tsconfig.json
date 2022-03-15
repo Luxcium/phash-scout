@@ -2,8 +2,6 @@
   "extends": "../tsconfig.json",
   "include": [
     ".",
-    "../test/types.ts",
-    "../archives/files",
   ],
   "exclude": [],
   "compilerOptions": {

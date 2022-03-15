@@ -1,7 +1,7 @@
 import { stat } from 'fs/promises';
 import path from 'path';
 import { immediateZalgo } from '../../../core/utils';
-import { getKeywords } from './getKeywords.1';
+import { getKeywords } from './getKeywords';
 import { getxDir } from './getxDir';
 import { statsReducer } from './statsReducer';
 

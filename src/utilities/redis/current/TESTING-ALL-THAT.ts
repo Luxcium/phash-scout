@@ -3,11 +3,11 @@ import path from 'path';
 import { devPaths } from '../../../constants/devPaths';
 import { BoxedGenerator } from '../../../core/classes/BoxedGenerator';
 import {
-  dirListWithFileTypeSync,
   getDirsSync,
   getFilesSync,
   getListingsSync,
 } from '../../../packages/file-path/tools';
+import { dirListWithFileType } from '../../../packages/file-path/utils/dirListWithFileType';
 import { immediateZalgo } from '../../utils';
 import { redisCreateClient } from '../tools';
 import { replaceStr } from './replaceStr';
@@ -246,7 +246,7 @@ function workingFunction(opts: { DEBUG: number }) {
       };
 
       const somedirListWithFileTypeSync = [
-        ...dirListWithFileTypeSync(collctn.fullPath),
+        ...dirListWithFileType(collctn.fullPath),
       ];
 
       const listings = getListingsSync(collctn.fullPath); // getListings

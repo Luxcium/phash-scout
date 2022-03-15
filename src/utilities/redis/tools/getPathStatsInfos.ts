@@ -9,11 +9,9 @@ import type {
   RedisJson_StatsInfoGetterFunct,
 } from '../../../core/types';
 import { immediateZalgo } from '../../../core/utils';
-import {
-  asyncDirListWithFileType,
-  getPathInfos,
-  getStats,
-} from '../../../packages/file-path/tools';
+import { getPathInfos, getStats } from '../../../packages/file-path/tools';
+import { dirListWithFileTypeAsync } from '../../../packages/file-path/tools/dirListWithFileType/dirListWithFileTypeAsync';
+import { dirListWithFileType } from '../../../packages/file-path/utils/dirListWithFileType';
 
 type PathStatsTuple<T> = RedisJson_PathStatsTuple<T>;
 
@@ -215,8 +213,7 @@ const get_dirList: RedisJson_DirentInfoGetterFunct<DirentWithFileType[]> = (
 ): PathStatsTuple<DirentWithFileType[]> => {
   return [
     '.dirList',
-    async (): Promise<DirentWithFileType[]> =>
-      asyncDirListWithFileType(path_str),
+    async (): Promise<DirentWithFileType[]> => dirListWithFileType(path_str),
   ];
 };
 
@@ -252,7 +249,7 @@ const getPathStatsInfos = {
   get_win32,
   get_dirname,
   get_dirList,
-  asyncDirListWithFileType,
+  dirListWithFileTypeAsync,
   getPathInfos,
   getStats,
 };
@@ -287,7 +284,7 @@ export {
   get_uid,
   get_win32,
   getPathStatsInfos,
-  asyncDirListWithFileType,
+  dirListWithFileTypeAsync,
   getPathInfos,
   getStats,
 };
