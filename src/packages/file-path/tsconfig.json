@@ -1,11 +1,7 @@
 {
   "extends": "../../../tsconfig.json",
-  "include": [
-    ".",
-  ],
-  "exclude": [
-    "out"
-  ],
+  "include": ["."],
+  "exclude": ["out"],
   "compilerOptions": {
     "emitDeclarationOnly": false,
     "composite": true,
@@ -57,15 +53,9 @@
     "assumeChangesOnlyAffectDirectDependencies": false,
     "generateCpuProfile": "./performance/.cpuprofile",
     /* Specify a set of bundled library declaration files that describe the target runtime environment. */
-    "lib": [
-      "dom",
-      "esnext"
-    ],
+    "lib": ["dom", "esnext"],
     /* Specify type package names to be included without being referenced in a source file. */
-    "types": [
-      "node",
-      "jest"
-    ],
+    "types": ["node", "jest"],
     /* Completeness */
     "skipDefaultLibCheck": false,
     "skipLibCheck": false,
@@ -104,7 +94,7 @@
     // "noLib": true,
     /* Vebosity */
     "diagnostics": true,
-    "extendedDiagnostics": true,
+    "extendedDiagnostics": true
     // "listEmittedFiles": true,
     // "listFiles": true,
     // "traceResolution": true,
@@ -205,5 +195,5 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     // "skipLibCheck": true                              /* Skip type checking all .d.ts files. */
-  },
+  }
 }

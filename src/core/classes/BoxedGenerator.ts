@@ -20,9 +20,13 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
     if (values.length === 1) {
       const list = values[0];
       if (Array.isArray(list)) {
-        return new BoxedGenerator<TVal>(arrayGenerator(list)); /* as BoxedGenerator<TVal>; */
+        return new BoxedGenerator<TVal>(
+          arrayGenerator(list)
+        ); /* as BoxedGenerator<TVal>; */
       } else {
-        return new BoxedGenerator<TVal>(arrayGenerator([list])); /* as BoxedGenerator<TVal>; */
+        return new BoxedGenerator<TVal>(
+          arrayGenerator([list])
+        ); /* as BoxedGenerator<TVal>; */
       }
     } else {
       const list: TVal = [...values] as any;
@@ -52,12 +56,16 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
   }
 
   // static =======================================-| fromGen() |-====
-  public static fromGen<TVal>(generatorFn: () => Generator<TVal>): BoxedGenerator<TVal> {
+  public static fromGen<TVal>(
+    generatorFn: () => Generator<TVal>
+  ): BoxedGenerator<TVal> {
     return new BoxedGenerator<TVal>(generatorFn);
   }
 
   // static ==========================================-| from() |-====
-  public static from<TVal>(boxedList: IUnboxList<TVal> | IUnbox<TVal[]>): BoxedGenerator<TVal> {
+  public static from<TVal>(
+    boxedList: IUnboxList<TVal> | IUnbox<TVal[]>
+  ): BoxedGenerator<TVal> {
     return BoxedGenerator.of<TVal>(boxedList.unbox());
   }
 
@@ -83,7 +91,9 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
 
   // public ====================================-| awaitedMap() |-====
   public awaitedMapIndex: number = 0;
-  public awaitedMap<TMap>(fn: Mapper<Awaited<T>, Promise<TMap>>): BoxedGenerator<Promise<TMap>> {
+  public awaitedMap<TMap>(
+    fn: Mapper<Awaited<T>, Promise<TMap>>
+  ): BoxedGenerator<Promise<TMap>> {
     const generator = this.#valueGenerator;
     const that = this;
     function* arrayGenerator(): Generator<Promise<TMap>> {
@@ -208,7 +218,9 @@ export class PseudoCode<T> {
       // values.length !== 1
       // PseudoCode.of(1, 2, 3);
       const list = [...values];
-      return PseudoCode.of<TVal>(list as any as TVal); /* as PseudoCode<TVal>; */
+      return PseudoCode.of<TVal>(
+        list as any as TVal
+      ); /* as PseudoCode<TVal>; */
       // return null;
     }
   }

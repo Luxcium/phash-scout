@@ -40,10 +40,9 @@ export function getPathWithStats(
       try {
         // const extname = path.extname(fullPath);
 
-
         return {
           fileName,
-           extname:path.extname(fullPath),
+          extname: path.extname(fullPath),
           pathToFile,
           fullPath,
           type,
@@ -52,7 +51,7 @@ export function getPathWithStats(
       } catch (error: any) {
         return immediateZalgo<GetStats>({
           pathToFile: '',
-           extname:'',
+          extname: '',
           fullPath: '',
           fileName: '',
           type: FileTypes.Error,
@@ -69,7 +68,7 @@ export function getPathWithStats(
     }
     return {
       fileName,
-      extname:path.extname(fullPath),
+      extname: path.extname(fullPath),
       pathToFile,
       fullPath,
       type,
