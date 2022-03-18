@@ -12,12 +12,17 @@ export type WithFullPath = {
   fullPath: string;
 };
 
+export type WithFileExtname = {
+  extname: string;
+};
 export type WithFileType = {
   type: FileType;
 };
 
+// extname:path.extname(fullPath),
 export type CurrentPath = WithFileName &
   WithPathToFile &
+  WithFileExtname &
   WithFullPath &
   WithFileType;
 

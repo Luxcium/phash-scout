@@ -1,3 +1,4 @@
+import path from 'path';
 import { FileTypes } from '../tools';
 import {
   BlockDevicePath,
@@ -15,6 +16,7 @@ import {
 export function getCurrentPath(f: DirentWithFileType, folderPath: string) {
   const fullPath: CurrentPath = {
     fileName: f.fileName,
+    extname: path.extname(`${f.fileName}`),
     pathToFile: folderPath,
     fullPath: `${folderPath}/${f.fileName}`.replaceAll('//', '/'),
     type: FileTypes.Unknown,

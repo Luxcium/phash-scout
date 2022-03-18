@@ -14,3 +14,8 @@ export function getRawDirListSync(pathSrc: string) {
   });
   return dirListing;
 }
+
+export function test_getRawDirListSync() {
+  console.log(getRawDirListSync('/'));
+}
+// test_getRawDirListSync();

@@ -25,6 +25,7 @@ export function getChildPaths(
       return [
         immediateZalgo<CurrentPathError>({
           pathToFile: '',
+          extname: '',
           fullPath: '',
           fileName: '',
           type: FileTypes.Error,
@@ -34,6 +35,7 @@ export function getChildPaths(
       return [
         immediateZalgo<CurrentPathError>({
           pathToFile: '',
+          extname: '',
           fullPath: '',
           fileName: '',
           type: FileTypes.Error,

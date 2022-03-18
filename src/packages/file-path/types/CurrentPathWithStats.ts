@@ -5,8 +5,10 @@ import { GetStats } from './GetStats';
 
 export type CurrentPathWithStats = {
   fileName: string;
+  extname: string;
   pathToFile: string;
   fullPath: string;
+
   type: FileType;
   getStats: () => Promise<GetStats>;
   getChild: () => Promise<

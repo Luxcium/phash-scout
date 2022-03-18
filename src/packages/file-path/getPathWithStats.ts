@@ -1,4 +1,5 @@
 import { stat } from 'fs/promises';
+import path from 'path';
 import { immediateZalgo } from './imports';
 import { FileTypes } from './tools';
 import type {
@@ -9,10 +10,12 @@ import type {
 import { dirListWithFileType } from './utils/dirListWithFileType';
 import { getChildPaths } from './utils/getChildPaths';
 import { getCurrentPath } from './utils/getCurrentPath';
+path;
 export function getPathWithStats(
   folderPath: string,
   withStats: false
 ): Promise<CurrentPathWithStats>[];
+
 export function getPathWithStats(
   folderPath: string,
   withStats: true
@@ -21,6 +24,9 @@ export function getPathWithStats(
   folderPath: string,
   withStats: boolean
 ): Promise<CurrentPathWithStats | CurrentPathAndStats>[];
+export function getPathWithStats(
+  folderPath: string
+): Promise<CurrentPathWithStats>[];
 export function getPathWithStats(
   folderPath: string,
   withStats: boolean = false
@@ -32,8 +38,12 @@ export function getPathWithStats(
     };
     const getStats = async (): Promise<GetStats> => {
       try {
+        // const extname = path.extname(fullPath);
+
+
         return {
           fileName,
+           extname:path.extname(fullPath),
           pathToFile,
           fullPath,
           type,
@@ -42,6 +52,7 @@ export function getPathWithStats(
       } catch (error: any) {
         return immediateZalgo<GetStats>({
           pathToFile: '',
+           extname:'',
           fullPath: '',
           fileName: '',
           type: FileTypes.Error,
@@ -58,6 +69,7 @@ export function getPathWithStats(
     }
     return {
       fileName,
+      extname:path.extname(fullPath),
       pathToFile,
       fullPath,
       type,

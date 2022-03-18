@@ -3,88 +3,105 @@ import { BoxedGenerator } from '../../core';
 import { PhashNow, TX } from '../../core/types';
 import { immediateZalgo } from '../../core/utils';
 import { getCurrentPaths } from '../../packages/file-path/tools/dirListWithFileType';
-import type { CurrentPath } from '../../packages/file-path/types';
-import { filter } from '../../packages/file-path/utils';
+import { CurrentPath } from '../../packages/file-path/types';
+import { filter, getPathWithStats } from '../../packages/file-path/utils';
 import { phashNow } from '../../packages/phash-now/phashNow';
 import { redisCreateClient } from '../redis/tools';
 import { uniqueAdd } from './img-scout/querryAndAdd';
 import { readListRx } from './readListR1';
 
 const count = { index1: 1 };
-main2().then().catch(console.error);
+type PHashedPath = { path: CurrentPath; phash: PhashNow };
+export type PHashedTuple = [
+  pHash: string | null,
+  currentPath: CurrentPath,
+  count: number
+];
 
-export async function main2(
-  folder = CURRENT_PATH,
-  port = 6383,
-  dbNumber = 0,
-  host = '0.0.0.0'
-) {
-  console.error('IN FUNCTION MAIN-2 at:', __filename, '\n');
-
+export async function rConnect(port = 6383, dbNumber = 0, host = '0.0.0.0') {
   /** REDIS CLIENT */
   const R = redisCreateClient({ port, dbNumber, host });
   await R.connect();
-  const step1 = (await getCurrentPaths(immediateZalgo(folder))).slice(0);
-  const step2 = step1.filter(filter.fileType.file);
-  const step3 = Array.of(...step2);
-  const step4 = step3.map((paths, index) => {
-    console.log(count.index1);
+  return R;
+}
+
+listFiles(rConnect(), CURRENT_PATH).then().catch(console.error);
+
+export async function listFiles(r: Promise<any>, folder: string) {
+  const R = await r;
+  const seedString = folder;
+  const currentPathList = getPathWithStats(seedString, false);
+
+  const subPathList = currentPathList.slice(1);
+  const filesPathList = subPathList.filter(filter.fileType.file);
+  const filesPathBoxedGen = BoxedGenerator.of(
+    ...(await Promise.all(filesPathList))
+  );
+  // const filesPathBoxedGen = Array.of(...filesPathList);
+  const pHashesBGen = filesPathBoxedGen.map((paths, index) => {
     return phashNow(paths, index || 0);
   });
-  const step5 = step4.map(
-    async (hash: { path: CurrentPath; phash: PhashNow }) => {
-      const { path, phash } = hash;
-      const phash_ = await phash.get();
-      const result = [phash_, path, count.index1++];
-      console.log(result);
-      uniqueAdd;
-      return result;
+  const pHashedTupleBGen = pHashesBGen.map(async (hash: PHashedPath) => {
+    const { path, phash } = hash;
+    const phash_ = await phash.get();
+    // const result: PHashedTuple = [phash_, path, count.index1++];
+    // result;
+    return { phash_, ...path, i: phash.index, count: count.index1++ };
+  });
+  // pHashedTupleBGen.map(async pHashedTup => {
+  //   const [pHash, currentPath, count] = await pHashedTup;
+  //   return [pHash, currentPath, count];
+  // });
+  // uniqueAdd;
+  // if (phash_ == null) {
+  //   return {
+  //     transact: immediateZalgo([]),
+  //     path,
+  //     pHash: { value: phash_, ...phash },
+  //   };
+  // }
+  // const pQuerryAndAdd = {
+  //   R,
+  //   k: `TEST:${path.pathToFile}`,
+  //   phash_,
+  //   title: path.fullPath,
+  //   radius: '3',
+  // };
+  // const transact = uniqueAdd({
+  //   R,
+  //   k: `TEST:${path.pathToFile}`,
+  //   phash_,
+  //   title: path.fullPath,
+  //   radius: '3',
+  // });
+  // return {
+  //   transact,
+  //   path,
+  //   pHash: { value: phash_, ...phash },
+  //   pQuerryAndAdd,
+  // };
 
-      // if (phash_ == null) {
-      //   return {
-      //     transact: immediateZalgo([]),
-      //     path,
-      //     pHash: { value: phash_, ...phash },
-      //   };
-      // }
-      // const pQuerryAndAdd = {
-      //   R,
-      //   k: `TEST:${path.pathToFile}`,
-      //   phash_,
-      //   title: path.fullPath,
-      //   radius: '3',
-      // };
-      // const transact = uniqueAdd({
-      //   R,
-      //   k: `TEST:${path.pathToFile}`,
-      //   phash_,
-      //   title: path.fullPath,
-      //   radius: '3',
-      // });
-      // return {
-      //   transact,
-      //   path,
-      //   pHash: { value: phash_, ...phash },
-      //   pQuerryAndAdd,
-      // };
-    }
-  );
   // const step6 = step5.map(async tx => {
   //   console.log(await tx);
   //   // await readListRx(tx);
   //   return tx;
   // });
-  const step6 = step5.map(result => {
-    (async () => {
-      await result;
-      console.log(count.index1);
-    })();
-    console.log('step5', count.index1);
+  const finalStep = pHashedTupleBGen.map(async result => {
+    console.timeLog('bunch-of-stuff', await result);
+    return result;
   });
-  const finalStep = step6;
-  await R.QUIT();
 
-  return finalStep;
+  // return Promise.all(finalStep) /* .asyncSpark() */
+  //   .then(async r => {
+  //     // r.map(i => console.log(i));
+  //     await R.QUIT();
+  //     return r;
+  //   });
+  return finalStep.asyncSpark().then(async r => {
+    // r.map(i => console.log(i));
+    await R.QUIT();
+    return r;
+  });
 }
 
 // main().then().catch(console.error);

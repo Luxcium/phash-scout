@@ -24,3 +24,8 @@ export function dirListWithFileType(
   }
   return dirListWithFileTypeSync(folderPath);
 }
+
+export function test() {
+  console.log(dirListWithFileType('/'));
+}
+test; //();
