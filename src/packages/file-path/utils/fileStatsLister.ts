@@ -1,5 +1,5 @@
 import { Stats } from 'fs';
-
+/** @deprecated */
 export const statsLister = (stats: Stats) => [
   ['.isDirectory', stats.isDirectory],
   ['.isFile', stats.isFile],
