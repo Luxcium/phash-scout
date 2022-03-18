@@ -81,6 +81,19 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
     return BoxedGenerator.fromGen(arrayGenerator);
   }
 
+  // public ====================================-| awaitedMap() |-====
+  public awaitedMapIndex: number = 0;
+  public awaitedMap<TMap>(fn: Mapper<Awaited<T>, Promise<TMap>>): BoxedGenerator<Promise<TMap>> {
+    const generator = this.#valueGenerator;
+    const that = this;
+    function* arrayGenerator(): Generator<Promise<TMap>> {
+      for (const item of generator()) {
+        yield (async () => fn(await item, that.mapIndex++))();
+      }
+    }
+    return BoxedGenerator.fromGen(arrayGenerator);
+  }
+
   // public =======================================-| thenMap() |-====
   public thenMap<TMap1, TMap2 = never>(
     onfulfilled?: ThenMapper<T, TMap1> | null,
