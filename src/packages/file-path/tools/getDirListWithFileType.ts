@@ -1,6 +1,7 @@
 import type { Dirent } from 'fs';
+import { filesTypeList } from '../constants/filesTypes';
 import type { DirentWithFileType } from '../types';
-import { FileType as filesTypes } from './FileTypeEnum';
+// import { FileType as filesTypes } from './FileTypeEnum';
 
 export function getDirListFileTypes(
   rawDirListing: Dirent[],
@@ -11,7 +12,7 @@ export function getDirListFileTypes(
       const curent = { fileName: d.name };
       // HACK:
       //@ts-ignore
-      filesTypes.map(method => (curent[method] = d[method]()));
+      filesTypeList.map(method => (curent[method] = d[method]()));
 
       return curent as DirentWithFileType;
     });

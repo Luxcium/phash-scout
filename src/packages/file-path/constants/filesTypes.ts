@@ -1,4 +1,4 @@
-export const filesTypes = [
+export const filesTypeList = [
   'isBlockDevice',
   'isCharacterDevice',
   'isDirectory',

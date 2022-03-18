@@ -1,5 +1,5 @@
 import { devPaths } from '../constants/devPaths';
-import { filesTypes } from '../constants/filesTypes';
+import { filesTypeList } from '../constants/filesTypes';
 import {
   currentPath,
   dirListWithFileType,
@@ -24,10 +24,10 @@ export { getDirListFileTypes } from './getDirListWithFileType';
 export { getPathInfos } from './getPathInfos';
 export { getRawDirList, getRawDirListSync } from './getRawDirList';
 export { getStats, getStatsSync } from './getStats';
-
+export { isA_Promise } from './isA_Promise';
 export const fsTools = {
   devPaths,
-  filesTypes,
+  filesTypeList,
   getDirListFileTypes,
   getPathInfos,
   getRawDirList,
