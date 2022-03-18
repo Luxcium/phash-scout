@@ -140,6 +140,12 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
     return BoxedGenerator.of(...this.unbox());
   }
 
+  // public ====================================-| sparkAsync() |-====
+  public async asyncSpark() {
+    const result = Promise.all(this.unbox().map(i => immediateZalgo(i)));
+    return BoxedGenerator.of(...(await result));
+  }
+
   // get ==============================================-| box() |-====
   get box() {
     return Box.of(this.unbox());
