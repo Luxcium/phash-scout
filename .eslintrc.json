@@ -1,18 +1,37 @@
 {
-  "env": {
-    "es2021": true,
-    "node": true
-  },
-  "extends": [
-    "eslint:recommended"
-  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true,
+    "node": true
+  },
   "plugins": [
+    "unicorn",
+    "prettier",
+    "simple-import-sort",
+    "import",
+    "jsdoc",
     "@typescript-eslint"
+  ],
+  "extends": [
+    "plugin:jsonc/base",
+    "plugin:jsonc/recommended-with-json",
+    "plugin:jsonc/recommended-with-jsonc",
+    "plugin:jsonc/recommended-with-json5",
+    "plugin:jsonc/auto-config",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint",
+    "prettier/babel",
+    "prettier/flowtype",
+    "prettier/react",
+    "prettier/standard",
+    "prettier/unicorn",
+    "prettier/vue"
   ],
   "rules": {
     "comma-style": [
@@ -46,7 +65,7 @@
       }
     ],
     "no-unused-vars": [
-      "error",
+      "off",
       {
         "ignoreRestSiblings": true
       }
