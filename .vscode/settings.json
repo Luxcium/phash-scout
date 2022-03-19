@@ -1,64 +1,104 @@
 {
-  // #region: FORMAT & FILES BEHAVIOUR                                          !
   /*
-  |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
-  ―― FORMAT BEHAVIOUR
+  |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
   */
-  // "editor.formatOnPaste": true,
+  // #region: EDITOR & TERMINAL                                      !
+  "workbench.iconTheme": "material-icon-theme",
+  "window.zoomLevel": 2,
+  "editor.fontFamily": "'VictorMono Nerd Font',Victor Mono, Fira Code",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 20,
+  "editor.fontWeight": "500",
+  "terminal.integrated.fontFamily": "'TerminessTTF Nerd Font Mono', 'Anonymice NF', '3270Narrow NF', mono",
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.fontWeight": "600",
+  "terminal.integrated.fontWeightBold": "bold",
+  // #endregion: EDITOR & TERMINAL                                   !
+  /*
+  |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
+  */
+  // #region: excludes                                               !
+  "files.exclude": {
+    ".directory": true,
+    "dist": false,
+    "out": false
+  },
+  "search.exclude": {
+    "docs": true,
+    "dist": true,
+    "out": true
+  },
+  // #endregion: excludes                                            !
+  /*
+  |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
+  */
+  // #region: FORMAT BEHAVIOUR                                       !
+  "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",
-  "editor.tabSize": 2,
   "editor.formatOnType": true,
   "editor.suggest.showFiles": true,
   "editor.suggest.showFolders": true,
+  "editor.tabSize": 2,
   "files.eol": "\n",
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
-  /*
-  |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
-  */
+  //                                                                  ――
+  // ―― CODEACTIONSONSAVE BEHAVIOUR:
   "editor.codeActionsOnSave": [
     "source.addMissingImports",
     "source.organizeImports",
-    "source.fixAll"
-    // "source.eslint",
+    "source.fixAll.eslint",
+    "source.fixAll",
   ],
+  // #endregion: FORMAT BEHAVIOUR                                    !
   /*
-  |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
+  |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
   */
-  "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[yaml]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
-  },
-  // #endregion: FILES & FORMAT BEHAVIOUR                                       !
-  // #region: JAVASCRIPT & TYPESCRIPT                                           !
+  // #region: PRETTIER                                               !
+  "prettier.enable": true,
+  "prettier.requireConfig": true,
+  "prettier.trailingComma": "all",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.printWidth": 80,
+  "prettier.proseWrap": "preserve",
+  // #endregion: PRETTIER                                            !
   /*
-  |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
-  ―― JAVASCRIPT
+  |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
   */
+  // #region: ESLINT                                                 !
+  "eslint.quiet": true,
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.codeActionsOnSave.mode": "all",
+  "eslint.packageManager": "yarn",
+  // #endregion: ESLINT                                              !
+  /*
+  |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
+  */
+  // #region: JAVASCRIPT BEHAVIOUR                                   !
+  "javascript.format.enable": true,
   "javascript.format.semicolons": "insert",
+  "javascript.suggest.paths": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
   "javascript.preferences.importModuleSpecifier": "relative",
   "javascript.preferences.quoteStyle": "single",
   "javascript.preferences.useAliasesForRenames": false,
   "javascript.referencesCodeLens.enabled": true,
   "javascript.referencesCodeLens.showOnAllFunctions": true,
   "javascript.suggest.completeFunctionCalls": true,
-  "javascript.updateImportsOnFileMove.enabled": "always",
+  // #endregion: JAVASCRIPT                                          !
   /*
-  |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
-  ―― TYPESCRIPT
+  |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
   */
-  "typescript.check.npmIsInstalled": false,
+  // #region: TYPESCRIPT BEHAVIOUR                                   !
+  "typescript.format.enable": true,
   "typescript.format.semicolons": "insert",
+  "typescript.suggest.paths": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.check.npmIsInstalled": false,
   "typescript.implementationsCodeLens.enabled": true,
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.includePackageJsonAutoImports": "on",
@@ -69,55 +109,28 @@
   "typescript.suggest.autoImports": true,
   "typescript.suggest.completeFunctionCalls": true,
   "typescript.suggest.enabled": true,
-  "typescript.suggest.paths": true,
   "typescript.suggestionActions.enabled": true,
   "typescript.surveys.enabled": false,
-  "typescript.updateImportsOnFileMove.enabled": "always",
   // "typescript.tsdk": "node_modules/typescript/lib",
-  // "typescript.tsserver.experimental.enableProjectDiagnostics": true,
-  // #endregion: JAVASCRIPT & TYPESCRIPT
-  // #region: PATH INTELLISENSE                                                 !
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  // #endregion: TYPESCRIPT BEHAVIOUR                                !
   /*
-  |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
-  ―― PATH-INTELLISENSE
+  |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
   */
+  // #region: PATH-INTELLISENSE                                      !
   "path-intellisense.extensionOnImport": false,
-  "path-intellisense.pathToFileWorkspace": false,
+  "path-intellisense.absolutePathToWorkspace": false,
   "path-intellisense.autoSlashAfterDirectory": false,
   "path-intellisense.showHiddenFiles": true,
-  // #endregion: PATH INTELLISENSE                                              !
-  // #region: PRETTIER                                                          !
+  // #endregion: PATH-INTELLISENSE                                   !
   /*
-  |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
-  ―― PRETTIER
+  |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
   */
-  "prettier.enable": true,
-  "prettier.requireConfig": true,
-  "prettier.printWidth": 80,
-  "prettier.proseWrap": "preserve",
-  "prettier.trailingComma": "all",
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  // =====2021=====Luxcium=====Author==Benjamin=Vincent=(Luxcium)=License==MIT====
-  // #endregion: PRETTIER                                                       !
-  // #region: ESLINT                                                            !
+  // #region: BETTER COMMENTS                                        !
   /*
-  |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
-  ―― ESLINT
-  */
-  // "eslint.quiet": true,
-  "eslint.format.enable": true,
-  "eslint.lintTask.enable": true,
-  "eslint.alwaysShowStatus": true,
-  "eslint.codeActionsOnSave.mode": "all",
-  "eslint.packageManager": "yarn",
-  // #endregion: ESLINT                                                         !
-  // #region: BETTER COMMENTS                                                   !
-  /*
-  |-···――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――···-|
-  ―― BETTER COMMENTS
-      "problemsErrorIcon.foreground": "#ff3366",
-      "problemsInfoIcon.foreground": "#ffcc55ee",
-      "problemsWarningIcon.foreground": "#ccff33",
+     "problemsErrorIcon.foreground": "#ff3366",
+     "problemsInfoIcon.foreground": "#ffcc55ee",
+     "problemsWarningIcon.foreground": "#ccff33",
   */
   // "#F36F"
   // "#F80B"
@@ -136,20 +149,21 @@
   "better-comments.highlightPlainText": true,
   "better-comments.multilineComments": true,
   "better-comments.tags": [
-    // #region:
+    // #region
     {
       "tag": "#region",
       "color": "#FF3",
       "strikethrough": false,
       "backgroundColor": "#FF34"
     },
+    // #endregion
     {
       "tag": "#endregion",
       "color": "#F15",
       "strikethrough": false,
       "backgroundColor": "#F154"
     },
-    // #endregion:
+    //:
     {
       // ~!-----------------------------------------------------------!~
       "tag": "~!",
@@ -932,6 +946,36 @@
   ],
   "[ignore]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
-  }
-  // #endregion: BETTER COMMENTS                                                !
+  },
+  // #endregion: BETTER COMMENTS                                     !
+  /*
+  |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
+  */
+  // #region: CUSTOMS RULES                                          !
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.fontFamily": "'VictorMono Nerd Font', 'hurmit Nerd Font mono','ProFontWindows Nerd Font mono','meslolgl Nerd Font mono','Iosevka Nerd Font Mono','SauceCodePro Nerd Font','ProFontIIx Nerd Font',mono",
+    // "editor.fontSize": 26,
+    // "editor.fontWeight": "400",
+    // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.fontFamily": "'VictorMono Nerd Font', 'hurmit Nerd Font mono','ProFontWindows Nerd Font mono','meslolgl Nerd Font mono','Iosevka Nerd Font Mono','SauceCodePro Nerd Font','ProFontIIx Nerd Font',mono",
+    // "editor.fontSize": 22,
+    // "editor.fontWeight": "500",
+    // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.fontFamily": "'VictorMono Nerd Font', 'hurmit Nerd Font mono','ProFontWindows Nerd Font mono','meslolgl Nerd Font mono','Iosevka Nerd Font Mono','SauceCodePro Nerd Font','ProFontIIx Nerd Font',mono",
+    // "editor.fontSize": 22,
+    // "editor.fontWeight": "500",
+    // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  // #endregion: CUSTOMS RULES                                       !
 }
