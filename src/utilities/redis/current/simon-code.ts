@@ -76,8 +76,8 @@ async function runApplication(port: number, _path: string) {
     const spiderFolder = getSpiderFolder(client, WriterTool);
     await spiderFolder(_path);
     await client.disconnect();
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
   }
 }
 

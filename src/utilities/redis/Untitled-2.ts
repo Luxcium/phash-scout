@@ -110,7 +110,7 @@ async function workingFunction(opts: { DEBUG: boolean }) {
 
       const listings = getListingsSync(collctn.fullPath);
       const getThisFileType = (f: string) =>
-        somedirListWithFileTypeSync.filter(item => item.fileName === f)[0];
+        somedirListWithFileTypeSync.find(item => item.fileName === f);
 
       /**
        * for each collections list contained files f

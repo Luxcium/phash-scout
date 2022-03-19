@@ -12,19 +12,17 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
   public static of<TVal>(...values: TVal[] | [TVal[]]): BoxedGenerator<TVal> {
     const arrayGenerator = (array: TVal[]): (() => Generator<TVal>) =>
       function* (): Generator<TVal> {
-        for (let index = 0; index < array.length; index++) {
-          const currentValue = array[index];
+        for (const currentValue of array) {
           yield currentValue;
         }
       };
     if (values.length === 1) {
       const list = values[0];
-      if (Array.isArray(list)) {
-        return new BoxedGenerator<TVal>(arrayGenerator(list));
-      } else {
-        /* as BoxedGenerator<TVal>; */
-        return new BoxedGenerator<TVal>(arrayGenerator([list]));
-      } /* as BoxedGenerator<TVal>; */
+      return Array.isArray(list)
+        ? new BoxedGenerator<TVal>(arrayGenerator(list))
+        : new BoxedGenerator<TVal>(
+            arrayGenerator([list])
+          ); /* as BoxedGenerator<TVal>; */
     } else {
       const list: TVal = [...values] as any;
       return BoxedGenerator.of<TVal>(list); /* as PseudoCode<TVal>; */
@@ -35,8 +33,7 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
   public static of2<TVal>(...values: TVal[] | [TVal[]]): BoxedGenerator<TVal> {
     const arrayGenerator = (array: TVal[]): (() => Generator<TVal>) =>
       function* (): Generator<TVal> {
-        for (let index = 0; index < array.length; index++) {
-          const currentValue = array[index];
+        for (const currentValue of array) {
           yield currentValue;
         }
       };
@@ -203,13 +200,9 @@ export class PseudoCode<T> {
   public static of<TVal>(...values: TVal[] | [TVal[]]): PseudoCode<TVal> {
     if (values.length === 1) {
       const list = values[0];
-      if (Array.isArray(list)) {
-        return new PseudoCode<TVal>(list) /* as PseudoCode<TVal>; */;
-      }
-      // not Array.isArray(list)
-      else {
-        return new PseudoCode<TVal>([list]);
-      } /* as PseudoCode<TVal>; */
+      return Array.isArray(list)
+        ? new PseudoCode<TVal>(list)
+        : new PseudoCode<TVal>([list]); /* as PseudoCode<TVal>; */
     } else {
       // values.length !== 1
       // PseudoCode.of(1, 2, 3);

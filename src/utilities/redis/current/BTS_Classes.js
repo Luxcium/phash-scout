@@ -97,7 +97,7 @@ export class BinarySearchTree {
     }
     var current = this.root;
     while (true) {
-      if (value === current.value) return undefined;
+      if (value === current.value) return;
       if (value < current.value) {
         if (current.left === null) {
           current.left = newNode;

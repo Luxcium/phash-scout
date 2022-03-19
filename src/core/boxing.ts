@@ -171,8 +171,9 @@ class None<T> {
   }
 
   public map<TMap>(fn: (val: T) => TMap) {
-    if (this._value !== undefined) return new None<TMap>(fn(this._value));
-    else return new None<TMap>(this._value as any);
+    return this._value !== undefined
+      ? new None<TMap>(fn(this._value))
+      : new None<TMap>(this._value as any);
   }
 }
 
@@ -208,8 +209,9 @@ export class Result<T> {
   }
 
   public map<TMap>(fn: (val: T) => TMap) {
-    if (this.isNothing()) return new Result<TMap>();
-    else return new Result<TMap>(fn(this._value));
+    return this.isNothing()
+      ? new Result<TMap>()
+      : new Result<TMap>(fn(this._value));
   }
 
   public ap<TMap>(c: Result<(val: T) => TMap>) {
@@ -323,7 +325,7 @@ export function ap<TMap>(self: any, c: SimpleBox<(val: any) => unknown>) {
       const head = itemList.shift();
       if (head) return tListMapper(/* <any, unknown> */ head(item), itemList);
 
-      throw Error('NEVER');
+      throw new Error('NEVER');
     }
     return item;
   }
@@ -426,8 +428,7 @@ export class BoxedGenerator<T> {
   ): BoxedGenerator<TVal> => {
     const arrayGenerator = (array: TVal[]) =>
       function* (): Generator<TVal> {
-        for (let index = 0; index < array.length; index++) {
-          const currentValue = array[index];
+        for (const currentValue of array) {
           yield currentValue;
         }
       };
@@ -604,8 +605,9 @@ class Nothing<T> {
   }
 
   public map<TMap>(fn: (val: T) => TMap) {
-    if (this.#value !== undefined) return new Nothing<TMap>(fn(this.#value));
-    else return new Nothing<TMap>(this.#value as any);
+    return this.#value !== undefined
+      ? new Nothing<TMap>(fn(this.#value))
+      : new Nothing<TMap>(this.#value as any);
   }
 }
 

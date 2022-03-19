@@ -10,8 +10,9 @@ class Nothing<T> {
   }
 
   public map<TMap>(fn: (val: T) => TMap) {
-    if (this.#value !== undefined) return new Nothing<TMap>(fn(this.#value));
-    else return new Nothing<TMap>(this.#value as any);
+    return this.#value !== undefined
+      ? new Nothing<TMap>(fn(this.#value))
+      : new Nothing<TMap>(this.#value as any);
   }
 }
 

@@ -30,9 +30,7 @@ export async function main3(
         imgExt,
       };
 
-      const isValidExt = ['jpg', 'jpeg', 'png'].some(
-        ex => ex === imgFullPath.imgExt
-      );
+      const isValidExt = ['jpg', 'jpeg', 'png'].includes(imgFullPath.imgExt);
 
       if (isValidExt) {
         const thisImage = await fs.promises.readFile(imgPath);

@@ -13,7 +13,7 @@ async function immediate(str: Promise<S>): Promise<S> {
   try {
     return immediateZalgo(bigString_(await str));
   } catch (error) {
-    throw Error(error as any);
+    throw new Error(error as any);
   }
 }
 function bigString_(str: S): S {

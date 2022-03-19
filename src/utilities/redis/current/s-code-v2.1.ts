@@ -14,7 +14,7 @@ import { WriterTool } from './WriterTool';
 // INFO:~            C : are counters                                           ~
 // INFO:~            R : is RedisClient                                         ~
 
-let STEPS: number | undefined = undefined;
+let STEPS: number | undefined;
 let smallCount = 0;
 let turns = 1000;
 
@@ -41,8 +41,8 @@ async function MAIN(port: number, dbNumber: number, _path: string) {
         async item => (isArray(item) && (await Promise.all(item))) || item
       )
     ).then(async () => await R.quit());
-  } catch (e) {
-    console.error('at runApplication:\n\n', e);
+  } catch (error) {
+    console.error('at runApplication:\n\n', error);
   }
 }
 
@@ -63,7 +63,7 @@ export function getSpiderFolder(r: RedisClientType, writerTool: WriterTool) {
         .map(_user => {
           if (_user.isDirectory()) return stageInfos(folderPath, _user.name);
 
-          return undefined;
+          return;
         })
         .thenMap();
       // ---------------------------------------------------------------//!!-----
@@ -119,7 +119,7 @@ export function getSpiderFolder(r: RedisClientType, writerTool: WriterTool) {
       }
 
       return Promise.all(A);
-    } catch (error) {
+    } catch {
       console.error('at Promise.all(returnList) or in that scope');
       return [];
     }

@@ -8,15 +8,15 @@ export function fromTo(from: number, to: number) {
   let unspecified = false;
   if (from == to) {
     unspecified = true;
-    throw Error('behaviour is unspecified');
+    throw new Error('behaviour is unspecified');
   }
   if (from < 0) {
     unspecified = true;
-    throw Error('behaviour is unspecified');
+    throw new Error('behaviour is unspecified');
   }
   if (to < 0) {
     unspecified = true;
-    throw Error('behaviour is unspecified');
+    throw new Error('behaviour is unspecified');
   }
 
   if (from > to) {

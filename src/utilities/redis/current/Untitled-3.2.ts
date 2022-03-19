@@ -6,7 +6,7 @@ import { srtPath } from './srtPath';
 import { withPrefix } from './withPrefix';
 
 const PREFIX = 'TESTING:001::JSON:REDIS';
-const STEPS = 100000;
+const STEPS = 100_000;
 let COUNT = 0;
 
 main();

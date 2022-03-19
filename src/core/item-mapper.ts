@@ -29,8 +29,8 @@ export async function itemMapper<T, U>({
       value,
     };
     return promiseFulfilledResult;
-  } catch (reason_) {
-    const reason = await immediateZalgo(reason_);
+  } catch (error) {
+    const reason = await immediateZalgo(error);
     const promiseRejectedResult: PromiseRejectedResult = {
       status: 'rejected',
       reason,

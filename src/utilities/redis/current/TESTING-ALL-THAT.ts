@@ -262,7 +262,7 @@ function workingFunction(opts: { DEBUG: number }) {
 
       const listings = getListingsSync(collctn.fullPath); // getListings
       const getThisFileType = (f: string) =>
-        somedirListWithFileTypeSync.filter(item => item.fileName === f)[0];
+        somedirListWithFileTypeSync.find(item => item.fileName === f);
 
       /**
        * for each collections list contained files f

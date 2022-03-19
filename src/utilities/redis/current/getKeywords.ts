@@ -7,7 +7,7 @@ export function getKeywords(collctnShortName: string) {
     .filter(csn => isNaN(csn as unknown as number))
     .filter(csn => csn.length > 1)
     .slice(0, -1)
-    .filter(notIn => !tooShort.some(isIn => isIn === notIn))
+    .filter(notIn => !tooShort.includes(notIn))
     .sort()
     .sort((a, b) => a.length - b.length);
 }

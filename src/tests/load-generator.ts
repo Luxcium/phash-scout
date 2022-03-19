@@ -133,7 +133,7 @@ export function loadGenerator() {
     // }
 
     function percent(num: number) {
-      return Math.round(num * 10000) / 100;
+      return Math.round(num * 10_000) / 100;
     }
     // @ts-ignore Parameter 'timeout' implicitly has an 'any' type.ts(7006)
     function stop(timeout) {
