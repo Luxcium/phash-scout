@@ -46,7 +46,8 @@
     "noErrorTruncation": true,
     "useDefineForClassFields": true,
     "assumeChangesOnlyAffectDirectDependencies": false,
-    "generateCpuProfile": "./performance/.cpuprofile",
+    // "generateCpuProfile": "./out/performance/cpu-info.cpuprofile",
+    // "generateCpuProfile": "./performance/.cpuprofile",
     /* Specify a set of bundled library declaration files that describe the target runtime environment. */
     "lib": [
       "dom",

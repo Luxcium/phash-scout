@@ -25,6 +25,8 @@
         "tsc",
         "-b",
         "${workspaceFolder}/src/tsconfig.json",
+        "--generateCpuProfile",
+        "${workspaceFolder}/out/performance/cpu-info.cpuprofile",
         "--verbose"
       ],
       "isBackground": false,

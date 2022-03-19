@@ -13,6 +13,7 @@
     "src",
     "test",
     "dist",
+    "archives",
     "out"
   ],
   "compilerOptions": {
@@ -22,8 +23,9 @@
     "composite": true,
     "rootDir": ".",
     // We can't pass "noEmit" in incremental mode, but this is close enough.
-    "outDir": "./.tmp/tsc/root",
+    "outDir": "./.tmp/build",
     "emitDeclarationOnly": true,
     "allowSyntheticDefaultImports": true,
+    "generateCpuProfile": "./.tmp/performance/cpu-info.cpuprofile",
   }
 }
