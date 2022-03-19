@@ -6,7 +6,7 @@ import {
   DirentWithFileType,
   MyPInfos,
   MyStats,
-  RedisJson_InfoGetterFunct,
+  RedisJson_InfoGetterFunct
 } from '../../core/types';
 import { immediateZalgo } from '../../core/utils';
 import { fsTools } from '../../packages/file-path/tools';
@@ -28,8 +28,8 @@ const atTest001 = rootJsonRedis(redisKey);
 
 const setValue =
   (val: string) =>
-  (close: 'close' | boolean = false) =>
-    atTest001(val, close);
+    (close: 'close' | boolean = false) =>
+      atTest001(val, close);
 
 (async () => console.log(await setValue(value)(CLOSE)))();
 
@@ -44,23 +44,23 @@ const getValue = (close: 'close' | boolean = false) => nameit(redisKey, close);
 export function nameMeLater<T>(pathStatsGetter: RedisJson_InfoGetterFunct<T>) {
   return <U extends string | MyStats | MyPInfos>(p: U) =>
     (RDSServer: Tedis) =>
-    (key: string) =>
-      (async () => {
-        const [jsonPath_, toGetInfo] = pathStatsGetter(p);
-        try {
-          return await testJsonRedis(jsonPath_)(RDSServer)(key)(
-            `${await toGetInfo()}`
-          );
-        } catch (error) {
-          console.error(
-            'Silently failling \n',
-            error,
-            '\n Must Implement Catch clause'
-          );
-          // throw new Error('Must Implement Catch clause');
-          return null;
-        }
-      })();
+      (key: string) =>
+        (async () => {
+          const [jsonPath_, toGetInfo] = pathStatsGetter(p);
+          try {
+            return await testJsonRedis(jsonPath_)(RDSServer)(key)(
+              `${await toGetInfo()}`
+            );
+          } catch (error) {
+            console.error(
+              'Silently failling \n',
+              error,
+              '\n Must Implement Catch clause'
+            );
+            // throw new Error('Must Implement Catch clause');
+            return null;
+          }
+        })();
 }
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -25,7 +25,7 @@ function getBackBit64(short64) {
   return splitted.join('');
 }
 
-function distance(a, b) {
+export function distance(a, b) {
   let count = 0;
   for (let i = 0; i < a.length; i++) {
     if (a[i] !== b[i]) {
@@ -88,7 +88,7 @@ class Node {
 // tree.root.left = new Node(7);
 // tree.root.left.right = new Node(9);
 
-class BinarySearchTree {
+export class BinarySearchTree {
   constructor() {
     this.root = null;
   }
