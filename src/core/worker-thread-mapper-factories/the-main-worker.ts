@@ -17,8 +17,9 @@ export function getAsyncWorker<Q, P>(script: string, payload: P): Promise<Q> {
     worker.on('message', resolve);
     worker.on('error', reject);
     worker.on('exit', code => {
-      if (code !== 0)
+      if (code !== 0) {
         reject(new Error(`Worker stopped with exit code ${code}`));
+      }
     });
     //
     // ++--------------------------------------------------------------+

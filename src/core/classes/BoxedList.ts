@@ -23,9 +23,8 @@ export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapItems<T> {
     if (values.length === 1) {
       const value = values[0];
 
-      if (Array.isArray(value)) {
-        return new BoxedList<TVal>([...value]);
-      }
+      if (Array.isArray(value)) return new BoxedList<TVal>([...value]);
+
       // console.log('length is one not an array inside');
     }
 
@@ -165,9 +164,7 @@ export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapItems<T> {
         ) => T),
     initialValue?: U | T
   ): U | T {
-    if (!initialValue) {
-      return this.list.reduce(callbackfn as CallbackfnT<T>);
-    }
+    if (!initialValue) return this.list.reduce(callbackfn as CallbackfnT<T>);
 
     return this.list.reduce<T | U>(
       callbackfn as CallbackfnU<U, T>,
@@ -274,9 +271,7 @@ export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapItems<T> {
   }
 
   public getArrayList<R>(): Either<T[], R[][]> {
-    if (this.isArrayList) {
-      return right(this.list as never as R[][]);
-    }
+    if (this.isArrayList) return right(this.list as never as R[][]);
 
     return left(this.list as T[]);
 

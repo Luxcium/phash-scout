@@ -45,9 +45,8 @@ export async function itemMapper<T, U>({
 export function eitherSettledResult<U>(
   result: PromiseSettledResult<U>
 ): Either<U, any> {
-  if (result.status === 'fulfilled') {
-    return right<never, U>(result.value);
-  }
+  if (result.status === 'fulfilled') return right<never, U>(result.value);
+
   return left<typeof result.reason, never>(result.reason);
 }
 

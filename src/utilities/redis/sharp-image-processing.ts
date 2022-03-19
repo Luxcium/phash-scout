@@ -20,12 +20,10 @@ will_5fb5baddf1a2e.then(async function (input) {
   let r = w < h ? w : h;
   r;
 
-  if (width && height) {
-    console.log('Width:', width, w);
-  }
-  if (height) {
-    console.log('Height:', height, h);
-  }
+  if (width && height) console.log('Width:', width, w);
+
+  if (height) console.log('Height:', height, h);
+
   sharpInput
     .flatten({ background: '#ff6600' })
     .composite([{ input: await will_wmrk, gravity: 'southeast' }])

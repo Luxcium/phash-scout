@@ -7,9 +7,8 @@ export function getStats(pathStr: string) {
   let stats: null | Promise<Stats> = null;
 
   async function _getStats() {
-    if (stats === null) {
-      stats = stat(pathStr);
-    }
+    if (stats === null) stats = stat(pathStr);
+
     return immediateZalgo(stats);
   }
 
@@ -39,9 +38,8 @@ export function getStatsSync(pathStr: string) {
   let stats: null | Stats = null;
 
   function _getStatsSync() {
-    if (stats === null) {
-      stats = statSync(pathStr);
-    }
+    if (stats === null) stats = statSync(pathStr);
+
     return stats;
   }
 

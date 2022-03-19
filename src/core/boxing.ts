@@ -12,9 +12,7 @@ class Box<T> {
     if (values.length === 1) {
       const value = values[0];
 
-      if (Array.isArray(value)) {
-        return new Box<TVal>([...value]);
-      }
+      if (Array.isArray(value)) return new Box<TVal>([...value]);
     }
     return new Box<TVal>([...(values as TVal[])]);
   };
@@ -24,9 +22,7 @@ class Box<T> {
     this.#value = [...value];
   }
   public *yield<R>(mapFn: Mapper<T, R>) {
-    for (const value of this.#value) {
-      yield mapFn(value);
-    }
+    for (const value of this.#value) yield mapFn(value);
   }
 
   public async *yieldAsync<R>(mapFn: Mapper<T, R>) {
@@ -46,16 +42,14 @@ class Box<T> {
       .filter(item => item.status === 'rejected')
       .map((item: any) => item.reason);
     const fulfilledIndex = results.map((item: any) => {
-      if (item.status === 'fulfilled') {
-        return item.value;
-      }
+      if (item.status === 'fulfilled') return item.value;
+
       return Symbol.for('rejected');
     });
 
     const rejectedIndex = results.map((item: any) => {
-      if (item.status === 'rejected') {
-        return item.reason;
-      }
+      if (item.status === 'rejected') return item.reason;
+
       return Symbol.for('fulfilled');
     });
 
@@ -132,9 +126,8 @@ async function main() {
   const myFn = (x: any) => {
     const result: number = x.length;
 
-    if (result % 2) {
-      throw new Error();
-    }
+    if (result % 2) throw new Error();
+
     return result;
   };
   const myBox001 = Box.of(myVal);
@@ -178,11 +171,8 @@ class None<T> {
   }
 
   public map<TMap>(fn: (val: T) => TMap) {
-    if (this._value !== undefined) {
-      return new None<TMap>(fn(this._value));
-    } else {
-      return new None<TMap>(this._value as any);
-    }
+    if (this._value !== undefined) return new None<TMap>(fn(this._value));
+    else return new None<TMap>(this._value as any);
   }
 }
 
@@ -210,9 +200,7 @@ export class Result<T> {
   private _value!: T;
 
   public constructor(val?: T) {
-    if (val) {
-      this._value = val;
-    }
+    if (val) this._value = val;
   }
 
   public isNothing() {
@@ -220,11 +208,8 @@ export class Result<T> {
   }
 
   public map<TMap>(fn: (val: T) => TMap) {
-    if (this.isNothing()) {
-      return new Result<TMap>();
-    } else {
-      return new Result<TMap>(fn(this._value));
-    }
+    if (this.isNothing()) return new Result<TMap>();
+    else return new Result<TMap>(fn(this._value));
   }
 
   public ap<TMap>(c: Result<(val: T) => TMap>) {
@@ -269,9 +254,7 @@ export class SimpleBox<T> {
     if (values.length === 1) {
       const value = values[0];
 
-      if (Array.isArray(value)) {
-        return new SimpleBox<TVal>([...value]);
-      }
+      if (Array.isArray(value)) return new SimpleBox<TVal>([...value]);
     }
     return new SimpleBox<TVal>([...(values as TVal[])]);
   };
@@ -338,9 +321,8 @@ export function ap<TMap>(self: any, c: SimpleBox<(val: any) => unknown>) {
     if (cItems.length > 1) {
       const itemList = cItems.slice();
       const head = itemList.shift();
-      if (head) {
-        return tListMapper(/* <any, unknown> */ head(item), itemList);
-      }
+      if (head) return tListMapper(/* <any, unknown> */ head(item), itemList);
+
       throw Error('NEVER');
     }
     return item;
@@ -378,9 +360,7 @@ export class BoxedList<T> {
     if (values.length === 1) {
       const list = values[0];
 
-      if (Array.isArray(list)) {
-        return new BoxedList<TVal>([...list]);
-      }
+      if (Array.isArray(list)) return new BoxedList<TVal>([...list]);
     }
     return new BoxedList<TVal>([...(values as TVal[])]);
   };
@@ -481,9 +461,7 @@ export class BoxedGenerator<T> {
   public map<TMap>(fn: Mapper<T, TMap>) {
     const generator = this.#valueGenerator;
     function* arrayGenerator(): Generator<TMap> {
-      for (const item of generator()) {
-        yield fn(item);
-      }
+      for (const item of generator()) yield fn(item);
     }
     return BoxedGenerator.from(arrayGenerator);
   }
@@ -626,11 +604,8 @@ class Nothing<T> {
   }
 
   public map<TMap>(fn: (val: T) => TMap) {
-    if (this.#value !== undefined) {
-      return new Nothing<TMap>(fn(this.#value));
-    } else {
-      return new Nothing<TMap>(this.#value as any);
-    }
+    if (this.#value !== undefined) return new Nothing<TMap>(fn(this.#value));
+    else return new Nothing<TMap>(this.#value as any);
   }
 }
 

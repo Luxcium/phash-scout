@@ -12,8 +12,8 @@ export function filterCharacterDevices(
   if (Array.isArray(element)) {
     return element.filter(item => item.isCharacterDevice);
   }
-  if ('isCharacterDevice' in element) {
-    return element.isCharacterDevice;
-  }
+
+  if ('isCharacterDevice' in element) return element.isCharacterDevice;
+
   return element.type === 'CharacterDevice';
 }

@@ -9,11 +9,9 @@ export function filterBlockDevices(element: DirentWithFileType): boolean;
 export function filterBlockDevices(
   element: DirentWithFileType | DirentWithFileType[] | CurrentPath
 ): boolean | DirentWithFileType[] {
-  if (Array.isArray(element)) {
-    return element.filter(item => item.isBlockDevice);
-  }
-  if ('isBlockDevice' in element) {
-    return element.isBlockDevice;
-  }
+  if (Array.isArray(element)) return element.filter(item => item.isBlockDevice);
+
+  if ('isBlockDevice' in element) return element.isBlockDevice;
+
   return element.type === 'BlockDevice';
 }

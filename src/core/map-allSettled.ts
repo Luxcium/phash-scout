@@ -22,9 +22,7 @@ export async function mapAllSettled<T, U>({
   //
   const result: PromiseSettledResult<U>[] = [];
 
-  if (list.length === 0) {
-    return result;
-  }
+  if (list.length === 0) return result;
 
   const gen = arrayGenerator(list);
 

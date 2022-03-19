@@ -95,19 +95,25 @@ async function main() {
           const jsonPath = '.';
           // const jsonSeter = jsonSet6382(fullKey)(jsonPath);
           const jsonFinfo = `${JSON.stringify(fInfos)}`;
-          if (DEBUG > 5)
+          if (DEBUG > 5) {
             console.log({
               fullKey,
             });
-          if (DEBUG > 4)
+          }
+
+          if (DEBUG > 4) {
             console.log({
               jsonPath,
             });
+          }
+
           if (DEBUG > 5) console.log({ count, countx });
-          if (DEBUG > 6)
+          if (DEBUG > 6) {
             console.log({
               jsonFinfo,
             });
+          }
+
           immediateZalgo;
           return (async () => {
             try {
@@ -117,10 +123,11 @@ async function main() {
               setTimeout(() => {
                 const delay = Date.now() - timeoutScheduled;
 
-                if (count1 % 1000 === 1)
+                if (count1 % 1000 === 1) {
                   console.log(
                     `BEFORE) ${delay}ms have passed since I was scheduled ${count1}`
                   );
+                }
               }, 100);
               count.setJ++;
               const setJ = count.setJ;
@@ -134,10 +141,11 @@ async function main() {
 
               setTimeout(() => {
                 const delay = Date.now() - timeoutScheduled2;
-                if (count1 % 1000 === 1)
+                if (count1 % 1000 === 1) {
                   console.log(
                     `AFTER) ${delay}ms have passed since I was scheduled ${count1}`
                   );
+                }
               }, 100);
               countx.jsonSeted++;
               //++ + == == == == == == == == == == == == == == == == -->
@@ -145,7 +153,7 @@ async function main() {
               count.result++;
               const resCnt = count.result;
               if (DEBUG > 4) console.log('jsonSetted:', resCnt);
-              if (DEBUG > 3)
+              if (DEBUG > 3) {
                 console.log('jsonSetted:', {
                   jsonSeted,
                   jsonPath,
@@ -155,6 +163,8 @@ async function main() {
                   countx,
                   count,
                 });
+              }
+
               return { fullKey, jsonSeted };
             } catch (error) {
               console.error('error:', error, {
@@ -229,13 +239,14 @@ function workingFunction(opts: { DEBUG: number }) {
     const length = dirsSync.length;
     ++count;
     count2 += length;
-    if (DEBUG > 4)
+    if (DEBUG > 4) {
       console.log(
         'collectionsPathsGen:',
         countx.c4++,
         'dirsSync.length',
         length
       );
+    }
 
     const collectionLevelGen = dirsSync.map(dir => {
       if (DEBUG > 4) console.log('collectionLevelGen:', countx.c5++);
@@ -299,8 +310,10 @@ function workingFunction(opts: { DEBUG: number }) {
           displaycount,
         });
 
-        if (opts.DEBUG > 1)
+        if (opts.DEBUG > 1) {
           (async () => console.log(`${f}:`, await fileInfo))();
+        }
+
         return fileInfo;
       });
 

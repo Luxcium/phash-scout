@@ -17,9 +17,8 @@ export function getChildPaths(
   >[] => {
     try {
       if (type === 'Directory') {
-        if (withStats) {
-          return [...getPathWithStats(fullPath, withStats)];
-        }
+        if (withStats) return [...getPathWithStats(fullPath, withStats)];
+
         return [...getPathWithStats(fullPath, withStats)];
       }
       return [

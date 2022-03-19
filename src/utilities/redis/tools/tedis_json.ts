@@ -12,18 +12,18 @@ import { Tedis } from 'tedis';
 export const tedis_jsonGet =
   (prefix: string) =>
   <R = any>(jsonPath: string = '.') =>
-    /**
+  /**
    * @param RDSServer - Redis Data Structures Server
    */
-      (RDSServer: Tedis) =>
-        (key: string, close: 'close' | boolean = false) =>
-          (async (): Promise<R> =>
-            RDSServer.command('JSON.GET', `${prefix}::${key}`, jsonPath).then(
-              value => {
-                close === 'close' || close ? RDSServer.close() : null;
-                return value;
-              }
-            ))();
+  (RDSServer: Tedis) =>
+  (key: string, close: 'close' | boolean = false) =>
+    (async (): Promise<R> =>
+      RDSServer.command('JSON.GET', `${prefix}::${key}`, jsonPath).then(
+        value => {
+          close === 'close' || close ? RDSServer.close() : null;
+          return value;
+        }
+      ))();
 
 /**********************************************************************
  * In a prefix space (name space) activated for a specific RDSS create
@@ -32,20 +32,20 @@ export const tedis_jsonGet =
  **********************************************************************/
 export const tedis_jsonSet =
   (prefix: string) =>
-    (jsonPath: string) =>
-    /**
+  (jsonPath: string) =>
+  /**
    * @param RDSServer - Redis Data Structures Server
    */
-      (RDSServer: Tedis) =>
-        (key: string) =>
+  (RDSServer: Tedis) =>
+  (key: string) =>
   <R>(value: string | number | Date, close: 'close' | boolean = false) =>
-            (async (): Promise<R> =>
-              RDSServer.command(
-                'JSON.SET',
-                `${prefix}::${key}`,
-                jsonPath,
-                `${value}`
-              ).then((result: R) => {
-                close === 'close' || close ? RDSServer.close() : null;
-                return result;
-              }))();
+    (async (): Promise<R> =>
+      RDSServer.command(
+        'JSON.SET',
+        `${prefix}::${key}`,
+        jsonPath,
+        `${value}`
+      ).then((result: R) => {
+        close === 'close' || close ? RDSServer.close() : null;
+        return result;
+      }))();

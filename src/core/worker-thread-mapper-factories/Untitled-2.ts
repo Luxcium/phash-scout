@@ -36,8 +36,9 @@ export function getAsyncWorker<P>(
     worker.on('message', resolve);
     worker.on('error', reject);
     worker.on('exit', code => {
-      if (code !== 0)
+      if (code !== 0) {
         reject(new Error(`Worker stopped with exit code ${code}`));
+      }
     });
     //
     // ++--------------------------------------------------------------+
@@ -76,9 +77,8 @@ export function fnMain() {
 
   return 0;
 }
-if (isMainThread! === true) {
-  fnMain();
-}
+if (isMainThread! === true) fnMain();
+
 export function mainAssingmentVOID() {
   if (isMainThread === false) {
     // const { workerData }: { workerData: Z } = worker_threads;
@@ -100,8 +100,9 @@ export function mainAssingmentVOID() {
       worker.on('message', resolve);
       worker.on('error', reject);
       worker.on('exit', code => {
-        if (code !== 0)
+        if (code !== 0) {
           reject(new Error(`Worker stopped with exit code ${code}`));
+        }
       });
     });
   }

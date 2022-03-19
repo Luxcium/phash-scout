@@ -66,6 +66,7 @@ export function getPathWithStats(
         getChild: getChildPaths(fullPath, type, withStats),
       };
     }
+
     return {
       fileName,
       extname: path.extname(fullPath),

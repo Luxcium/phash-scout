@@ -24,13 +24,9 @@ export function filterFiles(
     | CurrentPath
     | Promise<CurrentPathAndStats | CurrentPathWithStats>
 ): boolean | DirentWithFileType[] | Promise<boolean> {
-  if (Array.isArray(element)) {
-    return element.filter(item => item.isFile);
-  }
+  if (Array.isArray(element)) return element.filter(item => item.isFile);
 
-  if ('isFile' in element) {
-    return element.isFile;
-  }
+  if ('isFile' in element) return element.isFile;
 
   if (isA_Promise(element)) {
     return (async () => {
@@ -38,6 +34,7 @@ export function filterFiles(
       return element_.type === 'File';
     })();
   }
+
   return element.type === 'File';
 }
 

@@ -32,6 +32,7 @@ export async function setJson(A: SetJsonArgs) {
     if (null === (await jsonGet(RDSServer, shortKey, rootJsonPath))) {
       await jsonSet(RDSServer, shortKey, rootJsonPath)(initialValue);
     }
+
     setResult = await RDSServer.command(
       'JSON.SET',
       shortKey,

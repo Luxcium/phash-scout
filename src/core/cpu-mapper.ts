@@ -168,9 +168,8 @@ function mapperArgs<T, R>(
     return { list, mapFn: mapFn_, limit: limit_ };
   }
   list = listOrObj;
-  if (mapFn != null) {
-    return { list, mapFn, limit: limit ? limit : undefined };
-  }
+  if (mapFn != null) return { list, mapFn, limit: limit ? limit : undefined };
+
   // When mapFn is null or undefined throw TypeError.
   const errMsg = 'Error: mapFn must be a function of type Mapper<A, B>';
   throw new TypeError(errMsg);

@@ -20,14 +20,11 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
     if (values.length === 1) {
       const list = values[0];
       if (Array.isArray(list)) {
-        return new BoxedGenerator<TVal>(
-          arrayGenerator(list)
-        ); /* as BoxedGenerator<TVal>; */
+        return new BoxedGenerator<TVal>(arrayGenerator(list));
       } else {
-        return new BoxedGenerator<TVal>(
-          arrayGenerator([list])
-        ); /* as BoxedGenerator<TVal>; */
-      }
+        /* as BoxedGenerator<TVal>; */
+        return new BoxedGenerator<TVal>(arrayGenerator([list]));
+      } /* as BoxedGenerator<TVal>; */
     } else {
       const list: TVal = [...values] as any;
       return BoxedGenerator.of<TVal>(list); /* as PseudoCode<TVal>; */
@@ -82,9 +79,7 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
     const generator = this.#valueGenerator;
     const that = this;
     function* arrayGenerator(): Generator<TMap> {
-      for (const item of generator()) {
-        yield fn(item, that.mapIndex++);
-      }
+      for (const item of generator()) yield fn(item, that.mapIndex++);
     }
     return BoxedGenerator.fromGen(arrayGenerator);
   }
@@ -209,11 +204,12 @@ export class PseudoCode<T> {
     if (values.length === 1) {
       const list = values[0];
       if (Array.isArray(list)) {
-        return new PseudoCode<TVal>(list); /* as PseudoCode<TVal>; */
-      } else {
-        // not Array.isArray(list)
-        return new PseudoCode<TVal>([list]); /* as PseudoCode<TVal>; */
+        return new PseudoCode<TVal>(list) /* as PseudoCode<TVal>; */;
       }
+      // not Array.isArray(list)
+      else {
+        return new PseudoCode<TVal>([list]);
+      } /* as PseudoCode<TVal>; */
     } else {
       // values.length !== 1
       // PseudoCode.of(1, 2, 3);

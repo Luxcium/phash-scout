@@ -27,6 +27,7 @@ export function getCurrentPaths(
       );
     })();
   }
+
   if (isAsync) {
     const folderPath_ = immediateZalgo(folderPath);
     return (async () =>

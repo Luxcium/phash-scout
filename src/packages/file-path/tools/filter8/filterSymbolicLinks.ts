@@ -12,8 +12,8 @@ export function filterSymbolicLinks(
   if (Array.isArray(element)) {
     return element.filter(item => item.isSymbolicLink);
   }
-  if ('isSymbolicLink' in element) {
-    return element.isSymbolicLink;
-  }
+
+  if ('isSymbolicLink' in element) return element.isSymbolicLink;
+
   return element.type === 'SymbolicLink';
 }

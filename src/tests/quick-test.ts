@@ -22,9 +22,8 @@ export const values = [
 // https://git.io/JuC6r
 export async function main() {
   await CPU_MAP_miniTest_01a();
-  if (worker_threads.isMainThread) {
-    await IO_MAP_miniTest_01b();
-  }
+  if (worker_threads.isMainThread) await IO_MAP_miniTest_01b();
+
   // worker_threads.isMainThread ? miniTest_01b() : void null;
   // await miniTest_02a();
   // worker_threads.isMainThread ? miniTest_02b() : void null;

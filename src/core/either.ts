@@ -10,11 +10,8 @@ class Nothing<T> {
   }
 
   public map<TMap>(fn: (val: T) => TMap) {
-    if (this.#value !== undefined) {
-      return new Nothing<TMap>(fn(this.#value));
-    } else {
-      return new Nothing<TMap>(this.#value as any);
-    }
+    if (this.#value !== undefined) return new Nothing<TMap>(fn(this.#value));
+    else return new Nothing<TMap>(this.#value as any);
   }
 }
 
@@ -40,10 +37,14 @@ export type PromiseSettledEither<T> = Either<T, any>;
 export function promiseSettledEither<T>(
   promiseSettledResult: PromiseSettledResult<T>
 ): PromiseSettledEither<T> {
-  if (promiseSettledResult.status === 'fulfilled')
+  if (promiseSettledResult.status === 'fulfilled') {
     return Just.of(promiseSettledResult.value);
-  if (promiseSettledResult.status === 'rejected')
+  }
+
+  if (promiseSettledResult.status === 'rejected') {
     return Nothing.of(promiseSettledResult.reason);
+  }
+
   throw new Error('NEVER');
 }
 

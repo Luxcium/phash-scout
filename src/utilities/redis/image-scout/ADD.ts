@@ -22,9 +22,7 @@ export function transformArguments(
 ): Array<string | number> {
   const args: (string | number)[] = ['GRAPH.ADD', key, hashvalue, title];
 
-  if (id != null) {
-    args.push(id);
-  }
+  if (id != null) args.push(id);
 
   return args;
 }

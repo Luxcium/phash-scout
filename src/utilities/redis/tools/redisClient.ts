@@ -59,6 +59,7 @@ export function redisCreateClient(
         console.error('Redis Client reconnecting');
       });
   }
+
   return client;
 }
 

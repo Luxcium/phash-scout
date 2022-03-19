@@ -39,6 +39,7 @@ export async function main(
           pHash: { value: phash_, ...phash },
         };
       }
+
       const pQuerryAndAdd = {
         R,
         k: `TEST:${path.pathToFile}`,

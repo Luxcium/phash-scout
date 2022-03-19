@@ -13,5 +13,6 @@ export function isQueryResult2(contender: unknown): contender is QueryResult {
       );
     });
   }
+
   return false;
 }

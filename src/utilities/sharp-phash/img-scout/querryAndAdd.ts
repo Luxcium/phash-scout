@@ -13,14 +13,13 @@ const hasSomeTitleInclude = (title: string, queryResult: QueryResultItem[]) =>
 
 const shiftTitle =
   (title: string, level = '-1') =>
-    (i: QueryResultItem) => {
-      if (i[0] === title) {
-        i[2] = level;
-      }
-      return i;
-    };
+  (i: QueryResultItem) => {
+    if (i[0] === title) i[2] = level;
+
+    return i;
+  };
 export async function uniqueAdd(
-  querryAndAddParam: PQuerryAndAdd,
+  querryAndAddParam: PQuerryAndAdd
 ): Promise<QueryResultItem[]> {
   const { R, k, phash_, title, radius } = querryAndAddParam;
 
@@ -28,7 +27,7 @@ export async function uniqueAdd(
     R,
     k,
     phash_,
-    radius || '0',
+    radius || '0'
   );
   const queryResultList = await rawQueryResult;
 
@@ -37,6 +36,7 @@ export async function uniqueAdd(
     if (hasSomeTitleInclude(title, queryResultList)) {
       return immediateZalgo(queryResultList.map(shiftTitle(title, '-1')));
     }
+
     id = await addPhash(R, k, phash_, title);
     queryResultList.unshift([title, id, '-2']);
     return immediateZalgo(queryResultList);

@@ -56,9 +56,8 @@ export function fromTo(from: number, to: number) {
 //   });
 
 export function fromTo_(from: number, to: number): [1 | -1, number, number] {
-  if (from - to < 0) {
-    return [-1, from, to];
-  }
+  if (from - to < 0) return [-1, from, to];
+
   return [1, from, to];
 }
 export const [k, f, t] = fromTo_(10, 100);

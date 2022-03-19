@@ -19,5 +19,6 @@ export function getCurrentPaths(
         currentPath(await folderPath)
       ))();
   }
+
   return dirListWithFileType(folderPath).map(currentPath(folderPath));
 }

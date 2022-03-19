@@ -87,6 +87,7 @@ export function loadGenerator() {
       } else {
         contX++;
       }
+
       prevFactor = loadFactor_;
       blockCpuFor(1000 * granularity * (loadFactor_ / granularity));
       // @ts-ignore Cannot find name 'Timeout'.ts(2304)
@@ -169,9 +170,7 @@ function ProcessorUsage() {
 
     ProcessUsageWatcher.prototype = {
       startWatching: function () {
-        if (this.interval) {
-          return this;
-        }
+        if (this.interval) return this;
 
         //@ts-ignore Parameter 'cb' implicitly has an 'any' type.ts(7006)
         var getUsage = function (cb) {
@@ -203,9 +202,7 @@ function ProcessorUsage() {
       },
 
       stopWatching: function () {
-        if (this.interval) {
-          clearInterval(this.interval);
-        }
+        if (this.interval) clearInterval(this.interval);
       },
     };
     // @ts-ignore 'new' expression, whose target lacks a construct signature, implicitly has an 'any' type.ts(7009)

@@ -61,9 +61,8 @@ export function getSpiderFolder(r: RedisClientType, writerTool: WriterTool) {
       const boxedUsers = BoxedGenerator.of(...users.slice(0, STEPS));
       boxedUsers
         .map(_user => {
-          if (_user.isDirectory()) {
-            return stageInfos(folderPath, _user.name);
-          }
+          if (_user.isDirectory()) return stageInfos(folderPath, _user.name);
+
           return undefined;
         })
         .thenMap();
@@ -118,6 +117,7 @@ export function getSpiderFolder(r: RedisClientType, writerTool: WriterTool) {
           console.error('at unfolding users:\n\n', error);
         }
       }
+
       return Promise.all(A);
     } catch (error) {
       console.error('at Promise.all(returnList) or in that scope');

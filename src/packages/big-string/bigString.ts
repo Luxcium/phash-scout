@@ -4,9 +4,8 @@ import { S } from '../../core/types/IQueryListPhash';
 export function bigString(str: S): S;
 export function bigString(str: Promise<S>): Promise<S>;
 export function bigString(str: S | Promise<S>): S | Promise<S> {
-  if (typeof str === 'object' && str instanceof Promise) {
-    return immediate(str);
-  }
+  if (typeof str === 'object' && str instanceof Promise) return immediate(str);
+
   return bigString_(str);
 }
 
@@ -26,6 +25,7 @@ function bigString_(str: S): S {
   ) {
     return BigInt(`0b${str}`).toString();
   }
+
   throw new Error(
     'Something bad happened! Because the string was not 64 bit \'("0" | "1")\' long'
   );

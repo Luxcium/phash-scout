@@ -9,9 +9,7 @@ function ProcessUsageWatcher() {
 
 ProcessUsageWatcher.prototype = {
   startWatching: function () {
-    if (this.interval) {
-      return this;
-    }
+    if (this.interval) return this;
 
     var getUsage = function (cb) {
       fs.readFile('/proc/' + process.pid + '/stat', function (_err, data) {
@@ -38,9 +36,7 @@ ProcessUsageWatcher.prototype = {
   },
 
   stopWatching: function () {
-    if (this.interval) {
-      clearInterval(this.interval);
-    }
+    if (this.interval) clearInterval(this.interval);
   },
 };
 

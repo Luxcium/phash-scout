@@ -25,9 +25,7 @@ export class BoxedAsyncGenerator<T> {
     const arrayGenerator = (array: TVal[]): (() => AsyncGenerator<TVal>) =>
       async function* (): AsyncGenerator<TVal> {
         const array_ = array.map(i => immediateZalgo(i));
-        for await (const iterator of array_) {
-          yield iterator;
-        }
+        for await (const iterator of array_) yield iterator;
       };
 
     if (values.length === 1) {
@@ -90,14 +88,11 @@ async function main(): Promise<void> {
     .mapAwait<number>(item => item * 2)
     // .map(item => `${item}`)
     .asyncGen();
-  for await (const item of asyncGen) {
-    console.log(item);
-  }
-  for await (const item of asyncGen1) {
-    console.log(item);
-  }
-  for await (const item of asyncGen2) {
-    console.log(item);
-  }
+  for await (const item of asyncGen) console.log(item);
+
+  for await (const item of asyncGen1) console.log(item);
+
+  for await (const item of asyncGen2) console.log(item);
+
   return void 42;
 }

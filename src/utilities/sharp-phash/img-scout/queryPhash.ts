@@ -17,9 +17,8 @@ export async function queryPhash(
       return result;
     }
   } catch (error: any) {
-    if (!failSilently) {
-      throw new Error('queryPhash' + error);
-    }
+    if (!failSilently) throw new Error('queryPhash' + error);
+
     console.error('queryPhash Failled silently');
   }
   return [];

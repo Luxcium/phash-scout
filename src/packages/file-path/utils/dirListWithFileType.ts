@@ -33,5 +33,6 @@ export function dirListWithFileType(
   ) {
     return (async () => asyncDirListWithFileType(await folderPath))();
   }
+
   return dirListWithFileTypeSync(folderPath);
 }
