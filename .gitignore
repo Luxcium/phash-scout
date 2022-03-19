@@ -1,13 +1,16 @@
-dist
-release
-.env
-
 ## ROOT .gitignore CONFIG FILE
+build
+dist
+out
+release
+
+## RESET ANYTHING ABOVE IN HIERARCHY
 !*
 !.*
 !**/*
 !**/.*
 !typings
+
 ## FOLDERS and FOLDER infos files
 node_modules/
 web_modules/
