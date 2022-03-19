@@ -24,8 +24,6 @@ export class BoxedList<T> implements IUnboxList<T>, IUnbox<T[]>, IMapItems<T> {
       const value = values[0];
 
       if (Array.isArray(value)) return new BoxedList<TVal>([...value]);
-
-      // console.log('length is one not an array inside');
     }
 
     return new BoxedList<TVal>([...(values as TVal[])]);
