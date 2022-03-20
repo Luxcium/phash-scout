@@ -17,22 +17,22 @@ export function getListingsSync(pathSrc: string = '') {
       files: files.length,
       all: dirs.length + files.length,
       isLeaf: dirs.length === 0,
-      isNode: dirs.length !== 0,
+      isNode: dirs.length > 0,
       isEmptyLeaf: dirs.length === 0 && files.length === 0,
-      isEmptyNode: dirs.length !== 0 && files.length === 0,
+      isEmptyNode: dirs.length > 0 && files.length === 0,
     },
 
     isLeaf() {
       return dirs.length === 0;
     },
     isNode() {
-      return dirs.length !== 0;
+      return dirs.length > 0;
     },
     isEmptyLeaf() {
       return dirs.length === 0 && files.length === 0;
     },
     isEmptyNode() {
-      return dirs.length !== 0 && files.length === 0;
+      return dirs.length > 0 && files.length === 0;
     },
   };
 }
@@ -71,22 +71,22 @@ export async function getListings(pathSrc: string = '') {
       files: files.length,
       all: dirs.length + files.length,
       isLeaf: dirs.length === 0,
-      isNode: dirs.length !== 0,
+      isNode: dirs.length > 0,
       isEmptyLeaf: dirs.length === 0 && files.length === 0,
-      isEmptyNode: dirs.length !== 0 && files.length === 0,
+      isEmptyNode: dirs.length > 0 && files.length === 0,
     },
 
     isLeaf() {
       return dirs.length === 0;
     },
     isNode() {
-      return dirs.length !== 0;
+      return dirs.length > 0;
     },
     isEmptyLeaf() {
       return dirs.length === 0 && files.length === 0;
     },
     isEmptyNode() {
-      return dirs.length !== 0 && files.length === 0;
+      return dirs.length > 0 && files.length === 0;
     },
   };
 }

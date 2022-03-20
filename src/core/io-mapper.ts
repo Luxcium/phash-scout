@@ -23,7 +23,7 @@ export async function IO_Mapper<T, R>({
   const mapAllSettledArgs: MapAllSettledArgs<T, R> = {
     list,
     mapFn,
-    limit: limit || list.length,
+    limit: limit ? limit : list.length,
   };
   return mapAllSettled(mapAllSettledArgs);
   //
