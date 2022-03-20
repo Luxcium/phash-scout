@@ -131,7 +131,7 @@
     "unicorn/prefer-query-selector": "warn",
     "unicorn/prefer-reflect-apply": "warn",
     "unicorn/prefer-set-has": "warn",
-    // "unicorn/prefer-spread": "warn",
+    "unicorn/prefer-spread": "warn",
     "unicorn/prefer-string-slice": "warn",
     "unicorn/prefer-ternary": "warn",
     "unicorn/prefer-type-error": "warn",

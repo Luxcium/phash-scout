@@ -321,7 +321,7 @@ export function ap<TMap>(self: any, c: SimpleBox<(val: any) => unknown>) {
     cItems: any //((val: any) => any)[]
   ): TMap {
     if (cItems.length > 1) {
-      const itemList = cItems.slice();
+      const itemList = [...cItems];
       const head = itemList.shift();
       if (head) return tListMapper(/* <any, unknown> */ head(item), itemList);
 

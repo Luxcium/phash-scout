@@ -7,7 +7,7 @@ import type { PHashedPath } from './PHashedPath';
 export async function listFiles(folder: string, withStats: boolean = false) {
   const count = { index1: 1 };
   const currentPathList = getPathWithStats(folder, withStats);
-  const subPathList = currentPathList.slice(0);
+  const subPathList = [...currentPathList];
   const filesPathList = subPathList.filter(filter.fileType.file);
   const filesPathBoxedGen = BoxedGenerator.of(
     ...(await Promise.all(filesPathList))

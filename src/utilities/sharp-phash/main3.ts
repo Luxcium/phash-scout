@@ -20,7 +20,7 @@ export async function main3(
   const getExt = (fileName: string) =>
     fileName.split('.').slice(-1)[0].toLowerCase();
 
-  for (const image of images.slice(0)) {
+  for (const image of [...images]) {
     if (image.isFile()) {
       const imgPath = `${folder}/${image.name}`;
       const imgExt = getExt(image.name);

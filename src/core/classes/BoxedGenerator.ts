@@ -147,7 +147,7 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
   }
   // public =========================================-| unbox() |-====
   public unbox(): T[] {
-    return Array.from(this.#valueGenerator());
+    return [...this.#valueGenerator()];
   }
 
   // public =========================================-| spark() |-====

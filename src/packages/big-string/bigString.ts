@@ -17,7 +17,7 @@ async function immediate(str: Promise<S>): Promise<S> {
   }
 }
 function bigString_(str: S): S {
-  const strSplit = str.split('');
+  const strSplit = [...str];
 
   if (
     strSplit.length === 64 &&
