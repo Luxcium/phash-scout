@@ -3,6 +3,7 @@ import { PhashNow } from '../../core/types';
 import { immediateZalgo } from '../../utilities/utils';
 import { bigString } from '../big-string/bigString';
 import { CurrentPath } from '../file-path/types';
+
 const phash = require('sharp-phash');
 
 export function phashNow(

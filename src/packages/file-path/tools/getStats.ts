@@ -1,5 +1,4 @@
-import { statSync } from 'fs';
-import { Stats } from 'fs';
+import { statSync, Stats } from 'fs';
 import { stat } from 'fs/promises';
 import { immediateZalgo } from '../imports';
 

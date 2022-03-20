@@ -173,6 +173,60 @@
     //   "warn",
     //   "always-multiline"
     // ],
+    /*
+  ―――――――― simple-import-sort ――――――――――――――――――――――――――――――――――――――――――――――――――
+    */
+    "sort-imports": "off",
+    "import/order": "off",
+    // "simple-import-sort/imports": "warn",
+    // "simple-import-sort/exports": "warn",
+    /*
+  ―――――――― eslint-plugin-import ――――――――――――――――――――――――――――――――――――――――――――――――
+    */
+    /*Static analysis*/
+    "import/no-self-import": "error",
+    "import/no-useless-path-segments": "warn",
+    "import/no-unresolved": 0,
+    "import/named": 0,
+    "import/default": 0,
+    "import/namespace": "error",
+    "import/no-restricted-paths": 0,
+    "import/no-absolute-path": "error",
+    "import/no-dynamic-require": 0,
+    "import/no-internal-modules": 0,
+    "import/no-webpack-loader-syntax": 0,
+    "import/no-cycle": 0,
+    "import/no-relative-parent-imports": 0,
+    /* Helpful warnings */
+    "import/export": "error",
+    "import/no-named-as-default": "error",
+    "import/no-named-as-default-member": "error",
+    "import/no-deprecated": "error",
+    "import/no-extraneous-dependencies": "error",
+    "import/no-mutable-exports": "error",
+    "import/no-unused-modules": "error",
+    /*Style guide*/
+    "import/first": "warn",
+    "import/newline-after-import": "warn",
+    "import/no-duplicates": "warn",
+    "import/no-namespace": "off",
+    //  "import/order": 0, // ―3 managed with simple-import-sort
+    "import/exports-last": 0,
+    "import/extensions": 0,
+    "import/prefer-default-export": 0,
+    "import/max-dependencies": 0,
+    "import/no-unassigned-import": 0,
+    "import/no-named-default": 0,
+    "import/no-default-export": 0,
+    "import/no-named-export": 0,
+    "import/no-anonymous-default-export": 0,
+    "import/group-exports": 0,
+    "import/dynamic-import-chunkname": 0,
+    /*Module systems*/
+    "import/no-amd": 0,
+    "import/no-commonjs": 0,
+    "import/no-nodejs-modules": 0,
+    "import/unambiguous": 0,
     "no-constant-condition": [
       "error",
       {

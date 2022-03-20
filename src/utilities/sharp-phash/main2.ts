@@ -1,4 +1,5 @@
 import fs from 'fs';
+
 const phash = require('sharp-phash');
 
 // 'IMGSCOUT.QUERY' 'TEST:/home/luxcium/WSD_250/jpgs_ipn_impt_2022-02-04' 13498924397152224198 50

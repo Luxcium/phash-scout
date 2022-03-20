@@ -7,6 +7,7 @@ import type {
   IUnbox,
   IUnboxList,
 } from './types';
+
 export function boxedListOf<TVal>(value: TVal) {
   return BoxedList.of(value);
 }

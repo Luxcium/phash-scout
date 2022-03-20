@@ -4,6 +4,7 @@ import { BoxedGenerator } from '../../../core/classes/BoxedGenerator';
 import { getDirsSync, getFilesSync } from '../../../packages/file-path/tools';
 import { immediateZalgo } from '../../utils';
 import { replaceStr } from './replaceStr';
+
 const PREFIX = 'TESTING:001::JSON:REDIS';
 const STEPS = 1;
 const DEBUG = 1;

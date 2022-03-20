@@ -10,6 +10,7 @@ import type {
 import { dirListWithFileType } from './utils/dirListWithFileType';
 import { getChildPaths } from './utils/getChildPaths';
 import { getCurrentPath } from './utils/getCurrentPath';
+
 path;
 export function getPathWithStats(
   folderPath: string,

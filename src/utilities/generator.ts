@@ -1,4 +1,5 @@
 import { zalgo } from '../core/utils/restrainingZalgo/zalgo';
+
 zalgo;
 
 export function fromTo(from: number, to: number) {

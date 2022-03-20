@@ -5,6 +5,7 @@ import { isDevEnv } from './isDevEnv';
 import { NODE_ENV } from './NODE_ENV';
 import { nullOrDefined } from './nullOrDefined';
 import { splitedHead, splitedTail, splitHead, splitTail } from './split';
+
 export {
   getDevFilename,
   getSign,
