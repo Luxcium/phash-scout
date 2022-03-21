@@ -17,7 +17,5 @@
     "forceConsistentCasingInFileNames": true,
     "stripInternal": true
   },
-  "include": [
-    "./",
-  ]
+  "include": ["./"]
 }

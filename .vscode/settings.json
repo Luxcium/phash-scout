@@ -50,7 +50,7 @@
     "source.addMissingImports",
     "source.organizeImports",
     "source.fixAll.eslint",
-    "source.fixAll",
+    "source.fixAll"
   ],
   // #endregion: FORMAT BEHAVIOUR                                    !
   /*
@@ -954,21 +954,21 @@
   // #region: CUSTOMS RULES                                          !
   "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-    "editor.fontFamily": "'VictorMono Nerd Font', 'hurmit Nerd Font mono','ProFontWindows Nerd Font mono','meslolgl Nerd Font mono','Iosevka Nerd Font Mono','SauceCodePro Nerd Font','ProFontIIx Nerd Font',mono",
+    "editor.fontFamily": "'VictorMono Nerd Font', 'hurmit Nerd Font mono','ProFontWindows Nerd Font mono','meslolgl Nerd Font mono','Iosevka Nerd Font Mono','SauceCodePro Nerd Font','ProFontIIx Nerd Font',mono"
     // "editor.fontSize": 26,
     // "editor.fontWeight": "400",
     // "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features",
-    "editor.fontFamily": "'VictorMono Nerd Font', 'hurmit Nerd Font mono','ProFontWindows Nerd Font mono','meslolgl Nerd Font mono','Iosevka Nerd Font Mono','SauceCodePro Nerd Font','ProFontIIx Nerd Font',mono",
+    "editor.fontFamily": "'VictorMono Nerd Font', 'hurmit Nerd Font mono','ProFontWindows Nerd Font mono','meslolgl Nerd Font mono','Iosevka Nerd Font Mono','SauceCodePro Nerd Font','ProFontIIx Nerd Font',mono"
     // "editor.fontSize": 22,
     // "editor.fontWeight": "500",
     // "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features",
-    "editor.fontFamily": "'VictorMono Nerd Font', 'hurmit Nerd Font mono','ProFontWindows Nerd Font mono','meslolgl Nerd Font mono','Iosevka Nerd Font Mono','SauceCodePro Nerd Font','ProFontIIx Nerd Font',mono",
+    "editor.fontFamily": "'VictorMono Nerd Font', 'hurmit Nerd Font mono','ProFontWindows Nerd Font mono','meslolgl Nerd Font mono','Iosevka Nerd Font Mono','SauceCodePro Nerd Font','ProFontIIx Nerd Font',mono"
     // "editor.fontSize": 22,
     // "editor.fontWeight": "500",
     // "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -976,6 +976,6 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
-  },
+  }
   // #endregion: CUSTOMS RULES                                       !
 }

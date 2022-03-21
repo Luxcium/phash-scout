@@ -43,7 +43,7 @@
         "panel": "dedicated",
         "reveal": "never",
         "revealProblems": "onProblem",
-        "showReuseMessage": false,
+        "showReuseMessage": false
       },
       "problemMatcher": {
         "base": "$tsc",
@@ -69,7 +69,7 @@
         "panel": "dedicated",
         "reveal": "always",
         "revealProblems": "never",
-        "showReuseMessage": false,
+        "showReuseMessage": false
       },
       "problemMatcher": {
         "base": "$tsc",
@@ -92,15 +92,13 @@
         "clear": true,
         "revealProblems": "onProblem",
         "reveal": "always",
-        "showReuseMessage": true,
+        "showReuseMessage": true
       },
       "problemMatcher": {
         "base": "$eslint-compact",
         "owner": "eslint",
         "applyTo": "allDocuments",
-        "fileLocation": [
-          "absolute",
-        ],
+        "fileLocation": ["absolute"]
         // // /home/luxcium/dev/questrade-ts/src/private/core/next-rate-limiter/core_limiter.ts: line 121, col 3, Error - Expected an assignment or function call and instead saw an expression. (no-unused-expressions)
         // "pattern": {
         //   "regexp": "^(.+):\\s(.+)\\((.+)\\)\\sat\\s(.+):(\\d+):(\\d+):$",
@@ -124,15 +122,13 @@
         "clear": true,
         "revealProblems": "onProblem",
         "reveal": "silent",
-        "showReuseMessage": true,
+        "showReuseMessage": true
       },
       "problemMatcher": {
         "base": "$eslint-compact",
         "owner": "eslint",
         "applyTo": "allDocuments",
-        "fileLocation": [
-          "absolute",
-        ],
+        "fileLocation": ["absolute"],
         // /home/luxcium/dev/questrade-ts/src/private/core/next-rate-limiter/core_limiter.ts: line 121, col 3, Error - Expected an assignment or function call and instead saw an expression. (no-unused-expressions)
         "pattern": {
           "regexp": "^(.+):\\s(.+)\\((.+)\\)\\sat\\s(.+):(\\d+):(\\d+):$",
@@ -140,9 +136,9 @@
           "line": 2,
           "column": 3,
           "severity": 4,
-          "message": 5,
+          "message": 5
         }
       }
     }
-  ],
+  ]
 }

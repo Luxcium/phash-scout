@@ -9,13 +9,7 @@
     }
   ],
   // Exclude references and emitted output
-  "exclude": [
-    "src",
-    "test",
-    "dist",
-    "archives",
-    "out"
-  ],
+  "exclude": ["src", "test", "dist", "archives", "out"],
   "compilerOptions": {
     "target": "es6",
     "module": "CommonJS",
@@ -26,6 +20,6 @@
     "outDir": "./.tmp/build",
     "emitDeclarationOnly": true,
     "allowSyntheticDefaultImports": true,
-    "generateCpuProfile": "./.tmp/performance/cpu-info.cpuprofile",
+    "generateCpuProfile": "./.tmp/performance/cpu-info.cpuprofile"
   }
 }
