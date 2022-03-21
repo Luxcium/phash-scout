@@ -3,35 +3,27 @@ import { FileType } from '../tools';
 export type WithFileName = {
   fileName: string;
 };
-
 export type WithPathToFile = {
   pathToFile: string;
 };
-
 export type WithFullPath = {
   fullPath: string;
 };
-
 export type WithFileExtname = {
   extname: string;
 };
 export type WithFileType = {
   type: FileType;
 };
-
 export type WithExtname = {
   extname: string;
 };
-
 export type WithExt = {
   ext: string;
 };
-
 export type WithExclude = {
   exclude: boolean;
 };
-// ext: string; exclude: boolean
-// extname:path.extname(fullPath),
 export type CurrentPath = WithFileName &
   WithPathToFile &
   WithFileExtname &
@@ -40,7 +32,6 @@ export type CurrentPath = WithFileName &
   WithExtname &
   WithExt &
   WithExclude;
-
 export type CurrentPathError = ErrorTypePath & {
   fileName: '';
   pathToFile: '';
@@ -71,11 +62,9 @@ export type SocketPath = CurrentPath & {
 export type SymbolicLinkPath = CurrentPath & {
   readonly type: FileType.SymbolicLink;
 };
-
 export type UnknownTypePath = CurrentPath & {
   readonly type: FileType.Unknown;
 };
-
 export type ErrorTypePath = CurrentPath & {
   readonly type: FileType.Error;
 };
