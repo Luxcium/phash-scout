@@ -14,14 +14,17 @@ import {
 } from '../types';
 
 export function getCurrentPath(f: DirentWithFileType, folderPath: string) {
+  const extname = path.extname(`${f.fileName}`);
+  const ext = extname.toLowerCase();
   const fullPath: CurrentPath = {
-    fileName: f.fileName,
-    extname: path.extname(`${f.fileName}`),
     pathToFile: folderPath,
-    fullPath: `${folderPath}/${f.fileName}`.replaceAll('//', '/'),
+    extname,
+    ext,
+    fullPath: `${folderPath}/${f.fileName}`,
+    fileName: f.fileName,
     type: FileTypes.Unknown,
+    exclude: false,
   };
-
   if (f.isDirectory) {
     fullPath.type = FileTypes.Directory;
     return fullPath as DirectoryPath;

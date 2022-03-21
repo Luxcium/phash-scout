@@ -1,15 +1,8 @@
-import { FileType } from '../tools';
 import { CurrentPathAndStats } from './CurrentPathAndStats';
-import { CurrentPathError } from './file-path-types';
+import { CurrentPath, CurrentPathError } from './file-path-types';
 import { GetStats } from './GetStats';
 
-export type CurrentPathWithStats = {
-  fileName: string;
-  extname: string;
-  pathToFile: string;
-  fullPath: string;
-
-  type: FileType;
+export type CurrentPathWithStats = CurrentPath & {
   getStats: () => Promise<GetStats>;
   getChild: () => Promise<
     CurrentPathWithStats | CurrentPathAndStats | CurrentPathError

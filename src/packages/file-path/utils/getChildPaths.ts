@@ -25,9 +25,11 @@ export function getChildPaths(
         immediateZalgo<CurrentPathError>({
           pathToFile: '',
           extname: '',
+          ext: '',
           fullPath: '',
           fileName: '',
           type: FileTypes.Error,
+          exclude: true,
         }),
       ];
     } catch (error: any) {

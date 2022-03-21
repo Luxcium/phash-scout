@@ -37,32 +37,39 @@ export function getPathWithStats(
     const { type, pathToFile, fullPath, fileName } = {
       ...getCurrentPath(i, folderPath),
     };
-    const getStats = async (): Promise<GetStats> => {
+    const extname = path.extname(fullPath);
+    const ext = extname.toLowerCase();
+    const getStats = async (): Promise<
+      GetStats & { ext: string; exclude: boolean }
+    > => {
       try {
-        // const extname = path.extname(fullPath);
-
         return {
           fileName,
-          extname: path.extname(fullPath),
+          extname,
+          ext,
           pathToFile,
           fullPath,
           type,
           ...(await stat(fullPath)),
+          exclude: false,
         };
       } catch (error: any) {
         return immediateZalgo<GetStats>({
           pathToFile: '',
-          extname: '',
           fullPath: '',
           fileName: '',
+          extname: '',
+          ext: '',
           type: FileTypes.Error,
           ...error,
+          exclude: true,
         });
       }
     };
     if (withStats) {
       return {
         ...(await getStats()),
+        exclude: false,
         getStats,
         getChild: getChildPaths(fullPath, type, withStats),
       };
@@ -70,10 +77,12 @@ export function getPathWithStats(
 
     return {
       fileName,
-      extname: path.extname(fullPath),
+      extname,
+      ext,
       pathToFile,
       fullPath,
       type,
+      exclude: false,
       getStats,
       getChild: getChildPaths(fullPath, type, withStats),
     };

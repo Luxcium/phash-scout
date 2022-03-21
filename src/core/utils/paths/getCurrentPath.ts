@@ -25,12 +25,16 @@ export const currentPath = (folder: string) => (f: DirentWithFileType) =>
  */
 /** @deprecated */
 export function getCurrentPath(f: DirentWithFileType, folderPath: string) {
+  const extname = path.extname(`${f.fileName}`);
+  const ext = extname.toLowerCase();
   const fullPath: CurrentPath = {
     pathToFile: folderPath,
-    extname: path.extname(`${f.fileName}`),
+    extname,
+    ext,
     fullPath: `${folderPath}/${f.fileName}`,
     fileName: f.fileName,
     type: FileType.Unknown,
+    exclude: false,
   };
 
   if (f.isDirectory) {

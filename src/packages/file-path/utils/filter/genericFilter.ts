@@ -6,16 +6,19 @@ import type {
   DirentWithFileType,
 } from '../../types';
 
-export function filterFiles(
+function makeGenericFilter() {
+  return true;
+}
+
+void makeGenericFilter;
+function genericFilter(
   element: Promise<CurrentPathAndStats | CurrentPathWithStats>
 ): Promise<boolean>;
-export function filterFiles(element: CurrentPath): boolean;
-export function filterFiles(
-  element: DirentWithFileType[]
-): DirentWithFileType[];
-export function filterFiles(element: DirentWithFileType): boolean;
+function genericFilter(element: CurrentPath): boolean;
+function genericFilter(element: DirentWithFileType[]): DirentWithFileType[];
+function genericFilter(element: DirentWithFileType): boolean;
 
-export function filterFiles(
+function genericFilter(
   element:
     | DirentWithFileType
     | DirentWithFileType[]
@@ -35,3 +38,19 @@ export function filterFiles(
 
   return element.type === 'File';
 }
+[
+  [
+    (item: DirentWithFileType) => item.isFile,
+    'isFile',
+    (element: DirentWithFileType) => element.isFile,
+    'File',
+  ],
+  [
+    (item: DirentWithFileType) => item.isDirectory,
+    'isDirectory',
+    (element: DirentWithFileType) => element.isDirectory,
+    'Directory',
+  ],
+];
+
+void { genericFilter };
