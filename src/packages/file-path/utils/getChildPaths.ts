@@ -1,20 +1,14 @@
 import { getPathWithStats } from '../getPathWithStats';
 import { immediateZalgo } from '../imports';
 import { FileType, FileTypes } from '../tools';
-import {
-  CurrentPathAndStats,
-  CurrentPathError,
-  CurrentPathWithStats,
-} from '../types';
+import { CurrentPathError, PathAndStats, PathWithStats } from '../types';
 
 export function getChildPaths(
   fullPath: string,
   type: FileType,
   withStats: boolean
 ) {
-  return (): Promise<
-    CurrentPathWithStats | CurrentPathAndStats | CurrentPathError
-  >[] => {
+  return (): Promise<PathWithStats | PathAndStats | CurrentPathError>[] => {
     try {
       if (type === 'Directory') {
         if (withStats) return [...getPathWithStats(fullPath, withStats)];

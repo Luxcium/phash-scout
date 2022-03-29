@@ -1,37 +1,54 @@
 import { FileType } from '../tools';
+import { CurrentPath, WithFileType } from './CurrentPath';
 
-export type WithFileName = {
-  fileName: string;
+export type WithTypeDirectory = {
+  type: FileType.Directory;
 };
-export type WithPathToFile = {
-  pathToFile: string;
+
+export type WithTypeFile = {
+  type: FileType.File;
 };
-export type WithFullPath = {
-  fullPath: string;
+
+export type WithTypeBlockDevice = {
+  type: FileType.BlockDevice;
 };
-export type WithFileExtname = {
-  extname: string;
+
+export type WithTypeCharacterDevice = {
+  type: FileType.CharacterDevice;
 };
-export type WithFileType = {
-  type: FileType;
+
+export type WithTypeFIFO = {
+  type: FileType.FIFO;
 };
-export type WithExtname = {
-  extname: string;
+
+export type WithTypeSocket = {
+  type: FileType.Socket;
 };
-export type WithExt = {
-  ext: string;
+
+export type WithTypeSymbolicLink = {
+  type: FileType.SymbolicLink;
 };
-export type WithExclude = {
-  exclude: boolean;
+
+export type WithTypeUnknown = {
+  type: FileType.Unknown;
 };
-export type CurrentPath = WithFileName &
-  WithPathToFile &
-  WithFileExtname &
-  WithFullPath &
-  WithFileType &
-  WithExtname &
-  WithExt &
-  WithExclude;
+
+export type WithTypeError = {
+  type: FileType.Error;
+};
+
+export type WithFileType2 = WithFileType &
+  (
+    | WithTypeDirectory
+    | WithTypeFile
+    | WithTypeBlockDevice
+    | WithTypeCharacterDevice
+    | WithTypeFIFO
+    | WithTypeSocket
+    | WithTypeSymbolicLink
+    | WithTypeUnknown
+    | WithTypeError
+  );
 export type CurrentPathError = ErrorTypePath & {
   fileName: '';
   pathToFile: '';

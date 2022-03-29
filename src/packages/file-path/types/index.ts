@@ -1,10 +1,16 @@
-export type { CurrentPathAndStats } from './CurrentPathAndStats';
-export type { CurrentPathWithStats } from './CurrentPathWithStats';
+export type {
+  CurrentPath,
+  WithCount,
+  WithFileName,
+  WithFileType,
+  WithFullPath,
+  WithPathToFile,
+  WithPHash,
+} from './CurrentPath';
 export type { DirentWithFileType } from './DirentWithFileType';
 export type {
   BlockDevicePath,
   CharacterDevicePath,
-  CurrentPath,
   CurrentPathError,
   DirectoryPath,
   ErrorTypePath,
@@ -13,10 +19,14 @@ export type {
   SocketPath,
   SymbolicLinkPath,
   UnknownTypePath,
-  WithFileName,
-  WithFileType,
-  WithFullPath,
-  WithPathToFile,
 } from './file-path-types';
 export type { GetChild } from './GetChild';
 export type { GetStats } from './GetStats';
+export type { PathAndStats } from './PathAndStats';
+export type { PathWithStats } from './PathWithStats';
+export type {
+  Excluded,
+  IsExcluded,
+  NotExcluded,
+  WithExclude,
+} from './WithExclude';

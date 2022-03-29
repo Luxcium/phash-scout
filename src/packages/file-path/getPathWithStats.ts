@@ -2,36 +2,32 @@ import { stat } from 'fs/promises';
 import path from 'path';
 import { immediateZalgo } from './imports';
 import { FileTypes } from './tools';
-import type {
-  CurrentPathAndStats,
-  CurrentPathWithStats,
-  GetStats,
-} from './types';
+import type { GetStats, PathAndStats, PathWithStats } from './types';
 import { dirListWithFileType } from './utils/dirListWithFileType';
 import { getChildPaths } from './utils/getChildPaths';
 import { getCurrentPath } from './utils/getCurrentPath';
+
+const humanSize = require('human-size');
 
 path;
 export function getPathWithStats(
   folderPath: string,
   withStats: false
-): Promise<CurrentPathWithStats>[];
+): Promise<PathWithStats>[];
 
 export function getPathWithStats(
   folderPath: string,
   withStats: true
-): Promise<CurrentPathAndStats>[];
+): Promise<PathAndStats>[];
 export function getPathWithStats(
   folderPath: string,
   withStats: boolean
-): Promise<CurrentPathWithStats | CurrentPathAndStats>[];
-export function getPathWithStats(
-  folderPath: string
-): Promise<CurrentPathWithStats>[];
+): Promise<PathWithStats | PathAndStats>[];
+export function getPathWithStats(folderPath: string): Promise<PathWithStats>[];
 export function getPathWithStats(
   folderPath: string,
   withStats: boolean = false
-): Promise<CurrentPathWithStats | CurrentPathAndStats>[] {
+): Promise<PathWithStats | PathAndStats>[] {
   const dirList = dirListWithFileType(folderPath);
   const result = dirList.map(async i => {
     const { type, pathToFile, fullPath, fileName } = {
@@ -40,9 +36,11 @@ export function getPathWithStats(
     const extname = path.extname(fullPath);
     const ext = extname.toLowerCase();
     const getStats = async (): Promise<
-      GetStats & { ext: string; exclude: boolean }
+      GetStats & { ext: string; exclude: boolean; hSize?: string }
     > => {
       try {
+        const stats = { ...(await stat(fullPath)) };
+        const hSize = humanSize(stats.size, 4);
         return {
           fileName,
           extname,
@@ -50,7 +48,8 @@ export function getPathWithStats(
           pathToFile,
           fullPath,
           type,
-          ...(await stat(fullPath)),
+          ...stats,
+          hSize,
           exclude: false,
         };
       } catch (error: any) {
@@ -60,6 +59,7 @@ export function getPathWithStats(
           fileName: '',
           extname: '',
           ext: '',
+          hSize: '',
           type: FileTypes.Error,
           ...error,
           exclude: true,

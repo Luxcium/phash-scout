@@ -1,9 +1,9 @@
 import { Stats } from 'fs';
 import { CurrentPath } from '.';
 import { FileType } from '../tools';
-import { CurrentPathAndStats } from './CurrentPathAndStats';
-import { CurrentPathWithStats } from './CurrentPathWithStats';
 import { CurrentPathError } from './file-path-types';
+import { PathAndStats } from './PathAndStats';
+import { PathWithStats } from './PathWithStats';
 
 export type GetChild =
   | {
@@ -13,7 +13,7 @@ export type GetChild =
       type: FileType;
       getStats: () => Promise<(Stats & CurrentPath) | CurrentPathError>;
       getChild: () => Promise<
-        CurrentPathWithStats | CurrentPathAndStats | CurrentPathError
+        PathWithStats | PathAndStats | CurrentPathError
       >[];
     }
   | CurrentPathError;

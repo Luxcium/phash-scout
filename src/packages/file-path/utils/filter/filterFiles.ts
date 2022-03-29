@@ -1,13 +1,13 @@
 import { isA_Promise } from '../../tools';
 import type {
   CurrentPath,
-  CurrentPathAndStats,
-  CurrentPathWithStats,
   DirentWithFileType,
+  PathAndStats,
+  PathWithStats,
 } from '../../types';
 
 export function filterFiles(
-  element: Promise<CurrentPathAndStats | CurrentPathWithStats>
+  element: Promise<PathAndStats | PathWithStats>
 ): Promise<boolean>;
 export function filterFiles(element: CurrentPath): boolean;
 export function filterFiles(
@@ -20,7 +20,7 @@ export function filterFiles(
     | DirentWithFileType
     | DirentWithFileType[]
     | CurrentPath
-    | Promise<CurrentPathAndStats | CurrentPathWithStats>
+    | Promise<PathAndStats | PathWithStats>
 ): boolean | DirentWithFileType[] | Promise<boolean> {
   if (Array.isArray(element)) return element.filter(item => item.isFile);
 

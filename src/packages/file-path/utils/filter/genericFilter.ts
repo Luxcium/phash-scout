@@ -1,9 +1,9 @@
 import { isA_Promise } from '../../tools';
 import type {
   CurrentPath,
-  CurrentPathAndStats,
-  CurrentPathWithStats,
   DirentWithFileType,
+  PathAndStats,
+  PathWithStats,
 } from '../../types';
 
 function makeGenericFilter() {
@@ -12,7 +12,7 @@ function makeGenericFilter() {
 
 void makeGenericFilter;
 function genericFilter(
-  element: Promise<CurrentPathAndStats | CurrentPathWithStats>
+  element: Promise<PathAndStats | PathWithStats>
 ): Promise<boolean>;
 function genericFilter(element: CurrentPath): boolean;
 function genericFilter(element: DirentWithFileType[]): DirentWithFileType[];
@@ -23,7 +23,7 @@ function genericFilter(
     | DirentWithFileType
     | DirentWithFileType[]
     | CurrentPath
-    | Promise<CurrentPathAndStats | CurrentPathWithStats>
+    | Promise<PathAndStats | PathWithStats>
 ): boolean | DirentWithFileType[] | Promise<boolean> {
   if (Array.isArray(element)) return element.filter(item => item.isFile);
 
