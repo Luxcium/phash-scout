@@ -29,7 +29,7 @@ export async function main(
   const step2 = BoxedGenerator.of(...step1b);
   const step3 = step2.map((item, index) => phashNow(item, index || 0));
   const step4 = step3.map(
-    async (hash: { path: CurrentPath; phash: PhashNow }): TX => {
+    async (hash: { path: CurrentPath, phash: PhashNow }): TX => {
       const { path, phash } = hash;
       const phash_ = await phash.get();
       if (phash_ == null) {
