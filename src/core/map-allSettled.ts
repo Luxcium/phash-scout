@@ -10,7 +10,8 @@
 /*--------------------------------------------------------------------*/
 
 import { arrayGenerator } from './arrayGenerator';
-import type { MapAllSettledArgs, WorkerArgs } from './types/types';
+import { MapAllSettledArgs } from './types/MapAllSettledArgs';
+import { WorkerArgs } from './types/WorkerArgs';
 import { worker } from './worker';
 
 export async function mapAllSettled<T, U>({

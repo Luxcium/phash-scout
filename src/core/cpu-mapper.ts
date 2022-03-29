@@ -1,9 +1,9 @@
 import { cpus } from 'os';
 import * as worker_threads from 'worker_threads';
-import type {
-  CPU_MapperRetunType,
-  Mapper /* , MapperArgs */,
-} from './types/types';
+import {
+  CPU_MapperRetunType /* , MapperArgs */,
+} from './types/CPU_MapperRetunType';
+import { Mapper /* , MapperArgs */ } from './types/Mapper';
 import { processMapper } from './worker-thread-mapper-factories/parallel-mapping';
 
 const cpuCount = (): number => cpus().length;

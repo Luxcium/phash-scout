@@ -1,5 +1,4 @@
 import type { IUnbox, IUnboxList, Mapper } from '../..';
-import { timeoutZalgo } from '../../utilities/utils';
 import { immediateZalgo } from '../utils';
 
 /** Create a container to hold a value as an AsyncGenerator on wich you could map */
@@ -72,27 +71,4 @@ export class BoxedAsyncGenerator<T> {
   public unboxAsyncGen(): AsyncGenerator<T> {
     return this.asyncGen();
   }
-}
-
-void main;
-// main();
-async function main(): Promise<void> {
-  const box = BoxedAsyncGenerator.of([1, 2, 3, 4]);
-  const asyncGen1 = box
-    .mapAwait<Promise<number>>(item => timeoutZalgo(2000, item * 2))
-    .asyncGen();
-  const asyncGen2 = box.mapAwait<number>(item => item * 2).asyncGen();
-
-  const asyncGen = BoxedAsyncGenerator.of([1, 2, 3, 4])
-    .mapAwait<Promise<number>>(item => timeoutZalgo(2000, item * 2))
-    .mapAwait<number>(item => item * 2)
-    // .map(item => `${item}`)
-    .asyncGen();
-  for await (const item of asyncGen) console.log(item);
-
-  for await (const item of asyncGen1) console.log(item);
-
-  for await (const item of asyncGen2) console.log(item);
-
-  return void 42;
 }

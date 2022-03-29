@@ -1,3 +1,4 @@
+export type { Mapper, ThenMapper } from '../../types';
 export type { CallbackfnT, CallbackfnU } from './CallbackfnT';
 export type { IApply } from './IApply';
 export type { IChain } from './IChain';

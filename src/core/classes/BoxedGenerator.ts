@@ -1,7 +1,7 @@
-import { Box, BoxedList } from '.';
-import { Mapper, ThenMapper } from '../..';
 import { immediateZalgo } from '../utils';
-import { IUnbox, IUnboxList } from './types';
+import { Box } from './Box';
+import { BoxedList } from './BoxedList';
+import type { IUnbox, IUnboxList, Mapper, ThenMapper } from './types';
 
 const DEBUG = false;
 if (DEBUG) console.error('DEBUG = true in:', __filename);

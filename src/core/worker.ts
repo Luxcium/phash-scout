@@ -10,7 +10,8 @@
 /*--------------------------------------------------------------------*/
 
 import { itemMapper } from './item-mapper';
-import type { ItemMapperArgs, WorkerArgs } from './types/types';
+import { ItemMapperArgs } from './types/ItemMapperArgs';
+import { WorkerArgs } from './types/WorkerArgs';
 
 export async function worker<T, U>({ gen, mapFn, result }: WorkerArgs<T, U>) {
   // ++----- worker ---------------------------------------------------+

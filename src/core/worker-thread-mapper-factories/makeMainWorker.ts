@@ -1,4 +1,5 @@
-import { WorkerData, Worker_Threads } from '../types/types';
+import { WorkerData } from '../types/WorkerData';
+import { Worker_Threads } from '../types/Worker_Threads';
 import { getAsyncWorker } from './the-main-worker';
 
 export function makeMainWorker<T>(
