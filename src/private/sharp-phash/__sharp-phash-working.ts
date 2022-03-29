@@ -6,7 +6,7 @@ import {
   notExcluded,
   notNull,
 } from '../../packages/file-path/tools/notExclude';
-import { immediateZalgo } from '../utils';
+import { immediateZalgo } from '../../utilities/utils';
 import { filterExtensions, getPhsh } from './getFilesWithPHash';
 import { uniqueAdd } from './img-scout/querryAndAdd';
 import { QueryResultItem } from './img-scout/tools/isQueryResultItem';

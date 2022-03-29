@@ -2,7 +2,7 @@ import path from 'path';
 import { devPaths } from '../../../constants/devPaths';
 import { BoxedGenerator } from '../../../core/classes/BoxedGenerator';
 import { getDirsSync, getFilesSync } from '../../../packages/file-path/tools';
-import { immediateZalgo } from '../../utils';
+import { immediateZalgo } from '../../../utilities/utils';
 import { replaceStr } from './replaceStr';
 
 const PREFIX = 'TESTING:001::JSON:REDIS';

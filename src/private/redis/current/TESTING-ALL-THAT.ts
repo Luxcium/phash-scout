@@ -8,7 +8,7 @@ import {
   getListingsSync,
 } from '../../../packages/file-path/tools';
 import { dirListWithFileType } from '../../../packages/file-path/utils/dirListWithFileType';
-import { immediateZalgo } from '../../utils';
+import { immediateZalgo } from '../../../utilities/utils';
 import { redisCreateClient } from '../tools';
 import { replaceStr } from './replaceStr';
 
