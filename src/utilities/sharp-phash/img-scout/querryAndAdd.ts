@@ -1,14 +1,14 @@
 import { stat } from 'fs/promises';
 import { immediateZalgo } from '../../../core/utils';
 import { isA_Promise } from '../../../packages/file-path/tools';
+import { addPhash } from './addPhash';
+import { queryPhash } from './queryPhash';
 import {
   isQueryResultList,
   PQuerryAndAdd,
   QueryResultItem,
   RawQueryResult,
-} from '../isQueryResultItem';
-import { addPhash } from './addPhash';
-import { queryPhash } from './queryPhash';
+} from './tools/isQueryResultItem';
 
 const hasSomeTitleInclude = (title: string, queryResult: QueryResultItem[]) =>
   queryResult.some(i => i[0] === title);

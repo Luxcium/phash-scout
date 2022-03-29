@@ -1,10 +1,6 @@
 {
   "extends": "../tsconfig.json",
-  "include": [
-    ".",
-    "../archives/MyPathInfos.ts",
-    "../archives/willLog-working.ts"
-, "../archives/MyStats.ts"  ],
+  "include": ["."],
   "exclude": [],
   "compilerOptions": {
     // "rootDir": ".",

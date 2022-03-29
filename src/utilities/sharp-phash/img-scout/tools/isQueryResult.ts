@@ -1,7 +1,6 @@
 import { QueryResult } from './isQueryResultItem';
 
-export type QueryResult2 = [path: string, id: number, radius: string][];
-export function isQueryResult2(contender: unknown): contender is QueryResult {
+export function isQueryResult(contender: unknown): contender is QueryResult {
   if (Array.isArray(contender)) {
     return contender.every(item => {
       return (

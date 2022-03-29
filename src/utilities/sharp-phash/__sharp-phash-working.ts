@@ -2,11 +2,14 @@ import { statSync } from 'fs';
 import { CURRENT_PATH } from '../../constants/radius';
 import { BoxedGenerator } from '../../core';
 import { listFiles } from '../../packages/file-path/listFiles';
+import {
+  notExcluded,
+  notNull,
+} from '../../packages/file-path/tools/notExclude';
 import { immediateZalgo } from '../utils';
 import { filterExtensions, getPhsh } from './getFilesWithPHash';
 import { uniqueAdd } from './img-scout/querryAndAdd';
-import { QueryResultItem } from './isQueryResultItem';
-import { notExcluded, notNull } from './notExclude';
+import { QueryResultItem } from './img-scout/tools/isQueryResultItem';
 import { rConnect } from './rConnect';
 
 const humanSize = require('human-size');

@@ -1,8 +1,4 @@
-import {
-  IsExcluded,
-  NotExcluded,
-  WithExclude,
-} from '../../packages/file-path/types/WithExclude';
+import { IsExcluded, NotExcluded, WithExclude } from '../types/WithExclude';
 
 export function notExcluded(item: WithExclude): item is NotExcluded {
   return !item.exclude;

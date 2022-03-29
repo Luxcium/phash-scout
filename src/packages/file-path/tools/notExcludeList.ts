@@ -1,4 +1,4 @@
-import { WithExclude } from '../../packages/file-path/types';
+import { WithExclude } from '../types';
 import { notExcluded } from './notExclude';
 
 export function notExcludeList(list: WithExclude[]) {

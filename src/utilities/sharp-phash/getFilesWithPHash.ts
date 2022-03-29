@@ -1,5 +1,6 @@
 import { BoxedGenerator } from '../../core';
 import { listFiles } from '../../packages/file-path/listFiles';
+import { notExcluded } from '../../packages/file-path/tools/notExclude';
 import type {
   Excluded,
   PathAndStats,
@@ -12,7 +13,6 @@ import type {
 import { Bg } from '../../packages/file-path/types/Bg';
 import { phashNow } from '../../packages/phash-now/phashNow';
 import { immediateZalgo } from '../utils';
-import { notExcluded } from './notExclude';
 import { validExts } from './__sharp-phash-working';
 
 type Pr<T> = Promise<T>;

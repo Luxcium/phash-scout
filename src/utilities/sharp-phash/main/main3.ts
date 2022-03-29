@@ -1,6 +1,6 @@
 import fs from 'fs';
-import { CURRENT_PATH } from '../../constants/radius';
-import { redisCreateClient } from '../redis/tools';
+import { CURRENT_PATH } from '../../../constants/radius';
+import { redisCreateClient } from '../../redis/tools';
 
 const phash = require('sharp-phash');
 
