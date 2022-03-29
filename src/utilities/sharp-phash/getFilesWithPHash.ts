@@ -1,32 +1,32 @@
 import { BoxedGenerator } from '../../core';
+import { listFiles } from '../../packages/file-path/listFiles';
 import type {
   Excluded,
   PathAndStats,
   PathWithStats,
   WithCount,
   WithExclude,
+  WithIndex,
   WithPHash,
 } from '../../packages/file-path/types';
-import { getPathWithStats } from '../../packages/file-path/utils';
+import { Bg } from '../../packages/file-path/types/Bg';
 import { phashNow } from '../../packages/phash-now/phashNow';
 import { immediateZalgo } from '../utils';
 import { notExcluded } from './notExclude';
 import { validExts } from './__sharp-phash-working';
 
-type Bg<T> = BoxedGenerator<T>;
 type Pr<T> = Promise<T>;
-// type A<T> = Array<T>;
-
-// export async function listFiles(
-//   folder: string,
-//   withStats: false
-// ): Promise<PathWithStats[]>;
-
+export const filterExtensions =
+  (validExt: Set<string> = validExts) =>
+  <T extends PathWithStats>(list: Bg<Promise<T>>) =>
+    filterExts(list, validExt);
+export const getPhsh = <T extends PathWithStats>(list: Bg<Promise<T>>) =>
+  getPHash(list);
 export function getFilesWithPHash(
   folder: string,
   withStats: true,
   validExt?: Set<string>
-): Bg<Promise<PathAndStats & WithExclude & WithPHash & WithCount>>; // : Bg<Pr<T & WithExclude & WithPHash & WithCount>>
+): Bg<Promise<PathAndStats & WithExclude & WithPHash & WithCount>>;
 export function getFilesWithPHash(
   folder: string,
   withStats: false,
@@ -39,28 +39,15 @@ export function getFilesWithPHash(
 ): Bg<
   Promise<(PathWithStats | PathAndStats) & WithExclude & WithPHash & WithCount>
 > {
-  const fext = <T extends PathWithStats>(list: Bg<Promise<T>>) =>
-    filterExts(list, validExt);
-  const gPhsh = <T extends PathWithStats>(list: Bg<Promise<T>>) =>
-    getPHash(list);
+  // const fext = <T extends PathWithStats>(list: Bg<Promise<T>>) =>
+  //   filterExts(list, validExt);
+  // const gPhsh = <T extends PathWithStats>(list: Bg<Promise<T>>) =>
+  //   getPHash(list);
 
-  if (withStats) return gPhsh(fext(listFiles(folder, withStats)));
-  return gPhsh(fext(listFiles(folder, withStats)));
-}
-export function listFiles(
-  folder: string,
-  withStats: true
-): Bg<Promise<PathAndStats>>;
-export function listFiles(
-  folder: string,
-  withStats: false
-): Bg<Promise<PathWithStats>>;
-export function listFiles(
-  folder: string,
-  withStats: boolean = false
-): Bg<Promise<PathAndStats> | Promise<PathWithStats>> {
-  if (withStats) return BoxedGenerator.of(...getPathWithStats(folder, true));
-  return BoxedGenerator.of(...getPathWithStats(folder, false));
+  if (withStats) {
+    return getPhsh(filterExtensions(validExt)(listFiles(folder, true)));
+  }
+  return getPhsh(filterExtensions(validExt)(listFiles(folder, false)));
 }
 
 export function filterExts<T extends PathWithStats>(
@@ -76,8 +63,6 @@ export function filterExts<T extends PathWithStats>(
     });
   });
 }
-// phashNow()
-// const pHashesBGen =
 
 export function getPHash<T extends PathWithStats>(
   list: BoxedGenerator<Promise<T>>
@@ -87,10 +72,19 @@ export function getPHash<T extends PathWithStats>(
     const currentPath = await paths;
     if (notExcluded(currentPath)) {
       const { phash } = phashNow(currentPath, index || 0);
+      // const {index} = phash
       const hash = await phash.get();
       if (typeof hash === 'string') {
-        const result: Excluded<false> & PathWithStats & WithPHash & WithCount =
-          { pHash: hash, ...currentPath, count: count.index1++ };
+        const result: Excluded<false> &
+          PathWithStats &
+          WithPHash &
+          WithIndex &
+          WithCount = {
+          pHash: hash,
+          ...currentPath,
+          count: count.index1++,
+          index: index || 0,
+        };
         return result;
       }
     }

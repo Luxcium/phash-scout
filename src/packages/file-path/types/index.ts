@@ -4,6 +4,7 @@ export type {
   WithFileName,
   WithFileType,
   WithFullPath,
+  WithIndex,
   WithPathToFile,
   WithPHash,
 } from './CurrentPath';

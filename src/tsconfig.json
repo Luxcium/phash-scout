@@ -1,6 +1,8 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["."],
+  "include": [
+    "."
+  ],
   "exclude": [],
   "compilerOptions": {
     // "rootDir": ".",
@@ -25,7 +27,7 @@
     /* Emit Options */
     "newLine": "lf",
     "noEmit": false,
-    "rootDir": "./",
+    "rootDir": ".",
     "outDir": "../out/src",
     "incremental": true,
     "noEmitOnError": false,
@@ -61,9 +63,15 @@
     "assumeChangesOnlyAffectDirectDependencies": false,
     // "generateCpuProfile": "../performance/.cpuprofile",
     /* Specify a set of bundled library declaration files that describe the target runtime environment. */
-    "lib": ["dom", "esnext"],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     /* Specify type package names to be included without being referenced in a source file. */
-    "types": ["node", "jest"],
+    "types": [
+      "node",
+      "jest"
+    ],
     /* Completeness */
     "skipDefaultLibCheck": false,
     "skipLibCheck": false,

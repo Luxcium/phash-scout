@@ -33,7 +33,7 @@ export type {
   Mapper,
   MapperArgs,
   ThenMapper,
-} from './core/types/types';
+} from './core/types';
 
 /*
 (alias) function CPU_Mapper(filename: string): <T, R>(list: T[], mapFn: Mapper<T, R>, limit?: number | undefined) => {

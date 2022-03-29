@@ -1,11 +1,11 @@
 import { statSync } from 'fs';
 import { CURRENT_PATH } from '../../constants/radius';
 import { BoxedGenerator } from '../../core';
-import { FileType } from '../../core/types';
+import { listFiles } from '../../packages/file-path/listFiles';
 import { immediateZalgo } from '../utils';
+import { filterExtensions, getPhsh } from './getFilesWithPHash';
 import { uniqueAdd } from './img-scout/querryAndAdd';
 import { QueryResultItem } from './isQueryResultItem';
-import { getFilesWithPHash } from './listFiles';
 import { notExcluded, notNull } from './notExclude';
 import { rConnect } from './rConnect';
 
@@ -16,48 +16,51 @@ export const validExts = new Set(['.png', '.jpeg', '.jpg', '.webp']);
 export const count = { index1: 1 };
 
 export async function main() {
-  const listFiles001 = getFilesWithPHash(CURRENT_PATH, true, validExts);
-  const listFiles002 = getFilesWithPHash(
-    '/home/luxcium/Téléchargements/animes',
-    true,
-    validExts
-  );
-  const listFiles003 = getFilesWithPHash(
+  const listFiles001 = listFiles(CURRENT_PATH, false);
+  const listFiles002 = listFiles('/home/luxcium/Téléchargements/animes', false);
+  const listFiles003 = listFiles(
     '/home/luxcium/Téléchargements/archives 002',
-    true,
-    validExts
+    false
   );
-  const listFiles004 = getFilesWithPHash(
+  const listFiles004 = listFiles(
     '/home/luxcium/Téléchargements/images Archives 001',
-    true,
-    validExts
+    false
   );
-  const listFiles005 = getFilesWithPHash(
+  const listFiles005 = listFiles(
     '/home/luxcium/Téléchargements/Random images 800+',
-    true,
-    validExts
+    false
+  );
+  const boxedGenerator2 = getPhsh(
+    filterExtensions()(
+      BoxedGenerator.of(
+        ...listFiles001.unbox(),
+        ...listFiles002.unbox(),
+        ...listFiles003.unbox(),
+        ...listFiles004.unbox(),
+        ...listFiles005.unbox()
+        // ...getit('')
+      )
+    )
   );
 
-  const getit = (folder: string) => getFilesWithPHash(folder, true).unbox();
-  const boxedGenerator2 = BoxedGenerator.of(
-    ...listFiles001.unbox(),
-    ...listFiles002.unbox(),
-    ...listFiles003.unbox(),
-    ...listFiles004.unbox(),
-    ...listFiles005.unbox(),
-    ...getit('')
-  );
+  // const getit = (folder: string) => getFilesWithPHash(folder, false).unbox();
+  // const boxedGenerator2 = BoxedGenerator
+  //   .of
+
+  //   // ...getit('')
+  //   ();
   const R = await rConnect();
   const boxedGenerator3 = boxedGenerator2.map(async i => {
     const waited = await i;
 
-    const { type } = waited;
+    // const { type } = waited;
+    // type;
     let getQueryResult = (): any => null;
     let queryResult: null | QueryResultItem[] = null;
     if (
       notNull(waited.pHash) &&
-      notExcluded(waited) &&
-      type === FileType.File
+      notExcluded(waited)
+      // type === FileType.File
     ) {
       const { fullPath } = waited;
       const stats = statSync(fullPath);

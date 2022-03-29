@@ -43,6 +43,10 @@ export type WithPHash = {
 export type WithCount = {
   count: number;
 };
+
+export type WithIndex = {
+  index: number;
+};
 /*
 
   {
