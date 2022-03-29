@@ -1,6 +1,6 @@
 import { stat } from 'fs/promises';
-import { immediateZalgo } from '../../../core/utils';
-import { isA_Promise } from '../../../packages/file-path/tools';
+import { immediateZalgo } from '../../core/utils';
+import { isA_Promise } from '../../packages/file-path/tools';
 import { addPhash } from './addPhash';
 import { queryPhash } from './queryPhash';
 import {

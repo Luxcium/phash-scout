@@ -2,7 +2,7 @@ import { CurrentPath } from '../../packages/file-path/types';
 import {
   PQuerryAndAdd,
   QueryResultItem,
-} from '../../private/sharp-phash/img-scout/tools/isQueryResultItem';
+} from '../../private/img-scout/tools/isQueryResultItem';
 // /home/luxcium/projects/parallel-mapping/src/utilities/files/file-path/types/index.ts
 // /home/luxcium/projects/parallel-mapping/src/../../utilities/files/file-path/types
 import { FALSY } from './Falsy';

@@ -7,9 +7,9 @@ import {
   notNull,
 } from '../../packages/file-path/tools/notExclude';
 import { immediateZalgo } from '../../utilities/utils';
+import { uniqueAdd } from '../img-scout/querryAndAdd';
+import { QueryResultItem } from '../img-scout/tools/isQueryResultItem';
 import { filterExtensions, getPhsh } from './getFilesWithPHash';
-import { uniqueAdd } from './img-scout/querryAndAdd';
-import { QueryResultItem } from './img-scout/tools/isQueryResultItem';
 import { rConnect } from './rConnect';
 
 const humanSize = require('human-size');

@@ -1,4 +1,4 @@
-import type { S } from '../../../../core/types/IQueryListPhash';
+import type { S } from '../../../core/types/IQueryListPhash';
 
 export type QueryResultItem = [path: string, id: number, radius: string];
 export type RawQueryResult = Promise<QueryResultItem[]>;
