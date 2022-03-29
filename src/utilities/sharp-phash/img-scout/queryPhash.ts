@@ -11,14 +11,15 @@ export async function queryPhash(
   failSilently = true
 ) {
   try {
-    if (R.EXISTS(k) === 1) {
+    const R_EXISTS = await R.EXISTS(k);
+    if (R_EXISTS === 1) {
       await syncPhash(R, k);
       const result = R.sendCommand([QUERY, k, phash_, radius]);
       return result;
     }
+    console.error(`R.EXISTS(${k}) -> ${R_EXISTS}`);
   } catch (error: any) {
     if (!failSilently) throw new Error('queryPhash' + error);
-
     console.error('queryPhash Failled silently');
   }
   return [];

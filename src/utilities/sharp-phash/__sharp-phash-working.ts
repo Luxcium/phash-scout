@@ -1,108 +1,111 @@
-import { stat } from 'fs-extra';
+import { statSync } from 'fs';
 import { CURRENT_PATH } from '../../constants/radius';
 import { BoxedGenerator } from '../../core';
-import { WithExclude } from '../../packages/file-path/types/file-path-types';
-import { getPathWithStats } from '../../packages/file-path/utils';
-import { phashNow } from '../../packages/phash-now/phashNow';
+import { FileType } from '../../core/types';
 import { immediateZalgo } from '../utils';
-import type { PHashedPath } from './PHashedPath';
+import { uniqueAdd } from './img-scout/querryAndAdd';
+import { QueryResultItem } from './isQueryResultItem';
+import { getFilesWithPHash } from './listFiles';
+import { notExcluded, notNull } from './notExclude';
+import { rConnect } from './rConnect';
+
+const humanSize = require('human-size');
 
 export { CURRENT_PATH };
 export const validExts = new Set(['.png', '.jpeg', '.jpg', '.webp']);
-const count = { index1: 1 };
+export const count = { index1: 1 };
 
-export async function listFiles(folder: string, withStats: boolean = false) {
-  const pathList = BoxedGenerator.of(
-    ...getPathWithStats(folder) /* .filter(i => !i.exclude) */
-  );
-  count.index1 = 1;
-  const filesPathList = withStats
-    ? pathList.map(async i => {
-        const { fullPath } = await i;
-        return immediateZalgo({
-          ...(await i),
-          ...(await stat(fullPath)),
-        });
-      })
-    : pathList.map(async i => immediateZalgo(i));
-  const filteredExts = filesPathList.map(async i => {
-    const awaited_i = await i;
-    const { ext } = awaited_i;
-    return immediateZalgo({
-      ...awaited_i,
-      exclude: awaited_i.exclude || !validExts.has(ext),
-    });
-  });
-  const pHashesBGen = filteredExts.map(async (paths, index) => {
-    return phashNow(await paths, index || 0);
-  });
-  return pHashesBGen.map(async (hash: Promise<PHashedPath>) => {
-    const { path, phash } = await hash;
-    const phash_ = await phash.get();
-    return { phash_, ...path, i: phash.index, count: count.index1++ };
-  });
-}
 export async function main() {
-  // const boxedGenerator = await listFiles(
-  //   /* '/home/luxcium/Téléchargements', */
-  //   // CURRENT_PATH,
-  //   '/home/luxcium/Téléchargements/images Archives 001',
-  //   true
-  // );
-
-  // const listFiles001 = await listFiles(
-  //   '/home/luxcium/Téléchargements/images Archives 001',
-  //   true
-  // );
-
-  // const listFiles002 = await listFiles(
-  //   '/home/luxcium/Téléchargements/archives 002',
-  //   true
-  // );
-
-  // const listFiles003 = await listFiles(
-  //   '/home/luxcium/Téléchargements/Random images 800+',
-  //   true
-  // );
-  // listFiles001;
-  // listFiles002;
-  // listFiles003;
-  const listFiles004 = await listFiles(CURRENT_PATH);
-  // /home/luxcium/Téléchargements/animes
-  const boxedGenerator2 = BoxedGenerator.of(
-    // ...listFiles001.unbox(),
-    // ...listFiles002.unbox(),
-    // ...listFiles003.unbox(),
-    ...listFiles004.unbox()
+  const listFiles001 = getFilesWithPHash(CURRENT_PATH, true, validExts);
+  const listFiles002 = getFilesWithPHash(
+    '/home/luxcium/Téléchargements/animes',
+    true,
+    validExts
   );
-  // boxedGenerator;
-  const count = {
-    a: 0,
-    b: 0,
-    c: 0,
-    d: 0,
-    e: 1,
-  };
-  void count;
-  return boxedGenerator2
+  const listFiles003 = getFilesWithPHash(
+    '/home/luxcium/Téléchargements/archives 002',
+    true,
+    validExts
+  );
+  const listFiles004 = getFilesWithPHash(
+    '/home/luxcium/Téléchargements/images Archives 001',
+    true,
+    validExts
+  );
+  const listFiles005 = getFilesWithPHash(
+    '/home/luxcium/Téléchargements/Random images 800+',
+    true,
+    validExts
+  );
+
+  const getit = (folder: string) => getFilesWithPHash(folder, true).unbox();
+  const boxedGenerator2 = BoxedGenerator.of(
+    ...listFiles001.unbox(),
+    ...listFiles002.unbox(),
+    ...listFiles003.unbox(),
+    ...listFiles004.unbox(),
+    ...listFiles005.unbox(),
+    ...getit('')
+  );
+  const R = await rConnect();
+  const boxedGenerator3 = boxedGenerator2.map(async i => {
+    const waited = await i;
+
+    const { type } = waited;
+    let getQueryResult = (): any => null;
+    let queryResult: null | QueryResultItem[] = null;
+    if (
+      notNull(waited.pHash) &&
+      notExcluded(waited) &&
+      type === FileType.File
+    ) {
+      const { fullPath } = waited;
+      const stats = statSync(fullPath);
+      const phash_ = waited.pHash;
+      const k = 'x001';
+      queryResult = await uniqueAdd({
+        R,
+        title: `${k}:${humanSize(stats.size, 2) || 0}:${
+          stats.size
+        }:${fullPath}`, // waited.fullPath,
+        phash_,
+        k,
+      });
+      getQueryResult = () => queryResult;
+    }
+
+    return immediateZalgo({ queryResult, ...(await i), getQueryResult });
+  });
+  const result = boxedGenerator3
     .map(async item => {
-      if (await notExcludeAsync(item)) console.log(await item);
+      const waited = await item;
+
+      if (notExcluded(waited)) {
+        const { queryResult, ...awaited } = waited;
+        if (queryResult) {
+          const result = {
+            queryResult: queryResult.reverse(),
+            ...awaited,
+          };
+          console.log(result);
+          return result;
+        }
+      }
       return item;
     })
-    .map(i => i)
 
-    .spark();
+    .asyncSpark()
+    .then(a => {
+      R.QUIT();
+      return a;
+    });
+
+  return result;
 }
 main();
 
-export function notExclude(item: WithExclude) {
-  return !item.exclude;
-}
+/*
 
-export function notExcludeList(item: WithExclude[]) {
-  return item.filter(notExclude);
-}
 
-export async function notExcludeAsync(item: Promise<WithExclude>) {
-  return !(await item).exclude;
-}
+
+ */

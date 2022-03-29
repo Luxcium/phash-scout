@@ -1,18 +1,16 @@
 import fs from 'fs';
-import { PhashNow } from '../../core/types';
+import { notExcluded } from '../../utilities/sharp-phash/notExclude';
 import { immediateZalgo } from '../../utilities/utils';
 import { bigString } from '../big-string/bigString';
-import { CurrentPath } from '../file-path/types';
+import { PathWithStats } from '../file-path/types';
 
 const phash = require('sharp-phash');
 
-export function phashNow(
-  imgFile: CurrentPath,
-  index: number
-): { path: CurrentPath; phash: PhashNow } {
-  // TODO: implement a non hardcoded version with possibly more exclusisons
-  // HACK:
-  if (imgFile.fileName !== '.directory') {
+export function phashNow<T extends PathWithStats>(
+  imgFile: T,
+  index: number = 0
+) {
+  if (notExcluded(imgFile)) {
     const thisImage = fs.promises.readFile(imgFile.fullPath);
     const get = async () => {
       try {
@@ -27,7 +25,7 @@ export function phashNow(
 
   return {
     path: imgFile,
-    phash: { get: async () => immediateZalgo(null), index: index + 1 },
+    phash: { get: async () => immediateZalgo(), index: index + 1 },
   };
 }
 
