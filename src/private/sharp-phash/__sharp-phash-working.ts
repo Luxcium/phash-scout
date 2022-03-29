@@ -77,6 +77,7 @@ export async function main() {
         phash_,
         k,
       });
+
       getQueryResult = () => queryResult;
     }
 
