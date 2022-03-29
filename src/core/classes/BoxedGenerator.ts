@@ -150,6 +150,10 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
   public unbox(): T[] {
     return [...this.#valueGenerator()];
   }
+  // public =========================================-| unbox() |-====
+  public async asyncUnbox(): Promise<T[]> {
+    return Promise.all(this.unbox().map(i => immediateZalgo(i)));
+  }
 
   // public =========================================-| spark() |-====
   public spark() {
