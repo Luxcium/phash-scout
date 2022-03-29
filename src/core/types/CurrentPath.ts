@@ -2,7 +2,7 @@ import type { FileType } from './Enums/FileTypeEnum';
 
 /** @deprecated */
 export type WithIndex = {
-  title: number;
+  index: number;
 };
 /** @deprecated */
 export type WithTitle = {

@@ -1,22 +1,20 @@
 export type { CallbackfnT, CallbackfnU } from '../classes/types/CallbackfnT';
-// export type {
-//   BlockDevicePath,
-//   CharacterDevicePath,
-//   CurrentPath,
-//   DirectoryPath,
-//   FIFOPath,
-//   FilePath,
-//   SocketPath,
-//   SymbolicLinkPath,
-//   UnknownTypePath,
-// } from './CurrentPath-bak.ts-bak';
+export type { CPU_MapperRetunType } from './CPU_MapperRetunType';
+export type { CurrentPath } from './CurrentPath';
 export type { DirentWithFileType } from './DirentWithFileType';
-export { FileType } from './Enums/FileTypeEnum';
-export type { FileType as FileTypes } from './Enums/FileTypeEnum';
-// /home/luxcium/projects/parallel-mapping/src/utilities/sharp-phash/types/index.ts
+export type { FileType, FileType as FileTypes } from './Enums/FileTypeEnum';
 export type { FALSY } from './Falsy';
-// export type { MyPInfos } from './MyPathInfos';
-// export type { MyStats } from './MyStats';
+export type { FilePath } from './FilePath';
+export type { IParallelMapping } from './IParallelMapping';
+export type { IParallelMappingOptions } from './IParallelMappingOptions';
+export type { IQueryListPhash } from './IQueryListPhash';
+export type { ItemMapperArgs } from './ItemMapperArgs';
+export type { MakeThreadWorkerArgs } from './MakeThreadWorkerArgs';
+export type { MapAllSettledArgs } from './MapAllSettledArgs';
+export type { Mapper } from './Mapper';
+export type { MapperArgs } from './MapperArgs';
+export type { MapperPromise } from './MapperPromise';
+export type { ParallelProcessMapperFactory } from './ParallelProcessMapperFactory';
 export type {
   MyPInfos,
   MyStats,
@@ -27,6 +25,14 @@ export type {
   RedisJson_StatsInfoGetterFunct,
 } from './PathStatsGetter';
 export type { PhashNow } from './PhashNow';
+export type { ProcessMapperArgs } from './ProcessMapperArgs';
+export type { PromiseMapper2 } from './PromiseMapper2';
 export type { RedisClientType } from './RedisClientType';
 export type { RedisCStrOptions } from './RedisCStrOptions';
+export type { ThenMapper } from './ThenMapper';
 export type { TX } from './TX';
+export type { WorkerArgs } from './WorkerArgs';
+export type { WorkerData } from './WorkerData';
+export type { WorkerOptions } from './WorkerOptions';
+export type { Worker_Threads } from './Worker_Threads';
+export type { WT_D } from './WT_D';
