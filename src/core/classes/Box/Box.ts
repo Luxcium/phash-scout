@@ -1,13 +1,5 @@
 import type { IApply, IChain, IMap, IUnbox, IValue } from '../types';
 
-export function boxOf<TVal>(value: TVal) {
-  return Box.of(value);
-}
-
-export function boxFrom<TVal>(box: IUnbox<TVal>) {
-  return Box.from(box);
-}
-
 class Box<T> implements IUnbox<T>, IMap<T>, IApply<T>, IChain<T>, IValue<T> {
   #value: T;
   private boxedValue: T;
@@ -58,3 +50,11 @@ class Box<T> implements IUnbox<T>, IMap<T>, IApply<T>, IChain<T>, IValue<T> {
   }
 }
 export { Box };
+
+export function boxOf<TVal>(value: TVal) {
+  return Box.of(value);
+}
+
+export function boxFrom<TVal>(box: IUnbox<TVal>) {
+  return Box.from(box);
+}
