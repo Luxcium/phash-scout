@@ -23,30 +23,29 @@ export default class Box<T>
     return this;
   }
 
-  // public ===========================================-| map() |-====
-  public map<R>(fn: (value: T) => R) {
-    return Box.of(fn(this.#value));
-  }
-
-  // public ============================================-| ap() |-====
+  // public IApply<T> ==================================-| ap() |-====
   public ap<R>(c: IMap<(val: T) => R>) {
     return this.map<R>(val => c.map(fn => fn(val)).unbox());
   }
 
-  // public =========================================-| chain() |-====
+  // public IChain<T> ===============================-| chain() |-====
   public chain<R>(fn: (value: T) => R) {
     return this.map(fn).value;
   }
 
-  // public =========================================-| unbox() |-====
+  // public IMap<T> ===================================-| map() |-====
+  // public IUnbox<T> ===============================-| unbox() |-====
+  /** Unboxes the value inside the Functor */
   public unbox() {
     return this.#value;
   }
-  // get ================================================-| box |-====
+
+  // get IBox<T> ========================================-| box |-====
   public get box() {
     return Box.of(this.unbox());
   }
-  // get ==============================================-| value |-====
+
+  // get IValue<T> ====================================-| value |-====
   public get value() {
     return this.unbox();
   }
