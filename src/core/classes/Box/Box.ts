@@ -1,6 +1,8 @@
 import type { IApply, IChain, IMap, IUnbox, IValue } from '../types';
 
-class Box<T> implements IUnbox<T>, IMap<T>, IApply<T>, IChain<T>, IValue<T> {
+export default class Box<T>
+  implements IUnbox<T>, IMap<T>, IApply<T>, IChain<T>, IValue<T>
+{
   #value: T;
   private boxedValue: T;
 
