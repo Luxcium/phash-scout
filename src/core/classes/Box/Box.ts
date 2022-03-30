@@ -1,7 +1,5 @@
 import type { IApply, IChain, IMap, IUnbox, IValue } from '../types';
-import { test } from './boxTest';
 
-const debug = false;
 export function boxOf<TVal>(value: TVal) {
   return Box.of(value);
 }
@@ -60,5 +58,3 @@ class Box<T> implements IUnbox<T>, IMap<T>, IApply<T>, IChain<T>, IValue<T> {
   }
 }
 export { Box };
-
-test(debug);
