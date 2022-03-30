@@ -1,7 +1,7 @@
-import type { IApply, IChain, IMap, IUnbox, IValue } from '../types';
+import type { IApply, IBox, IChain, IMap, IUnbox, IValue } from '../types';
 
 export default class Box<T>
-  implements IUnbox<T>, IMap<T>, IApply<T>, IChain<T>, IValue<T>
+  implements IApply<T>, IChain<T>, IMap<T>, IUnbox<T>, IBox<T>, IValue<T>
 {
   #value: T;
   private boxedValue: T;
@@ -27,6 +27,7 @@ export default class Box<T>
   public ap<R>(c: IMap<(val: T) => R>) {
     return this.map<R>(val => c.map(fn => fn(val)).unbox());
   }
+  // IApply<T>, IChain<T>, IMap<T>, IUnbox<T>, IValue<T>
 
   // public IChain<T> ===============================-| chain() |-====
   public chain<R>(fn: (value: T) => R) {
@@ -34,6 +35,10 @@ export default class Box<T>
   }
 
   // public IMap<T> ===================================-| map() |-====
+  public map<R>(fn: (value: T) => R) {
+    return Box.of(fn(this.#value));
+  }
+
   // public IUnbox<T> ===============================-| unbox() |-====
   /** Unboxes the value inside the Functor */
   public unbox() {
