@@ -1,5 +1,4 @@
 import { BoxedGenerator, immediateZalgo } from '../../core';
-import { listFiles } from '../../packages/file-path/listFiles';
 import { notExcluded } from '../../packages/file-path/tools/notExclude';
 import type {
   Excluded,
@@ -12,6 +11,7 @@ import type {
 } from '../../packages/file-path/types';
 import { Bg } from '../../packages/file-path/types/Bg';
 import { phashNow } from '../../packages/phash-now/phashNow';
+import { listFiles } from './listFiles';
 import { validExts } from './__sharp-phash-working';
 
 type Pr<T> = Promise<T>;
@@ -19,7 +19,7 @@ export const filterExtensions =
   (validExt: Set<string> = validExts) =>
   <T extends PathWithStats>(list: Bg<Promise<T>>) =>
     filterExts(list, validExt);
-export const getPhsh = <T extends PathWithStats>(list: Bg<Promise<T>>) =>
+export const getPhash = <T extends PathWithStats>(list: Bg<Promise<T>>) =>
   getPHash(list);
 export function getFilesWithPHash(
   folder: string,
@@ -44,9 +44,9 @@ export function getFilesWithPHash(
   //   getPHash(list);
 
   if (withStats) {
-    return getPhsh(filterExtensions(validExt)(listFiles(folder, true)));
+    return getPhash(filterExtensions(validExt)(listFiles(folder, true)));
   }
-  return getPhsh(filterExtensions(validExt)(listFiles(folder, false)));
+  return getPhash(filterExtensions(validExt)(listFiles(folder, false)));
 }
 
 export function filterExts<T extends PathWithStats>(

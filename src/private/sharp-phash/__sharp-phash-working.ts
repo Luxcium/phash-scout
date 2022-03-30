@@ -1,7 +1,6 @@
 import { statSync } from 'fs';
 import { CURRENT_PATH } from '../../constants/radius';
 import { BoxedGenerator } from '../../core';
-import { listFiles } from '../../packages/file-path/listFiles';
 import {
   notExcluded,
   notNull,
@@ -9,7 +8,8 @@ import {
 import { immediateZalgo } from '../../utilities/utils';
 import { uniqueAdd } from '../img-scout/querryAndAdd';
 import { QueryResultItem } from '../img-scout/tools/isQueryResultItem';
-import { filterExtensions, getPhsh } from './getFilesWithPHash';
+import { filterExtensions, getPhash } from './getFilesWithPHash';
+import { listFiles } from './listFiles';
 import { rConnect } from './rConnect';
 
 const humanSize = require('human-size');
@@ -19,28 +19,28 @@ export const validExts = new Set(['.png', '.jpeg', '.jpg', '.webp']);
 export const count = { index1: 1 };
 
 export async function main() {
-  const listFiles001 = listFiles(CURRENT_PATH, false);
-  const listFiles002 = listFiles('/home/luxcium/Téléchargements/animes', false);
+  const listFiles001 = listFiles(CURRENT_PATH, true);
+  const listFiles002 = listFiles('/home/luxcium/Téléchargements/animes', true);
   const listFiles003 = listFiles(
     '/home/luxcium/Téléchargements/archives 002',
-    false
+    true
   );
   const listFiles004 = listFiles(
     '/home/luxcium/Téléchargements/images Archives 001',
-    false
+    true
   );
   const listFiles005 = listFiles(
     '/home/luxcium/Téléchargements/Random images 800+',
-    false
+    true
   );
-  const boxedGenerator2 = getPhsh(
+  const boxedGenerator2 = getPhash(
     filterExtensions()(
-      BoxedGenerator.of(
-        ...listFiles001.unbox(),
-        ...listFiles002.unbox(),
-        ...listFiles003.unbox(),
-        ...listFiles004.unbox(),
-        ...listFiles005.unbox()
+      BoxedGenerator.from(
+        listFiles001,
+        listFiles002,
+        listFiles003,
+        listFiles004,
+        listFiles005
         // ...getit('')
       )
     )
