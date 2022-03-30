@@ -1,5 +1,5 @@
 import { immediateZalgo } from '../utils';
-import { Box } from './Box';
+import { Box } from './Box/Box';
 import { BoxedList } from './BoxedList';
 import type { IUnbox, IUnboxList, Mapper, ThenMapper } from './types';
 
@@ -59,9 +59,9 @@ export class BoxedGenerator<T> implements IUnboxList<T>, IUnbox<T[]> {
 
   // static ==========================================-| from() |-====
   public static from<TVal>(
-    boxedList: IUnboxList<TVal> | IUnbox<TVal[]>
+    ...boxedList: (IUnboxList<TVal> | IUnbox<TVal[]>)[]
   ): BoxedGenerator<TVal> {
-    return BoxedGenerator.of<TVal>(boxedList.unbox());
+    return BoxedGenerator.of<TVal>(boxedList.flatMap(item => item.unbox()));
   }
 
   // protected ================================-| constructor() |-====

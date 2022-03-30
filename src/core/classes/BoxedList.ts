@@ -1,5 +1,5 @@
 import { Either, left, right } from 'fp-ts/lib/Either';
-import { Box } from './Box';
+import { Box } from './Box/Box';
 import type {
   CallbackfnT,
   CallbackfnU,

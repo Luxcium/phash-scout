@@ -1,4 +1,4 @@
-import { Box } from '..';
+import { Box } from '../..';
 
 describe('Testing Box specification', () => {
   test('Box of', () => {
