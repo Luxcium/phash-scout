@@ -1,4 +1,5 @@
-import { BoxedGenerator, immediateZalgo } from '../../core';
+import { BoxedGenerator } from '@luxcium/boxed-list';
+import { immediateZalgo } from '../..';
 import { notExcluded } from '../../packages/file-path/tools/notExclude';
 import type {
   Excluded,

@@ -1,6 +1,6 @@
+import { BoxedGenerator } from '@luxcium/boxed-list';
 import { statSync } from 'fs';
 import { CURRENT_PATH } from '../../constants/radius';
-import { BoxedGenerator } from '../../core';
 import {
   notExcluded,
   notNull,
@@ -35,7 +35,7 @@ export async function main() {
   );
   const boxedGenerator2 = getPhash(
     filterExtensions()(
-      BoxedGenerator.from(
+      BoxedGenerator.from<any>(
         listFiles001,
         listFiles002,
         listFiles003,

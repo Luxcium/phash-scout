@@ -1,4 +1,3 @@
-export type { CallbackfnT, CallbackfnU } from '../classes/types/CallbackfnT';
 export type { CPU_MapperRetunType } from './CPU_MapperRetunType';
 export type { CurrentPath } from './CurrentPath';
 export type { DirentWithFileType } from './DirentWithFileType';

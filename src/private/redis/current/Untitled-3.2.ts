@@ -1,5 +1,5 @@
+import { BoxedGenerator } from '@luxcium/boxed-list';
 import path from 'path';
-import { BoxedGenerator } from '../../../core/classes/BoxedGenerator';
 import { getDirsSync, getFilesSync } from '../../../packages/file-path/tools';
 import { getUserPathsGen } from './getUserPathsGen';
 import { srtPath } from './srtPath';

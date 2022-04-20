@@ -1,6 +1,6 @@
+import { BoxedGenerator } from '@luxcium/boxed-list';
 import { readdir } from 'fs/promises';
 import { BASE_SRC_PATH1 } from '../../../constants/devPaths';
-import { BoxedGenerator } from '../../../core/classes/BoxedGenerator';
 import type { RedisClientType } from '../../../core/types';
 import { isArray } from '../../../core/utils/isArray';
 import { redisCreateClient } from '../tools';

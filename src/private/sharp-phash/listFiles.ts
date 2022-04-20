@@ -1,4 +1,4 @@
-import { BoxedGenerator } from '../..';
+import { BoxedGenerator } from '@luxcium/boxed-list';
 import { getPathWithStats } from '../../packages/file-path';
 import { PathAndStats, PathWithStats } from '../../packages/file-path/types';
 import { Bg } from '../../packages/file-path/types/Bg';

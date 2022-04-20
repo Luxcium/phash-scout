@@ -1,3 +1,3 @@
-import { BoxedGenerator } from '../../../core';
+import { BoxedGenerator } from '@luxcium/boxed-list';
 
 export type Bg<T> = BoxedGenerator<T>;
