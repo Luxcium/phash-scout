@@ -1,5 +1,5 @@
 import { isA_Promise } from '../../../packages/file-path/tools';
-import { toSizedObj } from '../querryAndAdd';
+import { toSizedObj } from '../toSizedObj';
 import { QueryResultItem, QueryResultObject, QueryResultSize } from '../types';
 
 export function toQueryResultObj(
