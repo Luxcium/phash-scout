@@ -7,7 +7,7 @@ export const getKeywordList = (collctnShortName: string) => [
     .split('-')
     .flatMap(csn => csn.split('_'))
     .filter(csn => csn !== '')
-    .filter(csn => isNaN(csn as unknown as number))
+    .filter(csn => Number.isNaN(csn as unknown as number))
     .filter(csn => csn.length > 1)
     .slice(0, -1)
     .sort()

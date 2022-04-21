@@ -61,14 +61,16 @@ redisCreateClient;
 
 const client = redisCreateClient({ host: '0.0.0.0', port: 6382 });
 main;
-main().then(fulfilledResult => {
-  if (SPARK) {
-    if (DEBUG > 2) console.log('fulfilledResult.spark()');
-    return fulfilledResult.spark();
-  }
-  if (DEBUG > 2) console.log("fulfilledResult 'NOT' spark()");
-  return fulfilledResult;
-});
+main()
+  .then(fulfilledResult => {
+    if (SPARK) {
+      if (DEBUG > 2) console.log('fulfilledResult.spark()');
+      return fulfilledResult.spark();
+    }
+    if (DEBUG > 2) console.log("fulfilledResult 'NOT' spark()");
+    return fulfilledResult;
+  })
+  .catch(error => console.error(error));
 async function main() {
   await client.connect();
   // console.log(__filename);
@@ -196,7 +198,7 @@ async function main() {
         })
         .map(async l2 => {
           // if (DEBUG > 5) console.log('l2.spark()');
-          return (await l2).spark();
+          return l2.spark();
         });
     })
     .map(l1 => {
@@ -297,7 +299,7 @@ function workingFunction(opts: { DEBUG: number }) {
           keywords: collctn.shortName
             .split('-')
             .filter(csn => csn !== '')
-            .filter(csn => isNaN(csn as unknown as number))
+            .filter(csn => Number.isNaN(csn as unknown as number))
             .filter(csn => csn.length > 1)
             .slice(0, -1)
             .sort()
