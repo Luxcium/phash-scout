@@ -1,5 +1,6 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
 import { immediateZalgo } from '../..';
+import { validExts } from '../../constants/validExts';
 import { notExcluded } from '../../packages/file-path/tools/notExclude';
 import type {
   Excluded,
@@ -13,7 +14,6 @@ import type {
 import { Bg } from '../../packages/file-path/types/Bg';
 import { phashNow } from '../../packages/phash-now/phashNow';
 import { listFiles } from './listFiles';
-import { validExts } from './__sharp-phash-working';
 
 type Pr<T> = Promise<T>;
 export const filterExtensions =

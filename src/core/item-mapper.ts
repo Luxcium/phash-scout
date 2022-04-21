@@ -11,7 +11,7 @@
 
 import { Either, isLeft, left, right } from 'fp-ts/lib/Either';
 import { immediateZalgo } from '../utilities/utils';
-import { ItemMapperArgs } from './types/ItemMapperArgs';
+import type { ItemMapperArgs } from './types';
 
 // ~#----- itemMapper -------------------------------------------------#-~
 export async function itemMapper<T, U>({

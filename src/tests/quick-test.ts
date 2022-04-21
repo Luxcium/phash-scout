@@ -7,7 +7,7 @@
 /*--------------------------------------------------------------------*/
 import * as worker_threads from 'worker_threads';
 import { CPU_Mapper, IO_Mapper } from '..';
-import { MapperArgs } from '../core/types/MapperArgs';
+import type { MapperArgs } from '../core/types';
 
 const items = 100;
 const steps = Math.floor(items / 1);

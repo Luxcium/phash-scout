@@ -31,6 +31,7 @@ export function main2() {
     '/home/luxcium/src/parallel-mapping/scripts/assets/xing.jpg'
   );
   // 1110011001111011100110011000110011110001011010100100111100100101
+  // deepcode ignore PromiseNotCaughtNode: <$ Testing code will not be used in production $>
   Promise.all([phash(img1), phash(img2), phash(img3), phash(img4)]).then(
     ([hash1, hash2, hash3, hash4]) => {
       // hash returned is 64 characters length string with 0 and 1 only

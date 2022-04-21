@@ -11,9 +11,7 @@
 
 import { workerFactory } from '.';
 import { mapAllSettled } from '../map-allSettled';
-import { MapAllSettledArgs } from '../types/MapAllSettledArgs';
-import { Mapper } from '../types/Mapper';
-import { ProcessMapperArgs } from '../types/ProcessMapperArgs';
+import type { MapAllSettledArgs, Mapper, ProcessMapperArgs } from '../types';
 
 export function processMapper<T, U>({
   filename,

@@ -1,8 +1,8 @@
-import { CurrentPath } from '../../packages/file-path/types';
-import {
+import type { CurrentPath } from '../../packages/file-path/types';
+import type {
   PQuerryAndAdd,
   QueryResultItem,
-} from '../../private/img-scout/tools/isQueryResultItem';
+} from '../../private/img-scout/types';
 // /home/luxcium/projects/parallel-mapping/src/utilities/files/file-path/types/index.ts
 // /home/luxcium/projects/parallel-mapping/src/../../utilities/files/file-path/types
 import { FALSY } from './Falsy';

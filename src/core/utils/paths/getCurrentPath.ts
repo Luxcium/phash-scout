@@ -10,7 +10,7 @@ import {
   SymbolicLinkPath,
   UnknownTypePath,
 } from '../../../packages/file-path/types';
-import { DirentWithFileType } from '../../types/DirentWithFileType';
+import type { DirentWithFileType } from '../../types';
 import { FileType } from '../../types/Enums/FileTypeEnum';
 
 /** @deprecated */

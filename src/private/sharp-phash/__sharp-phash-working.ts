@@ -6,16 +6,14 @@ import {
   notNull,
 } from '../../packages/file-path/tools/notExclude';
 import { immediateZalgo } from '../../utilities/utils';
-import { uniqueAdd } from '../img-scout/querryAndAdd';
-import { QueryResultItem } from '../img-scout/tools/isQueryResultItem';
+import { QueryResultItem, QueryResultObject } from '../img-scout/types';
+import { uniqueAddToObj } from '../img-scout/uniqueAddToObj';
 import { filterExtensions, getPhash } from './getFilesWithPHash';
 import { listFiles } from './listFiles';
 import { rConnect } from './rConnect';
 
 const humanSize = require('human-size');
 
-export { CURRENT_PATH };
-export const validExts = new Set(['.png', '.jpeg', '.jpg', '.webp']);
 export const count = { index1: 1 };
 
 export async function main() {
@@ -41,78 +39,68 @@ export async function main() {
         listFiles003,
         listFiles004,
         listFiles005
-        // ...getit('')
       )
     )
   );
-
-  // const getit = (folder: string) => getFilesWithPHash(folder, false).unbox();
-  // const boxedGenerator2 = BoxedGenerator
-  //   .of
-
-  //   // ...getit('')
-  //   ();
   const R = await rConnect();
   const boxedGenerator3 = boxedGenerator2.map(async i => {
     const waited = await i;
-
-    // const { type } = waited;
-    // type;
     let getQueryResult = (): any => null;
-    let queryResult: null | QueryResultItem[] = null;
-    if (
-      notNull(waited.pHash) &&
-      notExcluded(waited)
-      // type === FileType.File
-    ) {
+    let queryResult: null | (QueryResultItem | QueryResultObject)[] = null;
+    if (notNull(waited.pHash) && notExcluded(waited)) {
       const { fullPath } = waited;
       const stats = statSync(fullPath);
       const phash_ = waited.pHash;
       const k = 'x001';
-      queryResult = await uniqueAdd({
+      queryResult = await uniqueAddToObj({
         R,
         title: `${k}:${humanSize(stats.size, 2) || 0}:${
           stats.size
-        }:${fullPath}`, // waited.fullPath,
+        }:${fullPath}`,
         phash_,
         k,
       });
-
       getQueryResult = () => queryResult;
     }
-
     return immediateZalgo({ queryResult, ...(await i), getQueryResult });
   });
   const result = boxedGenerator3
     .map(async item => {
       const waited = await item;
+      try {
+        if (notExcluded(waited)) {
+          const { queryResult, ...awaited } = waited;
+          if (queryResult) {
+            const result = {
+              queryResult: queryResult.reverse(),
+              ...awaited,
+            };
+            const count2 = { a1: 0 };
+            result.queryResult.map(
+              qrItem =>
+                (qrItem as QueryResultObject).radius === '0' &&
+                count2.a1++ === 0 &&
+                console.log(result)
+            );
+            // if (result.queryResult) {
+            // console.log(result);
 
-      if (notExcluded(waited)) {
-        const { queryResult, ...awaited } = waited;
-        if (queryResult) {
-          const result = {
-            queryResult: queryResult.reverse(),
-            ...awaited,
-          };
-          console.log(result);
-          return result;
+            // }
+            return result;
+          }
         }
+      } catch (error) {
+        console.error('in boxedGenerator3', error);
       }
       return item;
     })
-
     .asyncSpark()
     .then(a => {
       R.QUIT();
       return a;
-    });
+    })
+    .catch(error => console.error('in boxedGenerator3', error));
 
   return result;
 }
 main();
-
-/*
-
-
-
- */

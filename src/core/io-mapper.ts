@@ -10,8 +10,7 @@
 /*--------------------------------------------------------------------*/
 
 import { mapAllSettled } from './map-allSettled';
-import { MapAllSettledArgs } from './types/MapAllSettledArgs';
-import { MapperArgs } from './types/MapperArgs';
+import type { MapAllSettledArgs, MapperArgs } from './types';
 
 // ~#------- IO_Mapper ------------------------------------------------#-~
 export async function IO_Mapper<T, R>({

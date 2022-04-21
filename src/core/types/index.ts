@@ -6,7 +6,7 @@ export type { FALSY } from './Falsy';
 export type { FilePath } from './FilePath';
 export type { IParallelMapping } from './IParallelMapping';
 export type { IParallelMappingOptions } from './IParallelMappingOptions';
-export type { IQueryListPhash } from './IQueryListPhash';
+export type { IQueryListPhash, N, P, S } from './IQueryListPhash';
 export type { ItemMapperArgs } from './ItemMapperArgs';
 export type { MakeThreadWorkerArgs } from './MakeThreadWorkerArgs';
 export type { MapAllSettledArgs } from './MapAllSettledArgs';
