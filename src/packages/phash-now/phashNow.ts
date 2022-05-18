@@ -16,6 +16,7 @@ export function phashNow<T extends PathWithStats>(
       try {
         return await bigString(immediateZalgo(phash(await thisImage)));
       } catch (error) {
+        // deepcode ignore FormatString: <please specify a reason of ignoring this>
         console.error(error, 'Error with file at:', imgFile);
         return immediateZalgo(null);
       }
