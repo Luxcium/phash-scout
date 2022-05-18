@@ -1,6 +1,6 @@
-import { IO_Mapper } from '.';
-import { Mapper } from '..';
-import { immediateZalgo } from '../utilities/utils';
+import { IO_Mapper } from '../src/core';
+import { Mapper } from '../src';
+import { immediateZalgo } from '../src/utilities/utils';
 
 class Box<T> {
   #value: T[];
@@ -215,7 +215,11 @@ export class Result<T> {
   }
 
   public ap<TMap>(c: Result<(val: T) => TMap>) {
-    return c.map(fn => this.map(fn));
+    const ap_ = c.map(fn => {
+      const map__ = this.map(fn);
+      return map__;
+    });
+    return ap_;
   }
 }
 
