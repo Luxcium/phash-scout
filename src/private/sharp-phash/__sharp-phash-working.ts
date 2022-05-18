@@ -72,7 +72,7 @@ export async function main() {
           const { queryResult, ...awaited } = waited;
           if (queryResult) {
             const result = {
-              queryResult: queryResult.reverse(),
+              queryResult, //: queryResult.reverse(),
               ...awaited,
             };
             const count2 = { a1: 0 };
