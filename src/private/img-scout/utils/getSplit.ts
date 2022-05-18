@@ -6,6 +6,7 @@ export const getHSize = (qPath: string) =>
 export const getSize = (qPath: string) =>
   Number(qPath.split(':').slice(2)[0]) || -1;
 export const getPath = (qPath: string) => qPath.split(':').slice(3)[0] || '';
+
 export const getSplit = (qPath: string): SplitPath => ({
   absPath: getPath(qPath),
   group: getGroup(qPath),

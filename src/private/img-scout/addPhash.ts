@@ -1,4 +1,4 @@
-import { ADD } from '.';
+import { IMGSCOUT } from './tools';
 
 export async function addPhash(
   R: any,
@@ -6,5 +6,5 @@ export async function addPhash(
   p: string,
   t: string
 ): Promise<number> {
-  return R.sendCommand([ADD, k, p, t]);
+  return R.sendCommand([IMGSCOUT.ADD, k, p, t]);
 }

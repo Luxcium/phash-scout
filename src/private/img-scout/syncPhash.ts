@@ -1,4 +1,4 @@
-import { SYNC } from '.';
+import { IMGSCOUT } from './tools';
 
 export async function syncPhash(
   R: any,
@@ -6,7 +6,7 @@ export async function syncPhash(
   failSilently: boolean = true
 ) {
   try {
-    await R.sendCommand([SYNC, k]);
+    await R.sendCommand([IMGSCOUT.SYNC, k]);
     return true;
   } catch (error) {
     if (!failSilently) console.log(error);

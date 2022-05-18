@@ -1,7 +1,7 @@
-import { QUERY } from '.';
 import { RADIUS } from '../../constants/radius';
 import type { S } from '../../core/types';
 import { syncPhash } from './syncPhash';
+import { IMGSCOUT } from './tools';
 
 export async function queryPhash(
   R: any,
@@ -14,7 +14,7 @@ export async function queryPhash(
     const R_EXISTS = await R.EXISTS(k);
     if (R_EXISTS === 1) {
       await syncPhash(R, k);
-      const result = R.sendCommand([QUERY, k, phash_, radius]);
+      const result = R.sendCommand([IMGSCOUT.QUERY, k, phash_, radius]);
       return result;
     }
     console.error(`R.EXISTS(${k}) -> ${R_EXISTS}`);
