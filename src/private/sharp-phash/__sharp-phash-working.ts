@@ -69,7 +69,6 @@ export async function main() {
     }
     return immediateZalgo({ queryResult, ...(await i), getQueryResult });
   });
-
   const result = boxedGenerator3
     .map(async item => {
       const waited = await item;
