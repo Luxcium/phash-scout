@@ -31,6 +31,10 @@ export async function main() {
     '/home/luxcium/Téléchargements/Random images 800+',
     true
   );
+  const listFiles006 = listFiles(
+    '/home/luxcium/Téléchargements/photos-ChatExport_2022-05-18',
+    true
+  );
   const boxedGenerator2 = getPhash(
     filterExtensions()(
       BoxedGenerator.from<any>(
@@ -38,7 +42,8 @@ export async function main() {
         listFiles002,
         listFiles003,
         listFiles004,
-        listFiles005
+        listFiles005,
+        listFiles006
       )
     )
   );
@@ -64,6 +69,7 @@ export async function main() {
     }
     return immediateZalgo({ queryResult, ...(await i), getQueryResult });
   });
+
   const result = boxedGenerator3
     .map(async item => {
       const waited = await item;
