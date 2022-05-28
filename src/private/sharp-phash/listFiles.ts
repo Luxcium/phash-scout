@@ -20,10 +20,10 @@ export function listFilesFromArray<T extends boolean>(list: FileType<T>[]) {
   return BoxedGenerator.from(...bgList);
 }
 
-export function listFiles_(
-  folder: string,
-  withStats: boolean = false
-): Bg<Promise<PathAndStats> | Promise<PathWithStats>> {
-  if (withStats) return BoxedGenerator.of(...getPathWithStats(folder, true));
-  return BoxedGenerator.of(...getPathWithStats(folder, false));
-}
+// export function listFiles_(
+//   folder: string,
+//   withStats: boolean = false
+// ): Bg<Promise<PathAndStats> | Promise<PathWithStats>> {
+//   if (withStats) return BoxedGenerator.of(...getPathWithStats(folder, true));
+//   return BoxedGenerator.of(...getPathWithStats(folder, false));
+// }
