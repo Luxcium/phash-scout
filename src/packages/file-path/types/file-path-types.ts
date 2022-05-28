@@ -51,7 +51,7 @@ export type WithFileType2 = WithFileType &
   );
 export type CurrentPathError = ErrorTypePath & {
   fileName: '';
-  pathToFile: '';
+  dir: '';
   fullPath: '';
   extname: string;
   ext: string;

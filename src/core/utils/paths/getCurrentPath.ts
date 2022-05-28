@@ -18,7 +18,7 @@ export const currentPath = (folder: string) => (f: DirentWithFileType) =>
   getCurrentPath(f, folder);
 
 /*
-    pathToFile: folderPath,
+    dir: folderPath,
     fullPath: `${folderPath}/${f.fileName}`,
     fileName: f.fileName,
     type: FileType.Unknown,
@@ -27,46 +27,49 @@ export const currentPath = (folder: string) => (f: DirentWithFileType) =>
 export function getCurrentPath(f: DirentWithFileType, folderPath: string) {
   const extname = path.extname(`${f.fileName}`);
   const ext = extname.toLowerCase();
-  const fullPath: CurrentPath = {
-    pathToFile: folderPath,
+  const fullPath = `${folderPath}/${f.fileName}`;
+  const parsed = path.parse(fullPath);
+  const fullPath_: CurrentPath = {
+    dir: folderPath,
     extname,
     ext,
-    fullPath: `${folderPath}/${f.fileName}`,
+    fullPath,
     fileName: f.fileName,
+    baseName: parsed.name,
     type: FileType.Unknown,
     exclude: false,
   };
 
   if (f.isDirectory) {
-    fullPath.type = FileType.Directory;
-    return fullPath as DirectoryPath;
+    fullPath_.type = FileType.Directory;
+    return fullPath_ as DirectoryPath;
   }
   if (f.isFile) {
-    fullPath.type = FileType.File;
-    return fullPath as FilePath;
+    fullPath_.type = FileType.File;
+    return fullPath_ as FilePath;
   }
   if (f.isSymbolicLink) {
-    fullPath.type = FileType.SymbolicLink;
-    return fullPath as SymbolicLinkPath;
+    fullPath_.type = FileType.SymbolicLink;
+    return fullPath_ as SymbolicLinkPath;
   }
   if (f.isBlockDevice) {
-    fullPath.type = FileType.BlockDevice;
-    return fullPath as BlockDevicePath;
+    fullPath_.type = FileType.BlockDevice;
+    return fullPath_ as BlockDevicePath;
   }
   if (f.isCharacterDevice) {
-    fullPath.type = FileType.CharacterDevice;
-    return fullPath as CharacterDevicePath;
+    fullPath_.type = FileType.CharacterDevice;
+    return fullPath_ as CharacterDevicePath;
   }
 
   if (f.isFIFO) {
-    fullPath.type = FileType.FIFO;
-    return fullPath as FIFOPath;
+    fullPath_.type = FileType.FIFO;
+    return fullPath_ as FIFOPath;
   }
 
   if (f.isSocket) {
-    fullPath.type = FileType.Socket;
-    return fullPath as SocketPath;
+    fullPath_.type = FileType.Socket;
+    return fullPath_ as SocketPath;
   }
 
-  return fullPath as UnknownTypePath;
+  return fullPath_ as UnknownTypePath;
 }

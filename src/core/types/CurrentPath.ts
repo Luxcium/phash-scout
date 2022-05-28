@@ -28,7 +28,7 @@ export type WithFileName = {
 
 /** @deprecated */
 export type WithPathToFile = {
-  pathToFile: string;
+  dir: string;
 };
 
 /** @deprecated */

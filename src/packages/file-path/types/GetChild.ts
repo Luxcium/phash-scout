@@ -8,7 +8,7 @@ import { PathWithStats } from './PathWithStats';
 export type GetChild =
   | {
       fileName: string;
-      pathToFile: string;
+      dir: string;
       fullPath: string;
       type: FileType;
       getStats: () => Promise<(Stats & CurrentPath) | CurrentPathError>;

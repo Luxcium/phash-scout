@@ -23,10 +23,10 @@ async function main000() {
             ix3++;
             void ix1, ix2, ix3;
             // console.log(ix1, ix2, ix3);
-            const { fileName, fullPath, pathToFile, type, ...r } = a3;
+            const { fileName, fullPath, dir, type, ...r } = a3;
             // console.log(fileName);
             // console.log(`"${fullPath}"`);
-            // console.log(pathToFile);
+            // console.log(dir);
             // console.log(type);
             // console.log(r);
             if (count1 !== ix1) {
@@ -40,7 +40,7 @@ async function main000() {
             count2;
             // }
             a3;
-            void fileName, fullPath, pathToFile, type, r;
+            void fileName, fullPath, dir, type, r;
           }
         }
       }

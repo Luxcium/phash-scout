@@ -17,11 +17,12 @@ export function getChildPaths(
       }
       return [
         immediateZalgo<CurrentPathError>({
-          pathToFile: '',
+          dir: '',
           extname: '',
           ext: '',
           fullPath: '',
           fileName: '',
+          baseName: '',
           type: FileTypes.Error,
           exclude: true,
         }),
@@ -29,7 +30,7 @@ export function getChildPaths(
     } catch (error: any) {
       return [
         immediateZalgo<CurrentPathError>({
-          pathToFile: '',
+          dir: '',
           extname: '',
           fullPath: '',
           fileName: '',

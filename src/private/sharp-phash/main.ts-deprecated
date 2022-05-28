@@ -42,7 +42,7 @@ export async function main(
 
       const pQuerryAndAdd = {
         R,
-        k: `TEST:${path.pathToFile}`,
+        k: `TEST:${path.dir}`,
         phash_,
         title: path.fullPath,
         radius: '3',
@@ -50,7 +50,7 @@ export async function main(
 
       const transact = uniqueAdd({
         R,
-        k: `TEST:${path.pathToFile}`,
+        k: `TEST:${path.dir}`,
         phash_,
         title: path.fullPath,
         radius: '3',

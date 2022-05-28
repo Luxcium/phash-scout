@@ -3,7 +3,7 @@ import { dirListWithFileTypeAsync } from './dirListWithFileTypeAsync';
 import { dirListWithFileTypeSync } from './dirListWithFileTypeSync';
 
 /**
-    pathToFile: folderPath,  \
+    dir: folderPath,  \
     fullPath: `${folderPath}/${f.fileName}`,  \
     fileName: f.fileName,  \
     type: FileType.Unknown,
