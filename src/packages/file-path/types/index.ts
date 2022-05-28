@@ -1,3 +1,4 @@
+export type { Bg } from './Bg';
 export type {
   CurrentPath,
   WithCount,
