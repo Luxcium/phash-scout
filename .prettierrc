@@ -9,10 +9,12 @@
     {
       "files": [
         "scripts/*.ts",
-        "src/core/classes/utilities/files/fs.ts"
+        "src/core/classes/utilities/files/fs.ts",
+        "src/private/sharp-phash/listFiles.ts"
       ],
       "options": {
-        "printWidth": 120
+        "printWidth": 120,
+        "proseWrap": "never"
       }
     }
   ],

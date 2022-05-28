@@ -1,15 +1,14 @@
 {
-  "description": "",
-  "license": "MIT",
-  "main": "./out/index.js",
-  "name": "@luxcium/parallel-mapper",
-  "private": false,
-  "types": "./out/typings/index.d.ts",
-  "version": "0.0.0-unsafe-v1.0.4x",
   "dependencies": {
     "@luxcium/boxed-list": "file:../../../../boxed-list",
     "dotenv": "^16.0.0",
     "fp-ts": "^2.11.9",
     "human-size": "^1.1.0"
-  }
+  },
+  "description": "",
+  "license": "MIT",
+  "name": "@luxcium/parallel-mapper",
+  "private": false,
+  "types": "./out/typings/index.d.ts",
+  "version": "0.0.0-unsafe-v1.0.4x"
 }
