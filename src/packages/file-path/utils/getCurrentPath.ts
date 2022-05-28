@@ -1,5 +1,4 @@
-import path from 'path';
-import { FileTypes } from '../tools';
+import { FileTypes, parsePath } from '../tools';
 import {
   BlockDevicePath,
   CharacterDevicePath,
@@ -14,47 +13,42 @@ import {
 } from '../types';
 
 export function getCurrentPath(f: DirentWithFileType, folderPath: string) {
-  const extname = path.extname(`${f.fileName}`);
-  const ext = extname.toLowerCase();
-  const fullPath: CurrentPath = {
-    pathToFile: folderPath,
-    extname,
-    ext,
-    fullPath: `${folderPath}/${f.fileName}`,
-    fileName: f.fileName,
+  const fullPath = `${folderPath}/${f.fileName}`;
+  const _fullPath: CurrentPath = {
     type: FileTypes.Unknown,
     exclude: false,
+    ...parsePath(fullPath),
   };
   if (f.isDirectory) {
-    fullPath.type = FileTypes.Directory;
-    return fullPath as DirectoryPath;
+    _fullPath.type = FileTypes.Directory;
+    return _fullPath as DirectoryPath;
   }
   if (f.isFile) {
-    fullPath.type = FileTypes.File;
-    return fullPath as FilePath;
+    _fullPath.type = FileTypes.File;
+    return _fullPath as FilePath;
   }
   if (f.isSymbolicLink) {
-    fullPath.type = FileTypes.SymbolicLink;
-    return fullPath as SymbolicLinkPath;
+    _fullPath.type = FileTypes.SymbolicLink;
+    return _fullPath as SymbolicLinkPath;
   }
   if (f.isBlockDevice) {
-    fullPath.type = FileTypes.BlockDevice;
-    return fullPath as BlockDevicePath;
+    _fullPath.type = FileTypes.BlockDevice;
+    return _fullPath as BlockDevicePath;
   }
   if (f.isCharacterDevice) {
-    fullPath.type = FileTypes.CharacterDevice;
-    return fullPath as CharacterDevicePath;
+    _fullPath.type = FileTypes.CharacterDevice;
+    return _fullPath as CharacterDevicePath;
   }
 
   if (f.isFIFO) {
-    fullPath.type = FileTypes.FIFO;
-    return fullPath as FIFOPath;
+    _fullPath.type = FileTypes.FIFO;
+    return _fullPath as FIFOPath;
   }
 
   if (f.isSocket) {
-    fullPath.type = FileTypes.Socket;
-    return fullPath as SocketPath;
+    _fullPath.type = FileTypes.Socket;
+    return _fullPath as SocketPath;
   }
 
-  return fullPath as UnknownTypePath;
+  return _fullPath as UnknownTypePath;
 }

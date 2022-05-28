@@ -4,17 +4,26 @@ import { WithExclude } from './WithExclude';
 export type CurrentPath = WithFileName &
   WithPathToFile &
   WithFileExtname &
+  WithBaseName &
   WithFullPath &
   WithExtname &
+  WithDir &
   WithExt &
   WithExclude &
   WithFileType;
 
+export type WithDir = {
+  dir: string;
+};
+export type WithBaseName = {
+  baseName: string;
+};
 export type WithFileName = {
   fileName: string;
 };
+
 export type WithPathToFile = {
-  pathToFile: string;
+  dir: string;
 };
 export type WithFullPath = {
   fullPath: string;
@@ -47,47 +56,57 @@ export type WithCount = {
 export type WithIndex = {
   index: number;
 };
-/*
+export interface ParsedPath {
+  /**
+   * The root of the path such as '/' or 'c:\'
+   */
+  root: string;
+  /**
+   * The full directory path such as '/home/user/dir' or 'c:\path\dir'
+   */
+  dir: string;
+  /**
+   * The file name including extension (if any) such as 'index.html'
+   */
+  base: string;
+  /**
+   * The file extension (if any) such as '.html'
+   */
+  ext: string;
+  /**
+   * The file name without extension (if any) such as 'index'
+   */
+  name: string;
+}
 
-  {
-  type: FileType;
-};
- Error = 'Error',
-export type WithTypeFile = {
-  type: FileType.File;
-};
+export interface ParsedRoot {
+  ParsedPath: { root: string };
+}
+export interface ParsedDir {
+  ParsedPath: { dir: string };
+}
+export interface ParsedBase {
+  ParsedPath: { base: string };
+}
+export interface ParsedExt {
+  ParsedPath: { ext: string };
+}
+export interface ParsedName {
+  ParsedPath: { name: string };
+}
 
-export type WithTypeBlockDevice = {
-  type: FileType.BlockDevice;
-};
-
-export type WithTypeCharacterDevice = {
-  type: FileType.CharacterDevice;
-};
-
-export type WithTypeFIFO = {
-  type: FileType.FIFO;
-};
-
-export type WithTypeSocket = {
-  type: FileType.Socket;
-};
-
-export type WithTypeSymbolicLink = {
-  type: FileType.SymbolicLink;
-};
-
-export type WithTypeUnknown = {
-  type: FileType.Unknown;
-};
-
-
-
-  File = 'File',
-  BlockDevice = 'BlockDevice',
-  CharacterDevice = 'CharacterDevice',
-  FIFO = 'FIFO',
-  Socket = 'Socket',
-  SymbolicLink = 'SymbolicLink',
-    Unknown = 'Unknown',
-    */
+export interface BaseRoot {
+  root: string;
+}
+export interface BasedDir {
+  dir: string;
+}
+export interface BaseBase {
+  base: string;
+}
+export interface BasedExt {
+  ext: string;
+}
+export interface BaseName {
+  name: string;
+}

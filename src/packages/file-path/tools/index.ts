@@ -25,6 +25,7 @@ export { getPathInfos } from './getPathInfos';
 export { getRawDirList, getRawDirListSync } from './getRawDirList';
 export { getStats, getStatsSync } from './getStats';
 export { isA_Promise } from './isA_Promise';
+export { parsePath } from './parsePath';
 export const fsTools = {
   devPaths,
   filesTypeList,

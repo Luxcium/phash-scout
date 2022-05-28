@@ -2,6 +2,7 @@ import { stat } from 'fs/promises';
 import path from 'path';
 import { immediateZalgo } from './imports';
 import { FileTypes } from './tools';
+import { parsePath } from './tools/parsePath';
 import type { GetStats, PathAndStats, PathWithStats } from './types';
 import { dirListWithFileType } from './utils/dirListWithFileType';
 import { getChildPaths } from './utils/getChildPaths';
@@ -30,32 +31,27 @@ export function getPathWithStats(
 ): Promise<PathWithStats | PathAndStats>[] {
   const dirList = dirListWithFileType(folderPath);
   const result = dirList.map(async i => {
-    const { type, pathToFile, fullPath, fileName } = {
+    const currentPath = {
       ...getCurrentPath(i, folderPath),
     };
-    const extname = path.extname(fullPath);
-    const ext = extname.toLowerCase();
+    const { fullPath, type } = currentPath;
     const getStats = async (): Promise<
       GetStats & { ext: string; exclude: boolean; hSize?: string }
     > => {
       try {
-        const stats = { ...(await stat(fullPath)) };
+        const stats = { ...(await stat(currentPath.fullPath)) };
         const hSize = humanSize(stats.size, 4);
         return {
-          fileName,
-          extname,
-          ext,
-          pathToFile,
-          fullPath,
-          type,
+          ...currentPath,
           ...stats,
           hSize,
           exclude: false,
         };
       } catch (error: any) {
         return immediateZalgo<GetStats>({
-          pathToFile: '',
+          dir: '',
           fullPath: '',
+          baseName: '',
           fileName: '',
           extname: '',
           ext: '',
@@ -76,15 +72,11 @@ export function getPathWithStats(
     }
 
     return {
-      fileName,
-      extname,
-      ext,
-      pathToFile,
-      fullPath,
       type,
       exclude: false,
       getStats,
       getChild: getChildPaths(fullPath, type, withStats),
+      ...parsePath(fullPath),
     };
   });
 
