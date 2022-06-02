@@ -1,6 +1,9 @@
 import { FileType } from '../tools';
 import { WithExclude } from './WithExclude';
 
+export type ParsedWithTypeAndExcludeFlag = ParsedWithType & ParsedWithFlag;
+export type ParsedWithType = MyParsedPath & WithType;
+export type ParsedWithFlag = MyParsedPath & WithExcludeFlag;
 export type CurrentPath = WithFileName &
   WithPathToFile &
   WithFileExtname &
@@ -12,7 +15,16 @@ export type CurrentPath = WithFileName &
   WithExclude &
   WithFileType;
 
+export type WithRoot = {
+  /**
+   * The root of the path such as '/' or 'c:\'
+   */
+  root: string;
+};
 export type WithDir = {
+  /**
+   * The full directory path such as '/home/user/dir' or 'c:\path\dir'
+   */
   dir: string;
 };
 export type WithBaseName = {
@@ -23,6 +35,9 @@ export type WithFileName = {
 };
 
 export type WithPathToFile = {
+  /**
+   * The full directory path such as '/home/user/dir' or 'c:\path\dir'
+   */
   dir: string;
 };
 export type WithFullPath = {
@@ -44,7 +59,9 @@ export type WithExtention = WithExtname & WithExt;
 export type WithFileType = {
   type: FileType;
 };
-
+export type WithType = {
+  type: FileType;
+};
 export type WithPHash = {
   pHash: string | null;
 };
@@ -56,6 +73,17 @@ export type WithCount = {
 export type WithIndex = {
   index: number;
 };
+export type WithExcludeFlag = {
+  exclude: boolean;
+};
+export type MyParsedPath = WithFullPath &
+  WithDir &
+  WithFileName &
+  WithBaseName &
+  WithExt &
+  WithExtname &
+  WithRoot;
+
 export interface ParsedPath {
   /**
    * The root of the path such as '/' or 'c:\'
