@@ -86,8 +86,6 @@
   "javascript.preferences.importModuleSpecifier": "relative",
   "javascript.preferences.quoteStyle": "single",
   "javascript.preferences.useAliasesForRenames": false,
-  "javascript.referencesCodeLens.enabled": true,
-  "javascript.referencesCodeLens.showOnAllFunctions": true,
   "javascript.suggest.completeFunctionCalls": true,
   // #endregion: JAVASCRIPT                                          !
   /*
@@ -98,21 +96,14 @@
   "typescript.format.semicolons": "insert",
   "typescript.suggest.paths": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "typescript.check.npmIsInstalled": false,
-  "typescript.implementationsCodeLens.enabled": true,
+  "typescript.check.npmIsInstalled": true,
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.includePackageJsonAutoImports": "on",
   "typescript.preferences.quoteStyle": "single",
-  "typescript.preferences.useAliasesForRenames": false,
-  "typescript.referencesCodeLens.enabled": true,
-  "typescript.referencesCodeLens.showOnAllFunctions": true,
   "typescript.suggest.autoImports": true,
   "typescript.suggest.completeFunctionCalls": true,
   "typescript.suggest.enabled": true,
   "typescript.suggestionActions.enabled": true,
-  "typescript.surveys.enabled": false,
-  // "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
   // #endregion: TYPESCRIPT BEHAVIOUR                                !
   /*
   |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
@@ -976,6 +967,14 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
-  }
+  },
+  "typescript.preferences.useAliasesForRenames": false,
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "typescript.tsserver.maxTsServerMemory": 4096,
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.workspaceSymbols.scope": "currentProject",
+  "typescript.locale": "en",
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false
   // #endregion: CUSTOMS RULES                                       !
 }
