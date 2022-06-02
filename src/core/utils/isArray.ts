@@ -1,1 +1,1 @@
-export const isArray = <T>(item: T | T[]): item is [] => Array.isArray(item);
+export const isArray = (item: any): item is any[] => Array.isArray(item);
