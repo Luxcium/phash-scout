@@ -12,6 +12,7 @@
   "isLibrary": true,
   "scripts": {
     "base:build": "parcel build --no-cache",
+    "local:redis": "scripts/start_6383.sh",
     "base:prerelease": "./scripts/prerelease.sh",
     "base:release": "./scripts/release.sh",
     "base:check": "tsc --noEmit",
