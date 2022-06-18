@@ -14,6 +14,14 @@ import type { PQuerryAndAdd, QueryResultItem, RawQueryResult } from './types';
 
 // -15 already added previously
 // (has SomeTitleInclude so it was previously -10 or -5)
+
+const _keys: any = { list: {} };
+const keys: any = (k: string) => {
+  const tempValue = _keys.list[k] || 0;
+  _keys.list[k] = 1;
+  return tempValue;
+};
+
 export async function uniqueAdd(
   querryAndAddParam: PQuerryAndAdd
 ): Promise<QueryResultItem[]> {
@@ -23,12 +31,14 @@ export async function uniqueAdd(
     R,
     k,
     phash_,
-    radius || '0'
+    radius || '0',
+    true,
+    keys
   );
   const queryResultList = await rawQueryResult;
 
   let id = 0;
-  if (isQueryResultList(queryResultList) && queryResultList.length > 0) {
+  if (queryResultList.length > 0 && isQueryResultList(queryResultList)) {
     if (hasSameTitleInclude(title, queryResultList)) {
       let tCount = -15;
 

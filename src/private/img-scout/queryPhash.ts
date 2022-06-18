@@ -1,5 +1,6 @@
 import { RADIUS } from '../../constants/radius';
 import type { S } from '../../core/types';
+import { immediateZalgo } from '../../core/utils';
 import { syncPhash } from './syncPhash';
 import { IMGSCOUT } from './tools';
 
@@ -8,18 +9,22 @@ export async function queryPhash(
   k: S,
   phash_: S,
   radius: string = RADIUS,
-  failSilently = true
+  failSilently = true,
+  keys: any
 ) {
+  const keys_ = keys(k);
   try {
-    const R_EXISTS = await R.EXISTS(k);
+    // const R_EXISTS = await R.EXISTS(k);
+    const R_EXISTS = await immediateZalgo(keys_ || R.EXISTS(k));
     if (R_EXISTS === 1) {
       await syncPhash(R, k);
       const result = R.sendCommand([IMGSCOUT.QUERY, k, phash_, radius]);
+      // console.error(`R.EXISTS(${k}) -> ${R_EXISTS}`);
       return result;
     }
-    console.error(`R.EXISTS(${k}) -> ${R_EXISTS}`);
+    console.error(`R.EXISTS(${k}) -> ${R_EXISTS} ... keys.list[k]:${keys_}`);
   } catch (error: any) {
-    if (!failSilently) throw new Error('queryPhash' + error);
+    if (failSilently) throw new Error('queryPhash' + error);
     console.error('queryPhash Failled silently');
   }
   return [];

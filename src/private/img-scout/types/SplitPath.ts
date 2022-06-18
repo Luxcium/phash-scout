@@ -1,6 +1,9 @@
 export type SplitPath = {
-  absPath: string;
+  dir: string;
   group: string;
   hSize: string;
   size: number;
+  file: string;
+  ext: string;
+  fullPath: string;
 };

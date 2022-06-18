@@ -1,65 +1,54 @@
+import { P } from '../../../core/types';
 import { isA_Promise } from '../../../packages/file-path/tools';
-import { toSizedObj } from '../toSizedObj';
-import { QueryResultItem, QueryResultObject, QueryResultSize } from '../types';
+import {
+  QueryResultItem,
+  QueryResultObject,
+  QueryResultSize,
+  SplitPath,
+} from '../types';
+import { getSplit } from './getSplit';
+import { reorder } from './reorder';
 
 export function toQueryResultObj(
-  queryItem: QueryResultItem
+  queryItems: QueryResultItem
 ): QueryResultObject & QueryResultSize;
 export function toQueryResultObj(
-  queryItem: Promise<QueryResultItem[]>
-): Promise<QueryResultObject[]>;
+  queryItems: P<QueryResultItem[]>
+): P<QueryResultObject[]>;
 export function toQueryResultObj(
-  queryItem: QueryResultItem | Promise<QueryResultItem[]>
-): (QueryResultObject & QueryResultSize) | Promise<QueryResultObject[]> {
-  if (isA_Promise(queryItem)) {
-    return (async () => {
-      const result = (await queryItem).map(
-        (
-          x: QueryResultItem
-        ): QueryResultObject & QueryResultSize & { diff?: number } =>
-          toSizedObj(x)
-      );
-      return (await Promise.all(result))
-        .sort((a, b) => b.size - a.size || a.path.length - b.path.length)
-        .map((item, _i, array) => {
-          item.diff = item.size - array[0].size;
-          return reorder(item); //{ ...itm };
-        });
-    })();
-  }
-  return toSizedObj(queryItem); //as QueryResultObject;
+  queryItems: QueryResultItem | P<QueryResultItem[]>
+): (QueryResultObject & QueryResultSize) | P<QueryResultObject[]> {
+  //++----------------------------------------------------------------
+
+  return isA_Promise(queryItems)
+    ? (async () => {
+        return queryItemsResult(await queryItems);
+      })()
+    : toSizedObj(queryItems);
+
+  //++----------------------------------------------------------------
 }
 
-const reorder = ({
-  // absPath,
-  // group,
-  hSize,
-  size,
-  path,
-  id,
-  radius,
-  diff,
-  ...itm
-}: QueryResultObject & QueryResultSize & { diff?: number }): QueryResultObject &
-  QueryResultSize & { diff?: number } => ({
-  // absPath,
-  // group,
-  hSize,
-  size,
-  diff,
-  path,
-  id,
-  radius,
-  ...itm,
-});
-reorder;
-/*
-      absPath,
-      group,
-      hSize,
-      size,
-      path,
-      id,
-      radius,
-      diff,
- */
+function queryItemsResult(queryItem: QueryResultItem[]) {
+  return queryItem
+    .map(
+      (
+        x: QueryResultItem
+      ): QueryResultObject & QueryResultSize & { diff?: number } =>
+        toSizedObj(x)
+    )
+    .sort((a, b) => b.size - a.size || a.path.length - b.path.length)
+    .map((item, _i, array) => {
+      item.diff = item.size - array[0].size;
+      return reorder(item); //{ ...itm };
+    });
+}
+
+function toSizedObj(queryItem: QueryResultItem): SplitPath & QueryResultObject {
+  return {
+    ...getSplit(queryItem[0]),
+    path: queryItem[0],
+    id: queryItem[1],
+    radius: queryItem[2],
+  };
+}
