@@ -1,6 +1,6 @@
-import { IO_Mapper } from '../src/core';
+import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
 import { Mapper } from '../src';
-import { immediateZalgo } from '../src/utilities/utils';
+import { IO_Mapper } from '../src/core';
 
 class Box<T> {
   #value: T[];

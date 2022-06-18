@@ -1,6 +1,6 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
+import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
 import { validExts } from '../../constants/validExts';
-import { immediateZalgo } from '../../core/utils';
 import { notExcluded } from '../../private/file-path/tools/notExclude';
 import {
   Excluded,

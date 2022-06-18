@@ -1,6 +1,6 @@
+import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
 import { RADIUS } from '../../constants/radius';
 import type { S } from '../../core/types';
-import { immediateZalgo } from '../../core/utils';
 import { syncPhash } from './syncPhash';
 import { IMGSCOUT } from './tools';
 

@@ -1,3 +1,4 @@
+import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
 import type { PlatformPath } from 'path';
 import { ParsedPath } from 'path';
 import { Tedis } from 'tedis';
@@ -8,7 +9,6 @@ import {
   MyStats,
   RedisJson_InfoGetterFunct,
 } from '../../core/types';
-import { immediateZalgo } from '../../core/utils';
 import { fsTools } from '../../private/file-path/tools';
 import { dirListWithFileType } from '../../private/file-path/utils/dirListWithFileType';
 import { getPathStatsInfos } from './tools';

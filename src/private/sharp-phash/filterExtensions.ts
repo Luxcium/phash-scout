@@ -1,7 +1,7 @@
+import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
 import { validExts } from '../../constants/validExts';
 import { PathWithStats } from '../../private/file-path/types';
 import { Bg } from '../../private/file-path/types/Bg';
-import { immediateZalgo } from '../../utilities/utils';
 
 export function filterExtensions(
   validExt: Set<string> = validExts

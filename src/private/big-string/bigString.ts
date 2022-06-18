@@ -1,4 +1,4 @@
-import { immediateZalgo } from '../..';
+import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
 import { S } from '../../core/types/IQueryListPhash';
 
 export function bigString(str: S): S;

@@ -1,3 +1,4 @@
+import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
 import fs, { statSync } from 'fs';
 import { isArray } from '../../core/utils';
 import { notExcluded, notNull } from '../../private/file-path/tools/notExclude';
@@ -20,7 +21,6 @@ import type {
   WithPHash,
 } from '../../private/file-path/types';
 import { FileType, WithExclude } from '../../private/file-path/types';
-import { immediateZalgo } from '../../utilities/utils';
 import { QueryResultItem, QueryResultObject } from '../img-scout/types';
 import { uniqueAddToObj } from '../img-scout/uniqueAddToObj';
 import { Strange } from './types';

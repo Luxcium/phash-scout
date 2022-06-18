@@ -1,4 +1,4 @@
-import { immediateZalgo } from '../../core/utils';
+import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
 import { addPhash } from './addPhash';
 import { hasSameTitleInclude } from './hasSameTitleInclude';
 import { queryPhash } from './queryPhash';

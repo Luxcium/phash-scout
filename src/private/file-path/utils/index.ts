@@ -1,5 +1,4 @@
 export { getPathWithStats } from '../getPathWithStats';
-export { immediateZalgo } from '../imports/immediateZalgo';
 export {
   filter,
   filterBlockDevices,

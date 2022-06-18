@@ -1,8 +1,8 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
+import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
 import path from 'path';
 import { devPaths } from '../../../constants/devPaths';
 import { getDirsSync, getFilesAsync } from '../../../private/file-path/tools';
-import { immediateZalgo } from '../../../utilities/utils';
 import { replaceStr } from './replaceStr';
 
 const PREFIX = 'TESTING:001::JSON:REDIS';

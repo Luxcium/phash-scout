@@ -1,6 +1,6 @@
-import { statSync, Stats } from 'fs';
+import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
+import { Stats, statSync } from 'fs';
 import { stat } from 'fs/promises';
-import { immediateZalgo } from '../imports';
 
 export function getStats(pathStr: string) {
   let stats: null | Promise<Stats> = null;

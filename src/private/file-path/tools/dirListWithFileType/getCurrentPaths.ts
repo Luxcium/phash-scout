@@ -1,4 +1,5 @@
-import { immediateZalgo } from '../../imports';
+import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
+
 import { CurrentPath } from '../../types';
 import { isA_Promise } from '../isA_Promise';
 import { currentPath } from './currentPath';
