@@ -975,6 +975,7 @@
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.workspaceSymbols.scope": "currentProject",
   "typescript.locale": "en",
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+  "standard.enable": false
   // #endregion: CUSTOMS RULES                                       !
 }
