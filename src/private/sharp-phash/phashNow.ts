@@ -1,8 +1,8 @@
 import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
 import fs from 'fs';
-import { notExcluded } from '../../private/file-path/tools/notExclude';
-import { PathWithStats } from '../../private/file-path/types';
 import { bigString } from '../big-string/bigString';
+import { notExcluded } from '../file-path/tools/notExclude';
+import { PathWithStats } from '../file-path/types';
 
 const phash = require('sharp-phash');
 
