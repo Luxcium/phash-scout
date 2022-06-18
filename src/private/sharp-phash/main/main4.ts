@@ -1,4 +1,4 @@
-import { globalMain } from './global-main';
+import { globalMain } from '../global-main';
 
 process.title = 'Sharp pHash';
 //+ cliCursor hide
