@@ -1,6 +1,6 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
 import path from 'path';
-import { getDirsSync, getFilesSync } from '../../../packages/file-path/tools';
+import { getDirsSync, getFilesAsync } from '../../../packages/file-path/tools';
 import { getUserPathsGen } from './getUserPathsGen';
 import { srtPath } from './srtPath';
 import { withPrefix } from './withPrefix';
@@ -69,7 +69,7 @@ function workingFunction() {
       // ---------------------------------------------------------------//!!-----
       // ++ INNERMOST: FILLES LEVEL ------------------------------------
       const filesPathsGen = BoxedGenerator.of(
-        ...getFilesSync(collctn.fullPath)
+        ...getFilesAsync(collctn.fullPath)
       );
       // ---------------------------------------------------------------//!!-----
       const filesInfoGenerator = filesPathsGen.map(f => {

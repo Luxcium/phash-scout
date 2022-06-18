@@ -4,8 +4,8 @@ import path from 'path';
 import { devPaths } from '../../../constants/devPaths';
 import {
   getDirsSync,
-  getFilesSync,
-  getListingsSync,
+  getFilesAsync,
+  getListing,
 } from '../../../packages/file-path/tools';
 import { dirListWithFileType } from '../../../packages/file-path/utils/dirListWithFileType';
 import { immediateZalgo } from '../../../utilities/utils';
@@ -262,7 +262,7 @@ function workingFunction(opts: { DEBUG: number }) {
         ...dirListWithFileType(collctn.fullPath),
       ];
 
-      const listings = getListingsSync(collctn.fullPath); // getListings
+      const listings = getListing(collctn.fullPath); // getListings
       const getThisFileType = (f: string) =>
         somedirListWithFileTypeSync.find(item => item.fileName === f);
 
@@ -270,7 +270,7 @@ function workingFunction(opts: { DEBUG: number }) {
        * for each collections list contained files f
        */
       const filesPathsGen = BoxedGenerator.of(
-        ...getFilesSync(collctn.fullPath)
+        ...getFilesAsync(collctn.fullPath)
       );
 
       const filesInfoGenerator = filesPathsGen.map(f => {
@@ -286,7 +286,7 @@ function workingFunction(opts: { DEBUG: number }) {
         const fileInfo = immediateZalgo({
           ...stats,
           ...listings.count,
-          ...getThisFileType(f),
+          ...getThisFileType(f as any),
           dirname: srtPath(dirname),
           extname: path.extname(pathStr),
           isAbsolute: path.isAbsolute(pathStr),

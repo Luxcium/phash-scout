@@ -5,8 +5,8 @@ import { Tedis } from 'tedis';
 import { devPaths } from '../../constants/devPaths';
 import {
   getDirsSync,
-  getFilesSync,
-  getListingsSync,
+  getFilesAsync,
+  getListing,
 } from '../../packages/file-path/tools';
 import { dirListWithFileType } from '../../packages/file-path/utils/dirListWithFileType';
 import { jsonGet, jsonSet } from './jsonRedis';
@@ -108,7 +108,7 @@ async function workingFunction(opts: { DEBUG: boolean }) {
         ...dirListWithFileType(collctn.fullPath),
       ];
 
-      const listings = getListingsSync(collctn.fullPath);
+      const listings = getListing(collctn.fullPath);
       const getThisFileType = (f: string) =>
         somedirListWithFileTypeSync.find(item => item.fileName === f);
 
@@ -116,7 +116,7 @@ async function workingFunction(opts: { DEBUG: boolean }) {
        * for each collections list contained files f
        */
       const filesPathsGen = BoxedGenerator.of(
-        ...getFilesSync(collctn.fullPath)
+        ...getFilesAsync(collctn.fullPath)
       );
 
       const filesInfoGenerator = filesPathsGen.map(f => {
@@ -132,7 +132,7 @@ async function workingFunction(opts: { DEBUG: boolean }) {
         const fileInfo = {
           ...stats,
           ...listings.count,
-          ...getThisFileType(f),
+          ...getThisFileType(f as any),
           dirname: srtPath(dirname),
           extname: path.extname(pathStr),
           isAbsolute: path.isAbsolute(pathStr),
