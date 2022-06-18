@@ -11,9 +11,9 @@ import {
   WithPHash,
 } from '../../private/file-path/types';
 import { Bg } from '../../private/file-path/types/Bg';
-import { phashNow } from '../phash-now/phashNow';
 import { filterExtensions } from './filterExtensions';
 import { listFiles } from './listFiles';
+import { phashNow } from './phashNow';
 
 type Pr<T> = Promise<T>;
 export const getPhash = <T extends PathWithStats>(list: Bg<Promise<T>>) =>
