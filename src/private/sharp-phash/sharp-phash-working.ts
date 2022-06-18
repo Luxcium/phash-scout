@@ -1,4 +1,4 @@
-import { statSync } from 'fs';
+import fs, { statSync } from 'fs';
 import { isArray } from '../../core/utils';
 import {
   notExcluded,
@@ -6,6 +6,9 @@ import {
 } from '../../packages/file-path/tools/notExclude';
 import type {
   Bg,
+  Excluded,
+  PathWithStats,
+  ValidPHash,
   WithBaseName,
   WithDir,
   WithExtname,
@@ -41,32 +44,26 @@ export function doRedisQuery(
       >
     >
   ): Bg<Promise<Strange>> => {
-    return bgPaths.map(async paths => {
-      const awtPaths = await paths;
+    return bgPaths.map(async awtPaths => {
+      const paths = await awtPaths;
       let getQueryResult = (): any => null;
       let queryResult: Array<QueryResultItem | QueryResultObject> | null = null;
 
-      if (notNull(awtPaths.pHash) && notExcluded(awtPaths)) {
-        const { fullPath, dir, extname, baseName } = awtPaths;
-        const stats = statSync(fullPath);
-        const phash_ = awtPaths.pHash;
-        const title = `${key}:${
-          stats.size > 0 ? humanSize(stats.size, 2) || 0 : 0
-        }:${stats.size}:${dir}:${baseName}:${extname
-          .split('.')
-          .slice(1)
-          .join('')}`;
+      if (notNull(paths.pHash) && notExcluded(paths)) {
+        const stats = statSync(paths.fullPath);
+        const phash_ = paths.pHash;
         queryResult = await uniqueAddToObj({
           R,
-          title,
+          title: titleBuilder({ ...paths, ...stats, key }),
           phash_,
+          radius: '0',
           k: key,
         });
         getQueryResult = () => queryResult;
       }
       const strange: Strange = {
         queryResult,
-        ...(await paths),
+        ...paths,
         getQueryResult,
       };
       return immediateZalgo(strange);
@@ -74,8 +71,54 @@ export function doRedisQuery(
   };
 }
 
+export function newDoRedisQuery(
+  R: any,
+
+  key: string
+) {
+  return (
+    bgPaths: Bg<
+      PathWithStats & {
+        pHashValue: () => Promise<
+          | (Excluded<false> & ValidPHash<true>)
+          | (Excluded<true> & ValidPHash<false>)
+        >;
+      }
+    >
+  ) => {
+    return bgPaths.map(paths => {
+      // let getQueryResult = (): any => null;
+      // let queryResult: Array<QueryResultItem | QueryResultObject> | null = null;
+
+      let queryResult = async () => {
+        const _path = { ...paths, ...(await paths.pHashValue()) };
+        if (notNull(_path.pHash) && notExcluded(_path)) {
+          const stats = statSync(_path.fullPath);
+          const phash_ = _path.pHash;
+
+          return uniqueAddToObj({
+            R,
+            title: titleBuilder({ ..._path, ...stats, key }),
+            phash_,
+            radius: '0',
+            k: key,
+          });
+        }
+        return null;
+      };
+      const strange = {
+        ...paths,
+        queryResult,
+      };
+      return strange;
+    });
+  };
+}
+
+const count2 = { a1: 0, b: 0, len: 0 };
+
 export function manageRedisQuery(bgItem: Bg<Promise<Strange>>) {
-  return bgItem.map(async item => {
+  return bgItem.map(async (item, indx) => {
     const waited = await item;
     try {
       if (notExcluded(waited)) {
@@ -85,22 +128,53 @@ export function manageRedisQuery(bgItem: Bg<Promise<Strange>>) {
             queryResult, //: queryResult.reverse(),
             ...awaited,
           };
-          const count2 = { a1: 0 };
-          // HACK:
-          // console.log(
-          //   // ED2,
-          //   // CUD(10_000),
-          //   result.queryResult,
-          //   result.queryResult.length,
-          //   count2.a1++
-          // );
+          count2.a1 = 0;
+          // count2.len = a.length;
           result.queryResult.map(
-            qrItem =>
-              (qrItem as QueryResultObject).radius === '0' &&
+            (qrItem, _, a) =>
               count2.a1++ === 0 &&
-              console.log(/* ED2, CUD(10_000), */ result.queryResult.reverse())
+              console.log(
+                qrItem,
+                indx,
+                (qrItem as QueryResultObject).radius === '0' &&
+                  true &&
+                  linkSync(
+                    (qrItem as any).fullPath,
+                    '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/Twinks Lover 💙💚💔/jpgs/0/' +
+                      (qrItem as any).file +
+                      '.' +
+                      (qrItem as any).ext
+                  ),
+                (qrItem as QueryResultObject).radius === '-10' &&
+                  true &&
+                  linkSync(
+                    (qrItem as any).fullPath,
+                    '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/Twinks Lover 💙💚💔/jpgs/-10/' +
+                      (qrItem as any).file +
+                      '.' +
+                      (qrItem as any).ext
+                  ),
+                a.length === 1 &&
+                  true &&
+                  linkSync(
+                    (qrItem as any).fullPath,
+                    '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/Twinks Lover 💙💚💔/jpgs/ln1/' +
+                      (qrItem as any).file +
+                      '.' +
+                      (qrItem as any).ext
+                  ),
+                (qrItem as QueryResultObject).radius === '-15' &&
+                  true &&
+                  linkSync(
+                    (qrItem as any).fullPath,
+                    '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/Twinks Lover 💙💚💔/jpgs/-15/' +
+                      (qrItem as any).file +
+                      '.' +
+                      (qrItem as any).ext
+                  ),
+                a.length
+              )
           );
-
           return result.queryResult;
         }
       }
@@ -111,6 +185,31 @@ export function manageRedisQuery(bgItem: Bg<Promise<Strange>>) {
   });
 }
 
+function linkSync(existingPath: string, newPath: string) {
+  if (!fs.existsSync(newPath)) {
+    fs.linkSync(existingPath, newPath); //tmp/blue/1654566738095
+    return true;
+  }
+  return false;
+}
+
+function titleBuilder({
+  key,
+  size,
+  dir,
+  baseName,
+  extname,
+}: {
+  key: string;
+  size: number;
+  dir: string;
+  baseName: string;
+  extname: string;
+}) {
+  return `${key}:${
+    size > 0 ? humanSize(size, 2) || 0 : 0
+  }:${size}:${dir}:${baseName}:${extname.split('.').slice(1).join('')}`;
+}
 export function describeMapping<T>(fn: <R>(val: T) => R) {
   return (mapable: T[] | Bg<T>) => {
     if (isArray(mapable)) {
