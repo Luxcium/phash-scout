@@ -26,13 +26,6 @@ export function phashNow<T extends PathWithStats>(
 
   return {
     path: imgFile,
-    phash: { get: async () => immediateZalgo(), index: index + 1 },
+    phash: { get: async () => immediateZalgo(null), index: index + 1 },
   };
 }
-
-/*
-: CurrentPath &  {
-    willPhash_: () => Promise<string | null>;
-    index: number;
-}
- */
