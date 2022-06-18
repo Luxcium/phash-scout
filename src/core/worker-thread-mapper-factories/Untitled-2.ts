@@ -8,7 +8,7 @@ import {
   Worker,
   workerData,
 } from 'worker_threads';
-import { getDevFilename } from '../../utilities';
+import { getDevFilename } from '../../private/utils';
 import { cpuCount } from '../utils';
 
 export function getAsyncWorker<P>(
