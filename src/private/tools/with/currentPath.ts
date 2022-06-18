@@ -8,7 +8,7 @@ import {
   WithFileType,
   WithFullPath,
   WithPathToFile,
-} from '../../../packages/file-path/types';
+} from '../../../private/file-path/types';
 import { FileType } from '../../sharp-phash/types';
 import { WithFileName, withKey } from './withKey';
 
@@ -22,8 +22,6 @@ import { WithFileName, withKey } from './withKey';
 //   WithExt &
 //   WithExclude &
 //   WithFileType;
-
-
 
 /** @deprecated use {@link withDir} instead */
 export function withPathToFile<B extends {} = {}>(base: B, value: string) {

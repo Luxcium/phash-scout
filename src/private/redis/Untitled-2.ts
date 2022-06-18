@@ -7,8 +7,8 @@ import {
   getDirsSync,
   getFilesAsync,
   getListing,
-} from '../../packages/file-path/tools';
-import { dirListWithFileType } from '../../packages/file-path/utils/dirListWithFileType';
+} from '../../private/file-path/tools';
+import { dirListWithFileType } from '../../private/file-path/utils/dirListWithFileType';
 import { jsonGet, jsonSet } from './jsonRedis';
 // export const SUBSET = 1000;
 // const DEBUG = true;

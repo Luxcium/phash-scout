@@ -8,7 +8,7 @@
 //   WithFullPath,
 //   WithPathToFile,
 //   WithRoot,
-// } from '../../packages/file-path/types';
+// } from '../../private/file-path/types';
 
 // import { withKey } from './with/withKey';
 

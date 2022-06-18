@@ -1,9 +1,6 @@
 import fs, { statSync } from 'fs';
 import { isArray } from '../../core/utils';
-import {
-  notExcluded,
-  notNull,
-} from '../../packages/file-path/tools/notExclude';
+import { notExcluded, notNull } from '../../private/file-path/tools/notExclude';
 import type {
   Bg,
   CurrentPathError,
@@ -21,8 +18,8 @@ import type {
   WithExtname,
   WithFullPath,
   WithPHash,
-} from '../../packages/file-path/types';
-import { FileType, WithExclude } from '../../packages/file-path/types';
+} from '../../private/file-path/types';
+import { FileType, WithExclude } from '../../private/file-path/types';
 import { immediateZalgo } from '../../utilities/utils';
 import { QueryResultItem, QueryResultObject } from '../img-scout/types';
 import { uniqueAddToObj } from '../img-scout/uniqueAddToObj';

@@ -6,8 +6,8 @@ import {
   getDirsSync,
   getFilesAsync,
   getListing,
-} from '../../../packages/file-path/tools';
-import { dirListWithFileType } from '../../../packages/file-path/utils/dirListWithFileType';
+} from '../../../private/file-path/tools';
+import { dirListWithFileType } from '../../../private/file-path/utils/dirListWithFileType';
 import { immediateZalgo } from '../../../utilities/utils';
 import { redisCreateClient } from '../tools';
 import { replaceStr } from './replaceStr';

@@ -1,7 +1,7 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
 import { validExts } from '../../constants/validExts';
 import { immediateZalgo } from '../../core/utils';
-import { notExcluded } from '../../packages/file-path/tools/notExclude';
+import { notExcluded } from '../../private/file-path/tools/notExclude';
 import {
   Excluded,
   PathAndStats,
@@ -9,8 +9,8 @@ import {
   ValidPHash,
   WithExclude,
   WithPHash,
-} from '../../packages/file-path/types';
-import { Bg } from '../../packages/file-path/types/Bg';
+} from '../../private/file-path/types';
+import { Bg } from '../../private/file-path/types/Bg';
 import { phashNow } from '../phash-now/phashNow';
 import { filterExtensions } from './filterExtensions';
 import { listFiles } from './listFiles';

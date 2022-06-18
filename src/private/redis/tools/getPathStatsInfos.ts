@@ -9,9 +9,9 @@ import type {
   RedisJson_StatsInfoGetterFunct,
 } from '../../../core/types';
 import { immediateZalgo } from '../../../core/utils';
-import { getPathInfos, getStats } from '../../../packages/file-path/tools';
-import { dirListWithFileTypeAsync } from '../../../packages/file-path/tools/dirListWithFileType/dirListWithFileTypeAsync';
-import { dirListWithFileType } from '../../../packages/file-path/utils/dirListWithFileType';
+import { getPathInfos, getStats } from '../../../private/file-path/tools';
+import { dirListWithFileTypeAsync } from '../../../private/file-path/tools/dirListWithFileType/dirListWithFileTypeAsync';
+import { dirListWithFileType } from '../../../private/file-path/utils/dirListWithFileType';
 
 type PathStatsTuple<T> = RedisJson_PathStatsTuple<T>;
 

@@ -1,5 +1,5 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
-import { filterDirectories } from '../../packages/file-path/utils';
+import { filterDirectories } from '../../private/file-path/utils';
 import { computePHash } from './getFilesWithPHash';
 import { listFiles } from './listFiles';
 

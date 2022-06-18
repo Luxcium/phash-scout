@@ -1,7 +1,7 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
 import path from 'path';
 import { devPaths } from '../../../constants/devPaths';
-import { getDirsSync, getFilesAsync } from '../../../packages/file-path/tools';
+import { getDirsSync, getFilesAsync } from '../../../private/file-path/tools';
 import { immediateZalgo } from '../../../utilities/utils';
 import { replaceStr } from './replaceStr';
 

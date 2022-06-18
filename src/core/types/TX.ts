@@ -1,4 +1,4 @@
-import type { CurrentPath } from '../../packages/file-path/types';
+import type { CurrentPath } from '../../private/file-path/types';
 import type {
   PQuerryAndAdd,
   QueryResultItem,
