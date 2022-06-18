@@ -6,7 +6,6 @@ export type ParsedWithTypeAndExcludeFlag = ParsedWithType & ParsedWithFlag;
 export type ParsedWithType = MyParsedPath & WithType;
 export type ParsedWithFlag = MyParsedPath & WithExcludeFlag;
 export type CurrentPath = WithFileName &
-  WithPathToFile &
   WithFileExtname &
   WithBaseName &
   WithFullPath &
@@ -34,7 +33,7 @@ export type WithBaseName = {
 export type WithFileName = {
   fileName: string;
 };
-
+/** @deprecated use {@link WithDir} instead */
 export type WithPathToFile = {
   /**
    * The full directory path such as '/home/user/dir' or 'c:\path\dir'

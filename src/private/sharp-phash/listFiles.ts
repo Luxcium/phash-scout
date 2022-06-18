@@ -21,8 +21,6 @@ export function listFilesFromArray<T extends boolean>(list: FileType<T>[]) {
   return BoxedGenerator.from(...bgList);
 }
 
-// newGetPathWithStats
-
 export function newListFiles(folder: string): Bg<PathWithStats> {
-  return BoxedGenerator.of(...newGetPathWithStats(folder));
+  return BoxedGenerator.of(...newGetPathWithStats(folder)).map(pat => pat);
 }

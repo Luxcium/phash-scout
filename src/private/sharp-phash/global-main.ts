@@ -2,13 +2,13 @@ import { endAsyncSpark } from './endAsyncSpark';
 import { newFilterExtensions } from './filterExtensions';
 import { newGetPHash } from './getFilesWithPHash';
 import { newListFiles } from './listFiles';
-import { manageRedisQuery, newDoRedisQuery } from './sharp-phash-working';
+import { doRedisQuery, manageRedisQuery } from './sharp-phash-working';
 
 export const globalMain = async (dir: S, grpKey: S, validExt: Ss, rC: any) => {
   const R = await rC;
 
   const filterValidExts = newFilterExtensions(validExt);
-  const redisQuery = newDoRedisQuery(R, grpKey);
+  const redisQuery = doRedisQuery(R, grpKey);
   const asyncSpark = endAsyncSpark(R, 'Error in step0 to step5');
 
   const step0 = dir;

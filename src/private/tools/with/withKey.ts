@@ -22,14 +22,7 @@ export function withKey<B extends {}, W extends object, V = unknown>(
   return { ...base, ...kv<V>(key, value) } as B & W;
 }
 
-// export function withKey2<B extends {}, W extends {}, V>(
-//   key: string,
-//   base: W,
-//   value: V
-// ): B & W {
-//   return Object.assign(base, kv(key, value)) as B & W;
-// }
-
+/** DEMO FUNCTION */
 export function withExt<B extends {} = {}>(base: B, value: string) {
   return withKey<B, WithExt>('ext', base, value);
 }

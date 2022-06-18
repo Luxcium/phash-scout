@@ -14,7 +14,6 @@ export async function queryPhash(
 ) {
   const keys_ = keys(k);
   try {
-    // const R_EXISTS = await R.EXISTS(k);
     const R_EXISTS = await immediateZalgo(keys_ || R.EXISTS(k));
     if (R_EXISTS === 1) {
       await syncPhash(R, k);
@@ -24,7 +23,7 @@ export async function queryPhash(
     }
     console.error(`R.EXISTS(${k}) -> ${R_EXISTS} ... keys.list[k]:${keys_}`);
   } catch (error: any) {
-    if (failSilently) throw new Error('queryPhash' + error);
+    if (!failSilently) throw new Error('at: queryPhash →' + error);
     console.error('queryPhash Failled silently');
   }
   return [];

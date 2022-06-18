@@ -105,7 +105,7 @@ export function newGetPathWithStats(folderPath: string): PathWithStats[] {
       ...getCurrentPath(f, folderPath),
     };
     const { fullPath, type } = currentPath;
-    const getChild = () => getChildPaths(fullPath, type, false)();
+    const getChild = getChildPaths(fullPath, type, false);
 
     return {
       ...currentPath,

@@ -6,7 +6,14 @@ import {
 } from '../../packages/file-path/tools/notExclude';
 import type {
   Bg,
+  CurrentPathError,
   Excluded,
+  GetStats,
+  IsExcluded,
+  IsNotValidPHash,
+  IsValidPHash,
+  NotExcluded,
+  PathAndStats,
   PathWithStats,
   ValidPHash,
   WithBaseName,
@@ -15,19 +22,17 @@ import type {
   WithFullPath,
   WithPHash,
 } from '../../packages/file-path/types';
-import { WithExclude } from '../../packages/file-path/types';
+import { FileType, WithExclude } from '../../packages/file-path/types';
 import { immediateZalgo } from '../../utilities/utils';
 import { QueryResultItem, QueryResultObject } from '../img-scout/types';
 import { uniqueAddToObj } from '../img-scout/uniqueAddToObj';
 import { Strange } from './types';
 
 const humanSize = require('human-size');
-// ${
-// stats.size > 0 ? humanSize(stats.size, 2) || 0 : 0
-// }:
+
 export const count = { index1: 1 };
 
-export function doRedisQuery(
+export function oldDoRedisQuery(
   R: any,
 
   key: string
@@ -71,7 +76,7 @@ export function doRedisQuery(
   };
 }
 
-export function newDoRedisQuery(
+export function doRedisQuery(
   R: any,
 
   key: string
@@ -87,10 +92,7 @@ export function newDoRedisQuery(
     >
   ) => {
     return bgPaths.map(paths => {
-      // let getQueryResult = (): any => null;
-      // let queryResult: Array<QueryResultItem | QueryResultObject> | null = null;
-
-      let queryResult = async () => {
+      const queryResult = async () => {
         const _path = { ...paths, ...(await paths.pHashValue()) };
         if (notNull(_path.pHash) && notExcluded(_path)) {
           const stats = statSync(_path.fullPath);
@@ -106,7 +108,7 @@ export function newDoRedisQuery(
         }
         return null;
       };
-      const strange = {
+      const strange: NewStrange<true | false> = {
         ...paths,
         queryResult,
       };
@@ -117,30 +119,59 @@ export function newDoRedisQuery(
 
 const count2 = { a1: 0, b: 0, len: 0 };
 
-export function manageRedisQuery(bgItem: Bg<Promise<Strange>>) {
+export type FilePath<Bool extends boolean = true | false> = {
+  fileName: string;
+  extname: string;
+  baseName: string;
+  fullPath: string;
+  dir: string;
+  ext: string;
+  exclude: Bool;
+  type: FileType;
+};
+export type NewStrange<Bool extends boolean = true | false> = {
+  getChild: () => Promise<PathWithStats | PathAndStats | CurrentPathError>[];
+  getStats: () => Promise<GetStats>;
+  pHashValue: () => Promise<
+    (NotExcluded & IsValidPHash) | (IsExcluded & IsNotValidPHash)
+  >;
+  queryResult: () => Promise<QueryResultObject[] | null>;
+} & FilePath<Bool>;
+
+export function manageRedisQuery(bgItem: Bg<NewStrange<true | false>>) {
   return bgItem.map(async (item, indx) => {
-    const waited = await item;
     try {
-      if (notExcluded(waited)) {
-        const { queryResult, ...awaited } = waited;
+      if (notExcluded(item)) {
+        const { queryResult: qrFn, ...awaited } = item;
+        const queryResult = await qrFn();
         if (queryResult) {
           const result = {
             queryResult, //: queryResult.reverse(),
             ...awaited,
           };
           count2.a1 = 0;
-          // count2.len = a.length;
           result.queryResult.map(
             (qrItem, _, a) =>
               count2.a1++ === 0 &&
               console.log(
                 qrItem,
-                indx,
+                (indx || 0) + 1,
                 (qrItem as QueryResultObject).radius === '0' &&
                   true &&
                   linkSync(
                     (qrItem as any).fullPath,
-                    '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/Twinks Lover 💙💚💔/jpgs/0/' +
+                    (qrItem as any).dir +
+                      '/sub/0/' +
+                      (qrItem as any).file +
+                      '.' +
+                      (qrItem as any).ext
+                  ),
+                (qrItem as QueryResultObject).radius === '-5' &&
+                  true &&
+                  linkSync(
+                    (qrItem as any).fullPath,
+                    (qrItem as any).dir +
+                      '/sub/-5/' +
                       (qrItem as any).file +
                       '.' +
                       (qrItem as any).ext
@@ -149,7 +180,8 @@ export function manageRedisQuery(bgItem: Bg<Promise<Strange>>) {
                   true &&
                   linkSync(
                     (qrItem as any).fullPath,
-                    '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/Twinks Lover 💙💚💔/jpgs/-10/' +
+                    (qrItem as any).dir +
+                      '/sub/-10/' +
                       (qrItem as any).file +
                       '.' +
                       (qrItem as any).ext
@@ -158,7 +190,8 @@ export function manageRedisQuery(bgItem: Bg<Promise<Strange>>) {
                   true &&
                   linkSync(
                     (qrItem as any).fullPath,
-                    '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/Twinks Lover 💙💚💔/jpgs/ln1/' +
+                    (qrItem as any).dir +
+                      '/sub/ln1/' +
                       (qrItem as any).file +
                       '.' +
                       (qrItem as any).ext
@@ -167,12 +200,14 @@ export function manageRedisQuery(bgItem: Bg<Promise<Strange>>) {
                   true &&
                   linkSync(
                     (qrItem as any).fullPath,
-                    '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/Twinks Lover 💙💚💔/jpgs/-15/' +
+                    (qrItem as any).dir +
+                      '/sub/-15/' +
                       (qrItem as any).file +
                       '.' +
                       (qrItem as any).ext
                   ),
-                a.length
+                a.length,
+                _
               )
           );
           return result.queryResult;
