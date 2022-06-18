@@ -1,9 +1,8 @@
-import { isAllArrays, isArray } from '../core/utils';
+import { isAllArrays, isArray } from '../../core/utils';
 import { getDevFilename } from './getDevFileName';
 import { getSign } from './getSign';
 import { isDevEnv } from './isDevEnv';
 import { NODE_ENV } from './NODE_ENV';
-import { nullOrDefined } from './nullOrDefined';
 import { splitedHead, splitedTail, splitHead, splitTail } from './split';
 
 export {
@@ -11,7 +10,6 @@ export {
   getSign,
   isDevEnv,
   NODE_ENV,
-  nullOrDefined,
   splitedHead,
   splitedTail,
   splitHead,
@@ -25,7 +23,6 @@ export const utils = {
   isArray,
   isDevEnv,
   NODE_ENV,
-  nullOrDefined,
   splitedHead,
   splitedTail,
   splitHead,
