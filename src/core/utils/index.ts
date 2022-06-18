@@ -12,6 +12,7 @@ import {
   zalgo3,
 } from './restrainingZalgo';
 
+export { nullOrDefined } from './nullOrDefined';
 export { getCurrentPath } from './paths/getCurrentPath';
 export {
   cpuCount,
