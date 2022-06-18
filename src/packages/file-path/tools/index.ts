@@ -16,9 +16,9 @@ export {
   getDirs,
   getDirsSync,
   getFiles,
-  getFilesSync,
-  getListings,
-  getListingsSync,
+  getFilesAsync,
+  getListing,
+  getListingAsync,
 } from './fsTools';
 export { getDirListFileTypes } from './getDirListWithFileType';
 export { getPathInfos } from './getPathInfos';

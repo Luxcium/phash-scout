@@ -1,4 +1,5 @@
 import { FileType } from '../tools';
+import { IsNotValidPHash, IsValidPHash } from './ValidPHash';
 import { WithExclude } from './WithExclude';
 
 export type ParsedWithTypeAndExcludeFlag = ParsedWithType & ParsedWithFlag;
@@ -62,9 +63,7 @@ export type WithFileType = {
 export type WithType = {
   type: FileType;
 };
-export type WithPHash = {
-  pHash: string | null;
-};
+export type WithPHash = IsValidPHash | IsNotValidPHash;
 
 export type WithCount = {
   count: number;

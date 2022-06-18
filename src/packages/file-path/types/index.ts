@@ -48,8 +48,10 @@ export type {
 } from './file-path-types';
 export type { GetChild } from './GetChild';
 export type { GetStats } from './GetStats';
+export type { Listing } from './Listing';
 export type { PathAndStats } from './PathAndStats';
 export type { PathWithStats } from './PathWithStats';
+export type { IsNotValidPHash, IsValidPHash, ValidPHash } from './ValidPHash';
 export type {
   Excluded,
   IsExcluded,
