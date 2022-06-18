@@ -1,1 +1,8 @@
-export { getGroup, getHSize, getPath, getSize, getSplit } from './getSplit';
+export {
+  getExt,
+  getFile,
+  getGroup,
+  getHSize,
+  getPath,
+  getSize,
+} from './getSplit';

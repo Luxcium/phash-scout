@@ -11,8 +11,7 @@ export function getChildPaths(
   return (): Promise<PathWithStats | PathAndStats | CurrentPathError>[] => {
     try {
       if (type === 'Directory') {
-        if (withStats) return [...getPathWithStats(fullPath, withStats)];
-
+        // if (withStats) return [...getPathWithStats(fullPath, withStats)];
         return [...getPathWithStats(fullPath, withStats)];
       }
       return [

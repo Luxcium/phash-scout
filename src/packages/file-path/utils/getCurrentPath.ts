@@ -16,8 +16,8 @@ export function getCurrentPath(f: DirentWithFileType, folderPath: string) {
   const fullPath = `${folderPath}/${f.fileName}`;
   const _fullPath: CurrentPath = {
     type: FileTypes.Unknown,
-    exclude: false,
     ...parsePath(fullPath),
+    exclude: false,
   };
   if (f.isDirectory) {
     _fullPath.type = FileTypes.Directory;
