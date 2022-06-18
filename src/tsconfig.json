@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["."],
+  "include": [".", "../test/processor-usage.js"],
   "exclude": [
     /* "./packages" */
   ],
