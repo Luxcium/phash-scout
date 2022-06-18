@@ -11,7 +11,7 @@ import {
   WithPHash,
 } from '../../packages/file-path/types';
 import { Bg } from '../../packages/file-path/types/Bg';
-import { phashNow } from '../../packages/phash-now/phashNow';
+import { phashNow } from '../phash-now/phashNow';
 import { filterExtensions } from './filterExtensions';
 import { listFiles } from './listFiles';
 
