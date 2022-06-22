@@ -1,5 +1,4 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
-import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
 import { statSync } from 'fs-extra';
 import path from 'path';
 import { devPaths } from '../../../constants/devPaths';
@@ -9,6 +8,7 @@ import {
   getListing,
 } from '../../../private/file-path/tools';
 import { dirListWithFileType } from '../../../private/file-path/utils/dirListWithFileType';
+import { immediateZalgo } from '../../utils';
 import { redisCreateClient } from '../tools';
 import { replaceStr } from './replaceStr';
 

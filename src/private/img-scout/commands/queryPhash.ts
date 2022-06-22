@@ -1,8 +1,8 @@
-import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
-import { RADIUS } from '../../constants/radius';
-import type { S } from '../../core/types';
+import { RADIUS } from '../../../constants/radius';
+import type { S } from '../../../core/types';
+import { immediateZalgo } from '../../utils';
+import { IMGSCOUT } from '../tools';
 import { syncPhash } from './syncPhash';
-import { IMGSCOUT } from './tools';
 
 export async function queryPhash(
   R: any,

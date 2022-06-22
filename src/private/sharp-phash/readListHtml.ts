@@ -2,7 +2,7 @@ import { IQueryListPhash } from '../../core/types/IQueryListPhash';
 
 export async function readListHtml(listing: IQueryListPhash) {
   const queryList = listing.list;
-  const step2 = queryList.map(([path, id, radius]) => {
+  return queryList.map(([path, id, radius]) => {
     const html = `
     <br/>
     <a href="${path}">
@@ -18,6 +18,4 @@ export async function readListHtml(listing: IQueryListPhash) {
     console.log(result);
     return [html];
   });
-  const lastStep = step2;
-  return lastStep;
 }

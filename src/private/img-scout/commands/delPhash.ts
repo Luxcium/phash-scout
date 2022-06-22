@@ -1,6 +1,6 @@
-import type { N, S } from '../../core/types';
+import type { N, S } from '../../../core/types';
+import { IMGSCOUT } from '../tools';
 import { syncPhash } from './syncPhash';
-import { IMGSCOUT } from './tools';
 
 export async function delPhash(R: any, k: S, id: N, failSilently = true) {
   try {

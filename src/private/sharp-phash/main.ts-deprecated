@@ -1,7 +1,6 @@
 import { CURRENT_PATH } from '../../constants/radius';
 import { BoxedGenerator } from '../../core';
 import { PhashNow, TX } from '../../core/types';
-import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
 import { getCurrentPaths } from '../../private/file-path/tools/dirListWithFileType';
 import { CurrentPath } from '../../private/file-path/types';
 import { filter } from '../../private/file-path/utils';

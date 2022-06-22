@@ -9,9 +9,9 @@
 /*  Copyright (c) 2020-2021 Alex Ewerlöf                              */
 /*--------------------------------------------------------------------*/
 
-import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
 import { Either, isLeft, left, right } from 'fp-ts/lib/Either';
 import type { ItemMapperArgs } from './types';
+import { immediateZalgo } from './utils';
 
 // ~#----- itemMapper -------------------------------------------------#-~
 export async function itemMapper<T, U>({

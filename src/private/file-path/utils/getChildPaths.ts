@@ -1,4 +1,4 @@
-import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
+import { immediateZalgo } from '../../utils';
 import { getPathWithStats } from '../getPathWithStats';
 import { FileType, FileTypes } from '../tools';
 import { CurrentPathError, PathAndStats, PathWithStats } from '../types';

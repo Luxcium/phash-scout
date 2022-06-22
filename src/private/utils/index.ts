@@ -1,4 +1,15 @@
-import { isAllArrays, isArray } from '../../core/utils';
+import {
+  immediateZalgo,
+  isAllArrays,
+  isArray,
+  nextTickZalgo,
+  restrainingZalgo,
+  timeoutZalgo,
+  zalgo,
+  zalgo1,
+  zalgo2,
+  zalgo3,
+} from '../../core/utils';
 import { getDevFilename } from './getDevFileName';
 import { getSign } from './getSign';
 import { isDevEnv } from './isDevEnv';
@@ -14,6 +25,16 @@ export {
   splitedTail,
   splitHead,
   splitTail,
+};
+export {
+  immediateZalgo,
+  nextTickZalgo,
+  restrainingZalgo,
+  timeoutZalgo,
+  zalgo,
+  zalgo1,
+  zalgo2,
+  zalgo3,
 };
 
 export const utils = {

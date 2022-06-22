@@ -1,4 +1,3 @@
-import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
 import type { ParsedPath, PlatformPath } from 'path';
 import type {
   DirentWithFileType,
@@ -12,6 +11,7 @@ import type {
 import { getPathInfos, getStats } from '../../../private/file-path/tools';
 import { dirListWithFileTypeAsync } from '../../../private/file-path/tools/dirListWithFileType/dirListWithFileTypeAsync';
 import { dirListWithFileType } from '../../../private/file-path/utils/dirListWithFileType';
+import { immediateZalgo } from '../../utils';
 
 type PathStatsTuple<T> = RedisJson_PathStatsTuple<T>;
 

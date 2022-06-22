@@ -1,4 +1,4 @@
-import { QueryResultItem } from './types';
+import { QueryResultItem } from '../types';
 
 export function shiftTitle(title: string, level = '-1500') {
   return (i: QueryResultItem) => {

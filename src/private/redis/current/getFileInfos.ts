@@ -1,6 +1,6 @@
-import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
 import { stat } from 'fs/promises';
 import path from 'path';
+import { immediateZalgo } from '../../utils';
 import { getKeywords } from './getKeywords';
 import { getxDir } from './getxDir';
 import { statsReducer } from './statsReducer';

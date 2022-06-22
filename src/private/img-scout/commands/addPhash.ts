@@ -1,4 +1,4 @@
-import { IMGSCOUT } from './tools';
+import { IMGSCOUT } from '../tools';
 
 export async function addPhash(
   R: any,

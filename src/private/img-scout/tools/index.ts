@@ -1,14 +1,12 @@
+export { IMGSCOUT } from '../commands';
 export { getSplit } from './getSplit';
 export { isA_Promise } from './isA_Promise';
 export { isQueryResult } from './isQueryResult';
+export { isQueryResultItem } from './isQueryResultItem';
 export { isQueryResultList } from './isQueryResultList';
-const QUERY = 'IMGSCOUT.QUERY';
-const ADD = 'IMGSCOUT.ADD';
-const SYNC = 'IMGSCOUT.SYNC';
-const DEL = 'IMGSCOUT.DEL';
-export const IMGSCOUT = {
-  QUERY,
-  ADD,
-  SYNC,
-  DEL,
-};
+export { getTransact, readListRx } from './readListR1';
+export { reorder } from './reorder';
+export { toObj } from './toObj';
+export { toQueryResultObj } from './toQueryResultObj';
+export { toSizedObj } from './toSizedObj';
+export { toTup } from './toTup';

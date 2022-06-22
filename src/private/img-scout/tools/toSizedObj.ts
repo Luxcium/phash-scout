@@ -1,5 +1,5 @@
-import { getSplit } from './tools';
-import type { QueryResultItem, QueryResultObject, SplitPath } from './types';
+import { getSplit } from '.';
+import type { QueryResultItem, QueryResultObject, SplitPath } from '../types';
 
 export function toSizedObj(
   queryItem: QueryResultItem

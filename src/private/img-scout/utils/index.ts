@@ -6,3 +6,5 @@ export {
   getPath,
   getSize,
 } from './getSplit';
+export { hasSameTitleInclude } from './hasSameTitleInclude';
+export { shiftTitle } from './shiftTitle';

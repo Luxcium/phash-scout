@@ -1,10 +1,10 @@
-import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
+import { immediateZalgo } from '../../utils';
+import { isQueryResultList } from '../tools';
+import type { PQuerryAndAdd, QueryResultItem, RawQueryResult } from '../types';
+import { hasSameTitleInclude } from '../utils/hasSameTitleInclude';
+import { shiftTitle } from '../utils/shiftTitle';
 import { addPhash } from './addPhash';
-import { hasSameTitleInclude } from './hasSameTitleInclude';
 import { queryPhash } from './queryPhash';
-import { shiftTitle } from './shiftTitle';
-import { isQueryResultList } from './tools';
-import type { PQuerryAndAdd, QueryResultItem, RawQueryResult } from './types';
 
 // -5 add as the first and only
 // (not isQueryResultList or length === 0 )

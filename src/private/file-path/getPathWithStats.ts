@@ -1,5 +1,5 @@
-import { immediateZalgo } from '@luxcium/boxed-list/out/typings/utils';
 import { stat } from 'fs/promises';
+import { immediateZalgo } from '../utils';
 import { FileTypes } from './tools';
 import type { GetStats, PathAndStats, PathWithStats } from './types';
 import { dirListWithFileType } from './utils/dirListWithFileType';

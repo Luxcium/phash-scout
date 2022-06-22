@@ -1,1 +1,1 @@
-export { delPhash, delPhashKey } from './delPhash';
+export { delPhash, delPhashKey } from './commands/delPhash';

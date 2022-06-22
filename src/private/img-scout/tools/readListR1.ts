@@ -1,5 +1,3 @@
-import { N, S } from '../../../core/types/IQueryListPhash';
-import { CurrentPath } from '../../../private/file-path/types';
 import { TX } from '../../sharp-phash/types';
 import { QueryResultItem } from '../types';
 
@@ -39,13 +37,3 @@ export async function readListRx(
   // const lastStep = step2;
   // return lastStep;
 }
-
-export type TX_ = Promise<{
-  transact: Promise<QueryResultItem[]>;
-  path: CurrentPath;
-  pHash: {
-    willPhash_?: () => Promise<S | null>;
-    index: N;
-    value: null | string;
-  };
-}>;
