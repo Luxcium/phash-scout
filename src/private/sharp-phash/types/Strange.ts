@@ -1,33 +1,21 @@
-import { QueryResultItem, QueryResultObject } from '../../img-scout/types';
+import {
+  CurrentPathError,
+  GetStats,
+  IsExcluded,
+  IsNotValidPHash,
+  IsValidPHash,
+  NotExcluded,
+  PathAndStats,
+  PathWithStats,
+} from '../../file-path/types';
+import { QueryResultObject } from '../../img-scout/types';
+import { FilePath } from '../FilePath';
 
-export type Strange =
-  | {
-      getQueryResult: () => any;
-      dir: string;
-      fullPath: string;
-      baseName: string;
-      extname: string;
-      exclude: true;
-      pHash: string | null;
-      queryResult: (QueryResultItem | QueryResultObject)[] | null;
-    }
-  | {
-      getQueryResult: () => any;
-      dir: string;
-      fullPath: string;
-      baseName: string;
-      extname: string;
-      exclude: false;
-      pHash: string | null;
-      queryResult: (QueryResultItem | QueryResultObject)[] | null;
-    }
-  | {
-      getQueryResult: () => any;
-      dir: string;
-      fullPath: string;
-      baseName: string;
-      extname: string;
-      exclude: boolean;
-      pHash: string | null;
-      queryResult: (QueryResultItem | QueryResultObject)[] | null;
-    }
+export type Strange<Bool extends boolean = true | false> = {
+  getChild: () => Promise<PathWithStats | PathAndStats | CurrentPathError>[];
+  getStats: () => Promise<GetStats>;
+  pHashValue: () => Promise<
+    (NotExcluded & IsValidPHash) | (IsExcluded & IsNotValidPHash)
+  >;
+  queryResult: () => Promise<QueryResultObject[] | null>;
+} & FilePath<Bool>;

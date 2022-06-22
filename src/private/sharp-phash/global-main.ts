@@ -1,8 +1,9 @@
+import { doRedisQuery } from './doRedisQuery';
 import { endAsyncSpark } from './endAsyncSpark';
 import { newFilterExtensions } from './filterExtensions';
 import { newGetPHash } from './getFilesWithPHash';
 import { newListFiles } from './listFiles';
-import { doRedisQuery, manageRedisQuery } from './sharp-phash-working';
+import { manageRedisQuery } from './manageRedisQuery';
 
 export const globalMain = async (dir: S, grpKey: S, validExt: Ss, rC: any) => {
   const R = await rC;
