@@ -9,7 +9,7 @@ import {
   WithFullPath,
   WithPathToFile,
 } from '../../file-path/types';
-import { FileType } from '../../sharp-phash/types';
+import { FileType } from '../../types';
 import { WithFileName, withKey } from './withKey';
 
 // WithFileName &

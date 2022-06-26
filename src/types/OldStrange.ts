@@ -1,4 +1,4 @@
-import { QueryResultItem, QueryResultObject } from '../../img-scout/types';
+import { QueryResultItem, QueryResultObject } from '../img-scout/types';
 
 export type OldStrange =
   | {

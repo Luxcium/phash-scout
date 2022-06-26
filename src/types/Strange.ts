@@ -7,9 +7,9 @@ import {
   NotExcluded,
   PathAndStats,
   PathWithStats,
-} from '../../file-path/types';
-import { QueryResultObject } from '../../img-scout/types';
-import { FilePath } from '../FilePath';
+} from '../file-path/types';
+import { QueryResultObject } from '../img-scout/types';
+import { FilePath } from '../sharp-phash/FilePath';
 
 export type Strange<Bool extends boolean = true | false> = {
   getChild: () => Promise<PathWithStats | PathAndStats | CurrentPathError>[];

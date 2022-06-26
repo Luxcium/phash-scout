@@ -11,9 +11,9 @@ import {
 } from '../file-path/types';
 import { uniqueAddToObj } from '../img-scout/commands/uniqueAddToObj';
 import { QueryResultItem, QueryResultObject } from '../img-scout/types';
+import { OldStrange } from '../types';
 import { immediateZalgo } from '../utils';
 import { titleBuilder } from './titleBuilder';
-import { OldStrange } from './types';
 
 export function oldDoRedisQuery(
   R: any,

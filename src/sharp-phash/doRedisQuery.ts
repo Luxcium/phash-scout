@@ -8,7 +8,7 @@ import {
 } from '../file-path/types';
 import { uniqueAddToObj } from '../img-scout/commands/uniqueAddToObj';
 import { titleBuilder } from './titleBuilder';
-import { Strange } from './types';
+import { Strange } from '../types';
 
 export function doRedisQuery(
   R: any,
