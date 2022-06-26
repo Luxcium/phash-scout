@@ -1,6 +1,6 @@
 import path from 'path';
 import type { DirentWithFileType } from '../../../core/types';
-import { FileType } from '../../../core/types/Enums/FileTypeEnum';
+import  { FileType } from '../../types/Enums/FileTypeEnum';
 import {
   BlockDevicePath,
   CharacterDevicePath,

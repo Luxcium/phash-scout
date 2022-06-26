@@ -1,7 +1,5 @@
 export type { CPU_MapperRetunType } from './CPU_MapperRetunType';
-export type { CurrentPath } from './CurrentPath';
 export type { DirentWithFileType } from './DirentWithFileType';
-export type { FileType, FileType as FileTypes } from './Enums/FileTypeEnum';
 export type { FALSY } from './Falsy';
 export type { IParallelMapping } from './IParallelMapping';
 export type { IParallelMappingOptions } from './IParallelMappingOptions';
@@ -24,8 +22,6 @@ export type {
 export type { PhashNow } from './PhashNow';
 export type { ProcessMapperArgs } from './ProcessMapperArgs';
 export type { PromiseMapper2 } from './PromiseMapper2';
-export type { RedisClientType } from './RedisClientType';
-export type { RedisCStrOptions } from './RedisCStrOptions';
 export type { ThenMapper } from './ThenMapper';
 export type { WorkerArgs } from './WorkerArgs';
 export type { WorkerData } from './WorkerData';

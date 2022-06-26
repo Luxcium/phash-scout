@@ -6,9 +6,9 @@
 /*  See https://github.com/Luxcium/parallel-mapping/blob/cbf7e/LICENSE*/
 /*--------------------------------------------------------------------*/
 
-import { nullOrDefined } from '../nullOrDefined';
 import { immediateZalgo } from './immediateZalgo';
 import { nextTickZalgo } from './nextTickZalgo';
+import { nullOrDefined } from './nullOrDefined';
 import { timeoutZalgo } from './timeoutZalgo';
 
 type TimeoutDelayType = undefined | null | number | boolean;

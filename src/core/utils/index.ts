@@ -12,7 +12,6 @@ import {
   zalgo3,
 } from './restrainingZalgo';
 
-export { nullOrDefined } from './nullOrDefined';
 export {
   cpuCount,
   immediateZalgo,

@@ -2,7 +2,7 @@ import type { PlatformPath } from 'path';
 import { ParsedPath } from 'path';
 import { Tedis } from 'tedis';
 import { devPaths } from '../../constants/devPaths';
-import {
+import type {
   DirentWithFileType,
   MyPInfos,
   MyStats,
