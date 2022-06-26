@@ -90,7 +90,7 @@
     "glob": "^7.2.0",
     "hamming-distance": "^1.0.0",
     "human-size": "^1.1.0",
-    "jimp": "^0.16.1",
+    "jimp": "^0.16.0",
     "redis": "^4.0.4",
     "sharp": "^0.30.3",
     "sharp-phash": "^2.0.0",
