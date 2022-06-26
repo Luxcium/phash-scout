@@ -6,10 +6,10 @@ import { devPaths } from '../constants/devPaths';
 import { fsTools } from '../file-path/tools';
 import { DirentWithFileType } from '../file-path/types';
 import { dirListWithFileType } from '../file-path/utils/dirListWithFileType';
+import { getPathStatsInfos } from '../img-scout/tools';
+import { tedis_jsonGet, tedis_jsonSet } from '../img-scout/tools/tedis_json';
 import { MyPInfos, MyStats, RedisJson_InfoGetterFunct } from '../types';
 import { immediateZalgo } from '../utils';
-import { getPathStatsInfos } from './tools';
-import { tedis_jsonGet, tedis_jsonSet } from './tools/tedis_json';
 
 const CLOSE = 'close';
 const PREFIX = 'TESTING:JSON:REDIS';

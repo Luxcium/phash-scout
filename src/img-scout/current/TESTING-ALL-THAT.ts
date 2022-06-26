@@ -4,8 +4,8 @@ import path from 'path';
 import { devPaths } from '../../constants/devPaths';
 import { getDirsSync, getFilesAsync, getListing } from '../../file-path/tools';
 import { dirListWithFileType } from '../../file-path/utils/dirListWithFileType';
-import { immediateZalgo } from '../../utils';
 import { redisCreateClient } from '../tools';
+import { immediateZalgo } from '../../utils';
 import { replaceStr } from './replaceStr';
 
 const SPARK = true;

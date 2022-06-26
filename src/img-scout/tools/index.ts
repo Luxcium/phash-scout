@@ -1,10 +1,13 @@
 export { IMGSCOUT } from '../commands';
+export { getNewTedis } from './getNewTedis';
+export { getPathStatsInfos } from './getPathStatsInfos';
 export { getSplit } from './getSplit';
 export { isA_Promise } from './isA_Promise';
 export { isQueryResult } from './isQueryResult';
 export { isQueryResultItem } from './isQueryResultItem';
 export { isQueryResultList } from './isQueryResultList';
 export { getTransact, readListRx } from './readListR1';
+export { redisConnectionString, redisCreateClient } from './redisClient';
 export { reorder } from './reorder';
 export { toObj } from './toObj';
 export { toQueryResultObj } from './toQueryResultObj';
