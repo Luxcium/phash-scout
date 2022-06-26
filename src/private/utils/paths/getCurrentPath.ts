@@ -1,17 +1,17 @@
 import path from 'path';
-import type { DirentWithFileType } from '../../../core/types';
-import  { FileType } from '../../types/Enums/FileTypeEnum';
 import {
   BlockDevicePath,
   CharacterDevicePath,
   CurrentPath,
   DirectoryPath,
+  DirentWithFileType,
   FIFOPath,
   FilePath,
   SocketPath,
   SymbolicLinkPath,
   UnknownTypePath,
 } from '../../file-path/types';
+import { FileType } from '../../types/Enums/FileTypeEnum';
 
 /** @deprecated */
 export const currentPath = (folder: string) => (f: DirentWithFileType) =>

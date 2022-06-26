@@ -2,14 +2,11 @@ import type { PlatformPath } from 'path';
 import { ParsedPath } from 'path';
 import { Tedis } from 'tedis';
 import { devPaths } from '../../constants/devPaths';
-import type {
-  DirentWithFileType,
-  MyPInfos,
-  MyStats,
-  RedisJson_InfoGetterFunct,
-} from '../../core/types';
+
 import { fsTools } from '../file-path/tools';
+import { DirentWithFileType } from '../file-path/types';
 import { dirListWithFileType } from '../file-path/utils/dirListWithFileType';
+import { MyPInfos, MyStats, RedisJson_InfoGetterFunct } from '../types';
 import { immediateZalgo } from '../utils';
 import { getPathStatsInfos } from './tools';
 import { tedis_jsonGet, tedis_jsonSet } from './tools/tedis_json';

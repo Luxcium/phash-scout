@@ -1,4 +1,4 @@
-import { zalgo } from '../../core/utils/restrainingZalgo/zalgo';
+import { zalgo } from './restrainingZalgo';
 
 zalgo;
 

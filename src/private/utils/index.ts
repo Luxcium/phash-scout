@@ -1,23 +1,15 @@
-import { getDevFilename } from '../../core/tools/getDevFileName';
+import { getSign } from './getSign';
+import { isArray } from './isArray';
+import { zalgo, zalgo1, zalgo2, zalgo3 } from './restrainingZalgo';
 import {
   immediateZalgo,
-  isAllArrays,
   nextTickZalgo,
   restrainingZalgo,
   timeoutZalgo,
-  zalgo,
-  zalgo1,
-  zalgo2,
-  zalgo3,
-} from '../../core/utils';
-import { isDevEnv } from '../../core/utils/isDevEnv';
-import { NODE_ENV } from '../../core/utils/NODE_ENV';
-
-import { getSign } from './getSign';
-import { isArray } from './isArray';
+} from './utils';
 
 export { isArray } from './isArray';
-export { getDevFilename, getSign, isDevEnv, NODE_ENV };
+export { getSign };
 export {
   immediateZalgo,
   nextTickZalgo,
@@ -30,10 +22,6 @@ export {
 };
 
 export const utils = {
-  getDevFilename,
   getSign,
-  isAllArrays,
   isArray,
-  isDevEnv,
-  NODE_ENV,
 };

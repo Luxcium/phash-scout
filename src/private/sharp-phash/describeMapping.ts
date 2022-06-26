@@ -1,5 +1,5 @@
-import { isArray } from '../../core/utils';
 import { Bg } from '../file-path/types';
+import { isArray } from '../utils';
 
 export function describeMapping<T>(fn: <R>(val: T) => R) {
   return (mapable: T[] | Bg<T>) => {
