@@ -1,5 +1,5 @@
-import { isDevEnv } from '../../private_/utils/isDevEnv';
-import { splitedHead, splitedTail } from '../../private_/utils/split';
+import { isDevEnv } from '../utils/isDevEnv';
+import { splitedHead, splitedTail } from '../utils/split';
 
 export function getDevFilename(out = 'out') {
   return (__filename_: string = __filename) =>
