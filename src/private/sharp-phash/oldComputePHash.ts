@@ -1,9 +1,9 @@
-import { notExcluded } from '../../private/file-path/tools/notExclude';
+import { notExcluded } from '../file-path/tools/notExclude';
 import {
   Excluded,
   PathWithStats,
   WithPHash,
-} from '../../private/file-path/types';
+} from '../file-path/types';
 import { phashNow } from './phashNow';
 
 export async function oldComputePHash<T extends PathWithStats>(

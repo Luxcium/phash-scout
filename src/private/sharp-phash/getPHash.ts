@@ -2,8 +2,8 @@ import {
   Excluded,
   PathWithStats,
   ValidPHash,
-} from '../../private/file-path/types';
-import { Bg } from '../../private/file-path/types/Bg';
+} from '../file-path/types';
+import { Bg } from '../file-path/types/Bg';
 import { computePHash } from './computePHash';
 
 export function getPhash<T extends PathWithStats>(list: Bg<T>) {

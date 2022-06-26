@@ -1,11 +1,11 @@
 import { statSync } from 'fs';
-import { notExcluded, notNull } from '../../private/file-path/tools/notExclude';
+import { notExcluded, notNull } from '../file-path/tools/notExclude';
 import {
   Bg,
   Excluded,
   PathWithStats,
   ValidPHash,
-} from '../../private/file-path/types';
+} from '../file-path/types';
 import { uniqueAddToObj } from '../img-scout/commands/uniqueAddToObj';
 import { titleBuilder } from './titleBuilder';
 import { Strange } from './types';

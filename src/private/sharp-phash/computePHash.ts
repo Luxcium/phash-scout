@@ -1,9 +1,9 @@
-import { notExcluded } from '../../private/file-path/tools/notExclude';
+import { notExcluded } from '../file-path/tools/notExclude';
 import {
   Excluded,
   PathWithStats,
   ValidPHash,
-} from '../../private/file-path/types';
+} from '../file-path/types';
 import { immediateZalgo } from '../utils/utils';
 import { phashNow } from './phashNow';
 
