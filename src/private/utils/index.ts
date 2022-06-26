@@ -2,7 +2,6 @@ import { getDevFilename } from '../../core/tools/getDevFileName';
 import {
   immediateZalgo,
   isAllArrays,
-  isArray,
   nextTickZalgo,
   restrainingZalgo,
   timeoutZalgo,
@@ -13,24 +12,12 @@ import {
 } from '../../core/utils';
 import { isDevEnv } from '../../core/utils/isDevEnv';
 import { NODE_ENV } from '../../core/utils/NODE_ENV';
-import {
-  splitedHead,
-  splitedTail,
-  splitHead,
-  splitTail,
-} from '../../core/utils/split';
-import { getSign } from './getSign';
 
-export {
-  getDevFilename,
-  getSign,
-  isDevEnv,
-  NODE_ENV,
-  splitedHead,
-  splitedTail,
-  splitHead,
-  splitTail,
-};
+import { getSign } from './getSign';
+import { isArray } from './isArray';
+
+export { isArray } from './isArray';
+export { getDevFilename, getSign, isDevEnv, NODE_ENV };
 export {
   immediateZalgo,
   nextTickZalgo,
@@ -49,8 +36,4 @@ export const utils = {
   isArray,
   isDevEnv,
   NODE_ENV,
-  splitedHead,
-  splitedTail,
-  splitHead,
-  splitTail,
 };

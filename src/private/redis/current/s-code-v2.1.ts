@@ -1,8 +1,8 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
 import { readdir } from 'fs/promises';
 import { BASE_SRC_PATH1 } from '../../../constants/devPaths';
-import { isArray } from '../../../core/utils/isArray';
 import type { RedisClientType } from '../../types';
+import { isArray } from '../../utils';
 import { redisCreateClient } from '../tools';
 import { getFileInfos } from './getFileInfos';
 import { getPathsObj } from './getPathsObj';
@@ -137,7 +137,7 @@ export async function writerTool(R: RedisClientType, options: any) {
     if (keywords.length > 0) {
       W.push(
         Promise.allSettled(
-          keywords.map(item =>
+          keywords.map((item: any) =>
             R.ZINCRBY('${X4D}:SETS:KEYWORDS:RANKING', 1, item)
           )
         )
