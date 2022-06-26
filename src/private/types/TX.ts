@@ -3,7 +3,7 @@ import type { PQuerryAndAdd, QueryResultItem } from '../img-scout/types';
 // /home/luxcium/projects/parallel-mapping/src/utilities/files/file-path/types/index.ts
 // /home/luxcium/projects/parallel-mapping/src/../../utilities/files/file-path/types
 import { FALSY } from '../../core/types/Falsy';
-import { N, S } from '../../core/types/IQueryListPhash';
+import { N, S } from './IQueryListPhash';
 
 export type TX = Promise<{
   transact: Promise<QueryResultItem[]>;

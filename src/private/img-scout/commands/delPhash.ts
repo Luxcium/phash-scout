@@ -1,4 +1,4 @@
-import type { N, S } from '../../../core/types';
+import { N, S } from '../../types';
 import { IMGSCOUT } from '../tools';
 import { syncPhash } from './syncPhash';
 

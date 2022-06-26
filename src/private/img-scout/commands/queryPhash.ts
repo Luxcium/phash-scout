@@ -1,5 +1,5 @@
 import { RADIUS } from '../../../constants/radius';
-import type { S } from '../../../core/types';
+import type { S } from '../../types';
 import { immediateZalgo } from '../../utils';
 import { IMGSCOUT } from '../tools';
 import { syncPhash } from './syncPhash';

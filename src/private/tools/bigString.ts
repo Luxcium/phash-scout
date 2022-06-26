@@ -1,4 +1,4 @@
-import { S } from '../../core/types/IQueryListPhash';
+import { S } from '../types/IQueryListPhash';
 import { immediateZalgo } from '../utils';
 
 export function bigString(str: S): S;

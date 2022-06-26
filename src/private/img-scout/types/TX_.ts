@@ -1,5 +1,5 @@
 import { QueryResultItem } from '.';
-import { N, S } from '../../../core/types/IQueryListPhash';
+import { N, S } from '../../types/IQueryListPhash';
 import { CurrentPath } from '../../file-path/types';
 
 export type TX_ = Promise<{
