@@ -8,8 +8,8 @@ import {
   MyStats,
   RedisJson_InfoGetterFunct,
 } from '../../core/types';
-import { fsTools } from '../../private/file-path/tools';
-import { dirListWithFileType } from '../../private/file-path/utils/dirListWithFileType';
+import { fsTools } from '../file-path/tools';
+import { dirListWithFileType } from '../file-path/utils/dirListWithFileType';
 import { immediateZalgo } from '../utils';
 import { getPathStatsInfos } from './tools';
 import { tedis_jsonGet, tedis_jsonSet } from './tools/tedis_json';

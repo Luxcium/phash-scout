@@ -1,5 +1,5 @@
-import { notExcluded } from '../../private/file-path/tools/notExclude';
-import { Bg } from '../../private/file-path/types';
+import { notExcluded } from '../file-path/tools/notExclude';
+import { Bg } from '../file-path/types';
 import { QueryResultObject } from '../img-scout/types';
 import { linkSync } from './linkSync';
 import { Strange } from './types';

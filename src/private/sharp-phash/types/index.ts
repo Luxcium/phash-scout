@@ -1,4 +1,4 @@
-export type { TX } from '../../../core/types/TX';
+export type { TX } from '../../types/TX';
 export type { FileType } from './FileType';
 export type { OldStrange } from './OldStrange';
 export type { PHashedPath } from './PHashedPath';

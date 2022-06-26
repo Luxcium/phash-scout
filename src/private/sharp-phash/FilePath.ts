@@ -1,4 +1,4 @@
-import { FileType } from '../../private/file-path/types';
+import { FileType } from '../file-path/types';
 
 export type FilePath<Bool extends boolean = true | false> = {
   fileName: string;

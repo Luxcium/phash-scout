@@ -8,7 +8,7 @@ import {
   WithFileType,
   WithFullPath,
   WithPathToFile,
-} from '../../../private/file-path/types';
+} from '../../file-path/types';
 import { FileType } from '../../sharp-phash/types';
 import { WithFileName, withKey } from './withKey';
 

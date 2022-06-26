@@ -1,4 +1,4 @@
-import { Bg } from '../../private/file-path/types';
+import { Bg } from '../file-path/types';
 
 export function endAsyncSpark(R: any, errorMessage: string) {
   return async (bg: Bg<any>) => {

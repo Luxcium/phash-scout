@@ -1,5 +1,5 @@
 import { P } from '../../../core/types';
-import { isA_Promise } from '../../../private/file-path/tools';
+import { isA_Promise } from '../../file-path/tools';
 import {
   QueryResultItem,
   QueryResultObject,

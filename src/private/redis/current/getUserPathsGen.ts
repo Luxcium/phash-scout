@@ -1,5 +1,5 @@
 import { devPaths } from '../../../constants/devPaths';
-import { getDirsSync } from '../../../private/file-path/tools';
+import { getDirsSync } from '../../file-path/tools';
 
 export function getUserPathsGen(STEPS: number) {
   return [devPaths.PATH1]

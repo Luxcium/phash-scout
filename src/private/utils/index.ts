@@ -1,3 +1,4 @@
+import { getDevFilename } from '../../core/tools/getDevFileName';
 import {
   immediateZalgo,
   isAllArrays,
@@ -10,11 +11,15 @@ import {
   zalgo2,
   zalgo3,
 } from '../../core/utils';
-import { getDevFilename } from './getDevFileName';
+import { isDevEnv } from '../../core/utils/isDevEnv';
+import { NODE_ENV } from '../../core/utils/NODE_ENV';
+import {
+  splitedHead,
+  splitedTail,
+  splitHead,
+  splitTail,
+} from '../../core/utils/split';
 import { getSign } from './getSign';
-import { isDevEnv } from './isDevEnv';
-import { NODE_ENV } from './NODE_ENV';
-import { splitedHead, splitedTail, splitHead, splitTail } from './split';
 
 export {
   getDevFilename,

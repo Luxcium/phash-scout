@@ -4,8 +4,8 @@
 //   PathWithStats,
 //   WithExclude,
 //   WithPHash,
-// } from '../../private/file-path/types';
-// import { Bg } from '../../private/file-path/types/Bg';
+// } from '../file-path/types';
+// import { Bg } from '../file-path/types/Bg';
 // import { filterExtensions } from './filterExtensions';
 // import { listFiles } from './listFiles';
 // import { oldGetPhash } from './oldGetPhash';

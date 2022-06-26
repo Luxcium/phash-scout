@@ -1,9 +1,9 @@
 import { CURRENT_PATH } from '../../constants/radius';
 import { BoxedGenerator } from '../../core';
 import { PhashNow, TX } from '../../core/types';
-import { getCurrentPaths } from '../../private/file-path/tools/dirListWithFileType';
-import { CurrentPath } from '../../private/file-path/types';
-import { filter } from '../../private/file-path/utils';
+import { getCurrentPaths } from '../file-path/tools/dirListWithFileType';
+import { CurrentPath } from '../file-path/types';
+import { filter } from '../file-path/utils';
 import { phashNow } from '../../packages/phash-now/phashNow';
 import { redisCreateClient } from '../redis/tools';
 import { uniqueAdd } from './img-scout/querryAndAdd';

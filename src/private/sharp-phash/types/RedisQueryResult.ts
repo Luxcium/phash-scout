@@ -8,7 +8,7 @@ import {
   NotExcluded,
   PathAndStats,
   PathWithStats,
-} from '../../../private/file-path/types';
+} from '../../file-path/types';
 import { QueryResultObject } from '../../img-scout/types';
 
 export type RedisQueryResult<Bool extends boolean = true | false> = {

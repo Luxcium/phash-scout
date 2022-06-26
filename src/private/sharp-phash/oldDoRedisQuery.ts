@@ -1,5 +1,5 @@
 import { statSync } from 'fs';
-import { notExcluded, notNull } from '../../private/file-path/tools/notExclude';
+import { notExcluded, notNull } from '../file-path/tools/notExclude';
 import {
   Bg,
   WithBaseName,
@@ -8,7 +8,7 @@ import {
   WithExtname,
   WithFullPath,
   WithPHash,
-} from '../../private/file-path/types';
+} from '../file-path/types';
 import { uniqueAddToObj } from '../img-scout/commands/uniqueAddToObj';
 import { QueryResultItem, QueryResultObject } from '../img-scout/types';
 import { immediateZalgo } from '../utils';
