@@ -12,8 +12,8 @@ import {
   zalgo3,
 } from './restrainingZalgo';
 
+export { getCurrentPath } from '../../private_/utils/paths/getCurrentPath';
 export { nullOrDefined } from './nullOrDefined';
-export { getCurrentPath } from './paths/getCurrentPath';
 export {
   cpuCount,
   immediateZalgo,

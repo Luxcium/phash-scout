@@ -29,7 +29,6 @@ export type { PromiseMapper2 } from './PromiseMapper2';
 export type { RedisClientType } from './RedisClientType';
 export type { RedisCStrOptions } from './RedisCStrOptions';
 export type { ThenMapper } from './ThenMapper';
-export type { TX } from './TX';
 export type { WorkerArgs } from './WorkerArgs';
 export type { WorkerData } from './WorkerData';
 export type { WorkerOptions } from './WorkerOptions';
