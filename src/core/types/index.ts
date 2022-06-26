@@ -1,6 +1,5 @@
 export type { CPU_MapperRetunType } from './CPU_MapperRetunType';
 export type { DirentWithFileType } from './DirentWithFileType';
-export type { FALSY } from './Falsy';
 export type { IParallelMapping } from './IParallelMapping';
 export type { IParallelMappingOptions } from './IParallelMappingOptions';
 export type { ItemMapperArgs } from './ItemMapperArgs';
@@ -10,16 +9,6 @@ export type { Mapper } from './Mapper';
 export type { MapperArgs } from './MapperArgs';
 export type { MapperPromise } from './MapperPromise';
 export type { ParallelProcessMapperFactory } from './ParallelProcessMapperFactory';
-export type {
-  MyPInfos,
-  MyStats,
-  RedisJson_DirentInfoGetterFunct,
-  RedisJson_InfoGetterFunct,
-  RedisJson_PathInfoGetterFunct,
-  RedisJson_PathStatsTuple,
-  RedisJson_StatsInfoGetterFunct,
-} from './PathStatsGetter';
-export type { PhashNow } from './PhashNow';
 export type { ProcessMapperArgs } from './ProcessMapperArgs';
 export type { PromiseMapper2 } from './PromiseMapper2';
 export type { ThenMapper } from './ThenMapper';
