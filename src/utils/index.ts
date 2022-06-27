@@ -8,6 +8,18 @@ import {
   timeoutZalgo,
 } from './utils';
 
+export {
+  filter,
+  filterBlockDevices,
+  filterCharacterDevices,
+  filterDirectories,
+  filterFIFOs,
+  filterFiles,
+  filterSockets,
+  filterSymbolicLinks,
+} from './file-filter';
+export { getCurrentPath } from './getCurrentPath';
+export { getPathWithStats } from './getPathWithStats';
 export { isArray } from './isArray';
 export { getSign };
 export {

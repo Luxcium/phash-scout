@@ -10,7 +10,8 @@ import {
   SocketPath,
   SymbolicLinkPath,
   UnknownTypePath,
-} from '../../file-path/types';
+} from '../../types';
+// import { FilePath } from '../../types/CurrentPath';
 import { FileType } from '../../types/Enums/FileTypeEnum';
 
 /** @deprecated */

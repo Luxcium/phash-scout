@@ -1,4 +1,4 @@
-import type { CurrentPath } from '../file-path/types';
+import { CurrentPath } from './FileCurrentPath';
 
 export type PHashedTuple = [
   pHash: string | null,

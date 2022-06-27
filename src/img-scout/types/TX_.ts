@@ -1,6 +1,6 @@
 import { QueryResultItem } from '.';
+import { CurrentPath } from '../../types';
 import { N, S } from '../../types/IQueryListPhash';
-import { CurrentPath } from '../../file-path/types';
 
 export type TX_ = Promise<{
   transact: Promise<QueryResultItem[]>;

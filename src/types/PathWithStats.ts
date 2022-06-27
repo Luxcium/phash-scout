@@ -1,5 +1,5 @@
-import { CurrentPath } from './CurrentPath';
 import { CurrentPathError } from './file-path-types';
+import { CurrentPath } from './FileCurrentPath';
 import { GetStats } from './GetStats';
 import { PathAndStats } from './PathAndStats';
 

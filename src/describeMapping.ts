@@ -1,4 +1,4 @@
-import { Bg } from './file-path/types';
+import { Bg } from './types';
 import { isArray } from './utils';
 
 export function describeMapping<T>(fn: <R>(val: T) => R) {

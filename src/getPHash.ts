@@ -1,6 +1,6 @@
 import { computePHash } from './computePHash';
-import { Excluded, PathWithStats, ValidPHash } from './file-path/types';
-import { Bg } from './file-path/types/Bg';
+import { Excluded, PathWithStats, ValidPHash } from './types';
+import { Bg } from './types/Bg';
 
 export function getPhash<T extends PathWithStats>(list: Bg<T>) {
   return getPHash(list);

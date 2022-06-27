@@ -1,8 +1,8 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
-import { getPathWithStats } from './file-path';
-import { newGetPathWithStats } from './file-path/getPathWithStats';
-import type { Bg, PathAndStats, PathWithStats } from './file-path/types';
-import type { FileType } from './types/FileType';
+import type { Bg, PathAndStats, PathWithStats } from './types';
+import { FileTypeInfos } from './types/FileTypeInfos';
+import { getPathWithStats } from './utils';
+import { newGetPathWithStats } from './utils/getPathWithStats';
 
 export function listFiles(
   folder: string,
@@ -25,9 +25,11 @@ export function listFiles(
 }
 
 export function listFilesFromArray<T extends boolean = false>(
-  list: FileType<true>[]
+  list: FileTypeInfos<true>[]
 ): Bg<Promise<PathAndStats>>;
-export function listFilesFromArray<T extends boolean>(list: FileType<T>[]) {
+export function listFilesFromArray<T extends boolean>(
+  list: FileTypeInfos<T>[]
+) {
   const bgList = list.map(item => listFiles(item.folder, item.withStats));
   return BoxedGenerator.from(...bgList);
 }

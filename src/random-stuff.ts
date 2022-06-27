@@ -1,7 +1,6 @@
-import type { Bg } from './file-path/types';
+import type { Bg } from './types';
 
 export const count = { index1: 1 };
-
 
 export function composer<T, A, R>(fn1: (val: A) => R, fn2: (val: T) => A) {
   return (x: T) => fn1(fn2(x));

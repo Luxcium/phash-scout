@@ -1,9 +1,22 @@
-import { statSync } from 'fs';
-import { notExcluded, notNull } from './file-path/tools/notExclude';
-import { Bg, Excluded, PathWithStats, ValidPHash } from './file-path/types';
-import { uniqueAddToObj } from './img-scout/commands/uniqueAddToObj';
+import { statSync } from 'fs-extra';
+import { uniqueAddToObj } from './img-scout/commands';
+import { QueryResultObject } from './img-scout/types';
 import { titleBuilder } from './titleBuilder';
-import { Strange } from './types';
+import { notExcluded, notNull } from './tools/notExclude';
+import {
+  Bg,
+  CurrentPathError,
+  Excluded,
+  FilePathInfo,
+  GetStats,
+  IsExcluded,
+  IsNotValidPHash,
+  IsValidPHash,
+  NotExcluded,
+  PathAndStats,
+  PathWithStats,
+  ValidPHash,
+} from './types';
 
 export function doRedisQuery(
   R: any,
@@ -37,7 +50,16 @@ export function doRedisQuery(
         }
         return null;
       };
-      const strange: Strange<true | false> = {
+      const strange: {
+        getChild: () => Promise<
+          PathWithStats | PathAndStats | CurrentPathError
+        >[];
+        getStats: () => Promise<GetStats>;
+        pHashValue: () => Promise<
+          (NotExcluded & IsValidPHash) | (IsExcluded & IsNotValidPHash)
+        >;
+        queryResult: () => Promise<QueryResultObject[] | null>;
+      } & FilePathInfo<boolean> = {
         ...paths,
         queryResult,
       };

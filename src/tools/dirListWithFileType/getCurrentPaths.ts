@@ -1,5 +1,5 @@
-import { immediateZalgo } from '../../../utils';
 import { CurrentPath } from '../../types';
+import { immediateZalgo } from '../../utils';
 import { isA_Promise } from '../isA_Promise';
 import { currentPath } from './currentPath';
 import { dirListWithFileType } from './dirListWithFileType';

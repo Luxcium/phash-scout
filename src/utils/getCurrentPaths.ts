@@ -1,6 +1,6 @@
-import { dirListWithFileType } from '../tools/dirListWithFileType';
-import { isA_Promise } from '../tools/isA_Promise';
+import { isA_Promise } from '../tools';
 import { CurrentPath, DirentWithFileType } from '../types';
+import { dirListWithFileType } from './dirListWithFileType';
 import { getCurrentPath } from './getCurrentPath';
 
 export const currentPath = (folderPath: string) => (f: DirentWithFileType) =>

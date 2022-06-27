@@ -1,4 +1,4 @@
-import { getRawDirList } from '..';
+import { getRawDirList } from '../../tools';
 import { DirentWithFileType } from '../../types';
 import { getDirListFileTypes } from '../getDirListWithFileType';
 

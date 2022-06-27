@@ -1,4 +1,5 @@
 import {
+  FileType,
   WithBaseName,
   WithDir,
   WithExclude,
@@ -7,9 +8,8 @@ import {
   WithFileExtname,
   WithFileType,
   WithFullPath,
-  WithPathToFile,
-} from '../../file-path/types';
-import { FileType } from '../../types';
+} from '../../types';
+// import { WithPathToFile } from '../../types/CurrentPath';
 import { WithFileName, withKey } from './withKey';
 
 // WithFileName &
@@ -25,7 +25,7 @@ import { WithFileName, withKey } from './withKey';
 
 /** @deprecated use {@link withDir} instead */
 export function withPathToFile<B extends {} = {}>(base: B, value: string) {
-  return withKey<B, WithPathToFile>('dir', base, value);
+  return withKey<B, WithDir>('dir', base, value);
 }
 
 export function withFileName<B extends {} = {}>(base: B, value: string) {

@@ -1,4 +1,4 @@
-import { WithFileType } from '../CurrentPath';
+import { WithFileType } from '../FileCurrentPath';
 
 export enum FileType {
   Directory = 'Directory',

@@ -1,7 +1,7 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
 import { computePHash } from './computePHash';
-import { filterDirectories } from './file-path/utils';
 import { listFiles } from './listFiles';
+import { filterDirectories } from './utils';
 
 let count = 0;
 let count1 = 0;

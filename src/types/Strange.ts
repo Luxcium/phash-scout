@@ -1,15 +1,11 @@
-import {
-  CurrentPathError,
-  GetStats,
-  IsExcluded,
-  IsNotValidPHash,
-  IsValidPHash,
-  NotExcluded,
-  PathAndStats,
-  PathWithStats,
-} from '../file-path/types';
 import { QueryResultObject } from '../img-scout/types';
+import { CurrentPathError } from './file-path-types';
 import { FilePathInfo } from './FilePathInfo';
+import { GetStats } from './GetStats';
+import { PathAndStats } from './PathAndStats';
+import { PathWithStats } from './PathWithStats';
+import { IsNotValidPHash, IsValidPHash } from './ValidPHash';
+import { IsExcluded, NotExcluded } from './WithExclude';
 
 export type Strange<Bool extends boolean = true | false> = {
   getChild: () => Promise<PathWithStats | PathAndStats | CurrentPathError>[];

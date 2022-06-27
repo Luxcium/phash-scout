@@ -1,10 +1,10 @@
-import { stat } from 'fs/promises';
-import { immediateZalgo } from '../utils';
-import { FileTypes } from './tools';
-import type { GetStats, PathAndStats, PathWithStats } from './types';
-import { dirListWithFileType } from './utils/dirListWithFileType';
-import { getChildPaths } from './utils/getChildPaths';
-import { getCurrentPath } from './utils/getCurrentPath';
+import { stat } from 'fs-extra';
+import { FileTypes } from '../tools';
+import { GetStats, PathAndStats, PathWithStats } from '../types';
+import { dirListWithFileType } from './dirListWithFileType';
+import { getChildPaths } from './getChildPaths';
+import { getCurrentPath } from './getCurrentPath';
+import { immediateZalgo } from './restrainingZalgo';
 
 const humanSize = require('human-size');
 

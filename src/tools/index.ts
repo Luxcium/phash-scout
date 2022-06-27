@@ -1,5 +1,5 @@
-import { devPaths } from '../../constants/devPaths';
-import { filesTypeList } from '../../constants/filesTypes';
+import { devPaths } from '../constants/devPaths';
+import { filesTypeList } from '../constants/filesTypes';
 import {
   currentPath,
   dirListWithFileType,

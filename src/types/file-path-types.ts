@@ -1,5 +1,5 @@
 import { FileType } from '../tools';
-import { CurrentPath, WithFileType } from './CurrentPath';
+import { CurrentPath, WithFileType } from './FileCurrentPath';
 
 export type WithTypeDirectory = {
   type: FileType.Directory;

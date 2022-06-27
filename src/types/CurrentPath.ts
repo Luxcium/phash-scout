@@ -42,40 +42,40 @@ export type WithFileType = {
 };
 
 /** @deprecated */
-export type CurrentPath = WithFileName &
+export type CurrentPathOld = WithFileName &
   WithPathToFile &
   WithFullPath &
   WithFileType;
 /** @deprecated */
-export type BlockDevicePath = CurrentPath & {
+export type BlockDevicePath = CurrentPathOld & {
   readonly type: FileType.BlockDevice;
 };
 /** @deprecated */
-export type CharacterDevicePath = CurrentPath & {
+export type CharacterDevicePath = CurrentPathOld & {
   readonly type: FileType.CharacterDevice;
 };
 /** @deprecated */
-export type DirectoryPath = CurrentPath & {
+export type DirectoryPath = CurrentPathOld & {
   readonly type: FileType.Directory;
 };
 /** @deprecated */
-export type FIFOPath = CurrentPath & {
+export type FIFOPath = CurrentPathOld & {
   readonly type: FileType.FIFO;
 };
 /** @deprecated */
-export type FilePath = CurrentPath & {
+export type FilePath = CurrentPathOld & {
   readonly type: FileType.File;
 };
 /** @deprecated */
-export type SocketPath = CurrentPath & {
+export type SocketPath = CurrentPathOld & {
   readonly type: FileType.Socket;
 };
 /** @deprecated */
-export type SymbolicLinkPath = CurrentPath & {
+export type SymbolicLinkPath = CurrentPathOld & {
   readonly type: FileType.SymbolicLink;
 };
 
 /** @deprecated */
-export type UnknownTypePath = CurrentPath & {
+export type UnknownTypePath = CurrentPathOld & {
   readonly type: FileType.Unknown;
 };
