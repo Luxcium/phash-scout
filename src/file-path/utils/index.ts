@@ -8,5 +8,5 @@ export {
   filterFiles,
   filterSockets,
   filterSymbolicLinks,
-} from './filter';
+} from './file-filter';
 export { getCurrentPath } from './getCurrentPath';
