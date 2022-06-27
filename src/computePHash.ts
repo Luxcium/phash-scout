@@ -1,11 +1,7 @@
-import { notExcluded } from '../file-path/tools/notExclude';
-import {
-  Excluded,
-  PathWithStats,
-  ValidPHash,
-} from '../file-path/types';
-import { immediateZalgo } from '../utils/utils';
+import { notExcluded } from './file-path/tools/notExclude';
+import { Excluded, PathWithStats, ValidPHash } from './file-path/types';
 import { phashNow } from './phashNow';
+import { immediateZalgo } from './utils/utils';
 
 export function computePHash<T extends PathWithStats>(paths: T) {
   const result: PathWithStats & {

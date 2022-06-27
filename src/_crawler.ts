@@ -1,6 +1,6 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
-import { filterDirectories } from '../file-path/utils';
 import { computePHash } from './computePHash';
+import { filterDirectories } from './file-path/utils';
 import { listFiles } from './listFiles';
 
 let count = 0;
@@ -11,7 +11,6 @@ let childCount = 0;
 const step1 = listFiles(
   '/media/luxcium/D:\\ Archive locale/import/GAYBOYSTUBE/users'
 );
-// .map(async e => console.log(e)) .map(async e =>e)
 step1
   .map(async pr => (await pr).getChild().map(async e => console.log(await e)))
   .spark();

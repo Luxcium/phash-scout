@@ -1,5 +1,5 @@
 import { statSync } from 'fs';
-import { notExcluded, notNull } from '../file-path/tools/notExclude';
+import { notExcluded, notNull } from './file-path/tools/notExclude';
 import {
   Bg,
   WithBaseName,
@@ -8,11 +8,11 @@ import {
   WithExtname,
   WithFullPath,
   WithPHash,
-} from '../file-path/types';
-import { uniqueAddToObj } from '../img-scout/commands/uniqueAddToObj';
-import { QueryResultItem, QueryResultObject } from '../img-scout/types';
-import { OldStrange } from '../types';
-import { immediateZalgo } from '../utils';
+} from './file-path/types';
+import { uniqueAddToObj } from './img-scout/commands/uniqueAddToObj';
+import { QueryResultItem, QueryResultObject } from './img-scout/types';
+import { OldStrange } from './types';
+import { immediateZalgo } from './utils';
 import { titleBuilder } from './titleBuilder';
 
 export function oldDoRedisQuery(

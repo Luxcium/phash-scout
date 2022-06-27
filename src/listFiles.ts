@@ -1,8 +1,8 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
-import { getPathWithStats } from '../file-path';
-import { newGetPathWithStats } from '../file-path/getPathWithStats';
-import type { Bg, PathAndStats, PathWithStats } from '../file-path/types';
-import type { FileType } from '../types/FileType';
+import { getPathWithStats } from './file-path';
+import { newGetPathWithStats } from './file-path/getPathWithStats';
+import type { Bg, PathAndStats, PathWithStats } from './file-path/types';
+import type { FileType } from './types/FileType';
 
 export function listFiles(
   folder: string,

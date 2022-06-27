@@ -1,4 +1,4 @@
-import { IQueryListPhash } from '../types/IQueryListPhash';
+import type { IQueryListPhash } from './types';
 
 export async function readListHtml(listing: IQueryListPhash) {
   const queryList = listing.list;

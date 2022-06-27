@@ -1,6 +1,6 @@
-import { validExts } from '../constants/validExts';
-import { PathWithStats } from '../file-path/types';
-import { Bg } from '../file-path/types/Bg';
+import { validExts } from './constants/validExts';
+import { PathWithStats } from './file-path/types';
+import { Bg } from './file-path/types/Bg';
 import { oldFilterExts } from './oldFilterExts';
 
 export function oldFilterExtensions(

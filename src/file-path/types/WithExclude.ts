@@ -8,9 +8,7 @@ export type NotExcluded = {
 export type WithExclude =
   | IsExcluded
   | NotExcluded
-  | {
-      exclude: boolean;
-    };
+  
 export type Excluded<T extends true | false> = T extends true
   ? IsExcluded
   : NotExcluded;

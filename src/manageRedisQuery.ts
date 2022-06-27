@@ -1,8 +1,8 @@
-import { notExcluded } from '../file-path/tools/notExclude';
-import { Bg } from '../file-path/types';
-import { QueryResultObject } from '../img-scout/types';
-import { Strange } from '../types';
+import { notExcluded } from './file-path/tools/notExclude';
+import { Bg } from './file-path/types';
+import { QueryResultObject } from './img-scout/types';
 import { linkSync } from './linkSync';
+import { Strange } from './types';
 
 export const count2 = { a1: 0, b: 0, len: 0 };
 

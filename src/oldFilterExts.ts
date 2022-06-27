@@ -1,7 +1,7 @@
-import { validExts } from '../constants/validExts';
-import { PathWithStats } from '../file-path/types';
-import { Bg } from '../file-path/types/Bg';
-import { immediateZalgo } from '../utils';
+import { validExts } from './constants/validExts';
+import { PathWithStats } from './file-path/types';
+import { Bg } from './file-path/types/Bg';
+import { immediateZalgo } from './utils';
 
 export function oldFilterExts<T extends PathWithStats>(
   list: Bg<Promise<T>>,

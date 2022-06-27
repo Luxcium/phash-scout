@@ -1,6 +1,6 @@
 import fs from 'fs';
-import { CURRENT_PATH } from '../../constants/radius';
-import { redisCreateClient } from '../../img-scout/tools';
+import { CURRENT_PATH } from '../constants/radius';
+import { redisCreateClient } from '../img-scout/tools';
 
 const phash = require('sharp-phash');
 

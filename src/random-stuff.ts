@@ -1,4 +1,4 @@
-import type { Bg } from '../file-path/types';
+import type { Bg } from './file-path/types';
 
 export const count = { index1: 1 };
 

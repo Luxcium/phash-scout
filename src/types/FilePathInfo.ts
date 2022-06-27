@@ -1,6 +1,6 @@
 import { FileType } from '../file-path/types';
 
-export type FilePath<Bool extends boolean = true | false> = {
+export type FilePathInfo<Bool extends boolean = true | false> = {
   fileName: string;
   extname: string;
   baseName: string;
