@@ -84,6 +84,7 @@ export type { RedisQueryResult } from './RedisQueryResult';
 export type { SplitPath } from './SplitPath';
 export type { Strange } from './Strange';
 export type { TX_ } from './TX_';
+export type { UnBoxedArray } from './UnBoxedArray';
 export type { IsNotValidPHash, IsValidPHash, ValidPHash } from './ValidPHash';
 export type {
   Excluded,
