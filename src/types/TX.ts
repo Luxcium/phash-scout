@@ -1,8 +1,8 @@
-import { CurrentPath, FALSY } from '.';
-import type { PQuerryAndAdd, QueryResultItem } from '../img-scout/types';
+import { CurrentPath, FALSY, QueryResultItem } from '.';
 // /home/luxcium/projects/parallel-mapping/src/utilities/files/file-path/types/index.ts
 // /home/luxcium/projects/parallel-mapping/src/../../utilities/files/file-path/types
 import { N, S } from './IQueryListPhash';
+import { PQuerryAndAdd } from './PQuerryAndAdd';
 
 export type TX = Promise<{
   transact: Promise<QueryResultItem[]>;

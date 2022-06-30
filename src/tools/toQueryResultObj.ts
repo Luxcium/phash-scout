@@ -1,6 +1,6 @@
-import { P } from '../../types';
 import { isA_Promise } from '../tools';
 import {
+  P,
   QueryResultItem,
   QueryResultObject,
   QueryResultSize,

@@ -3,9 +3,8 @@ import { ParsedPath } from 'path';
 import { Tedis } from 'tedis';
 import { devPaths } from '../constants/devPaths';
 
-import { getPathStatsInfos } from '../img-scout/tools';
-import { tedis_jsonGet, tedis_jsonSet } from '../img-scout/tools/tedis_json';
-import { fsTools } from '../tools';
+import { fsTools, getPathStatsInfos } from '../tools';
+import { tedis_jsonGet, tedis_jsonSet } from '../tools/tedis_json';
 import {
   DirentWithFileType,
   MyPInfos,

@@ -71,11 +71,19 @@ export type { PathWithStats } from './PathWithStats';
 export type { PHashedPath } from './PHashedPath';
 export type { PHashedTuple } from './PHashedTuple';
 export type { PhashNow } from './PhashNow';
+export type { PQuerryAndAdd } from './PQuerryAndAdd';
 export type { Pr } from './Pr';
+export type { QueryResult } from './QueryResult';
+export type { QueryResultItem } from './QueryResultItem';
+export type { QueryResultObject } from './QueryResultObject';
+export type { QueryResultSize } from './QueryResultSize';
+export type { RawQueryResult } from './RawQueryResult';
 export type { RedisClientType } from './RedisClientType';
 export type { RedisCStrOptions } from './RedisCStrOptions';
 export type { RedisQueryResult } from './RedisQueryResult';
+export type { SplitPath } from './SplitPath';
 export type { Strange } from './Strange';
+export type { TX_ } from './TX_';
 export type { IsNotValidPHash, IsValidPHash, ValidPHash } from './ValidPHash';
 export type {
   Excluded,

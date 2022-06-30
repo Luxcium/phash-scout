@@ -1,6 +1,5 @@
 import { statSync } from 'fs-extra';
-import { uniqueAddToObj } from './img-scout/commands';
-import { QueryResultObject } from './img-scout/types';
+import { uniqueAddToObj } from './commands';
 import { titleBuilder } from './titleBuilder';
 import { notExcluded, notNull } from './tools/notExclude';
 import {
@@ -15,6 +14,7 @@ import {
   NotExcluded,
   PathAndStats,
   PathWithStats,
+  QueryResultObject,
   ValidPHash,
 } from './types';
 

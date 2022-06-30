@@ -1,5 +1,4 @@
 import { FileType } from '.';
-import { QueryResultObject } from '../img-scout/types';
 import {
   CurrentPathError,
   GetStats,
@@ -9,6 +8,7 @@ import {
   NotExcluded,
   PathAndStats,
   PathWithStats,
+  QueryResultObject,
 } from '../types';
 
 export type RedisQueryResult<Bool extends boolean = true | false> = {

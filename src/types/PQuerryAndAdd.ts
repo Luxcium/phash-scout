@@ -1,4 +1,4 @@
-import { S } from '../../types/IQueryListPhash';
+import { S } from './IQueryListPhash';
 
 export type PQuerryAndAdd = {
   R: any;

@@ -1,5 +1,5 @@
-import { N, S } from '../../types';
 import { IMGSCOUT } from '../tools';
+import { N, S } from '../types';
 import { syncPhash } from './syncPhash';
 
 export async function delPhash(R: any, k: S, id: N, failSilently = true) {

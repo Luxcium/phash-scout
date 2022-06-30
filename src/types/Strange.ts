@@ -1,4 +1,4 @@
-import { QueryResultObject } from '../img-scout/types';
+import { QueryResultObject } from '../types';
 import { CurrentPathError } from './file-path-types';
 import { FilePathInfo } from './FilePathInfo';
 import { GetStats } from './GetStats';

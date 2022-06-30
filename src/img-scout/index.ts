@@ -5,7 +5,7 @@ import { transformArguments as QUERY } from './QUERY';
 import { transformArguments as SIZE } from './SIZE';
 import { transformArguments as SYNC } from './SYNC';
 
-export { delPhash, delPhashKey } from './commands/delPhash';
+export { delPhash, delPhashKey } from '../commands/delPhash';
 
 export const imageScout = {
   ADD,

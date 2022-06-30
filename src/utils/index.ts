@@ -20,7 +20,17 @@ export {
 } from './file-filter';
 export { getCurrentPath } from './getCurrentPath';
 export { getPathWithStats } from './getPathWithStats';
+export {
+  getExt,
+  getFile,
+  getGroup,
+  getHSize,
+  getPath,
+  getSize,
+} from './getSplit';
+export { hasSameTitleInclude } from './hasSameTitleInclude';
 export { isArray } from './isArray';
+export { shiftTitle } from './shiftTitle';
 export { getSign };
 export {
   immediateZalgo,

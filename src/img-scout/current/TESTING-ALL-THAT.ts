@@ -2,10 +2,14 @@ import { BoxedGenerator } from '@luxcium/boxed-list';
 import { statSync } from 'fs-extra';
 import path from 'path';
 import { devPaths } from '../../constants/devPaths';
-import { getDirsSync, getFilesAsync, getListing } from '../../tools';
+import {
+  getDirsSync,
+  getFilesAsync,
+  getListing,
+  redisCreateClient,
+} from '../../tools';
 import { immediateZalgo } from '../../utils';
 import { dirListWithFileType } from '../../utils/dirListWithFileType';
-import { redisCreateClient } from '../tools';
 import { replaceStr } from './replaceStr';
 
 const SPARK = true;
