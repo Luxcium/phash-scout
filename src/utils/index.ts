@@ -30,6 +30,7 @@ export {
 } from './getSplit';
 export { hasSameTitleInclude } from './hasSameTitleInclude';
 export { isArray } from './isArray';
+export { replaceStr } from './replaceStr';
 export { shiftTitle } from './shiftTitle';
 export { getSign };
 export {
