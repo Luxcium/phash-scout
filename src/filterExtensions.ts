@@ -8,7 +8,7 @@ export function filterExtensions(
   return <T extends PathWithStats>(list: Bg<T>) => filterExts(list, validExt);
 }
 
-export function filterExts<T extends PathWithStats>(
+function filterExts<T extends PathWithStats>(
   list: Bg<T>,
   validExt: Set<string> = validExts
 ): Bg<T> {

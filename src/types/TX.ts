@@ -1,7 +1,6 @@
-import { CurrentPath, FALSY, QueryResultItem } from '.';
+import { CurrentPath, N, QueryResultItem, S } from '.';
 // /home/luxcium/projects/parallel-mapping/src/utilities/files/file-path/types/index.ts
 // /home/luxcium/projects/parallel-mapping/src/../../utilities/files/file-path/types
-import { N, S } from './IQueryListPhash';
 import { PQuerryAndAdd } from './PQuerryAndAdd';
 
 export type TX = Promise<{
@@ -15,15 +14,15 @@ export type TX = Promise<{
   pQuerryAndAdd?: PQuerryAndAdd;
 }>;
 
-export type Tx = Promise<{
-  transact: FALSY | Promise<QueryResultItem[]>;
-  path: FALSY | CurrentPath;
-  pHash:
-    | FALSY
-    | {
-        willPhash_?: () => Promise<S | null>;
-        index: N;
-        value: null | string;
-      };
-  pQuerryAndAdd?: FALSY | PQuerryAndAdd;
-}>;
+// export type Tx = Promise<{
+//   transact: FALSY | Promise<QueryResultItem[]>;
+//   path: FALSY | CurrentPath;
+//   pHash:
+//     | FALSY
+//     | {
+//         willPhash_?: () => Promise<S | null>;
+//         index: N;
+//         value: null | string;
+//       };
+//   pQuerryAndAdd?: FALSY | PQuerryAndAdd;
+// }>;

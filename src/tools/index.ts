@@ -13,14 +13,7 @@ import { getStats } from './getStats';
 export { IMGSCOUT } from '../commands';
 export { FileType as FileTypes } from './FileTypeEnum';
 export type { FileType } from './FileTypeEnum';
-export {
-  getDirs,
-  getDirsSync,
-  getFiles,
-  getFilesAsync,
-  getListing,
-  getListingAsync,
-} from './fsTools';
+export { getDirsSync, getFilesAsync, getListing } from './fsTools';
 export { getDirListFileTypes } from './getDirListWithFileType';
 export { getNewTedis } from './getNewTedis';
 export { getPathInfos } from './getPathInfos';
@@ -29,7 +22,6 @@ export { getRawDirList, getRawDirListSync } from './getRawDirList';
 export { getSplit } from './getSplit';
 export { getStats, getStatsSync } from './getStats';
 export { isA_Promise } from './isA_Promise';
-// export { isA_Promise } from './isA_Promise';
 export { isQueryResult } from './isQueryResult';
 export { isQueryResultItem } from './isQueryResultItem';
 export { isQueryResultList } from './isQueryResultList';

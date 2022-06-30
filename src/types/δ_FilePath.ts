@@ -1,4 +1,4 @@
-import { S } from './IQueryListPhash';
+import { S } from '.';
 
 /** @deprecated */
 export type FilePath = {

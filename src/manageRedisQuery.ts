@@ -2,7 +2,7 @@ import { linkSync } from './linkSync';
 import { notExcluded } from './tools/notExclude';
 import { Bg, QueryResultObject, Strange } from './types';
 
-export const count2 = { a1: 0, b: 0, len: 0 };
+const count2 = { a1: 0, b: 0, len: 0 };
 
 export function manageRedisQuery(bgItem: Bg<Strange<true | false>>) {
   return bgItem.map(async (item, indx) => {

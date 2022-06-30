@@ -1,7 +1,7 @@
 import { Stats } from 'fs';
 import { CurrentPath } from '.';
 import { FileType } from '../tools';
-import { CurrentPathError } from './file-path-types';
+import { CurrentPathError } from './complex-types';
 import { PathAndStats } from './PathAndStats';
 import { PathWithStats } from './PathWithStats';
 

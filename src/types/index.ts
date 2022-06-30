@@ -1,8 +1,6 @@
 // export type { FileType } from '../tools';
 export type { Bg } from './Bg';
-export type { DirentWithFileType } from './DirentWithFileType';
-export type { FileType, FileType as FileTypes } from './Enums/FileTypeEnum';
-export type { FALSY } from './Falsy';
+// export type { FALSY } from './Falsy';
 export type {
   BlockDevicePath,
   CharacterDevicePath,
@@ -14,7 +12,10 @@ export type {
   SocketPath,
   SymbolicLinkPath,
   UnknownTypePath,
-} from './file-path-types';
+} from './complex-types/file-path-types';
+export type { DirentWithFileType } from './DirentWithFileType';
+export type { FileType, FileType as FileTypes } from './Enums/FileTypeEnum';
+export type { FALSY_ω } from './FALSY_ω';
 export type {
   BaseBase,
   BasedDir,
@@ -54,7 +55,7 @@ export type {
 export type { FilePathInfo } from './FilePathInfo';
 export type { GetChild } from './GetChild';
 export type { GetStats } from './GetStats';
-export type { IQueryListPhash, N, P, S } from './IQueryListPhash';
+export type { IQueryListPhash } from './IQueryListPhash';
 export type { Listing } from './Listing';
 // export type { FileType } from './FileType';
 export type { PathAndStats } from './PathAndStats';
@@ -72,7 +73,6 @@ export type { PHashedPath } from './PHashedPath';
 export type { PHashedTuple } from './PHashedTuple';
 export type { PhashNow } from './PhashNow';
 export type { PQuerryAndAdd } from './PQuerryAndAdd';
-export type { Pr } from './Pr';
 export type { QueryResult } from './QueryResult';
 export type { QueryResultItem } from './QueryResultItem';
 export type { QueryResultObject } from './QueryResultObject';
@@ -83,7 +83,7 @@ export type { RedisCStrOptions } from './RedisCStrOptions';
 export type { RedisQueryResult } from './RedisQueryResult';
 export type { SplitPath } from './SplitPath';
 export type { Strange } from './Strange';
-export type { TX_ } from './TX_';
+// export type { TX_ } from './TX_';
 export type { UnBoxedArray } from './UnBoxedArray';
 export type { IsNotValidPHash, IsValidPHash, ValidPHash } from './ValidPHash';
 export type {
@@ -92,3 +92,6 @@ export type {
   NotExcluded,
   WithExclude,
 } from './WithExclude';
+export type P<T> = Promise<T>;
+export type S = string;
+export type N = number;

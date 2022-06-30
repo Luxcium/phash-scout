@@ -1,7 +1,3 @@
-import { zalgo } from './restrainingZalgo';
-
-zalgo;
-
 export function fromTo(from: number, to: number) {
   // if from is larger decrement
   // if from is smaller increment
@@ -56,7 +52,7 @@ export function fromTo(from: number, to: number) {
 //     },
 //   });
 
-export function fromTo_(from: number, to: number): [1 | -1, number, number] {
+function fromTo_(from: number, to: number): [1 | -1, number, number] {
   if (from - to < 0) return [-1, from, to];
 
   return [1, from, to];

@@ -1,5 +1,5 @@
 import { QueryResultObject } from '../types';
-import { CurrentPathError } from './file-path-types';
+import { CurrentPathError } from './complex-types';
 import { FilePathInfo } from './FilePathInfo';
 import { GetStats } from './GetStats';
 import { PathAndStats } from './PathAndStats';
