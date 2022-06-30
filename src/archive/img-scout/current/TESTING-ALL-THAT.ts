@@ -1,16 +1,16 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
 import { statSync } from 'fs-extra';
 import path from 'path';
-import { devPaths } from '../../constants/devPaths';
+import { devPaths } from '../../../constants/devPaths';
 import {
   getDirsSync,
   getFilesAsync,
   getListing,
   redisCreateClient,
-} from '../../tools';
-import { immediateZalgo } from '../../utils';
-import { dirListWithFileType } from '../../utils/dirListWithFileType';
-import { replaceStr } from './replaceStr';
+} from '../../../tools';
+import { immediateZalgo } from '../../../utils';
+import { dirListWithFileType } from '../../../utils/dirListWithFileType';
+import { replaceStr } from '../../../utils/replaceStr';
 
 const SPARK = true;
 const PREFIX = '1001:TESTING:1001::JSON:REDIS';

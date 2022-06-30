@@ -1,4 +1,4 @@
-import { jsonGet, jsonSet } from '../jsonRedis';
+import { jsonGet, jsonSet } from './jsonRedis';
 import { SetJsonArgs } from './SetJsonArgs';
 
 export async function setJson(A: SetJsonArgs) {

@@ -1,5 +1,5 @@
 // const str = '1001000001010011110010001001101001111101000010010010000001111101';
-export const BASE = 36;
+const BASE = 36;
 
 export function shortBit64(bin64: string, base = BASE) {
   var hexa1 = parseInt(bin64.slice(0, 16), 2).toString(base).toUpperCase();

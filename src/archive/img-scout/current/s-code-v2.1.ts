@@ -1,9 +1,9 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
 import { readdir } from 'fs/promises';
-import { BASE_SRC_PATH1 } from '../../constants/devPaths';
-import { redisCreateClient } from '../../tools';
-import type { RedisClientType } from '../../types';
-import { isArray } from '../../utils';
+import { BASE_SRC_PATH1 } from '../../../constants/devPaths';
+import { redisCreateClient } from '../../../tools';
+import type { RedisClientType } from '../../../types';
+import { isArray } from '../../../utils';
 import { getFileInfos } from './getFileInfos';
 import { getPathsObj } from './getPathsObj';
 import { getShortWordList } from './getShortWordList';

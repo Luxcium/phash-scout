@@ -1,9 +1,9 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
 import path from 'path';
-import { getDirsSync, getFilesAsync } from '../../tools';
-import { getUserPathsGen } from './getUserPathsGen';
-import { srtPath } from './srtPath';
-import { withPrefix } from './withPrefix';
+import { getDirsSync, getFilesAsync } from '../tools';
+import { getUserPathsGen } from './img-scout/current/getUserPathsGen';
+import { srtPath } from './img-scout/current/srtPath';
+import { withPrefix } from './img-scout/current/withPrefix';
 
 const PREFIX = 'TESTING:001::JSON:REDIS';
 const STEPS = 100_000;
@@ -11,7 +11,7 @@ let COUNT = 0;
 
 main();
 function main() {
-  // -------------------------------------------------------------------//!!-----
+  // -----------------------------------------------------------------//!!------
   // → UserList (u1 or l1) Level 1
   // → → ColectionList (c2 or l2) Level 2
   // → → → FilesList (f3) Level 3
@@ -31,7 +31,7 @@ function sFnct() {
     const jsonPath = '.';
     const jsonFinfo = `${JSON.stringify(fInfos)}`;
     try {
-      // -------------------------------------------------------------//!!-----
+      // -------------------------------------------------------------//!!------
       // LOG: MAIN LOGGER ////////////////////////////////////////++ +
       console.log({ fullKey, jsonPath, fInfos, count: ++COUNT });
     } catch (error) {
@@ -46,16 +46,16 @@ function sFnct() {
 }
 
 function workingFunction() {
-  // -------------------------------------------------------------------//!!-----
+  // -----------------------------------------------------------------//!!------
   // ++ USERS PATH GENERATION ------------------------------------------
   const userPathsGen = BoxedGenerator.of(...getUserPathsGen(STEPS));
 
-  // -------------------------------------------------------------------//!!-----
+  // -----------------------------------------------------------------//!!------
   // ++ USERS LEVEL ----------------------------------------------------
   const collectionsPathsGen = userPathsGen.map(user => {
     const dirsSync = BoxedGenerator.of(...getDirsSync(user.fullPath));
 
-    // -----------------------------------------------------------------//!!-----
+    // ---------------------------------------------------------------//!!------
     // ++ COLLECTION LEVEL ---------------------------------------------
     const collectionLevelGen = dirsSync.map(dir => {
       const collctn = {
@@ -66,12 +66,12 @@ function workingFunction() {
       /**
        * for each collections list contained files f
        */
-      // ---------------------------------------------------------------//!!-----
+      // -------------------------------------------------------------//!!------
       // ++ INNERMOST: FILLES LEVEL ------------------------------------
       const filesPathsGen = BoxedGenerator.of(
         ...getFilesAsync(collctn.fullPath)
       );
-      // ---------------------------------------------------------------//!!-----
+      // -------------------------------------------------------------//!!------
       const filesInfoGenerator = filesPathsGen.map(f => {
         const pathStr = `${collctn.fullPath}/${f}`;
         const parsed = path.parse(pathStr);
