@@ -26,7 +26,7 @@ export function doRedisQuery(
   return (
     bgPaths: Bg<
       PathWithStats & {
-        pHashValue: () => Promise<
+        getPHash: () => Promise<
           | (Excluded<false> & ValidPHash<true>)
           | (Excluded<true> & ValidPHash<false>)
         >;
@@ -35,7 +35,7 @@ export function doRedisQuery(
   ) => {
     return bgPaths.map(paths => {
       const queryResult = async () => {
-        const _path = { ...paths, ...(await paths.pHashValue()) };
+        const _path = { ...paths, ...(await paths.getPHash()) };
         if (notNull(_path.pHash) && notExcluded(_path)) {
           const stats = statSync(_path.fullPath);
           const phash_ = _path.pHash;
@@ -55,7 +55,7 @@ export function doRedisQuery(
           PathWithStats | PathAndStats | CurrentPathError
         >[];
         getStats: () => Promise<GetStats>;
-        pHashValue: () => Promise<
+        getPHash: () => Promise<
           (NotExcluded & IsValidPHash) | (IsExcluded & IsNotValidPHash)
         >;
         queryResult: () => Promise<QueryResultObject[] | null>;

@@ -11,7 +11,7 @@ export function getPHash<T extends PathWithStats>(
 ): Bg<
   T &
     PathWithStats & {
-      pHashValue: () => Promise<
+      getPHash: () => Promise<
         | (Excluded<false> & ValidPHash<true>)
         | (Excluded<true> & ValidPHash<false>)
       >;

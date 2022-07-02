@@ -25,6 +25,15 @@ export { isA_Promise } from './isA_Promise';
 export { isQueryResult } from './isQueryResult';
 export { isQueryResultItem } from './isQueryResultItem';
 export { isQueryResultList } from './isQueryResultList';
+export {
+  isExcluded,
+  isNull,
+  isUndefined,
+  notExcluded,
+  notNull,
+  notNullOrUndef,
+  notUndefined,
+} from './notExclude';
 export { parsePath } from './parsePath';
 export { getTransact, readListRx } from './readListR1';
 export { redisConnectionString, redisCreateClient } from './redisClient';
@@ -33,6 +42,7 @@ export { toObj } from './toObj';
 export { toQueryResultObj } from './toQueryResultObj';
 export { toSizedObj } from './toSizedObj';
 export { toTup } from './toTup';
+
 export const fsTools = {
   devPaths,
   filesTypeList,

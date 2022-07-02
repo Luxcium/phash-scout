@@ -10,7 +10,7 @@ import { IsExcluded, NotExcluded } from './WithExclude';
 export type Strange<Bool extends boolean = true | false> = {
   getChild: () => Promise<PathWithStats | PathAndStats | CurrentPathError>[];
   getStats: () => Promise<GetStats>;
-  pHashValue: () => Promise<
+  getPHash: () => Promise<
     (NotExcluded & IsValidPHash) | (IsExcluded & IsNotValidPHash)
   >;
   queryResult: () => Promise<QueryResultObject[] | null>;

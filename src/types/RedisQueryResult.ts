@@ -22,7 +22,7 @@ export type RedisQueryResult<Bool extends boolean = true | false> = {
   type: FileType;
   getChild: () => Promise<PathWithStats | PathAndStats | CurrentPathError>[];
   getStats: () => Promise<GetStats>;
-  pHashValue: () => Promise<
+  getPHash: () => Promise<
     (NotExcluded & IsValidPHash) | (IsExcluded & IsNotValidPHash)
   >;
   queryResult: () => Promise<QueryResultObject[] | null>;
