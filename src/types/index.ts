@@ -59,6 +59,7 @@ export type { IQueryListPhash } from './IQueryListPhash';
 export type { Listing } from './Listing';
 // export type { FileType } from './FileType';
 export type { PathAndStats } from './PathAndStats';
+export type { PHashGetter } from './PHashGetter';
 export type {
   MyPInfos,
   MyStats,

@@ -1,9 +1,9 @@
 import { doRedisQuery } from './doRedisQuery';
 import { endAsyncSpark } from './endAsyncSpark';
 import { filterExtensions } from './filterExtensions';
-import { getPHash } from './getPHash';
 import { newListFiles } from './listFiles';
 import { manageRedisQuery } from './manageRedisQuery';
+import { getPhash } from './tools';
 
 export const globalMain = async (dir: S, grpKey: S, validExt: Ss, rC: any) => {
   const R = await rC;
@@ -16,7 +16,7 @@ export const globalMain = async (dir: S, grpKey: S, validExt: Ss, rC: any) => {
 
   const step1 = newListFiles(step0);
   const step2 = filterValidExts(step1);
-  const step3 = getPHash(step2);
+  const step3 = getPhash(step2);
   const step4 = redisQuery(step3);
   const step5 = manageRedisQuery(step4);
   const stepN = asyncSpark(step5);

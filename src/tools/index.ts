@@ -11,6 +11,7 @@ import { getRawDirList } from './getRawDirList';
 import { getStats } from './getStats';
 
 export { IMGSCOUT } from '../commands';
+export { computePHash, getPhash } from './computePHash';
 export { FileType as FileTypes } from './FileTypeEnum';
 export type { FileType } from './FileTypeEnum';
 export { getDirsSync, getFilesAsync, getListing } from './fsTools';

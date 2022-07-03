@@ -1,8 +1,8 @@
 import fs from 'fs';
-import { bigString } from './tools/bigString';
-import { notExcluded } from './tools/notExclude';
-import { PathWithStats } from './types';
-import { immediateZalgo } from './utils';
+import { PathWithStats } from '../../types';
+import { immediateZalgo } from '../../utils';
+import { bigString } from '../bigString';
+import { notExcluded } from '../notExclude';
 
 const phash = require('sharp-phash');
 
