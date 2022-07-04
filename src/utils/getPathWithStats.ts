@@ -99,6 +99,7 @@ export function getPathWithStats(
 
 export function newGetPathWithStats(folderPath: string): PathWithStats[] {
   const dirList = dirListWithFileType(folderPath);
+  console.log('in newGetPathWithStats (length) ' + dirList.length);
   const result = dirList.map(f => {
     const currentPath = {
       ...getCurrentPath(f, folderPath),

@@ -1,17 +1,15 @@
-import { QueryResultObject } from '../types';
+import { PHashGetter, QueryResultObject } from '../types';
 import { CurrentPathError } from './complex-types';
 import { FilePathInfo } from './FilePathInfo';
 import { GetStats } from './GetStats';
 import { PathAndStats } from './PathAndStats';
 import { PathWithStats } from './PathWithStats';
-import { IsNotValidPHash, IsValidPHash } from './ValidPHash';
-import { IsExcluded, NotExcluded } from './WithExclude';
 
 export type Strange<Bool extends boolean = true | false> = {
   getChild: () => Promise<PathWithStats | PathAndStats | CurrentPathError>[];
   getStats: () => Promise<GetStats>;
-  getPHash: () => Promise<
-    (NotExcluded & IsValidPHash) | (IsExcluded & IsNotValidPHash)
-  >;
+  await: {
+    getPHash: PHashGetter;
+  };
   queryResult: () => Promise<QueryResultObject[] | null>;
 } & FilePathInfo<Bool>;

@@ -1,14 +1,11 @@
-import { computePHash } from '..';
-import { Bg, PathWithStats, PHashGetter } from '../../types';
-
-// export function getPhash<T extends PathWithStats>(
-//   pathWithStatsBgList: Bg<T>
-// ): Bg<T & PathWithStats & { getPHash: PHashGetter }> {
-//   return pathWithStatsBgList.map(paths => computePHash(paths));
-// }
+import { Bg, PathWithStats, PHashGet } from '../../types';
+import { makePHashGetter } from './makePHashGetter';
 
 export function getPhash<T extends PathWithStats>(
   pathWithStatsBgList: Bg<T>
-): Bg<T & PathWithStats & { getPHash: PHashGetter }> {
-  return pathWithStatsBgList.map(paths => computePHash(paths));
+): Bg<T & PHashGet> {
+  return pathWithStatsBgList.map(paths => ({
+    ...paths,
+    await: { ...makePHashGetter<T>(paths).await },
+  }));
 }

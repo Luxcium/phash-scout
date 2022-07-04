@@ -5,37 +5,34 @@ import { notExcluded, notNull } from './tools/notExclude';
 import {
   Bg,
   CurrentPathError,
-  Excluded,
   FilePathInfo,
   GetStats,
-  IsExcluded,
-  IsNotValidPHash,
-  IsValidPHash,
-  NotExcluded,
   PathAndStats,
   PathWithStats,
+  PHashGet,
+  PHashGetter,
   QueryResultObject,
-  ValidPHash,
 } from './types';
 
+export type MyReturnType = (bgPaths: Bg<PathWithStats & PHashGet>) => Bg<
+  {
+    getChild: () => Promise<PathWithStats | PathAndStats | CurrentPathError>[];
+    getStats: () => Promise<GetStats>;
+    await: {
+      getPHash: PHashGetter;
+    };
+    queryResult: () => Promise<QueryResultObject[] | null>;
+  } & FilePathInfo<boolean>
+>;
 export function doRedisQuery(
   R: any,
 
   key: string
 ) {
-  return (
-    bgPaths: Bg<
-      PathWithStats & {
-        getPHash: () => Promise<
-          | (Excluded<false> & ValidPHash<true>)
-          | (Excluded<true> & ValidPHash<false>)
-        >;
-      }
-    >
-  ) => {
+  return (bgPaths: Bg<PathWithStats & PHashGet>) => {
     return bgPaths.map(paths => {
       const queryResult = async () => {
-        const _path = { ...paths, ...(await paths.getPHash()) };
+        const _path = { ...paths, ...(await paths.await.getPHash()) };
         if (notNull(_path.pHash) && notExcluded(_path)) {
           const stats = statSync(_path.fullPath);
           const phash_ = _path.pHash;
@@ -55,9 +52,9 @@ export function doRedisQuery(
           PathWithStats | PathAndStats | CurrentPathError
         >[];
         getStats: () => Promise<GetStats>;
-        getPHash: () => Promise<
-          (NotExcluded & IsValidPHash) | (IsExcluded & IsNotValidPHash)
-        >;
+        await: {
+          getPHash: PHashGetter;
+        };
         queryResult: () => Promise<QueryResultObject[] | null>;
       } & FilePathInfo<boolean> = {
         ...paths,

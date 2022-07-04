@@ -59,7 +59,6 @@ export type { IQueryListPhash } from './IQueryListPhash';
 export type { Listing } from './Listing';
 // export type { FileType } from './FileType';
 export type { PathAndStats } from './PathAndStats';
-export type { PHashGetter } from './PHashGetter';
 export type {
   MyPInfos,
   MyStats,
@@ -72,6 +71,7 @@ export type {
 export type { PathWithStats } from './PathWithStats';
 export type { PHashedPath } from './PHashedPath';
 export type { PHashedTuple } from './PHashedTuple';
+export type { PHashGet, PHashGetter } from './PHashGetter';
 export type { PhashNow } from './PhashNow';
 export type { PQuerryAndAdd } from './PQuerryAndAdd';
 export type { QueryResult } from './QueryResult';

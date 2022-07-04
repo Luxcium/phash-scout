@@ -9,9 +9,10 @@ export function getDirListFileTypes(
   try {
     const dirListWithFileType = rawDirListing.map(d => {
       const curent = { fileName: d.name };
+      console.log('fileName:', d.name);
       // HACK:
       //@ts-ignore
-      filesTypeList.map(method => (curent[method] = d[method]()));
+      // filesTypeList.map(method => (curent[method] = d[method]()));
 
       return curent as DirentWithFileType;
     });
@@ -19,6 +20,7 @@ export function getDirListFileTypes(
     return dirListWithFileType;
   } catch (error: any) {
     if (debug) console.error(error.message);
+    console.error(error.message);
     return [];
   }
 }

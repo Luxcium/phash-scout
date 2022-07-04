@@ -1,6 +1,5 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
-import { listFiles } from './listFiles';
-import { computePHash } from './tools';
+import { old_listFiles } from './listFiles';
 import { filterDirectories } from './utils';
 
 let count = 0;
@@ -8,7 +7,7 @@ let count1 = 0;
 let count2Total = 0;
 let count2 = 0;
 let childCount = 0;
-const step1 = listFiles(
+const step1 = old_listFiles(
   '/media/luxcium/D:\\ Archive locale/import/GAYBOYSTUBE/users'
 );
 step1
@@ -22,8 +21,6 @@ const step2 = step1.map(async pathWithStats => {
   BoxedGenerator.of(...awtPathWStats.getChild())
     .map(async (c, i) => {
       // HACK:
-      const processed = computePHash(c as any);
-      processed;
       process.stdout.write(
         `child item N°${++childCount} ${count2}/${count2Total} (${
           (i || 0) + 1
@@ -32,7 +29,7 @@ const step2 = step1.map(async pathWithStats => {
       // console.log('child:', await c);
     })
     .spark();
-  const step2a = listFiles((await pathWithStats).fullPath);
+  const step2a = old_listFiles((await pathWithStats).fullPath);
   const step2b = step2a.map(async (subPathWithStats, j) => {
     const current = (j || 0) + 1;
 

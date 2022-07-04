@@ -1,22 +1,24 @@
 import fs from 'fs';
-import { PathWithStats, PHashGetter } from '../../types';
+import { PathWithStats, PHashGet } from '../../types';
 import { immediateZalgo } from '../../utils';
 import { bigString } from '../bigString';
 import { notExcluded } from '../notExclude';
 
-const phash = require('sharp-phash');
+const sharpPhash = require('sharp-phash');
 
-export function makePHashGetter<T extends PathWithStats>(
-  imgFile: T
-): PHashGetter {
+export function makePHashGetter<T extends PathWithStats>(imgFile: T): PHashGet {
   try {
     if (notExcluded(imgFile)) {
       const thisImage = fs.promises.readFile(imgFile.fullPath);
-      return async () => {
-        return immediateZalgo({
-          pHash: bigString(phash(await thisImage)),
-          exclude: false,
-        });
+      return {
+        await: {
+          getPHash: async () => {
+            return immediateZalgo({
+              pHash: bigString(sharpPhash(await thisImage)),
+              exclude: false,
+            });
+          },
+        },
       };
     }
   } catch (error) {
@@ -28,11 +30,15 @@ export function makePHashGetter<T extends PathWithStats>(
     );
   }
   //++ implied else and catched error return here: -------------------
-  return async () => {
-    return immediateZalgo({
-      pHash: null,
-      exclude: true,
-    });
+  return {
+    await: {
+      getPHash: async () => {
+        return immediateZalgo({
+          pHash: null,
+          exclude: true,
+        });
+      },
+    },
   };
   //++ ---------------------------------------------------------------
 }
