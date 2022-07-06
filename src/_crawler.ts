@@ -40,4 +40,4 @@ const step2 = step1.map(async pathWithStats => {
   preload_001 ? step2b.spark() : console.log(null);
   return pathWithStats;
 });
-step2.spark; //();
+step2.spark;

@@ -1,6 +1,6 @@
 import { statSync } from 'fs-extra';
 import { uniqueAddToObj } from './commands';
-import { titleBuilder } from './titleBuilder';
+import { titleBuilder } from './utils/titleBuilder';
 import { notExcluded, notNull } from './tools/notExclude';
 import {
   Bg,

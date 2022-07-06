@@ -32,6 +32,7 @@ export { hasSameTitleInclude } from './hasSameTitleInclude';
 export { isArray } from './isArray';
 export { replaceStr } from './replaceStr';
 export { shiftTitle } from './shiftTitle';
+export { titleBuilder } from './titleBuilder';
 export { getSign };
 export {
   immediateZalgo,
