@@ -13,8 +13,13 @@ async function immediate(str: Promise<S>): Promise<S> {
   try {
     return immediateZalgo(bigString_(await str));
   } catch (error) {
-    throw new Error(error as any);
+    console.error(
+      '>     \u009B31mFailed Silently in: immediate ~~>bigString_(await str)\u0007 \u009B0m',
+      error
+    );
+    // throw new Error(error as any);
   }
+  return '';
 }
 function bigString_(str: S): S {
   const strSplit = [...str];
