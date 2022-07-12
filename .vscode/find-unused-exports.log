@@ -1,4 +1,4 @@
-2022-07-12T11:40:11.484Z
+2022-07-12T17:10:19.159Z
 Path to project: "/home/luxcium/projects/pHashScout"
 Using glob rule: "/home/luxcium/projects/pHashScout/**/*.ts?(x)"
 And glob ignore rules: [
@@ -20,6 +20,7 @@ Found source file: "/home/luxcium/projects/pHashScout/src/_softMain.ts"
 Found source file: "/home/luxcium/projects/pHashScout/src/describeMapping.ts"
 Found source file: "/home/luxcium/projects/pHashScout/src/displayPrompt.ts"
 Found source file: "/home/luxcium/projects/pHashScout/src/doRedisQuery.ts"
+Found source file: "/home/luxcium/projects/pHashScout/src/doUniqueAddObj.ts"
 Found source file: "/home/luxcium/projects/pHashScout/src/endAsyncSpark.ts"
 Found source file: "/home/luxcium/projects/pHashScout/src/filterExtensions.ts"
 Found source file: "/home/luxcium/projects/pHashScout/src/globalMain.ts"
@@ -33,8 +34,8 @@ Found source file: "/home/luxcium/projects/pHashScout/src/qResultWithSize.ts"
 Found source file: "/home/luxcium/projects/pHashScout/src/rConnect.ts"
 Found source file: "/home/luxcium/projects/pHashScout/src/random-stuff.ts"
 Found source file: "/home/luxcium/projects/pHashScout/src/readListHtml.ts"
+Found source file: "/home/luxcium/projects/pHashScout/src/API/___starting-point.ts"
 Found source file: "/home/luxcium/projects/pHashScout/src/API/cli.ts"
-Found source file: "/home/luxcium/projects/pHashScout/src/API/starting-point.ts"
 Found source file: "/home/luxcium/projects/pHashScout/src/API/vtfeatures.ts"
 Found source file: "/home/luxcium/projects/pHashScout/src/archive/SetJsonArgs.ts"
 Found source file: "/home/luxcium/projects/pHashScout/src/archive/Untitled-2.ts"
@@ -208,47 +209,51 @@ Found source file: "/home/luxcium/projects/pHashScout/src/utils/restrainingZalgo
 Found source file: "/home/luxcium/projects/pHashScout/src/utils/restrainingZalgo/restrainingZalgo.ts"
 Found source file: "/home/luxcium/projects/pHashScout/src/utils/restrainingZalgo/timeoutZalgo.ts"
 Found source file: "/home/luxcium/projects/pHashScout/src/utils/restrainingZalgo/zalgo.ts"
-Finding the sources took (407ms)
+Finding the sources took (401ms)
 Parse file: "/home/luxcium/projects/pHashScout/scripts/FileSystem.ts"
 Normalizing the content took (0ms)
-Found imports: 5 (0ms)
-Found exports: 2 (1ms)
+Found imports: 5 (1ms)
+Found exports: 2 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/scripts/build.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 8 (0ms)
-Found exports: 4 (1ms)
+Found exports: 4 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/scripts/pre-publish.ts"
-Normalizing the content took (0ms)
-Found imports: 2 (1ms)
+Normalizing the content took (1ms)
+Found imports: 2 (0ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/scripts/release.ts"
 Normalizing the content took (0ms)
 Found imports: 4 (0ms)
-Found exports: 1 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/scripts/run.ts"
 Normalizing the content took (0ms)
 Found imports: 2 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/_crawler.ts"
-Normalizing the content took (0ms)
-Found imports: 3 (1ms)
+Normalizing the content took (1ms)
+Found imports: 3 (0ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/_softMain.ts"
 Normalizing the content took (0ms)
 Found imports: 2 (0ms)
-Found exports: 0 (0ms)
+Found exports: 0 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/describeMapping.ts"
 Normalizing the content took (0ms)
 Found imports: 0 (0ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/displayPrompt.ts"
-Normalizing the content took (0ms)
-Found imports: 0 (1ms)
+Normalizing the content took (1ms)
+Found imports: 0 (0ms)
 Found exports: 20 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/doRedisQuery.ts"
+Normalizing the content took (1ms)
+Found imports: 3 (0ms)
+Found exports: 2 (0ms)
+Parse file: "/home/luxcium/projects/pHashScout/src/doUniqueAddObj.ts"
 Normalizing the content took (0ms)
-Found imports: 5 (1ms)
-Found exports: 3 (0ms)
+Found imports: 3 (1ms)
+Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/endAsyncSpark.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
@@ -263,72 +268,72 @@ Found imports: 6 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/index.ts"
 Normalizing the content took (0ms)
-Found imports: 1 (1ms)
-Found exports: 0 (0ms)
+Found imports: 1 (0ms)
+Found exports: 0 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/link.ts"
 Normalizing the content took (0ms)
-Found imports: 2 (0ms)
-Found exports: 5 (1ms)
+Found imports: 2 (1ms)
+Found exports: 5 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/linkSync.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/listFiles.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 5 (0ms)
 Found exports: 7 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/manageRedisQuery.ts"
-Normalizing the content took (0ms)
-Found imports: 2 (1ms)
+Normalizing the content took (1ms)
+Found imports: 2 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/newGetPHash.ts"
 Normalizing the content took (0ms)
-Found imports: 0 (1ms)
+Found imports: 0 (0ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/qResultWithSize.ts"
 Normalizing the content took (0ms)
 Found imports: 0 (0ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/rConnect.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 1 (0ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/random-stuff.ts"
 Normalizing the content took (0ms)
-Found imports: 1 (1ms)
-Found exports: 11 (0ms)
+Found imports: 1 (0ms)
+Found exports: 11 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/readListHtml.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
 Found exports: 0 (0ms)
-Parse file: "/home/luxcium/projects/pHashScout/src/API/cli.ts"
-Normalizing the content took (0ms)
-Found imports: 1 (0ms)
-Found exports: 1 (0ms)
-Parse file: "/home/luxcium/projects/pHashScout/src/API/starting-point.ts"
+Parse file: "/home/luxcium/projects/pHashScout/src/API/___starting-point.ts"
 Normalizing the content took (1ms)
 Found imports: 6 (0ms)
 Found exports: 5 (0ms)
+Parse file: "/home/luxcium/projects/pHashScout/src/API/cli.ts"
+Normalizing the content took (0ms)
+Found imports: 1 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/API/vtfeatures.ts"
 Normalizing the content took (0ms)
 Found imports: 0 (0ms)
-Found exports: 53 (1ms)
+Found exports: 53 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/SetJsonArgs.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/Untitled-2.ts"
 Normalizing the content took (0ms)
-Found imports: 8 (0ms)
+Found imports: 8 (1ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/Untitled-3.2.ts"
 Normalizing the content took (0ms)
-Found imports: 6 (0ms)
+Found imports: 6 (1ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/Untitled-3.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 6 (0ms)
-Found exports: 0 (0ms)
+Found exports: 0 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/jsonRedis.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
@@ -336,19 +341,19 @@ Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/setJson.ts"
 Normalizing the content took (0ms)
 Found imports: 2 (0ms)
-Found exports: 0 (0ms)
+Found exports: 0 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/untitled-1.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 9 (0ms)
-Found exports: 4 (0ms)
+Found exports: 4 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/ADD.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 0 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/DEL.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 0 (0ms)
-Found exports: 1 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/LOOKUP.ts"
 Normalizing the content took (0ms)
 Found imports: 0 (0ms)
@@ -358,13 +363,13 @@ Normalizing the content took (0ms)
 Found imports: 0 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/SIZE.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 0 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/SYNC.ts"
 Normalizing the content took (0ms)
-Found imports: 0 (0ms)
-Found exports: 1 (1ms)
+Found imports: 0 (1ms)
+Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/index.ts"
 Normalizing the content took (0ms)
 Found imports: 7 (0ms)
@@ -380,53 +385,53 @@ Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/TESTING-ALL-THAT.ts"
 Normalizing the content took (0ms)
 Found imports: 8 (0ms)
-Found exports: 0 (0ms)
+Found exports: 0 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/WriterTool.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
-Found exports: 1 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/fileInfo.ts"
 Normalizing the content took (0ms)
 Found imports: 2 (1ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/getBackBit64.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 0 (0ms)
-Found exports: 2 (0ms)
+Found exports: 2 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/getFileInfos.ts"
 Normalizing the content took (0ms)
-Found imports: 6 (0ms)
+Found imports: 6 (1ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/getKeywordList.ts"
 Normalizing the content took (0ms)
 Found imports: 0 (1ms)
 Found exports: 2 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/getKeywords.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 1 (0ms)
-Found exports: 1 (1ms)
+Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/getPathsObj.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
-Found exports: 1 (1ms)
-Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/getShortKey.ts"
-Normalizing the content took (0ms)
-Found imports: 0 (0ms)
 Found exports: 1 (0ms)
-Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/getShortWordList.ts"
+Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/getShortKey.ts"
 Normalizing the content took (1ms)
 Found imports: 0 (0ms)
 Found exports: 1 (0ms)
+Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/getShortWordList.ts"
+Normalizing the content took (0ms)
+Found imports: 0 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/getUserPathsGen.ts"
 Normalizing the content took (0ms)
-Found imports: 2 (0ms)
-Found exports: 1 (1ms)
+Found imports: 2 (1ms)
+Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/getxDir.ts"
 Normalizing the content took (0ms)
 Found imports: 0 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/s-code-v2.1.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 11 (0ms)
 Found exports: 2 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/shortBit64.ts"
@@ -442,108 +447,108 @@ Normalizing the content took (0ms)
 Found imports: 2 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/stageInfos.ts"
-Normalizing the content took (0ms)
-Found imports: 4 (1ms)
+Normalizing the content took (1ms)
+Found imports: 4 (0ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/statsReducer.ts"
 Normalizing the content took (0ms)
 Found imports: 0 (0ms)
-Found exports: 1 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/current/withPrefix.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 1 (0ms)
-Found exports: 1 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/archive/img-scout/tools/isA_Promise.ts"
 Normalizing the content took (0ms)
 Found imports: 0 (0ms)
-Found exports: 1 (1ms)
+Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/commands/addPhash.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 1 (0ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/commands/delPhash.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 3 (0ms)
-Found exports: 1 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/commands/index.ts"
 Normalizing the content took (0ms)
-Found imports: 6 (1ms)
+Found imports: 6 (0ms)
 Found exports: 7 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/commands/queryPhash.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 5 (0ms)
-Found exports: 0 (1ms)
+Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/commands/syncPhash.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
-Found exports: 0 (0ms)
+Found exports: 0 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/commands/uniqueAdd.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 7 (0ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/commands/uniqueAddToObj.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 3 (0ms)
-Found exports: 0 (1ms)
+Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/constants/devPaths.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
-Found exports: 10 (0ms)
+Found exports: 10 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/constants/filesTypes.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 0 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/constants/radius.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 0 (0ms)
 Found exports: 9 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/constants/validExts.ts"
 Normalizing the content took (0ms)
 Found imports: 0 (0ms)
-Found exports: 1 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/main/main2.ts"
 Normalizing the content took (0ms)
-Found imports: 2 (1ms)
+Found imports: 2 (0ms)
 Found exports: 2 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/main/main3.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 4 (0ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/main/main4.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
-Found exports: 0 (0ms)
+Found exports: 0 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/FileTypeEnum.ts"
 Normalizing the content took (0ms)
-Found imports: 0 (1ms)
-Found exports: 1 (0ms)
+Found imports: 0 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/__trying-stuff.ts"
 Normalizing the content took (0ms)
 Found imports: 2 (0ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/bigString.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 2 (0ms)
-Found exports: 3 (0ms)
+Found exports: 4 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/fsTools.ts"
 Normalizing the content took (0ms)
 Found imports: 4 (1ms)
 Found exports: 10 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/getDirListWithFileType.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 2 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/getNewTedis.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
-Found exports: 1 (1ms)
+Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/getPathInfos.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/getPathStatsInfos.ts"
-Normalizing the content took (1ms)
-Found imports: 6 (0ms)
+Normalizing the content took (0ms)
+Found imports: 6 (1ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/getRawDirList.ts"
 Normalizing the content took (0ms)
@@ -554,44 +559,44 @@ Normalizing the content took (0ms)
 Found imports: 3 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/getStats.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 3 (0ms)
 Found exports: 2 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/index.ts"
-Normalizing the content took (0ms)
-Found imports: 32 (1ms)
+Normalizing the content took (1ms)
+Found imports: 32 (0ms)
 Found exports: 25 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/isA_CurrentPath.ts"
 Normalizing the content took (0ms)
-Found imports: 1 (0ms)
-Found exports: 1 (1ms)
+Found imports: 1 (1ms)
+Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/isA_DirentWithFileType.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
-Found exports: 1 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/isA_Promise.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 0 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/isQueryResult.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 1 (0ms)
-Found exports: 1 (1ms)
+Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/isQueryResultItem.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/isQueryResultList.ts"
-Normalizing the content took (1ms)
-Found imports: 2 (0ms)
+Normalizing the content took (0ms)
+Found imports: 2 (1ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/notExclude.ts"
 Normalizing the content took (0ms)
-Found imports: 1 (1ms)
+Found imports: 1 (0ms)
 Found exports: 7 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/notExcludeAsync.ts"
 Normalizing the content took (0ms)
-Found imports: 1 (1ms)
+Found imports: 1 (0ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/notExcludeList.ts"
 Normalizing the content took (0ms)
@@ -606,159 +611,159 @@ Normalizing the content took (0ms)
 Found imports: 2 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/redisClient.ts"
-Normalizing the content took (1ms)
-Found imports: 2 (0ms)
+Normalizing the content took (0ms)
+Found imports: 2 (1ms)
 Found exports: 2 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/reorder.ts"
 Normalizing the content took (0ms)
-Found imports: 1 (1ms)
+Found imports: 1 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/tedis_json.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
-Found exports: 2 (1ms)
+Found exports: 2 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/toObj.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 1 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/toQueryResultObj.ts"
 Normalizing the content took (0ms)
 Found imports: 4 (0ms)
-Found exports: 3 (0ms)
+Found exports: 3 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/toSizedObj.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 2 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/toTup.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 1 (0ms)
-Found exports: 1 (1ms)
+Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/with.ts"
 Normalizing the content took (0ms)
 Found imports: 0 (0ms)
-Found exports: 0 (0ms)
+Found exports: 0 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/computePHash/getBigStrPHash.ts"
-Normalizing the content took (1ms)
-Found imports: 3 (0ms)
-Found exports: 0 (0ms)
+Normalizing the content took (0ms)
+Found imports: 4 (0ms)
+Found exports: 0 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/computePHash/getPhash.ts"
 Normalizing the content took (0ms)
 Found imports: 2 (0ms)
-Found exports: 1 (1ms)
+Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/computePHash/index.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 2 (0ms)
 Found exports: 2 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/computePHash/makePHashGetter.ts"
 Normalizing the content took (0ms)
-Found imports: 4 (1ms)
-Found exports: 1 (0ms)
+Found imports: 4 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/dirListWithFileType/currentPath.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 2 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/dirListWithFileType/dirListWithFileType.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 3 (0ms)
-Found exports: 4 (1ms)
+Found exports: 4 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/dirListWithFileType/dirListWithFileTypeAsync.ts"
 Normalizing the content took (0ms)
-Found imports: 3 (0ms)
+Found imports: 3 (1ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/dirListWithFileType/dirListWithFileTypeSync.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 3 (0ms)
 Found exports: 2 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/dirListWithFileType/getCurrentPaths.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 5 (0ms)
 Found exports: 5 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/dirListWithFileType/index.ts"
 Normalizing the content took (0ms)
 Found imports: 3 (0ms)
-Found exports: 3 (0ms)
+Found exports: 3 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/with/EXCLUDE.ts"
 Normalizing the content took (0ms)
-Found imports: 4 (1ms)
+Found imports: 4 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/with/currentPath.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 2 (0ms)
 Found exports: 10 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/with/withAwaitedCount.ts"
 Normalizing the content took (0ms)
-Found imports: 1 (0ms)
+Found imports: 1 (1ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/with/withAwaitedFileName.ts"
 Normalizing the content took (0ms)
-Found imports: 1 (1ms)
+Found imports: 1 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/with/withExcludeFlag.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 1 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/tools/with/withKey.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 0 (0ms)
-Found exports: 8 (0ms)
+Found exports: 8 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/Bg.ts"
 Normalizing the content took (0ms)
-Found imports: 1 (0ms)
-Found exports: 1 (1ms)
+Found imports: 1 (1ms)
+Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/DirentWithFileType.ts"
 Normalizing the content took (0ms)
 Found imports: 0 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/FALSY_ω.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 0 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/FileCurrentPath.ts"
 Normalizing the content took (0ms)
-Found imports: 3 (0ms)
-Found exports: 32 (1ms)
+Found imports: 3 (1ms)
+Found exports: 32 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/FilePathInfo.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
-Found exports: 1 (1ms)
+Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/FileTypeInfos.ts"
 Normalizing the content took (0ms)
 Found imports: 0 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/GetChild.ts"
-Normalizing the content took (1ms)
-Found imports: 6 (0ms)
+Normalizing the content took (0ms)
+Found imports: 6 (1ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/GetStats.ts"
 Normalizing the content took (0ms)
 Found imports: 3 (0ms)
-Found exports: 1 (1ms)
+Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/IQueryListPhash.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 1 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/Listing.ts"
-Normalizing the content took (1ms)
-Found imports: 1 (0ms)
+Normalizing the content took (0ms)
+Found imports: 1 (1ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/PHashGetter.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
 Found exports: 2 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/PHashedPath.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 2 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/PHashedTuple.ts"
 Normalizing the content took (0ms)
-Found imports: 1 (1ms)
-Found exports: 1 (0ms)
+Found imports: 1 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/PQuerryAndAdd.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/PathAndStats.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 2 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/PathStatsGetter.ts"
@@ -767,16 +772,16 @@ Found imports: 1 (0ms)
 Found exports: 7 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/PathWithStats.ts"
 Normalizing the content took (0ms)
-Found imports: 4 (0ms)
+Found imports: 4 (1ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/PhashNow.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 0 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/QueryResult.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 1 (0ms)
-Found exports: 1 (1ms)
+Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/QueryResultItem.ts"
 Normalizing the content took (0ms)
 Found imports: 0 (0ms)
@@ -792,65 +797,65 @@ Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/RawQueryResult.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
-Found exports: 1 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/RedisCStrOptions.ts"
 Normalizing the content took (0ms)
 Found imports: 0 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/RedisClientType.ts"
-Normalizing the content took (0ms)
-Found imports: 1 (1ms)
+Normalizing the content took (1ms)
+Found imports: 1 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/RedisQueryResult.ts"
 Normalizing the content took (0ms)
 Found imports: 2 (0ms)
-Found exports: 1 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/SplitPath.ts"
 Normalizing the content took (0ms)
 Found imports: 0 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/Strange.ts"
-Normalizing the content took (0ms)
-Found imports: 6 (1ms)
+Normalizing the content took (1ms)
+Found imports: 6 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/TX.ts"
 Normalizing the content took (0ms)
 Found imports: 2 (0ms)
-Found exports: 1 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/TX_.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 0 (0ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/UnBoxedArray.ts"
-Normalizing the content took (0ms)
-Found imports: 0 (0ms)
-Found exports: 1 (1ms)
-Parse file: "/home/luxcium/projects/pHashScout/src/types/ValidPHash.ts"
-Normalizing the content took (0ms)
-Found imports: 0 (0ms)
-Found exports: 3 (0ms)
-Parse file: "/home/luxcium/projects/pHashScout/src/types/WithExclude.ts"
 Normalizing the content took (1ms)
 Found imports: 0 (0ms)
-Found exports: 4 (0ms)
+Found exports: 1 (0ms)
+Parse file: "/home/luxcium/projects/pHashScout/src/types/ValidPHash.ts"
+Normalizing the content took (0ms)
+Found imports: 0 (1ms)
+Found exports: 3 (0ms)
+Parse file: "/home/luxcium/projects/pHashScout/src/types/WithExclude.ts"
+Normalizing the content took (0ms)
+Found imports: 0 (0ms)
+Found exports: 4 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/index.ts"
 Normalizing the content took (0ms)
 Found imports: 31 (0ms)
-Found exports: 3 (1ms)
+Found exports: 3 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/δ_CurrentPath.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 1 (0ms)
 Found exports: 18 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/δ_FilePath.ts"
 Normalizing the content took (0ms)
-Found imports: 1 (0ms)
-Found exports: 1 (1ms)
+Found imports: 1 (1ms)
+Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/δ_Pr.ts"
 Normalizing the content took (0ms)
 Found imports: 0 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/Enums/FileTypeEnum.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 1 (0ms)
 Found exports: 9 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/types/complex-types/file-path-types.ts"
@@ -862,39 +867,39 @@ Normalizing the content took (0ms)
 Found imports: 1 (0ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/convert.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 2 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/dirListWithFileType.ts"
-Normalizing the content took (1ms)
-Found imports: 2 (0ms)
+Normalizing the content took (0ms)
+Found imports: 2 (1ms)
 Found exports: 4 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/fileStatsLister.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
-Found exports: 1 (1ms)
+Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/generator.ts"
 Normalizing the content took (0ms)
 Found imports: 0 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/getChildPaths.ts"
 Normalizing the content took (0ms)
-Found imports: 4 (0ms)
+Found imports: 4 (1ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/getCurrentPath.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 2 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/getCurrentPaths.ts"
 Normalizing the content took (0ms)
 Found imports: 4 (0ms)
-Found exports: 4 (1ms)
+Found exports: 4 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/getPathWithStats.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 8 (0ms)
-Found exports: 6 (1ms)
+Found exports: 6 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/getSign.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 0 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/getSplit.ts"
@@ -903,7 +908,7 @@ Found imports: 0 (0ms)
 Found exports: 6 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/hasSameTitleInclude.ts"
 Normalizing the content took (0ms)
-Found imports: 1 (1ms)
+Found imports: 1 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/incrementor.ts"
 Normalizing the content took (0ms)
@@ -926,7 +931,7 @@ Normalizing the content took (0ms)
 Found imports: 1 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/titleBuilder.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 1 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/utils.ts"
@@ -938,7 +943,7 @@ Normalizing the content took (0ms)
 Found imports: 1 (0ms)
 Found exports: 4 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/file-filter/filterCharacterDevices.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 1 (0ms)
 Found exports: 4 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/file-filter/filterDirectories.ts"
@@ -950,58 +955,58 @@ Normalizing the content took (0ms)
 Found imports: 1 (0ms)
 Found exports: 4 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/file-filter/filterFiles.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 2 (0ms)
 Found exports: 5 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/file-filter/filterSockets.ts"
 Normalizing the content took (0ms)
 Found imports: 1 (0ms)
-Found exports: 4 (1ms)
+Found exports: 4 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/file-filter/filterSymbolicLinks.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 1 (0ms)
 Found exports: 4 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/file-filter/genericFilter.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 2 (0ms)
-Found exports: 0 (0ms)
+Found exports: 0 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/file-filter/index.ts"
-Normalizing the content took (1ms)
+Normalizing the content took (0ms)
 Found imports: 7 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/paths/getCurrentPath.ts"
-Normalizing the content took (0ms)
-Found imports: 3 (1ms)
+Normalizing the content took (1ms)
+Found imports: 3 (0ms)
 Found exports: 2 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/restrainingZalgo/immediateZalgo.ts"
 Normalizing the content took (0ms)
 Found imports: 2 (0ms)
-Found exports: 1 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/restrainingZalgo/index.ts"
 Normalizing the content took (0ms)
 Found imports: 5 (0ms)
 Found exports: 5 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/restrainingZalgo/nextTickZalgo.ts"
-Normalizing the content took (0ms)
-Found imports: 1 (1ms)
+Normalizing the content took (1ms)
+Found imports: 1 (0ms)
 Found exports: 0 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/restrainingZalgo/nullOrDefined.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 0 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/restrainingZalgo/restrainingZalgo.ts"
 Normalizing the content took (0ms)
 Found imports: 3 (0ms)
-Found exports: 1 (0ms)
+Found exports: 1 (1ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/restrainingZalgo/timeoutZalgo.ts"
 Normalizing the content took (0ms)
-Found imports: 2 (1ms)
+Found imports: 2 (0ms)
 Found exports: 1 (0ms)
 Parse file: "/home/luxcium/projects/pHashScout/src/utils/restrainingZalgo/zalgo.ts"
-Normalizing the content took (0ms)
+Normalizing the content took (1ms)
 Found imports: 4 (0ms)
 Found exports: 5 (0ms)
-Parsing the files took (143ms)
+Parsing the files took (149ms)
 Cannot resolve path to '/home/luxcium/projects/pHashScout/scripts/fp-ts/function'. Tried: [
   "file",
   "/home/luxcium/projects/pHashScout/scripts/fp-ts/function",
@@ -1173,6 +1178,15 @@ Cannot resolve path to '/home/luxcium/projects/pHashScout/src/utils'. Tried: [
   0,
   null
 ]
+Cannot resolve path to '/home/luxcium/projects/pHashScout/src/types'. Tried: [
+  "file",
+  "/home/luxcium/projects/pHashScout/src/types",
+  [
+    ""
+  ],
+  0,
+  null
+]
 Cannot resolve path to '/home/luxcium/projects/pHashScout/src/fs-extra'. Tried: [
   "file",
   "/home/luxcium/projects/pHashScout/src/fs-extra",
@@ -1185,15 +1199,6 @@ Cannot resolve path to '/home/luxcium/projects/pHashScout/src/fs-extra'. Tried: 
 Cannot resolve path to '/home/luxcium/projects/pHashScout/src/commands'. Tried: [
   "file",
   "/home/luxcium/projects/pHashScout/src/commands",
-  [
-    ""
-  ],
-  0,
-  null
-]
-Cannot resolve path to '/home/luxcium/projects/pHashScout/src/types'. Tried: [
-  "file",
-  "/home/luxcium/projects/pHashScout/src/types",
   [
     ""
   ],
@@ -1317,15 +1322,6 @@ Cannot resolve path to '/home/luxcium/projects/pHashScout/src/types'. Tried: [
   0,
   null
 ]
-Cannot resolve path to '/home/luxcium/projects/pHashScout/src/API/yargs'. Tried: [
-  "file",
-  "/home/luxcium/projects/pHashScout/src/API/yargs",
-  [
-    ""
-  ],
-  0,
-  null
-]
 Cannot resolve path to '/home/luxcium/projects/pHashScout/src/API/node:fs/promises'. Tried: [
   "file",
   "/home/luxcium/projects/pHashScout/src/API/node:fs/promises",
@@ -1356,6 +1352,15 @@ Cannot resolve path to '/home/luxcium/projects/pHashScout/src/tools'. Tried: [
 Cannot resolve path to '/home/luxcium/projects/pHashScout/src/tools/computePHash'. Tried: [
   "file",
   "/home/luxcium/projects/pHashScout/src/tools/computePHash",
+  [
+    ""
+  ],
+  0,
+  null
+]
+Cannot resolve path to '/home/luxcium/projects/pHashScout/src/API/yargs'. Tried: [
+  "file",
+  "/home/luxcium/projects/pHashScout/src/API/yargs",
   [
     ""
   ],
@@ -2325,6 +2330,15 @@ Cannot resolve path to '/home/luxcium/projects/pHashScout/src/tools/computePHash
   0,
   null
 ]
+Cannot resolve path to '/home/luxcium/projects/pHashScout/src/utils'. Tried: [
+  "file",
+  "/home/luxcium/projects/pHashScout/src/utils",
+  [
+    ""
+  ],
+  0,
+  null
+]
 Cannot resolve path to '/home/luxcium/projects/pHashScout/src/tools/computePHash/sharp-phash'. Tried: [
   "file",
   "/home/luxcium/projects/pHashScout/src/tools/computePHash/sharp-phash",
@@ -3054,12 +3068,12 @@ Cannot resolve path to '/home/luxcium/projects/pHashScout/src/utils/restrainingZ
   0,
   null
 ]
-Processed files: 198 (132ms)
-Files having imports|exports: 190 (1ms)
-Total imports: 596 (1ms)
-Total exports: 596 (4ms)
-Analysed files: 190 (3ms)
-Not used exports: 52 (3ms)
-Found circular imports: 23 (3ms)
-Total ellapsed time (ms): 699
+Processed files: 199 (117ms)
+Files having imports|exports: 191 (0ms)
+Total imports: 598 (1ms)
+Total exports: 597 (4ms)
+Analysed files: 191 (3ms)
+Not used exports: 53 (3ms)
+Found circular imports: 23 (2ms)
+Total ellapsed time (ms): 682
 ------------------------------------------------------------------------
