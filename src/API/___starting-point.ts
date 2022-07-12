@@ -1,16 +1,14 @@
 import * as fs from 'node:fs/promises';
-import { join } from 'node:path';
+import path, { join } from 'node:path';
 import { doUniqueAddObj } from '../doUniqueAddObj';
 import { rConnect } from '../rConnect';
 import { getPathInfos } from '../tools';
-import { getBigStrPHash } from '../tools/computePHash';
+import { getBigStrPHashFromFile } from '../tools/computePHash';
 
 const CSI = '\u009B';
 
-const argvs = process.argv.slice(2);
-// console.log(argvs);
-void argvs;
-export {};
+// const argvs = process.argv.slice(2);
+// void argvs;
 const Rc = rConnect();
 
 const traverse = async (dir: string) => {
@@ -39,37 +37,38 @@ export async function doSomethingWithPath(dir: string, subfolders: string[]) {
     }
     const isDirectory = await isDir(fullPath);
     if (!isDirectory) {
-      // console.log('\nfullPath', fullPath, '\u009B2F', '\u009B3J'); // \u009B31m
       const grpKey = 'x00Traverse';
-      // const validExtentions = new Set(['.png', '.jpeg', '.jpg', '.webp']);
-      const pHash = await getBigStrPHash(fullPath);
-
-      const infosToAdd = {
-        dir: pathInfos.dir,
-        fullPath,
-        pHash,
-        baseName: pathInfos.base,
-        extname,
-      };
-      doUniqueAddObj(await Rc, grpKey, infosToAdd);
-      // console.log(infosToAdd, '\u009B1F'); // , '\u009B7F', '\u009B1J', '\u009B1F');
-      // console.log('\u009B9mfullPath', fullPath, '\u009B0m\u009B1F');
-      scroll(7);
-      console.log('>  fullPath', fullPath, '\u009B0K\u009B0m\u009B1F');
-      scroll(-8);
-
-      // console.log('fullPath', fullPath, '\u009B1E');
+      const pHash = await getBigStrPHashFromFile(fullPath);
+      if (pHash) {
+        const infosToAdd = {
+          dir: pathInfos.dir,
+          fullPath,
+          pHash,
+          baseName: pathInfos.base,
+          extname,
+        };
+        doUniqueAddObj(await Rc, grpKey, infosToAdd);
+        console.log(
+          '>  fullPath',
+          `'"${path.normalize(fullPath)}"'`,
+          '\u009B0K\u009B0m\u009B1F'
+        );
+        return true;
+      } else {
+        console.error(
+          '\u009B1m<\u009B0m \u009B90m skip file at:\u009B0m',
+          `\u009B90m"'${path.normalize(fullPath)}'"\u009B0m\n`
+        );
+        return false;
+      }
     } else {
-      console.log(
-        '\u009B9mfullPath\u009B0m\u009B7m',
+      console.error(
+        '\u009B9m>  Skip due to fullPath `isDirectory`\u009B0m\u009B7m',
         fullPath,
-        '\u009B0m\u009B1F'
+        '\u009B0m\u009B1F\n'
       );
-      // console.log('\u009B7m\u009B9mfullPath', fullPath, '\u009B1F');
+      return null;
     }
-    // const redisQuerry = doRedisQuery(Rc, grpKey);
-    // redisQuerry;
-    // return globalMain(fullPath, grpKey, validExtentions, Rc);
   });
 }
 export function insertLine(Ps = 1) {
@@ -119,3 +118,14 @@ async function isDir(dir: string) {
   const stats = await fs.stat(dir);
   return stats.isDirectory();
 }
+
+// console.log('\nfullPath', fullPath, '\u009B2F', '\u009B3J'); // \u009B31m
+// console.log(infosToAdd, '\u009B1F'); // , '\u009B7F', '\u009B1J', '\u009B1F');
+// console.log('\u009B9mfullPath', fullPath, '\u009B0m\u009B1F');
+// scroll(7);
+// scroll(-8);
+// console.log('fullPath', fullPath, '\u009B1E');
+// console.log('\u009B7m\u009B9mfullPath', fullPath, '\u009B1F');
+// const redisQuerry = doRedisQuery(Rc, grpKey);
+// redisQuerry;
+// return globalMain(fullPath, grpKey, validExtentions, Rc);

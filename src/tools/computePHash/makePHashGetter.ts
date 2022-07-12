@@ -1,7 +1,7 @@
 import { PathWithStats, PHashGet } from '../../types';
 import { immediateZalgo } from '../../utils';
 import { notExcluded } from '../notExclude';
-import { getBigStrPHash } from './getBigStrPHash';
+import { getBigStrPHashFromFile } from './getBigStrPHash';
 
 export function makePHashGetter<T extends PathWithStats>(imgFile: T): PHashGet {
   try {
@@ -10,7 +10,7 @@ export function makePHashGetter<T extends PathWithStats>(imgFile: T): PHashGet {
         await: {
           getPHash: async () => {
             return immediateZalgo({
-              pHash: await getBigStrPHash(imgFile.fullPath),
+              pHash: await getBigStrPHashFromFile(imgFile.fullPath),
               exclude: false,
             });
           },

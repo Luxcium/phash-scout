@@ -1,2 +1,2 @@
-export { getBigStrPHash } from './getBigStrPHash';
+export { getBigStrPHashFromFile } from './getBigStrPHash';
 export { getPhash } from './getPhash';

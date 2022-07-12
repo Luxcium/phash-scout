@@ -1,7 +1,7 @@
 /** CSI	Control Sequence Introducer	\x9B	Start of a CSI sequence.	✓   */
 export const CSI = '\u009B';
 export const SP = '\u0020';
-
+// `${'\u009B'}0K`;
 /**
  * **ESC :**	Escape	`\e`, `\x1B`	Start of a sequence. \
  * Cancels any other sequence.
