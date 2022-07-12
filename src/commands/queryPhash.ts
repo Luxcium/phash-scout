@@ -17,9 +17,9 @@ export async function queryPhash(
     const R_EXISTS = await immediateZalgo(keys_ || R.EXISTS(k));
     if (R_EXISTS === 1) {
       await syncPhash(R, k);
-      console.error(`
-      const result = R.sendCommand([${IMGSCOUT.QUERY}, ${k}, ${phash_}, ${radius}]);
-      `);
+      // console.error(`
+      // const result = R.sendCommand([${IMGSCOUT.QUERY}, ${k}, ${phash_}, ${radius}]);
+      // `);
       const result = R.sendCommand([IMGSCOUT.QUERY, k, phash_, radius]);
       // console.error(`R.EXISTS(${k}) -> ${R_EXISTS}`);
       return result;
@@ -27,7 +27,7 @@ export async function queryPhash(
     console.error(`R.EXISTS(${k}) -> ${R_EXISTS} ... keys.list[k]:${keys_}`);
   } catch (error: any) {
     if (!failSilently) throw new Error('at: queryPhash →' + error);
-    console.error('queryPhash Failled silently');
+    console.error('\u009B31mqueryPhash Failled silently\u009B0m');
   }
   return [];
 }

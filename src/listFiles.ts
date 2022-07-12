@@ -35,10 +35,8 @@ export function listFilesFromArray<T extends boolean>(
 }
 
 export function listFiles(folder: string): Bg<PathWithStats> {
-  console.log('in listFiles' + folder);
-
-  return BoxedGenerator.of(...newGetPathWithStats(folder)).map(pat => {
-    console.log('pat', pat);
-    return pat;
+  return BoxedGenerator.of(...newGetPathWithStats(folder)).map(path_ => {
+    console.log('(listFiles) path:', path_);
+    return path_;
   });
 }

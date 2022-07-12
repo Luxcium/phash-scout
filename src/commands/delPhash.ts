@@ -13,7 +13,7 @@ export async function delPhash(R: any, k: S, id: N, failSilently = true) {
     console.error(`R.EXISTS(${k}) -> ${R_EXISTS}`);
   } catch (error: any) {
     if (!failSilently) throw new Error('queryPhash' + error);
-    console.error('queryPhash Failled silently');
+    console.error('\u009B31mqueryPhash Failled silently\u009B0m');
   }
   return [];
 }
