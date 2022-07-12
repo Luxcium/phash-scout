@@ -1,6 +1,4 @@
-import { statSync } from 'fs-extra';
-import { uniqueAddToObj } from './commands';
-import { titleBuilder } from './utils/titleBuilder';
+import { doUniqueAddObj } from './doUniqueAddObj';
 import { notExcluded, notNull } from './tools/notExclude';
 import {
   Bg,
@@ -33,19 +31,10 @@ export function doRedisQuery(
     return bgPaths.map(paths => {
       const queryResult = async () => {
         const _path = { ...paths, ...(await paths.await.getPHash()) };
-        if (notNull(_path.pHash) && notExcluded(_path)) {
-          const stats = statSync(_path.fullPath);
-          const phash_ = _path.pHash;
 
-          return uniqueAddToObj({
-            R,
-            title: titleBuilder({ ..._path, ...stats, key }),
-            phash_,
-            radius: '0',
-            k: key,
-          });
-        }
-        return null;
+        return notNull(_path.pHash) && notExcluded(_path)
+          ? doUniqueAddObj(R, key, _path)
+          : null;
       };
       const strange: {
         getChild: () => Promise<
