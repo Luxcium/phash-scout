@@ -1,35 +1,40 @@
-/*
-MIT License
-
-Copyright (c) webstrand 2022
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
+/* *************************************************************************** */
+/* *                                                                         * */
+/* *   MIT License                                                           * */
+/* *   Copyright webstrand © 2022                                            * */
+/* *   https://gist.github.com/webstrand/46e7de2319a5aad77da443e3fd50a82d    * */
+/* *   (Revision:  1100077cf56fa2532b6c0dd2c94ccb9f3718d79b)                 * */
+/* *   Fast Synchronous Directory Traversal using chdir                      * */
+/* *                                                                         * */
+/* *   Midified by Luxcium                                                   * */
+/* *   Copyright Luxcium © 2022                                              * */
+/* *                                                                         * */
+/* *   The above copyright notice and this permission notice shall be        * */
+/* *   included in all copies or substantial portions of the Software.       * */
+/* *                                                                         * */
+/* *   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,       * */
+/* *   EXPRESS OR IMPLIED INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF     * */
+/* *   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE [... MIT License ]  * */
+/* *                                                                         * */
+/* *************************************************************************** */
 
 import { opendirSync } from 'node:fs';
 import { constants } from 'node:os';
-import { chdir, exit } from 'node:process';
+import { chdir } from 'node:process';
 
-doTraverseDirs(process.argv[2]);
-exit(0);
+const count = { a: 0 };
+const timeThen = performance.now();
+const timeNow = () => performance.now();
+const timeSinceThen = () => timeNow() - timeThen;
 
-function doTraverseDirs(dir: string) {
+// doTraverseDirs(process.argv[2]);
+// exit(0);
+
+export function doTraverseDirs(
+  dir: string,
+  sideFunction: <T>(...args: any[]) => T,
+  verbose = true
+) {
   const parents: string[] = [];
   let cwd = '';
 
@@ -44,8 +49,20 @@ function doTraverseDirs(dir: string) {
     const dir = opendirSync('.', {});
 
     for (let ent = dir.readSync(); ent !== null; ent = dir.readSync()) {
-      if (ent.isDirectory()) queue.push(ent.name);
-      else console.log(`${cwd}/${ent.name}`);
+      const ms = timeSinceThen();
+
+      if (ent.isDirectory()) {
+        queue.push(ent.name);
+      } else {
+        // TODO: //-* ------------------------------------------------
+        //       //-* Add the side effect on files here !!!
+        sideFunction(`${cwd}/${ent.name}`);
+        verbose &&
+          console.log(
+            [++count.a, (ms / count.a).toFixed(2)],
+            `${cwd}/${ent.name}`
+          );
+      }
     }
     dir.closeSync();
   }
@@ -62,7 +79,7 @@ function doTraverseDirs(dir: string) {
       if (error instanceof Error) {
         if (hasKey(error, 'errno')) {
           if (error.errno === -constants.errno.EACCES) {
-            console.error('skipping', next, error);
+            verbose && console.error('skipping', next, error);
             return false;
           }
         }
@@ -76,7 +93,7 @@ function doTraverseDirs(dir: string) {
     } else {
       parents.push(next);
       cwd = cwd.length === 0 ? next : `${cwd}/${next}`;
-      console.log(cwd);
+      verbose && console.log(cwd);
       queue.push('..');
       return true;
     }
