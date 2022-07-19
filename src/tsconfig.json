@@ -48,9 +48,9 @@
     /* Source Map and declaration options */
     "declaration": true,
     "declarationMap": true,
-    "inlineSourceMap": true,
+    "inlineSourceMap": false,
     "inlineSources": true,
-    "sourceMap": false,
+    "sourceMap": true,
     // "emitDeclarationOnly": false,
     /* Projects */
     // "composite": true,
