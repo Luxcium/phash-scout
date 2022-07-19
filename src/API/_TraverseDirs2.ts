@@ -2,10 +2,9 @@ import { Dir } from 'node:fs';
 import * as fs from 'node:fs/promises';
 import { join } from 'node:path';
 import { rConnect } from '../rConnect';
-import { getBigStrPHashFromFile } from '../tools/computePHash';
+import { isDir, getBigStrPHashFromFile } from '../tools';
 import { SideFunctionParam } from '../types';
 import { immediateZalgo } from '../utils';
-import { isDir } from './isDir';
 import { doTraverseDirs } from './sync-directory-traversal';
 
 export const count = { a: 1 };

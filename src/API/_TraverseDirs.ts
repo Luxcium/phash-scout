@@ -3,10 +3,13 @@ import * as fs from 'node:fs/promises';
 import { join } from 'node:path';
 import { doUniqueAddObj } from '../doUniqueAddObj';
 import { rConnect } from '../rConnect';
-import { getPathInfos } from '../tools';
-import { getBigStrPHashFromFile } from '../tools/computePHash';
-import { Nothing, Right } from '../tools/Maybe';
-import { isDir } from './isDir';
+import {
+  getPathInfos,
+  isDir,
+  Nothing,
+  Right,
+  getBigStrPHashFromFile,
+} from '../tools';
 
 export const count = { a: 1, b: 1, c: 1, d: 1 };
 export const steps = {

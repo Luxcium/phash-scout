@@ -1,7 +1,6 @@
 import { rConnect } from '../rConnect';
-import { getBigStrPHashFromFile } from '../tools/computePHash';
+import { isDir, getBigStrPHashFromFile } from '../tools';
 import { SideFunctionParam } from '../types';
-import { isDir } from './isDir';
 import { doTraverseDirs } from './sync-directory-traversal';
 import { cachedPhash } from './_TraverseDirs2';
 

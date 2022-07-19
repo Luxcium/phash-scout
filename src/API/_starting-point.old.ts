@@ -3,12 +3,10 @@ import * as fs from 'node:fs/promises';
 import path, { join } from 'node:path';
 import { doUniqueAddObj } from '../doUniqueAddObj';
 import { rConnect } from '../rConnect';
-import { getPathInfos } from '../tools';
+import { getPathInfos, isDir, isDirSync, Nothing, Right } from '../tools';
 import { getBigStrPHashFromFile } from '../tools/computePHash';
-import { Nothing, Right } from '../tools/Maybe';
 import { SideFunctionParam } from '../types';
 import { immediateZalgo } from '../utils';
-import { isDir, isDirSync } from './isDir';
 import { doTraverseDirs } from './sync-directory-traversal';
 import { cachedPhash } from './_TraverseDirs2';
 

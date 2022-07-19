@@ -11,7 +11,7 @@ import { getRawDirList } from './getRawDirList';
 import { getStats } from './getStats';
 
 export { IMGSCOUT } from '../commands';
-export { getPhash } from './computePHash';
+export { getBigStrPHashFromFile, getPhash } from './computePHash';
 export { FileType as FileTypes } from './FileTypeEnum';
 export type { FileType } from './FileTypeEnum';
 export { getDirsSync, getFilesAsync, getListing } from './fsTools';
@@ -23,9 +23,11 @@ export { getRawDirList, getRawDirListSync } from './getRawDirList';
 export { getSplit } from './getSplit';
 export { getStats, getStatsSync } from './getStats';
 export { isA_Promise } from './isA_Promise';
+export { isDir, isDirSync } from './isDir';
 export { isQueryResult } from './isQueryResult';
 export { isQueryResultItem } from './isQueryResultItem';
 export { isQueryResultList } from './isQueryResultList';
+export { MayBe, Nothing, Right } from './Maybe';
 export {
   isExcluded,
   isNull,
