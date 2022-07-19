@@ -23,6 +23,8 @@ import { opendir } from 'node:fs/promises';
 import { constants } from 'node:os';
 import { chdir } from 'node:process';
 
+import { SideFunctionParam } from '../types';
+
 const count = { a: 0 };
 const timeThen = performance.now();
 const timeNow = () => performance.now();
@@ -43,80 +45,39 @@ export async function doTraverseDirs(
   }
   return;
 }
-let count3 = 1;
-let count4 = 1;
-let count5 = 1;
-let count6 = 1;
-let timeThen3 = performance.now();
-let timeThen4 = performance.now();
-let timeThen5 = performance.now();
-let timeThen6 = performance.now();
-let perform1 = '1';
-/**
- * Scans the current directory
- */
-// [363505] 0.24    0.28
-// const openSync = true;
-// const closeSync = true;
-// const sideAwait = true;
-export const ASYNC = false;
+
 export const SYNC = true;
 export const AWAIT = true;
 
-// const openSync = ASYNC;
-// const closeSync = SYNC;
-// const sideAwait = AWAIT;
+/**
+ * Scans the current directory
+ */
 async function scan(
   queue: string[],
-  sideFunction: (...args: any[]) => Promise<string>,
+  sideFunction: <T extends SideFunctionParam>(args: T) => Promise<string>,
   cwd: { path: string },
   debug = true
 ) {
   // const dir =
-  const dir = ASYNC ? opendirSync('.', {}) : await opendir('.', {});
+  const dir = AWAIT ? await opendir('.', {}) : opendirSync('.', {});
   for (let ent = dir.readSync(); ent !== null; ent = dir.readSync()) {
     const ms = timeSinceThen();
     if (ent.isDirectory()) {
       queue.push(ent.name);
     } else {
-      // TODO: //-* ------- Add the side effect on files here --------
       const fullPath = `${cwd.path}/${ent.name}`;
-      // console.log
-      !AWAIT ? await sideFunction(fullPath) : sideFunction(fullPath);
-      debug &&
-        process.stdout.write(
-          `\u009B33m[\u009B93m${++count.a}\u009B33m] \u009B32m${(
-            ms / count.a
-          ).toFixed(2)} ${perform1} \u009B37m${fullPath}\u009B0m\n`
-        );
 
-      if ((count3 + 5000) % 10_000 === 0) {
-        count3 = 1;
-        timeThen3 = performance.now();
-      }
-      if ((count4 + 675) % 5000 === 0) {
-        count4 = 1;
-        timeThen4 = performance.now();
-      }
-      if ((count5 + 1250) % 5000 === 0) {
-        count5 = 1;
-        timeThen5 = performance.now();
-      }
-      if ((count6 + 2500) % 5000 === 0) {
-        count6 = 1;
-        timeThen6 = performance.now();
-      }
-      const perf3 = (performance.now() - timeThen3) / count3++;
-      const perf4 = (performance.now() - timeThen4) / count4++;
-      const perf5 = (performance.now() - timeThen5) / count5++;
-      const perf6 = (performance.now() - timeThen6) / count6++;
-      perform1 = ((perf3 + perf4 + perf5 + perf6) / 4)
-        .toFixed(2)
-        .padStart(7, ' ');
+      // HACK: //-! ------- Add the side effect on files here --------
+
+      !AWAIT
+        ? await sideFunction({ fullPath, ms, count, debug })
+        : sideFunction({ fullPath, ms, count, debug });
+
+      // : : : //-! --------------------------------------------------
     }
   }
 
-  ASYNC ? dir.closeSync() : dir.close();
+  !SYNC ? dir.closeSync() : !AWAIT ? await dir.close() : dir.close();
 }
 
 /**

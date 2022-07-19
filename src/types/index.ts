@@ -82,6 +82,7 @@ export type { RawQueryResult } from './RawQueryResult';
 export type { RedisClientType } from './RedisClientType';
 export type { RedisCStrOptions } from './RedisCStrOptions';
 export type { RedisQueryResult } from './RedisQueryResult';
+export type { SideFunctionParam } from './SideFunctionParam';
 export type { SplitPath } from './SplitPath';
 export type { Strange } from './Strange';
 // export type { TX_ } from './TX_';
