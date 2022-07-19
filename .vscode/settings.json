@@ -934,9 +934,7 @@
       "backgroundColor": "transparent"
     }
   ],
-  "[ignore]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  },
+
   // #endregion: BETTER COMMENTS                                     !
   /*
   |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
@@ -975,6 +973,571 @@
   "typescript.workspaceSymbols.scope": "currentProject",
   "typescript.locale": "en",
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
-  "standard.enable": false
   // #endregion: CUSTOMS RULES                                       !
+  // #region: TODO TREE                                                         !
+  "todo-tree.highlights.defaultHighlight": {
+    "background": "#FFF",
+    "borderRadius": "10px",
+    "foreground": "#224",
+    "gutterIcon": true,
+    "hideFromStatusBar": true,
+    "hideFromTree": true,
+    "icon": "alert",
+    "iconColour": "#05F",
+    "rulerLane": "center",
+    "type": "tag",
+    "opacity": 80
+    // "rulerColour":   ,
+  },
+  // "todo-tree.highlights.schemes": [
+  //   "file",
+  //   "untitled",
+  //   "vscode-userdata",
+  //   "output",
+  // ],
+  "todo-tree.general.tags": [
+    "#region:",
+    "-+",
+    "#endregion:",
+    "-:",
+    "BUG:",
+    "CONSOLE:",
+    "ERROR:",
+    "ERROR HANDLER:",
+    "RETURNS:",
+    "HACK:",
+    "HINT:",
+    "→",
+    "->",
+    "FIXME:",
+    "eslint-disable",
+    "INFO:",
+    "←:",
+    "-!",
+    "SECTION:",
+    "-@",
+    "LOG:",
+    "-#",
+    "TODO:",
+    "-$",
+    "WARNING:",
+    "-%",
+    "XXX:",
+    "-?",
+    "FUNC DEF:",
+    "-&",
+    "FUNC CALL:",
+    "|-::",
+    "#-|",
+    "-*",
+    "!:",
+    "@:",
+    "$:",
+    "#:",
+    "%:",
+    "?:",
+    "&:",
+    "*:",
+    "+:",
+    "::"
+  ],
+  "todo-tree.highlights.customHighlight": {
+    // #region: //-+
+    "#region:": {
+      "foreground": "#224",
+      "background": "#DF3",
+      "iconColour": "#DF3",
+      "icon": "mirror",
+      "gutterIcon": true,
+      "type": "tag-and-comment",
+      "borderRadius": "7px",
+      "rulerLane": "right"
+    },
+    // -+
+    "-+": {
+      "foreground": "#DF3",
+      "background": "#DF3",
+      "opacity": 25,
+      "type": "whole-line",
+      "gutterIcon": false,
+      "borderRadius": "0px",
+      "hideFromTree": true,
+      "hideFromStatusBar": true,
+      "rulerLane": "full"
+    },
+    // #endregion: // -:
+    "#endregion:": {
+      "foreground": "#224",
+      "background": "#F15",
+      "iconColour": "#F15",
+      "icon": "mirror",
+      "gutterIcon": true,
+      "type": "tag-and-comment",
+      "rulerLane": "left",
+      "borderRadius": "7px",
+      "hideFromTree": true,
+      "hideFromStatusBar": true
+    },
+    // -:
+    "-:": {
+      "background": "#F15",
+      "foreground": "#F15",
+      "gutterIcon": false,
+      "hideFromStatusBar": true,
+      "hideFromTree": true,
+      "borderRadius": "0px",
+      "opacity": 15,
+      "rulerLane": "full",
+      "type": "whole-line"
+    },
+    // eslint-disable
+    "eslint-disable": {
+      "foreground": "#5CF",
+      "background": "#93F",
+      "type": "whole-line",
+      "opacity": 30,
+      "iconColour": "#FB0",
+      "borderRadius": "0px",
+      "icon": "report",
+      "gutterIcon": true,
+      "rulerLane": "full"
+    },
+    // INFO: //-!
+    "INFO:": {
+      "background": "#BBB",
+      "foreground": "#224",
+      "gutterIcon": true,
+      "hideFromStatusBar": false,
+      "hideFromTree": false,
+      "icon": "info",
+      "borderRadius": "7px",
+      "iconColour": "#BBB",
+      "rulerLane": "right",
+      "type": "tag",
+      "opacity": 90,
+      "rulerColour": "#FFF"
+    },
+    //-!
+    "-!": {
+      "background": "#9BF",
+      "foreground": "#BBB",
+      "gutterIcon": false,
+      "hideFromStatusBar": true,
+      "hideFromTree": true,
+      "opacity": 20,
+      "rulerLane": "full",
+      "borderRadius": "0px",
+      "rulerColour": "#FFF5",
+      "type": "whole-line"
+    },
+    // HINT: //->
+    "HINT:": {
+      "background": "#FB0",
+      "foreground": "#224",
+      "gutterIcon": true,
+      "icon": "report",
+      "borderRadius": "7px",
+      "iconColour": "#FB0",
+      "rulerLane": "center"
+    },
+    //->
+    "->": {
+      "background": "#93F",
+      "foreground": "#5CF",
+      "gutterIcon": true,
+      "icon": "report",
+      "iconColour": "#FB0",
+      "opacity": 30,
+      "rulerLane": "full",
+      "borderRadius": "0px",
+      "rulerColour": "#5CF5",
+      "type": "whole-line"
+    },
+    // HACK: //-*
+    "HACK:": {
+      "background": "#74F",
+      "foreground": "#DDD",
+      "gutterIcon": true,
+      "borderRadius": "7px",
+      "icon": "squirrel",
+      "iconColour": "#93F",
+      "rulerLane": "center"
+    },
+    //-*
+    "-*": {
+      "background": "#0BF",
+      "foreground": "#FB0",
+      "gutterIcon": false,
+      "hideFromStatusBar": true,
+      "hideFromTree": true,
+      "opacity": 20,
+      "iconColour": "#FB0",
+      "rulerLane": "full",
+      "borderRadius": "0px",
+      "rulerColour": "#FB05",
+      "type": "whole-line"
+    },
+    // RETURNS: //→
+    "RETURNS:": {
+      "foreground": "#224",
+      "background": "#CF2",
+      "iconColour": "#CF2",
+      "icon": "cross-reference",
+      "borderRadius": "7px",
+      "gutterIcon": true,
+      "rulerLane": "center"
+    },
+    //→
+    "→": {
+      "foreground": "#CF2",
+      "background": "#CF2",
+      "iconColour": "#CF2",
+      "opacity": 50,
+      "type": "whole-line",
+      "icon": "cross-reference",
+      "gutterIcon": true,
+      "rulerLane": "full",
+      "hideFromTree": true,
+      "borderRadius": "0px",
+      "hideFromStatusBar": true
+    },
+    "←": {
+      "foreground": "#5CF",
+      "background": "#5CF",
+      "opacity": 30,
+      "gutterIcon": false,
+      "type": "text-and-comment",
+      "rulerLane": "center",
+      "hideFromTree": true,
+      "hideFromStatusBar": true
+    },
+    "BUG:": {
+      "foreground": "#224",
+      "background": "#F15",
+      "iconColour": "#F15",
+      "icon": "bug",
+      "gutterIcon": true,
+      "rulerLane": "center"
+    },
+    "CONSOLE:": {
+      "foreground": "#224",
+      "background": "#4B9",
+      "iconColour": "#4B9",
+      "icon": "terminal",
+      "gutterIcon": true,
+      "rulerLane": "center"
+    },
+    "ERROR:": {
+      "foreground": "#224",
+      "background": "#F36",
+      "iconColour": "#F36",
+      "icon": "x-circle",
+      "gutterIcon": true,
+      "rulerLane": "center"
+    },
+    // ERROR HANDLER: //-?
+    "ERROR HANDLER:": {
+      "foreground": "#FC9",
+      "background": "#F359",
+      "borderRadius": "7px",
+      "iconColour": "#F149",
+      "icon": "note",
+      "gutterIcon": true,
+      "type": "tag-and-comment",
+      "rulerLane": "center"
+      // "ERROR HANDLER:",
+    },
+    "-?": {
+      "foreground": "#FDB",
+      "background": "#F14",
+      "opacity": 30,
+      "type": "whole-line",
+      "gutterIcon": false,
+      "hideFromTree": true,
+      "hideFromStatusBar": true,
+      "rulerLane": "none",
+      "borderRadius": "0px"
+    },
+    "FIXME:": {
+      "foreground": "#224",
+      "background": "#F80",
+      "iconColour": "#F80",
+      "icon": "tools",
+      "gutterIcon": true,
+      "rulerLane": "center"
+    },
+    "SECTION:": {
+      "foreground": "#224",
+      "background": "#FD7",
+      "iconColour": "#FD7",
+      "icon": "mirror",
+      "gutterIcon": true,
+      "rulerColour": "#FB0",
+      "rulerLane": "full",
+      "type": "whole-line",
+      "hideFromTree": true,
+      "hideFromStatusBar": true
+    },
+    "LOG:": {
+      "foreground": "#224",
+      "background": "#9BE",
+      "iconColour": "#9BE",
+      "icon": "checklist",
+      "gutterIcon": true,
+      "rulerLane": "center"
+    },
+    "-#": {
+      "foreground": "#224",
+      "background": "#9BE",
+      "opacity": 25,
+      "type": "whole-line",
+      "gutterIcon": false,
+      "hideFromTree": true,
+      "hideFromStatusBar": true,
+      "rulerLane": "none"
+    },
+    "TODO:": {
+      "foreground": "#224",
+      "background": "#FB3",
+      "iconColour": "#FB3",
+      "icon": "bookmark",
+      "gutterIcon": true,
+      "rulerLane": "center"
+    },
+    "-$": {
+      "foreground": "#224",
+      "background": "#FB3",
+      "opacity": 25,
+      "type": "whole-line",
+      "gutterIcon": false,
+      "hideFromTree": true,
+      "hideFromStatusBar": true,
+      "rulerLane": "none"
+    },
+    "WARNING:": {
+      "foreground": "#224",
+      "background": "#BF2",
+      "iconColour": "#BF2",
+      "icon": "alert",
+      "gutterIcon": true,
+      "rulerLane": "center"
+    },
+    "-%": {
+      "foreground": "#224",
+      "background": "#BF2",
+      "opacity": 25,
+      "type": "whole-line",
+      "gutterIcon": false,
+      "hideFromTree": true,
+      "hideFromStatusBar": true,
+      "rulerLane": "none"
+    },
+    "XXX:": {
+      "foreground": "#224",
+      "background": "#E22",
+      "iconColour": "#E22",
+      "icon": "law",
+      "gutterIcon": true,
+      "rulerLane": "center"
+    },
+    "FUNC DEF:": {
+      "foreground": "#07F",
+      "background": "#FB0",
+      "iconColour": "#FB7",
+      "icon": "package-dependents",
+      "gutterIcon": true,
+      "rulerColour": "#FB7",
+      "rulerLane": "left",
+      "type": "tag",
+      // "hideFromTree": true,
+      "hideFromStatusBar": true
+    },
+    "FUNC CALL:": {
+      "foreground": "#FB7",
+      "background": "#07F",
+      "iconColour": "#07F",
+      "icon": "package-dependencies",
+      "gutterIcon": true,
+      "rulerColour": "#07F",
+      "rulerLane": "right",
+      "type": "tag",
+      "hideFromStatusBar": true
+    },
+    "-&": {
+      "foreground": "#07F",
+      "background": "#07F",
+      "opacity": 25,
+      "type": "whole-line",
+      "gutterIcon": false,
+      "hideFromTree": true,
+      "hideFromStatusBar": true,
+      "rulerColour": "#F45",
+      "rulerLane": "center"
+    },
+    // !:
+    "!:": {
+      "foreground": "#F20",
+      "background": "#F20",
+      "iconColour": "#F20",
+      "icon": "stop",
+      "gutterIcon": true,
+      "opacity": 20,
+      "rulerLane": "center",
+      "borderRadius": "0px",
+      "type": "whole-line"
+    },
+    // @:
+    "@:": {
+      "foreground": "#F36",
+      "background": "#F36",
+      "iconColour": "#F36",
+      "icon": "mention",
+      "gutterIcon": true,
+      "opacity": 20,
+      "rulerLane": "center",
+      "borderRadius": "0px",
+      "type": "whole-line"
+    },
+    // #-|
+    "#-|": {
+      "foreground": "#F36",
+      "background": "#F36",
+      "iconColour": "#F36",
+      "icon": "cpu",
+      "gutterIcon": true,
+      "opacity": 20,
+      "rulerLane": "center",
+      "borderRadius": "0px",
+      "type": "whole-line"
+    },
+    // ::
+    "::": {
+      "foreground": "#F84",
+      "background": "#F84",
+      "iconColour": "#F84",
+      "icon": "gear",
+      "gutterIcon": true,
+      "opacity": 20,
+      "rulerLane": "center",
+      "borderRadius": "0px",
+      "type": "whole-line"
+    },
+    // %:
+    "%:": {
+      "foreground": "#4EF",
+      "background": "#4EF",
+      "iconColour": "#4EF",
+      "icon": "gear",
+      "gutterIcon": true,
+      "opacity": 20,
+      "rulerLane": "center",
+      "borderRadius": "0px",
+      "type": "whole-line"
+    },
+    // ?:
+    "?:": {
+      "foreground": "#39F",
+      "background": "#39F",
+      "iconColour": "#39F",
+      "icon": "unverified",
+      "gutterIcon": true,
+      "opacity": 20,
+      "rulerLane": "center",
+      "borderRadius": "0px",
+      "type": "whole-line"
+    },
+    // &:
+    "&:": {
+      "foreground": "#93F",
+      "background": "#93F",
+      "iconColour": "#93F",
+      "icon": "squirrel",
+      "gutterIcon": true,
+      "opacity": 20,
+      "rulerLane": "center",
+      "borderRadius": "0px",
+      "type": "whole-line"
+    },
+    // *:
+    "*:": {
+      "foreground": "#9C7",
+      "background": "#9C7",
+      "iconColour": "#9C7",
+      "icon": "north-star",
+      "gutterIcon": true,
+      "opacity": 20,
+      "rulerLane": "center",
+      "borderRadius": "0px",
+      "type": "whole-line"
+    },
+    // $:
+    "$:": {
+      "foreground": "#9BE",
+      "background": "#9BE",
+      "iconColour": "#9BE",
+      "icon": "grabber",
+      "gutterIcon": true,
+      "opacity": 20,
+      "rulerLane": "center",
+      "borderRadius": "0px",
+      "type": "whole-line"
+    }
+  },
+  "todo-tree.filtering.ignoreGitSubmodules": false,
+  "todo-tree.filtering.includeHiddenFiles": false,
+  "todo-tree.filtering.passGlobsToRipgrep": true,
+  "todo-tree.filtering.useBuiltInExcludes": "file and search excludes",
+  "todo-tree.general.debug": false,
+  "todo-tree.general.enableFileWatcher": true,
+  "todo-tree.general.exportPath": "~/todo-tree-%Y%m%d-%H%M.txt",
+  "todo-tree.general.fileWatcherGlob": "**/*",
+  "todo-tree.general.revealBehaviour": "end of todo",
+  "todo-tree.general.rootFolder": "",
+  "todo-tree.general.statusBar": "current file",
+  "todo-tree.general.statusBarClickBehaviour": "cycle",
+  "todo-tree.highlights.enabled": true,
+  "todo-tree.highlights.highlightDelay": 100,
+  "todo-tree.highlights.useColourScheme": true,
+  "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^)\\s*($TAGS)|^\\s*- \\[ \\])",
+  "todo-tree.regex.regexCaseSensitive": true,
+  "todo-tree.ripgrep.ripgrep": "",
+  "todo-tree.ripgrep.ripgrepArgs": "--max-columns=1000 --no-config ",
+  "todo-tree.ripgrep.ripgrepMaxBuffer": 200,
+  "todo-tree.ripgrep.usePatternFile": true,
+  "todo-tree.tree.autoRefresh": true,
+  "todo-tree.tree.buttons.expand": true,
+  "todo-tree.tree.buttons.export": false,
+  "todo-tree.tree.buttons.filter": true,
+  "todo-tree.tree.buttons.groupByTag": true,
+  "todo-tree.tree.buttons.refresh": true,
+  "todo-tree.tree.buttons.reveal": true,
+  "todo-tree.tree.buttons.scanMode": false,
+  "todo-tree.tree.buttons.viewStyle": true,
+  "todo-tree.tree.disableCompactFolders": false,
+  "todo-tree.tree.expanded": true,
+  "todo-tree.tree.filterCaseSensitive": false,
+  "todo-tree.tree.flat": false,
+  // "todo-tree.tree.grouped": true,
+  "todo-tree.tree.hideIconsWhenGroupedByTag": false,
+  "todo-tree.tree.hideTreeWhenEmpty": false,
+  "todo-tree.tree.labelFormat": "${tag} ${after} ― Line ${line}",
+  "todo-tree.tree.scanAtStartup": true,
+  "todo-tree.tree.scanMode": "workspace",
+  "todo-tree.tree.showBadges": true,
+  "todo-tree.tree.showCountsInTree": true,
+  "todo-tree.tree.showCurrentScanMode": true,
+  // "todo-tree.tree.showScanModeButton": false,
+  "todo-tree.tree.sort": true,
+  "todo-tree.tree.sortTagsOnlyViewAlphabetically": false,
+  "todo-tree.tree.tagsOnly": true,
+  "todo-tree.tree.tooltipFormat": "${filepath}, line ${line}",
+  "todo-tree.tree.trackFile": true,
+  "todo-tree.filtering.excludedWorkspaces": [],
+  "todo-tree.filtering.excludeGlobs": [],
+  "todo-tree.filtering.includedWorkspaces": [],
+  "todo-tree.filtering.includeGlobs": [],
+  "todo-tree.general.tagGroups": {},
+  "todo-tree.highlights.backgroundColourScheme": [],
+  "todo-tree.highlights.foregroundColourScheme": []
+  // #endregion: TODO TREE                                                      !
 }
