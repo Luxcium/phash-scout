@@ -25,10 +25,20 @@ import { chdir } from 'node:process';
 
 import { SideFunctionParam } from '../types';
 
-const count = { a: 0 };
 const timeThen = performance.now();
 const timeNow = () => performance.now();
 const timeSinceThen = () => timeNow() - timeThen;
+const count = {
+  a: 0,
+  b: 0,
+  c: 0,
+  x: 0,
+  y: 0,
+  z: 0,
+  time1: timeThen,
+  time2: timeThen,
+  time3: timeThen,
+};
 
 export async function doTraverseDirs(
   absolutePath: string,
@@ -46,8 +56,8 @@ export async function doTraverseDirs(
   return;
 }
 
-export const SYNC = true;
-export const AWAIT = true;
+const isSYNC = false;
+const isAWAIT = false;
 
 /**
  * Scans the current directory
@@ -59,8 +69,13 @@ async function scan(
   debug = true
 ) {
   // const dir =
-  const dir = AWAIT ? await opendir('.', {}) : opendirSync('.', {});
-  for (let ent = dir.readSync(); ent !== null; ent = dir.readSync()) {
+  const dir = isSYNC ? opendirSync('.', {}) : await opendir('.', {});
+  for (
+    let ent = isSYNC ? dir.readSync() : await dir.read();
+    ent !== null;
+    ent = isSYNC ? dir.readSync() : await dir.read()
+  ) {
+    // for (let ent = dir.readSync(); ent !== null; ent = dir.readSync()) {
     const ms = timeSinceThen();
     if (ent.isDirectory()) {
       queue.push(ent.name);
@@ -69,7 +84,7 @@ async function scan(
 
       // HACK: //-! ------- Add the side effect on files here --------
       try {
-        !AWAIT
+        isAWAIT
           ? await sideFunction({ fullPath, ms, count, debug })
           : sideFunction({ fullPath, ms, count, debug });
       } catch (error) {
@@ -80,7 +95,7 @@ async function scan(
     }
   }
 
-  !SYNC ? dir.closeSync() : !AWAIT ? await dir.close() : dir.close();
+  isSYNC ? dir.closeSync() : !isAWAIT ? await dir.close() : dir.close();
 }
 
 /**

@@ -1,9 +1,8 @@
+import { Count } from './Count';
+
 export type SideFunctionParam = {
   fullPath: string;
-  ms: number;
-  count: {
-    a: number;
-  };
+  count: Count;
   debug?: boolean;
   verbose?: boolean;
 };

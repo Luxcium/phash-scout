@@ -13,6 +13,7 @@ export type {
   SymbolicLinkPath,
   UnknownTypePath,
 } from './complex-types/file-path-types';
+export type { Count } from './Count';
 export type { DirentWithFileType } from './DirentWithFileType';
 export type { FileType, FileType as FileTypes } from './Enums/FileTypeEnum';
 export type { FALSY_ω } from './FALSY_ω';
