@@ -68,10 +68,13 @@ async function scan(
       const fullPath = `${cwd.path}/${ent.name}`;
 
       // HACK: //-! ------- Add the side effect on files here --------
-
-      !AWAIT
-        ? await sideFunction({ fullPath, ms, count, debug })
-        : sideFunction({ fullPath, ms, count, debug });
+      try {
+        !AWAIT
+          ? await sideFunction({ fullPath, ms, count, debug })
+          : sideFunction({ fullPath, ms, count, debug });
+      } catch (error) {
+        console.error(error);
+      }
 
       // : : : //-! --------------------------------------------------
     }
@@ -98,7 +101,11 @@ function traverse(
     if (error instanceof Error) {
       if (hasKey(error, 'errno')) {
         if (error.errno === -constants.errno.EACCES) {
-          debug && console.error('skipping', next, error);
+          debug && console.error('EACCES: skipping', next, error);
+          return false;
+        }
+        if (error.errno === -constants.errno.ENOENT) {
+          debug && console.error('ENOENT: skipping', next, error);
           return false;
         }
       }
