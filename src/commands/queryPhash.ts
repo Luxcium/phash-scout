@@ -17,11 +17,7 @@ export async function queryPhash(
     const R_EXISTS = await immediateZalgo(keys_ || R.EXISTS(k));
     if (R_EXISTS === 1) {
       await syncPhash(R, k);
-      // console.error(`
-      // const result = R.sendCommand([${IMGSCOUT.QUERY}, ${k}, ${phash_}, ${radius}]);
-      // `);
       const result = R.sendCommand([IMGSCOUT.QUERY, k, phash_, radius]);
-      // console.error(`R.EXISTS(${k}) -> ${R_EXISTS}`);
       return result;
     }
     console.error(`R.EXISTS(${k}) -> ${R_EXISTS} ... keys.list[k]:${keys_}`);

@@ -41,7 +41,6 @@ export async function uniqueAdd(
   if (queryResultList.length > 0 && isQueryResultList(queryResultList)) {
     if (hasSameTitleInclude(title, queryResultList)) {
       let tCount = -15;
-
       //++ already added previously will be lower than -15 -----------
       return immediateZalgo(
         queryResultList

@@ -28,6 +28,7 @@ import { SideFunctionParam } from '../types';
 const timeThen = performance.now();
 const timeNow = () => performance.now();
 const timeSinceThen = () => timeNow() - timeThen;
+timeSinceThen;
 const count = {
   a: 0,
   b: 0,
@@ -40,10 +41,13 @@ const count = {
   time3: timeThen,
 };
 
+const isSYNC = false;
+const isAWAIT = false;
 export async function doTraverseDirs(
   absolutePath: string,
-  sideFunction: (...args: any[]) => Promise<string>,
-  verbose = false
+  sideFunction: (args: SideFunctionParam) => Promise<unknown>,
+  verbose = false,
+  awaits = isAWAIT
 ) {
   const parents_ς: string[] = [];
   let cwd_ς = { path: '' };
@@ -51,22 +55,20 @@ export async function doTraverseDirs(
   const queue_ς = [absolutePath];
   while (queue_ς.length > 0) {
     traverse(queue_ς, parents_ς, cwd_ς, true, verbose) &&
-      (await scan(queue_ς, sideFunction, cwd_ς, true));
+      (await scan(queue_ς, sideFunction, cwd_ς, true, awaits));
   }
   return;
 }
-
-const isSYNC = false;
-const isAWAIT = false;
 
 /**
  * Scans the current directory
  */
 async function scan(
   queue: string[],
-  sideFunction: <T extends SideFunctionParam>(args: T) => Promise<string>,
+  sideFunction: (args: SideFunctionParam) => Promise<unknown>,
   cwd: { path: string },
-  debug = true
+  debug = true,
+  awaits = false
 ) {
   // const dir =
   const dir = isSYNC ? opendirSync('.', {}) : await opendir('.', {});
@@ -76,7 +78,7 @@ async function scan(
     ent = isSYNC ? dir.readSync() : await dir.read()
   ) {
     // for (let ent = dir.readSync(); ent !== null; ent = dir.readSync()) {
-    const ms = timeSinceThen();
+    // const ms = timeSinceThen();
     if (ent.isDirectory()) {
       queue.push(ent.name);
     } else {
@@ -84,9 +86,9 @@ async function scan(
 
       // HACK: //-! ------- Add the side effect on files here --------
       try {
-        isAWAIT
-          ? await sideFunction({ fullPath, ms, count, debug })
-          : sideFunction({ fullPath, ms, count, debug });
+        awaits
+          ? await sideFunction({ fullPath, count, debug })
+          : sideFunction({ fullPath, count, debug });
       } catch (error) {
         console.error(error);
       }

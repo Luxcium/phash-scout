@@ -10,6 +10,6 @@ void (async function __MAIN__(traverseDir: string) {
   if (await isDir(traverseDir)) {
     const RC = Rc();
     const sideFunction = sideFunctionBuilder(RC, times);
-    doTraverseDirs(traverseDir, sideFunction);
+    doTraverseDirs(traverseDir, sideFunction, false, false);
   }
 })('/media/luxcium/D:\\ Archive locale/import/GAYBOYSTUBE/users');

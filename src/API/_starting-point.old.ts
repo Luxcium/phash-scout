@@ -7,7 +7,7 @@ import { getPathInfos, isDir, isDirSync, Nothing, Right } from '../tools';
 import { getBigStrPHashFromFile } from '../tools/computePHash';
 import { SideFunctionParam } from '../types';
 import { immediateZalgo } from '../utils';
-import { cachedPhash } from './cachedPhash';
+import { getCachedPhash } from './getCachedPhash';
 import { doTraverseDirs } from './sync-directory-traversal';
 
 const Rc = () => rConnect();
@@ -20,7 +20,7 @@ void (async function main_(traverseDir: string) {
         process.stdout.write(
           `\u009B33m[\u009B93m ${(++count.a).toLocaleString()}\u009B33m] \u009B32m \u009B37m${fullPath}\u009B0m\n`
         );
-      return cachedPhash(RC, fullPath, getBigStrPHashFromFile);
+      return getCachedPhash(RC, fullPath, getBigStrPHashFromFile);
     };
     doTraverseDirs(traverseDir, sideFunction);
   }
