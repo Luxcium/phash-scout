@@ -9,7 +9,7 @@
   "engines": {
     "node": ">= 12"
   },
-  "isLibrary": true,
+  "isLibrary": 10,
   "scripts": {
     "base:build": "parcel build --no-cache",
     "local:redis": "scripts/start_6383.sh",
@@ -85,6 +85,9 @@
   },
   "dependencies": {
     "@luxcium/boxed-list": "file:../boxed-list",
+    "@tensorflow/tfjs": "^3.18.0",
+    "@tensorflow/tfjs-node": "^3.18.0",
+    "@tensorflow/tfjs-node-gpu": "^3.18.0",
     "dotenv": "~16.0.1",
     "fp-ts": "~2.12.1",
     "fs-extra": "~10.1.0",
