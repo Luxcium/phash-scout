@@ -19,12 +19,3 @@ export function sideFunctionBuilder(RC: any, times: number[]) {
     return redisQueryResult;
   };
 }
-
-
-let x:number | string  | boolean  = 5;
-x = 'string';
-let y: typeof x = 'A string';
-x = true;
-
-x;
-typeof y === 'number';
