@@ -13,12 +13,6 @@
   },
   "tasks": [
     {
-      "label": "test",
-      "type": "shell",
-      "command": "echo test",
-      "icon": { "id": "light-bulb", "color": "terminal.ansiBlue" }
-    },
-    {
       "label": "TSC Build Task",
       "type": "shell",
       "detail": "Output watcher for this Type-Script project",
@@ -57,6 +51,34 @@
       },
       "icon": { "id": "server-process", "color": "terminal.ansiYellow" }
     },
+    {
+      "label": "Start_6383",
+      "type": "shell",
+      "command": "sh ${workspaceFolder}/scripts/start_6383.sh",
+      "runOptions": {
+        "reevaluateOnRerun": true,
+        "instanceLimit": 1,
+        "runOn": "folderOpen"
+      },
+      "presentation": {
+        "panel": "new",
+        "group": "redis",
+        "focus": false,
+        "echo": true,
+        "clear": true,
+        "revealProblems": "onProblem",
+        "close": true,
+        "reveal": "always",
+        "showReuseMessage": false
+      }
+    },
+    {
+      "label": "test",
+      "type": "shell",
+      "command": "echo test",
+      "icon": { "id": "light-bulb", "color": "terminal.ansiBlue" }
+    },
+
     {
       "label": "MAIN Runer",
       "type": "shell",
