@@ -68,7 +68,7 @@
     "types": ["node", "jest"],
     /* Completeness */
     "skipDefaultLibCheck": false,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "noResolve": false,
     /* Type Checking */
     /*  ALWAYS FALSE NEVER ALLOW-UNUSED-LABELS & ALLOW-UNREACHABLE-CODE FALSE */
