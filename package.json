@@ -1,15 +1,17 @@
 {
-  "name": "@luxcium/parallel-mapper",
-  "version": "0.0.0-unsafe-v1.2x",
+  "name": "@luxcium/phashscout",
+  "version": "0.0.0-UNSAFE-v1.0x",
+  "keywords": [],
+  "author": "Benjamin Vincent (Luxcium)",
   "license": "MIT",
   "private": false,
   "description": "",
   "main": "./index.js",
   "types": "./typings/index.d.ts",
   "engines": {
-    "node": ">= 12"
+    "node": ">= 16"
   },
-  "isLibrary": 10,
+  "isLibrary": true,
   "scripts": {
     "base:build": "parcel build --no-cache",
     "local:redis": "scripts/start_6383.sh",
@@ -47,8 +49,6 @@
     "postcheck": "npm run coverage || exit 2",
     "tsc:version": "tsc --version"
   },
-  "keywords": [],
-  "author": "Benjamin Vincent (Luxcium)",
   "devDependencies": {
     "@babel/core": "~7.18.6",
     "@babel/plugin-transform-typescript": "~7.18.6",
@@ -85,8 +85,6 @@
   },
   "dependencies": {
     "@luxcium/boxed-list": "file:../boxed-list",
-    "@tensorflow/tfjs": "^3.18.0",
-    "@tensorflow/tfjs-node": "^3.18.0",
     "@tensorflow/tfjs-node-gpu": "^3.18.0",
     "dotenv": "~16.0.1",
     "fp-ts": "~2.12.1",
@@ -94,6 +92,7 @@
     "glob": "~8.0.3",
     "hamming-distance": "~1.0.0",
     "human-size": "~1.1.0",
+    "piscina": "^3.2.0",
     "redis": "~4.2.0",
     "rxjs": "~7.5.5",
     "sharp": "~0.30.7",
