@@ -1,4 +1,4 @@
-import { parse } from 'node:path';
+import { normalize, parse } from 'node:path';
 import { doUniqueAddObj } from './doUniqueAddObj';
 import { notExcluded, notNull } from './tools/notExclude';
 import {
@@ -66,7 +66,7 @@ export function redisQuery(
   fullPath: string,
   pHash: Promise<string>
 ) {
-  const path = parse(fullPath);
+  const path = parse(normalize(fullPath).replace('\\\\', '\u005C'));
   const pathInfos = {
     ...path,
     fullPath,

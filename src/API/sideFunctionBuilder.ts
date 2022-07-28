@@ -5,8 +5,8 @@ import { averageReducer } from './averageReducer';
 import { getCachedPhash } from './getCachedPhash';
 
 export function sideFunctionBuilder(RC: any, times: number[]) {
-  return async ({ fullPath, count, debug }: SideFunctionParam) => {
-    debug &&
+  return async ({ fullPath, count, DEBUGS }: SideFunctionParam) => {
+    DEBUGS &&
       process.stdout.write(
         `\u009B33m[\u009B93m ${(++count.a).toLocaleString()}\u009B33m] \u009B32m${averageReducer(
           times
@@ -14,8 +14,10 @@ export function sideFunctionBuilder(RC: any, times: number[]) {
       );
     const cachedPhash = getCachedPhash(RC, fullPath, getBigStrPHashFromFile);
     const redisQueryResult = redisQuery(RC, 'key', fullPath, cachedPhash);
-    // console.log(await redisQueryResult.queryResult());
-    await redisQueryResult.queryResult();
+    // console.log(
+    //   'redisQueryResult.queryResult() :>>',
+    /* await */ redisQueryResult.queryResult();
+    // );
     return redisQueryResult;
   };
 }

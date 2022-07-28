@@ -21,41 +21,37 @@
 import { opendirSync } from 'node:fs';
 import { opendir } from 'node:fs/promises';
 import { constants } from 'node:os';
+import { normalize } from 'node:path';
 import { chdir } from 'node:process';
 
 import { SideFunctionParam } from '../types';
 
-const timeThen = performance.now();
-const timeNow = () => performance.now();
-const timeSinceThen = () => timeNow() - timeThen;
-timeSinceThen;
+// const timeThen = performance.now();
+// const timeNow = () => performance.now();
+// const timeSinceThen = () => timeNow() - timeThen;
+// timeSinceThen;
+
 const count = {
   a: 0,
-  b: 0,
-  c: 0,
-  x: 0,
-  y: 0,
-  z: 0,
-  time1: timeThen,
-  time2: timeThen,
-  time3: timeThen,
 };
 
-const isSYNC = false;
-const isAWAIT = false;
+const isOpenDirSYNC = true;
+const isReadSYNC = true;
+const isCloseDirSYNC = false;
+
 export async function doTraverseDirs(
   absolutePath: string,
   sideFunction: (args: SideFunctionParam) => Promise<unknown>,
-  verbose = false,
-  awaits = isAWAIT
+  flags: { [keys: string]: boolean }
 ) {
+  const { VERBOSE, DEBUGS, AWAITS } = flags;
   const parents_ς: string[] = [];
   let cwd_ς = { path: '' };
 
   const queue_ς = [absolutePath];
   while (queue_ς.length > 0) {
-    traverse(queue_ς, parents_ς, cwd_ς, true, verbose) &&
-      (await scan(queue_ς, sideFunction, cwd_ς, true, awaits));
+    traverse(queue_ς, parents_ς, cwd_ς, DEBUGS, VERBOSE) &&
+      (await scan(queue_ς, sideFunction, cwd_ς, DEBUGS, AWAITS));
   }
   return;
 }
@@ -67,37 +63,33 @@ async function scan(
   queue: string[],
   sideFunction: (args: SideFunctionParam) => Promise<unknown>,
   cwd: { path: string },
-  debug = true,
-  awaits = false
+  DEBUGS = true,
+  AWAITS = false
 ) {
-  // const dir =
-  const dir = isSYNC ? opendirSync('.', {}) : await opendir('.', {});
+  const dir = isOpenDirSYNC ? opendirSync('.', {}) : await opendir('.', {});
   for (
-    let ent = isSYNC ? dir.readSync() : await dir.read();
-    ent !== null;
-    ent = isSYNC ? dir.readSync() : await dir.read()
+    /* FOR LOOP */ let ent = isReadSYNC ? dir.readSync() : await dir.read();
+    /* FOR LOOP */ ent !== null;
+    /* FOR LOOP */ ent = isReadSYNC ? dir.readSync() : await dir.read()
   ) {
-    // for (let ent = dir.readSync(); ent !== null; ent = dir.readSync()) {
-    // const ms = timeSinceThen();
     if (ent.isDirectory()) {
       queue.push(ent.name);
     } else {
-      const fullPath = `${cwd.path}/${ent.name}`;
-
+      const fullPath = normalize(`${(cwd.path)}/${ent.name}`);
       // HACK: //-! ------- Add the side effect on files here --------
       try {
-        awaits
-          ? await sideFunction({ fullPath, count, debug })
-          : sideFunction({ fullPath, count, debug });
+        AWAITS
+          ? await sideFunction({ fullPath, count, DEBUGS })
+          : sideFunction({ fullPath, count, DEBUGS });
       } catch (error) {
         console.error(error);
       }
-
       // : : : //-! --------------------------------------------------
     }
   }
 
-  isSYNC ? dir.closeSync() : !isAWAIT ? await dir.close() : dir.close();
+  const noAWAIT = false;
+  isCloseDirSYNC ? dir.closeSync() : noAWAIT ? dir.close() : await dir.close();
 }
 
 /**
@@ -135,7 +127,10 @@ function traverse(
     return false;
   } else {
     parents.push(next);
-    cwd.path = cwd.path.length === 0 ? next : `${cwd.path}/${next}`;
+    cwd.path =
+      cwd.path.length === 0
+        ? next
+        : normalize(`${(cwd.path)}/${next}`);
     verbose && console.log(cwd.path);
     queue.push('..');
     return true;

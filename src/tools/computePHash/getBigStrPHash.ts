@@ -20,7 +20,7 @@ export async function getBigStrPHashFromFile(
       `    \u009B91m> \u009B01m\u009B4m${error}\u009B0m`.replace(/\n/g, ''),
       `\n\n     > '${imgFilePath}' !!!\u009B0m\n\u009B0m`
     );
-    return '0n';
+    return '0';
   }
 }
 

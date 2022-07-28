@@ -15,6 +15,7 @@ export async function getCachedPhash(
   if (value !== null && value.toString().length < 10) {
     return immediateZalgo(value);
   }
+  // calling getBigStrPHashFromFile here:
   value = getValueFnct(k_FullPath);
   SET(R, K, value);
   return immediateZalgo(value);

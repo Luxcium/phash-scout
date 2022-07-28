@@ -10,19 +10,28 @@ import { immediateZalgo } from '../utils';
 import { getCachedPhash } from './getCachedPhash';
 import { doTraverseDirs } from './sync-directory-traversal';
 
+const flags = {
+  isOpenDirSYNC: true,
+  isReadSYNC: true,
+  isCloseDirSYNC: false,
+  VERBOSE: false,
+  DEBUGS: true,
+  AWAITS: false,
+};
+
 const Rc = () => rConnect();
 
 void (async function main_(traverseDir: string) {
   if (await isDir(traverseDir)) {
     const RC = Rc();
-    const sideFunction = ({ fullPath, count, debug }: SideFunctionParam) => {
-      debug &&
+    const sideFunction = ({ fullPath, count, DEBUGS }: SideFunctionParam) => {
+      DEBUGS &&
         process.stdout.write(
           `\u009B33m[\u009B93m ${(++count.a).toLocaleString()}\u009B33m] \u009B32m \u009B37m${fullPath}\u009B0m\n`
         );
       return getCachedPhash(RC, fullPath, getBigStrPHashFromFile);
     };
-    doTraverseDirs(traverseDir, sideFunction);
+    doTraverseDirs(traverseDir, sideFunction, flags);
   }
 })('/media/luxcium/D:\\ Archive locale/import/GAYBOYSTUBE/users');
 export const count = { a: 1, b: 1, c: 1, d: 1 };
