@@ -17,7 +17,7 @@ export const result = yargs
     },
 
     function (argv) {
-      console.log('hello', argv.name, 'welcome to yargs!');
+      console.log('hello', argv['name'], 'welcome to yargs!');
     }
   )
   .help().argv;

@@ -23,12 +23,12 @@ export function reorder({
     ext?: string;
   }): QueryResultObject &
   QueryResultSize & {
-    diff?: number;
-    fullPath?: string;
-    group?: string;
-    dir?: string;
-    file?: string;
-    ext?: string;
+    diff?: number | undefined;
+    fullPath?: string | undefined;
+    group?: string | undefined;
+    dir?: string | undefined;
+    file?: string | undefined;
+    ext?: string | undefined;
   } {
   return {
     radius,
