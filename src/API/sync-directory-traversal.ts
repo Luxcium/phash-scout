@@ -75,7 +75,7 @@ async function scan(
     if (ent.isDirectory()) {
       queue.push(ent.name);
     } else {
-      const fullPath = normalize(`${(cwd.path)}/${ent.name}`);
+      const fullPath = normalize(`${cwd.path}/${ent.name}`);
       // HACK: //-! ------- Add the side effect on files here --------
       try {
         AWAITS
@@ -127,10 +127,7 @@ function traverse(
     return false;
   } else {
     parents.push(next);
-    cwd.path =
-      cwd.path.length === 0
-        ? next
-        : normalize(`${(cwd.path)}/${next}`);
+    cwd.path = cwd.path.length === 0 ? next : normalize(`${cwd.path}/${next}`);
     verbose && console.log(cwd.path);
     queue.push('..');
     return true;
