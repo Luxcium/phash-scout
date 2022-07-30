@@ -3,7 +3,8 @@ import { isDir } from '../tools';
 import { sideFunctionBuilder } from './sideFunctionBuilder';
 import { doTraverseDirs } from './sync-directory-traversal';
 
-const localFolderAbsolutePath = '/media/luxcium/Archive_Locale/import/GAYBOYSTUBE/users'
+const localFolderAbsolutePath =
+  '/media/luxcium/Archive_Locale/import/GAYBOYSTUBE/users';
 
 const Rc = () => rConnect();
 
@@ -15,7 +16,6 @@ const flags = {
   DEBUGS: true,
   AWAITS: false,
 };
-
 
 void (async function __MAIN__(traverseDir: string) {
   const times: number[] = [];
