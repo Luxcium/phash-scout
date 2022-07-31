@@ -1,7 +1,6 @@
+import axios from 'axios';
 import { immediateZalgo } from '../utils';
-import { SET } from './_TraverseDirs2';
-
-// HACK:  caching pHash in redis -------------------------------------
+import { SET } from './SET';
 
 export async function getCachedPhash(
   RC: any,
@@ -15,8 +14,28 @@ export async function getCachedPhash(
   if (value !== null && value.toString().length < 10) {
     return immediateZalgo(value);
   }
+
   // calling getBigStrPHashFromFile here:
-  value = getValueFnct(k_FullPath);
+
+  // HACK:------------------------------------------------------------
+  value = calculatedFromWorker(k_FullPath);
+  getValueFnct;
+  // getValueFnct(k_FullPath);
+  // :----------------------------------------------------------------
   SET(R, K, value);
   return immediateZalgo(value);
+}
+
+async function calculatedFromWorker(fullPath: string) {
+  try {
+    const phashValue: string[] = (
+      await axios.get(
+        'http://localhost:8083/bigstr_phash_from_file' + encodeURI(fullPath)
+      )
+    ).data.split('\0\n\0');
+
+    return JSON.parse(phashValue.shift() || '{"value" : "-1"}').value;
+  } catch {
+    return '-2';
+  }
 }

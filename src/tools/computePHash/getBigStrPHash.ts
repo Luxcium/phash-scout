@@ -8,8 +8,8 @@ export async function getBigStrPHashFromFile(
   imgFilePath: string
 ): Promise<string> {
   try {
-    const thisImage = await fs.promises.readFile(imgFilePath);
-    const sharpPhashValue = calculateSharpPhash(thisImage);
+    const thisImage = readFileImgFile(imgFilePath);
+    const sharpPhashValue = calculateSharpPhash(await thisImage);
     const returnValue = calculateBigString(await sharpPhashValue);
 
     return await immediateZalgo(returnValue);

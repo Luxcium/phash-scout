@@ -1,7 +1,5 @@
+'use strict';
 const { Worker } = require('worker_threads');
-const CORES = require('os').cpus().length;
-
-const STRATEGIES = new Set(['roundrobin', 'random', 'leastbusy']);
 
 /* **************************************************************** */
 /*                                                                  */
@@ -15,6 +13,9 @@ const STRATEGIES = new Set(['roundrobin', 'random', 'leastbusy']);
 /*                                                                  */
 /* **************************************************************** */
 
+const CORES = require('os').cpus().length;
+
+const STRATEGIES = new Set(['roundrobin', 'random', 'leastbusy']);
 module.exports = class RpcWorkerPool {
   /** @member {number} */
   size;
@@ -50,20 +51,21 @@ module.exports = class RpcWorkerPool {
   /**
    * @param {string} method - The first input number
    */
-  exec(method, ...args) {
+  exec(method, message_id, ...args) {
     const id = ++this.next_command_id;
     let resolve, reject;
     const promise = new Promise((res, rej) => {
       resolve = res;
       reject = rej;
     });
-    const worker = this.getWorker(); // <1>
+    const worker = this.getWorker(message_id); // <1>
     worker.in_flight_commands.set(id, { resolve, reject });
     worker.worker.postMessage({ method, params: args, id });
+
     return promise;
   }
   // ++ ----------------------------------------------------------------
-  getWorker() {
+  getWorker(message_id = -1) {
     let id;
     if (this.strategy === 'random') {
       id = Math.floor(Math.random() * this.size);
@@ -81,7 +83,7 @@ module.exports = class RpcWorkerPool {
         }
       }
     }
-    console.log('Selected Worker:', id);
+    console.log('Selected Worker:', id, 'for message id:', message_id || 0);
     return this.workers[id];
   }
 };

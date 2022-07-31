@@ -31,7 +31,7 @@ void (async function main_(traverseDir: string) {
         );
       return getCachedPhash(RC, fullPath, getBigStrPHashFromFile);
     };
-    doTraverseDirs(traverseDir, sideFunction, flags);
+    doTraverseDirs(traverseDir, sideFunction, flags, { await: 0 });
   }
 })('/media/luxcium/D:\\ Archive locale/import/GAYBOYSTUBE/users');
 export const count = { a: 1, b: 1, c: 1, d: 1 };

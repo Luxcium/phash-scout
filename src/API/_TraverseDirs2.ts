@@ -55,12 +55,3 @@ export async function doForWithUniquePath(fullPath: string /* , RC: any */) {
   console.log(...result);
   return; //cachedPhash(RC, fullPath, getBigStrPHashFromFile);
 }
-
-export async function SET(
-  R: any,
-  K: string,
-  value: Promise<string>,
-  PX?: number
-) {
-  return (await R.SET(K, await value, { PX })) === 'OK';
-}

@@ -42,7 +42,8 @@ const isCloseDirSYNC = false;
 export async function doTraverseDirs(
   absolutePath: string,
   sideFunction: (args: SideFunctionParam) => Promise<unknown>,
-  flags: { [keys: string]: boolean }
+  flags: { [keys: string]: boolean },
+  counts: any
 ) {
   const { VERBOSE, DEBUGS, AWAITS } = flags;
   const parents_ς: string[] = [];
@@ -51,7 +52,7 @@ export async function doTraverseDirs(
   const queue_ς = [absolutePath];
   while (queue_ς.length > 0) {
     traverse(queue_ς, parents_ς, cwd_ς, DEBUGS, VERBOSE) &&
-      (await scan(queue_ς, sideFunction, cwd_ς, DEBUGS, AWAITS));
+      (await scan(queue_ς, sideFunction, cwd_ς, DEBUGS, AWAITS, counts));
   }
   return;
 }
@@ -64,7 +65,8 @@ async function scan(
   sideFunction: (args: SideFunctionParam) => Promise<unknown>,
   cwd: { path: string },
   DEBUGS = true,
-  AWAITS = false
+  AWAITS = true,
+  counts: any
 ) {
   const dir = isOpenDirSYNC ? opendirSync('.', {}) : await opendir('.', {});
   for (
@@ -76,9 +78,12 @@ async function scan(
       queue.push(ent.name);
     } else {
       const fullPath = normalize(`${cwd.path}/${ent.name}`);
-      // HACK: //-! ------- Add the side effect on files here --------
+      // HACK:- //-! ------- Add the side effect on files here -------
       try {
-        AWAITS
+        /*eslint no-constant-condition: "off"*/
+        void AWAITS;
+        console.log('counts.await++', ++counts.await);
+        counts.await % 1000 === 0
           ? await sideFunction({ fullPath, count, DEBUGS })
           : sideFunction({ fullPath, count, DEBUGS });
       } catch (error) {

@@ -1,6 +1,6 @@
 /** Used to average out times in a timer list */
 
-export function averageReducer(times: number[], max = 20_000) {
+export function averageReducer(times: number[], max = 10_000) {
   times.push(performance.now());
   let len = times.length;
   while (len > max) {

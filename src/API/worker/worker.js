@@ -1,7 +1,13 @@
-/*                                                                  */
-/*                                                                  */
+'use strict';
+import { redisQuery } from '../../doRedisQuery';
+import { rConnect } from '../../rConnect';
+import { immediateZalgo } from '../../utils';
+import { SET } from '../SET';
+
+import { parse } from 'node:path';
 
 const { parentPort } = require('worker_threads');
+const { getBigStrPHashFromFile } = require('../../tools');
 
 /* **************************************************************** */
 /*                                                                  */
@@ -14,18 +20,84 @@ const { parentPort } = require('worker_threads');
 /* have precedence on the current license information in some cases */
 /*                                                                  */
 /* **************************************************************** */
+const DEBUG = false;
+const Rc = rConnect();
+
+DEBUG && console.log('in worker');
 function asyncOnMessageWrap(fn) {
   return async function (msg) {
     parentPort.postMessage(await fn(msg));
   };
 }
-
+let thisWorkerLoopCount = 0;
 const commands = {
-  async square_sum(max) {
-    await new Promise(res => setTimeout(res, 10_000));
-    let sum = 0;
-    for (let i = 0; i < max; i++) sum += Math.sqrt(i);
-    return sum;
+  async redis_phash_query(imgFileAbsolutePath, count_a) {
+    DEBUG && console.log('in redis_phash_query ' + thisWorkerLoopCount);
+    const RC = await Rc;
+    try {
+      const path = parse(imgFileAbsolutePath);
+      const pathInfos = {
+        ...path,
+        fullPath: imgFileAbsolutePath,
+        extname: path.ext.toLowerCase(),
+        baseName: path.base,
+      };
+      if (pathInfos.extname !== '.jpg') return [];
+    } catch (error) {
+      console.log('at: redis_phash_query([])↓\n    error:', error);
+      return [];
+    }
+
+    try {
+      const cachedPhash =
+        (await commands.get_cached_phash(imgFileAbsolutePath)) || '-4';
+
+      const redisQueryResult = redisQuery(
+        RC,
+        'key',
+        imgFileAbsolutePath,
+        immediateZalgo(cachedPhash)
+      );
+      redisQueryResult.queryResult();
+      const queryResult = await redisQueryResult.queryResult();
+      console.log(count_a, thisWorkerLoopCount++, imgFileAbsolutePath);
+      return {
+        ...redisQueryResult,
+        queryResult,
+      };
+    } catch (error) {
+      console.log('at: redis_phash_query([])↓\n    error:', error);
+      return [];
+    }
+  },
+  async get_cached_phash(imgFileAbsolutePath, count_a) {
+    DEBUG && console.log('in get_cached_phash ' + thisWorkerLoopCount);
+    try {
+      const K = `'cachedPhash:${imgFileAbsolutePath}'`;
+      const R = await Rc;
+
+      let value = await R.GET(K);
+      if (value !== null && value.toString().length < 10) {
+        return immediateZalgo(value);
+      }
+
+      value = commands.bigstr_phash_from_file(imgFileAbsolutePath);
+      SET(R, K, value);
+      return immediateZalgo(value);
+    } catch (error) {
+      console.log('at: get_cached_phash(-3)↓\n    error:', error);
+      return '-3';
+    }
+  },
+  async bigstr_phash_from_file(imgFileAbsolutePath, count_a) {
+    DEBUG && console.log('in bigstr_phash_from_file ' + thisWorkerLoopCount);
+
+    try {
+      return getBigStrPHashFromFile(imgFileAbsolutePath);
+    } catch (error) {
+      console.log('at: bigstr_phash_from_file(-2)↓\n    error:', error);
+      return '-2';
+    }
   },
 };
 
@@ -39,6 +111,7 @@ parentPort.on(
     };
 
     try {
+      ++thisWorkerLoopCount;
       const result = await commands[method](...params);
 
       return { ...messageRPC, result };
@@ -58,6 +131,33 @@ parentPort.on(
 
 /*
 
+
+    const redisQueryResult = redisQuery(
+      RC,
+      'key',
+      fullPath,
+      immediateZalgo(calculatedValue)
+    );
+
+
+export async function getCachedPhash(
+  RC: any,
+  k_FullPath: string,
+  getValueFnct: (fullPath: string) => Promise<string>
+) {
+  const K = `'cachedPhash:${k_FullPath}'`;
+  const R = await RC;
+
+  let value: Promise<string> | string = (await R.GET(K)) as string;
+  if (value !== null && value.toString().length < 10) {
+    return immediateZalgo(value);
+  }
+
+
+  value = commands.bigstr_phash_from_file(k_FullPath);
+  SET(R, K, value);
+  return immediateZalgo(value);
+}
 
 msg => { // .. dosomething }
       URL: https://www.jsonrpc.org/specification

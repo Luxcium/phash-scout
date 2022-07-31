@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+'use strict';
 const http = require('http');
 const net = require('net');
 
@@ -15,7 +15,7 @@ const net = require('net');
 /*                                                                  */
 /* **************************************************************** */
 
-const [, , web_host, actor_host] = process.argv;
+const [, , web_host, actor_host, threads] = process.argv;
 const [web_hostname, web_port] = web_host.split(':');
 const [actor_hostname, actor_port] = actor_host.split(':');
 
@@ -48,44 +48,64 @@ net
     console.log(`actor: tcp://${actor_hostname}:${actor_port}`);
   });
 // ++ ----------------------------------------------------------------
+
 http
   .createServer(async (req, res) => {
     message_id++;
+
     if (actors.size === 0) return res.end('ERROR: EMPTY ACTOR POOL');
+
     const actor = randomActor();
+
     messages.set(message_id, res);
+
+    console.log(
+      req.url.split('/').slice(1, 2).pop(),
+      req.url.split('/').slice(2, 3).pop(),
+      '\n',
+      decodeURI(req.url.split('/').slice(3).join('/'))
+    );
+
     actor({
       id: message_id,
-      method: 'square_sum',
-      args: [Number(req.url.slice(1))],
+      method: req.url.split('/').slice(1, 2).pop(),
+      args: [
+        decodeURI(req.url.split('/').slice(3).join('/')),
+        req.url.split('/').slice(2, 3).pop(),
+      ],
     });
   })
   .listen(web_port, web_hostname, () => {
     console.log(`web:   http://${web_hostname}:${web_port}`);
   });
 // ++ ----------------------------------------------------------------
+
 function randomActor() {
   const pool = [...actors];
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
 // ++ ---- PART TWO BEGINS BELOW -------------------------------------
+
 const RpcWorkerPool = require('./rpc-worker.js');
 
 const worker = new RpcWorkerPool(
-  '/home/luxcium/projects/pHashScout/src/API/worker/worker.js',
-  20,
+  '/home/luxcium/projects/pHashScout/out/src/API/worker/worker.js',
+  threads || 0,
   'leastbusy'
 );
+
 actors.add(async data => {
-  const value = await worker.exec(data.method, ...data.args);
-  messages.get(data.id).end(
+  const value = await worker.exec(data.method, data.id, ...data.args);
+
+  const reply =
     JSON.stringify({
       id: data.id,
       value,
       pid: 'server:' + process.pid,
-    }) + '\0\n\0'
-  );
+    }) + '\0\n\0';
+
+  messages.get(data.id).end(reply);
   messages.delete(data.id);
 });
 

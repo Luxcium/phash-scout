@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-
+'use strict';
 const net = require('net');
-const RpcWorkerPool = require('./rpc-worker-old.js');
+const RpcWorkerPool = require('./rpc-worker.js');
 
 /* **************************************************************** */
 /*                                                                  */
@@ -18,6 +18,7 @@ const RpcWorkerPool = require('./rpc-worker-old.js');
 const [, , host] = process.argv;
 const [hostname, port] = host.split(':');
 const worker = new RpcWorkerPool('./worker.js', 4, 'leastbusy');
+
 // ++ ----------------------------------------------------------------
 const upstream = net
   .connect(port, hostname, () => {
@@ -28,7 +29,11 @@ const upstream = net
     chunks.pop();
     for (let chunk of chunks) {
       const data = JSON.parse(chunk);
-      const result = await worker.exec(data.method, ...data.args);
+      const result = await worker.exec(
+        data.method,
+        `- ${data.id}`,
+        ...data.args
+      );
       upstream.write(
         JSON.stringify({
           jsonrpc: '2.0',
