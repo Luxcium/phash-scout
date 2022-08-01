@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
-const net = require('net');
-const RpcWorkerPool = require('./rpc-worker.js');
+import { connect } from 'net';
+import { RpcWorkerPool } from './rpc-worker.js';
 
 /* **************************************************************** */
 /*                                                                  */
@@ -19,10 +19,9 @@ const [, , host] = process.argv;
 const [hostname, port] = host.split(':');
 
 // ++ ----------------------------------------------------------------
-const upstream = net
-  .connect(port, hostname, () => {
-    console.log('connected to server!');
-  })
+const upstream = connect(port, hostname, () => {
+  console.log('connected to server!');
+})
   .on('data', raw_data => {
     void String(raw_data)
       .split('\0\n\0')

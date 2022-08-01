@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 'use strict';
+import { createServer as createHTTP_Server } from 'http';
+import { createServer as createTCP_Server } from 'net';
 import { normalize } from 'node:path';
 
-const http = require('http');
-const net = require('net');
+import { RpcWorkerPool } from './rpc-worker.js';
 
 /* **************************************************************** */
 /*                                                                  */
@@ -35,73 +36,69 @@ const VERBOSE2 = false;
 
 // ++ ----------------------------------------------------------------
 
-net
-  .createServer(client => {
-    const handler = data => client.write(JSON.stringify(data) + '\0\n\0'); // <1>
-    actors.add(handler);
-    console.info('actor pool connected', actors.size, message_id);
-    client
-      .on('end', () => {
-        actors.delete(handler); // <2>
-        console.info('actor pool disconnected', actors.size);
-      })
-      .on('data', raw_data => {
-        String(raw_data)
-          .split('\0\n\0')
-          .slice(0, -1)
-          .forEach(chunk => {
-            const data = JSON.parse(chunk);
-            const res = messages.get(data.id);
-            res.end(JSON.stringify(data) + '\0\n\0');
-            messages.delete(data.id);
-          });
+createTCP_Server(client => {
+  const handler = data => client.write(JSON.stringify(data) + '\0\n\0'); // <1>
+  actors.add(handler);
+  console.info('actor pool connected', actors.size, message_id);
+  client
+    .on('end', () => {
+      actors.delete(handler); // <2>
+      console.info('actor pool disconnected', actors.size);
+    })
+    .on('data', raw_data => {
+      String(raw_data)
+        .split('\0\n\0')
+        .slice(0, -1)
+        .forEach(chunk => {
+          const data = JSON.parse(chunk);
+          const res = messages.get(data.id);
+          res.end(JSON.stringify(data) + '\0\n\0');
+          messages.delete(data.id);
+        });
 
-        // const chunks = String(raw_data).split('\0\n\0'); // <3>
-        // chunks.pop(); // <4>
-        // for (let chunk of chunks) {
-        //   const data = JSON.parse(chunk);
-        //   const res = messages.get(data.id);
-        //   res.end(JSON.stringify(data) + '\0\n\0');
-        //   messages.delete(data.id);
-        // }
-      });
-  })
-  .listen(actor_port, actor_hostname, () => {
-    console.info(`actor: tcp://${actor_hostname}:${actor_port}`);
-  });
+      // const chunks = String(raw_data).split('\0\n\0'); // <3>
+      // chunks.pop(); // <4>
+      // for (let chunk of chunks) {
+      //   const data = JSON.parse(chunk);
+      //   const res = messages.get(data.id);
+      //   res.end(JSON.stringify(data) + '\0\n\0');
+      //   messages.delete(data.id);
+      // }
+    });
+}).listen(actor_port, actor_hostname, () => {
+  console.info(`actor: tcp://${actor_hostname}:${actor_port}`);
+});
 
 // ++ ----------------------------------------------------------------
 
-http
-  .createServer(async (req, res) => {
-    message_id++;
+createHTTP_Server(async (req, res) => {
+  message_id++;
 
-    if (actors.size === 0) return res.end('ERROR: EMPTY ACTOR POOL');
+  if (actors.size === 0) return res.end('ERROR: EMPTY ACTOR POOL');
 
-    const actor = randomActor();
+  const actor = randomActor();
 
-    messages.set(message_id, res);
+  messages.set(message_id, res);
 
-    VERBOSE2 &&
-      console.log(
-        req.url.split('/').slice(1, 2).pop(),
-        req.url.split('/').slice(2, 3).pop(),
-        '\n',
-        decodeURI(req.url.split('/').slice(3).join('/'))
-      );
+  VERBOSE2 &&
+    console.log(
+      req.url.split('/').slice(1, 2).pop(),
+      req.url.split('/').slice(2, 3).pop(),
+      '\n',
+      decodeURI(req.url.split('/').slice(3).join('/'))
+    );
 
-    actor({
-      id: message_id,
-      method: req.url.split('/').slice(1, 2).pop(),
-      args: [
-        normalize('/' + decodeURI(req.url.split('/').slice(3).join('/'))),
-        req.url.split('/').slice(2, 3).pop(),
-      ],
-    });
-  })
-  .listen(web_port, web_hostname, () => {
-    console.info(`web:   http://${web_hostname}:${web_port}`);
+  actor({
+    id: message_id,
+    method: req.url.split('/').slice(1, 2).pop(),
+    args: [
+      normalize('/' + decodeURI(req.url.split('/').slice(3).join('/'))),
+      req.url.split('/').slice(2, 3).pop(),
+    ],
   });
+}).listen(web_port, web_hostname, () => {
+  console.info(`web:   http://${web_hostname}:${web_port}`);
+});
 // ++ ----------------------------------------------------------------
 
 function randomActor() {
@@ -110,8 +107,6 @@ function randomActor() {
 }
 
 // ++ ---- PART TWO BEGINS BELOW -------------------------------------
-
-const RpcWorkerPool = require('./rpc-worker.js');
 
 const worker = new RpcWorkerPool(
   '/home/luxcium/projects/pHashScout/out/src/API/worker/worker.js',

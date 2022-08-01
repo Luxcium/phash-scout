@@ -1,5 +1,5 @@
 'use strict';
-const { Worker } = require('worker_threads');
+import { Worker } from 'worker_threads';
 
 /* **************************************************************** */
 /*                                                                  */
@@ -16,7 +16,7 @@ const VERBOSE = true;
 const CORES = require('os').cpus().length;
 
 const STRATEGIES = new Set(['roundrobin', 'random', 'leastbusy']);
-module.exports = class RpcWorkerPool {
+export class RpcWorkerPool {
   /** @member {number} */
   size;
   constructor(path, size = 0, strategy = 'roundrobin') {
@@ -84,10 +84,15 @@ module.exports = class RpcWorkerPool {
       }
     }
     VERBOSE &&
-      console.log('Selected Worker:', id+1, 'for message id:', message_id || 0);
+      console.log(
+        'Selected Worker:',
+        id + 1,
+        'for message id:',
+        message_id || 0
+      );
     return this.workers[id];
   }
-};
+}
 
 /* **************************************************************** */
 /*                                                                  */
