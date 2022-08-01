@@ -18,7 +18,11 @@ const RpcWorkerPool = require('./rpc-worker.js');
 const [, , host] = process.argv;
 
 const [hostname, port] = host.split(':');
-const worker = new RpcWorkerPool('./worker.js', 4, 'roundrobin');
+const worker = new RpcWorkerPool(
+  '/home/luxcium/projects/pHashScout/out/src/API/worker/worker.js',
+  4,
+  'roundrobin'
+);
 
 // ++ ----------------------------------------------------------------
 const upstream = net
