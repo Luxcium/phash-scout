@@ -13,6 +13,8 @@
   },
   "isLibrary": true,
   "scripts": {
+    "prestart": "tsc -b /home/luxcium/projects/pHashScout/src/tsconfig.json",
+    "start": "UV_THREADPOOL_SIZE=10; node 'out/src/API/worker/server.js' '127.0.0.1:8083' '127.0.0.1:9093' 100 &",
     "base:build": "parcel build --no-cache",
     "local:redis": "scripts/start_6383.sh",
     "base:prerelease": "./scripts/prerelease.sh",
