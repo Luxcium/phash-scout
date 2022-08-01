@@ -16,13 +16,7 @@ const RpcWorkerPool = require('./rpc-worker.js');
 /* **************************************************************** */
 
 const [, , host] = process.argv;
-
 const [hostname, port] = host.split(':');
-const worker = new RpcWorkerPool(
-  '/home/luxcium/projects/pHashScout/out/src/API/worker/worker.js',
-  4,
-  'roundrobin'
-);
 
 // ++ ----------------------------------------------------------------
 const upstream = net
@@ -35,7 +29,7 @@ const upstream = net
       .slice(0, -1)
       .forEach(async chunk => {
         const data = JSON.parse(chunk);
-        const result = await worker.exec(
+        const result = await getWorker().exec(
           data.method,
           `${data.id}`,
           ...data.args
@@ -55,6 +49,13 @@ const upstream = net
     console.log('disconnect from server');
   });
 
+function getWorker() {
+  return new RpcWorkerPool(
+    '/home/luxcium/projects/pHashScout/out/src/API/worker/worker.js',
+    4,
+    'roundrobin'
+  );
+}
 /* **************************************************************** */
 /*                                                                  */
 /*  O’Reilly Online Learning                                        */
