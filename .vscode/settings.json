@@ -4,14 +4,14 @@
   */
   // #region: EDITOR & TERMINAL                                      !
   "workbench.iconTheme": "material-icon-theme",
-  "editor.fontFamily": "'VictorMono Nerd Font',Victor Mono, Fira Code",
-  "editor.fontLigatures": true,
-  "editor.fontSize": 20,
-  "editor.fontWeight": "500",
-  "terminal.integrated.fontFamily": "'TerminessTTF Nerd Font Mono', 'Anonymice NF', '3270Narrow NF', mono",
-  "terminal.integrated.fontSize": 14,
-  "terminal.integrated.fontWeight": "600",
-  "terminal.integrated.fontWeightBold": "bold",
+  // "editor.fontFamily": "'VictorMono Nerd Font',Victor Mono, Fira Code",
+  // "editor.fontLigatures": true,
+  // "editor.fontSize": 20,
+  // "editor.fontWeight": "500",
+  // "terminal.integrated.fontFamily": "'TerminessTTF Nerd Font Mono', 'Anonymice NF', '3270Narrow NF', mono",
+  // "terminal.integrated.fontSize": 14,
+  // "terminal.integrated.fontWeight": "600",
+  // "terminal.integrated.fontWeightBold": "bold",
   // #endregion: EDITOR & TERMINAL                                   !
   /*
   |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
@@ -79,30 +79,44 @@
   */
   // #region: JAVASCRIPT BEHAVIOUR                                   !
   "javascript.format.enable": true,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
   "javascript.format.semicolons": "insert",
-  "javascript.suggest.paths": false,
-  "javascript.updateImportsOnFileMove.enabled": "always",
   "javascript.preferences.importModuleSpecifier": "relative",
   "javascript.preferences.quoteStyle": "single",
   "javascript.preferences.useAliasesForRenames": false,
+  "javascript.referencesCodeLens.enabled": true,
+  "javascript.suggest.autoImports": true,
   "javascript.suggest.completeFunctionCalls": true,
+  "javascript.suggest.enabled": true,
+  "javascript.suggest.paths": true,
+  "javascript.suggestionActions.enabled": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
   // #endregion: JAVASCRIPT                                          !
   /*
   |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
   */
   // #region: TYPESCRIPT BEHAVIOUR                                   !
-  "typescript.format.enable": true,
-  "typescript.format.semicolons": "insert",
-  "typescript.suggest.paths": true,
-  "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.check.npmIsInstalled": true,
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.format.enable": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+  "typescript.format.semicolons": "insert",
+  "typescript.implementationsCodeLens.enabled": true,
+  "typescript.locale": "en",
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.preferences.includePackageJsonAutoImports": "on",
   "typescript.preferences.quoteStyle": "single",
+  "typescript.preferences.useAliasesForRenames": false,
+  "typescript.referencesCodeLens.enabled": true,
   "typescript.suggest.autoImports": true,
   "typescript.suggest.completeFunctionCalls": true,
   "typescript.suggest.enabled": true,
+  "typescript.suggest.paths": true,
   "typescript.suggestionActions.enabled": true,
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "typescript.tsserver.maxTsServerMemory": 4096,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.workspaceSymbols.scope": "currentProject",
   // #endregion: TYPESCRIPT BEHAVIOUR                                !
   /*
   |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
@@ -965,14 +979,7 @@
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
-  "typescript.preferences.useAliasesForRenames": false,
-  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
-  "typescript.tsserver.maxTsServerMemory": 4096,
-  "typescript.referencesCodeLens.enabled": true,
-  "typescript.enablePromptUseWorkspaceTsdk": true,
-  "typescript.workspaceSymbols.scope": "currentProject",
-  "typescript.locale": "en",
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+
   // #endregion: CUSTOMS RULES                                       !
   // #region: TODO TREE                                                         !
   "todo-tree.highlights.defaultHighlight": {
