@@ -1,8 +1,8 @@
 import type { PlatformPath } from 'path';
 import { ParsedPath } from 'path';
 import { Tedis } from 'tedis';
-import { devPaths } from '../constants/devPaths';
 
+import { devPaths } from '../constants/devPaths';
 import { fsTools, getPathStatsInfos } from '../tools';
 import { tedis_jsonGet, tedis_jsonSet } from '../tools/tedis_json';
 import {

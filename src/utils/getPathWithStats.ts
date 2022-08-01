@@ -1,4 +1,5 @@
 import { stat } from 'fs-extra';
+
 import { FileTypes } from '../tools';
 import { GetStats, PathAndStats, PathWithStats } from '../types';
 import { dirListWithFileType } from './dirListWithFileType';

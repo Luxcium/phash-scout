@@ -1,5 +1,6 @@
 import { Stats, statSync } from 'fs';
 import { stat } from 'fs/promises';
+
 import { immediateZalgo } from '../utils';
 
 export function getStats(pathStr: string) {

@@ -1,4 +1,3 @@
-import { FileType } from '.';
 import {
   CurrentPathError,
   GetStats,
@@ -10,6 +9,7 @@ import {
   PathWithStats,
   QueryResultObject,
 } from '../types';
+import { FileType } from '.';
 
 export type RedisQueryResult<Bool extends boolean = true | false> = {
   baseName: string;

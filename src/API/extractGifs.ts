@@ -1,4 +1,5 @@
 import { link, lstat } from 'fs/promises';
+
 import { getPathInfos } from '../tools';
 
 export function extractGifs(fullPath: string) {

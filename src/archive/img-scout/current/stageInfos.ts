@@ -1,5 +1,6 @@
-import { Dirent } from 'fs-extra';
 import { readdir } from 'fs/promises';
+import { Dirent } from 'fs-extra';
+
 import { getPathsObj } from './getPathsObj';
 import { LongShortPath } from './LongShortPath';
 

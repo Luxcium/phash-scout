@@ -12,8 +12,8 @@ import { getStats } from './getStats';
 
 export { IMGSCOUT } from '../commands';
 export { getBigStrPHashFromFile, getPhash } from './computePHash';
-export { FileType as FileTypes } from './FileTypeEnum';
 export type { FileType } from './FileTypeEnum';
+export { FileType as FileTypes } from './FileTypeEnum';
 export { getDirsSync, getFilesAsync, getListing } from './fsTools';
 export { getDirListFileTypes } from './getDirListWithFileType';
 export { getNewTedis } from './getNewTedis';

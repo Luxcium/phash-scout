@@ -1,4 +1,5 @@
 import { createClient } from 'redis';
+
 import { RedisCStrOptions } from '../types';
 
 const DEBUG = false;

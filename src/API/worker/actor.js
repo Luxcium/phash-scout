@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 import { connect } from 'net';
+
 import { RpcWorkerPool } from './rpc-worker.js';
 
 /* **************************************************************** */

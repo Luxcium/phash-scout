@@ -255,6 +255,7 @@ const getPathStatsInfos = {
   getStats,
 };
 export {
+  dirListWithFileTypeAsync,
   get_atime,
   get_atimeMs,
   get_birthtime,
@@ -284,8 +285,7 @@ export {
   get_toNamespacedPath,
   get_uid,
   get_win32,
-  getPathStatsInfos,
-  dirListWithFileTypeAsync,
   getPathInfos,
+  getPathStatsInfos,
   getStats,
 };

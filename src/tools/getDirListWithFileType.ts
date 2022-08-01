@@ -1,4 +1,5 @@
 import type { Dirent } from 'fs';
+
 import type { DirentWithFileType } from '../types';
 // import { FileType as filesTypes } from './FileTypeEnum';
 

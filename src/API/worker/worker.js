@@ -1,10 +1,10 @@
 'use strict';
+import { parse } from 'node:path';
+
 import { redisQuery } from '../../doRedisQuery';
 import { rConnect } from '../../rConnect';
 import { immediateZalgo } from '../../utils';
 import { SET } from '../SET';
-
-import { parse } from 'node:path';
 
 const { parentPort } = require('worker_threads');
 const { getBigStrPHashFromFile } = require('../../tools');
@@ -53,8 +53,8 @@ const commands = {
           console.error(
             'at: redis_phash_query_result([])↓\n    error:',
             'TypeError: previousStepResult is an empty array for ' +
-            'messageId: ' +
-            count_a
+              'messageId: ' +
+              count_a
           );
           return [];
         }
@@ -64,13 +64,14 @@ const commands = {
         DEBUG &&
           console.error(
             'at: redis_phash_query_result([])↓\n    error:',
-            `TypeError: previousStepResult${!previousStepResult
-              ? ' is ' + undefined
-              : !previousStepResult.queryResult
+            `TypeError: previousStepResult${
+              !previousStepResult
+                ? ' is ' + undefined
+                : !previousStepResult.queryResult
                 ? '.queryResult is undefined' + previousStepResult
                 : typeof previousStepResult.queryResult !== 'function'
-                  ? '.queryResult is not a function'
-                  : ' is' + null + 'will return [](`never`)↓'
+                ? '.queryResult is not a function'
+                : ' is' + null + 'will return [](`never`)↓'
             }`
           );
         return [];

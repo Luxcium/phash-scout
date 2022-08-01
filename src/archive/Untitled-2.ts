@@ -2,6 +2,7 @@ import { BoxedGenerator } from '@luxcium/boxed-list';
 import { statSync } from 'fs-extra';
 import path from 'path';
 import { Tedis } from 'tedis';
+
 import { devPaths } from '../constants/devPaths';
 import { getDirsSync, getFilesAsync, getListing } from '../tools';
 import { dirListWithFileType } from '../utils/dirListWithFileType';

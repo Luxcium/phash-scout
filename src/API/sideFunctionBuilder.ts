@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import type { SideFunctionParam } from '../types';
 import { averageReducer } from './averageReducer';
 
