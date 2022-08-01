@@ -80,7 +80,6 @@ async function scan(
       const fullPath = normalize(`${cwd.path}/${ent.name}`);
       // HACK:- //-! ------- Add the side effect on files here -------
       try {
-        /*eslint no-constant-condition: "off"*/
         void AWAITS;
         console.log('counts.await++', ++counts.await);
         counts.await % 1000 === 0

@@ -21,6 +21,9 @@ const { getBigStrPHashFromFile } = require('../../tools');
 /*                                                                  */
 /* **************************************************************** */
 const DEBUG = false;
+const VERBOSE1 = true;
+const VERBOSE2 = false;
+const VERBOSE3 = false;
 const Rc = rConnect();
 
 DEBUG && console.log('in worker');
@@ -30,9 +33,59 @@ function asyncOnMessageWrap(fn) {
   };
 }
 let thisWorkerLoopCount = 0;
+
 const commands = {
+  async redis_phash_query_result(imgFileAbsolutePath, count_a) {
+    DEBUG &&
+      console.error('in redis_phash_query_result ' + thisWorkerLoopCount);
+
+    VERBOSE2 &&
+      console.log(count_a, thisWorkerLoopCount++, imgFileAbsolutePath);
+    try {
+      const previousStepResult = await commands.redis_phash_query(
+        imgFileAbsolutePath,
+        count_a
+      );
+      if (Array.isArray(previousStepResult)) {
+        if (previousStepResult.length > 0) {
+          return previousStepResult;
+        } else {
+          console.error(
+            'at: redis_phash_query_result([])↓\n    error:',
+            'TypeError: previousStepResult is an empty array for ' +
+            'messageId: ' +
+            count_a
+          );
+          return [];
+        }
+      } else {
+      }
+      if (!previousStepResult || !previousStepResult.queryResult) {
+        DEBUG &&
+          console.error(
+            'at: redis_phash_query_result([])↓\n    error:',
+            `TypeError: previousStepResult${!previousStepResult
+              ? ' is ' + undefined
+              : !previousStepResult.queryResult
+                ? '.queryResult is undefined' + previousStepResult
+                : typeof previousStepResult.queryResult !== 'function'
+                  ? '.queryResult is not a function'
+                  : ' is' + null + 'will return [](`never`)↓'
+            }`
+          );
+        return [];
+      }
+      const queryResult = await previousStepResult.queryResult();
+      VERBOSE2 && console.log('queryResult:');
+      VERBOSE2 && console.log(queryResult);
+      // return previousStepResult
+    } catch (error) {
+      console.error('at: redis_phash_query_result([])↓\n    error:', error);
+      return [];
+    }
+  },
   async redis_phash_query(imgFileAbsolutePath, count_a) {
-    DEBUG && console.log('in redis_phash_query ' + thisWorkerLoopCount);
+    DEBUG && console.error('in redis_phash_query ' + thisWorkerLoopCount);
     const RC = await Rc;
     try {
       const path = parse(imgFileAbsolutePath);
@@ -42,9 +95,12 @@ const commands = {
         extname: path.ext.toLowerCase(),
         baseName: path.base,
       };
-      if (pathInfos.extname !== '.jpg') return [];
+      if (pathInfos.extname !== '.jpg') {
+        VERBOSE3 && console.error('at: redis_phash_query error:', 'not .jpg');
+        return ['not .jpg'];
+      }
     } catch (error) {
-      console.log('at: redis_phash_query([])↓\n    error:', error);
+      console.error('at: redis_phash_query([])↓\n    error:', error);
       return [];
     }
 
@@ -59,19 +115,18 @@ const commands = {
         immediateZalgo(cachedPhash)
       );
       redisQueryResult.queryResult();
-      const queryResult = await redisQueryResult.queryResult();
-      console.log(count_a, thisWorkerLoopCount++, imgFileAbsolutePath);
+      // const queryResult = await redisQueryResult.queryResult();
       return {
         ...redisQueryResult,
-        queryResult,
+        // queryResult,
       };
     } catch (error) {
-      console.log('at: redis_phash_query([])↓\n    error:', error);
+      console.error('at: redis_phash_query([])↓\n    error:', error);
       return [];
     }
   },
   async get_cached_phash(imgFileAbsolutePath, count_a) {
-    DEBUG && console.log('in get_cached_phash ' + thisWorkerLoopCount);
+    DEBUG && console.error('in get_cached_phash ' + thisWorkerLoopCount);
     try {
       const K = `'cachedPhash:${imgFileAbsolutePath}'`;
       const R = await Rc;
@@ -85,17 +140,17 @@ const commands = {
       SET(R, K, value);
       return immediateZalgo(value);
     } catch (error) {
-      console.log('at: get_cached_phash(-3)↓\n    error:', error);
+      console.error('at: get_cached_phash(-3)↓\n    error:', error);
       return '-3';
     }
   },
   async bigstr_phash_from_file(imgFileAbsolutePath, count_a) {
-    DEBUG && console.log('in bigstr_phash_from_file ' + thisWorkerLoopCount);
+    DEBUG && console.error('in bigstr_phash_from_file ' + thisWorkerLoopCount);
 
     try {
       return getBigStrPHashFromFile(imgFileAbsolutePath);
     } catch (error) {
-      console.log('at: bigstr_phash_from_file(-2)↓\n    error:', error);
+      console.error('at: bigstr_phash_from_file(-2)↓\n    error:', error);
       return '-2';
     }
   },
@@ -111,7 +166,7 @@ parentPort.on(
     };
 
     try {
-      ++thisWorkerLoopCount;
+      // ++thisWorkerLoopCount;
       const result = await commands[method](...params);
 
       return { ...messageRPC, result };

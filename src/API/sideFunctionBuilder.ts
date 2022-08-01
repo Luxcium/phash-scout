@@ -19,9 +19,8 @@ async function calculatedFromWorker(fullPath: string, count_a: number) {
   try {
     const phashValue: string[] = (
       await axios.get(
-        'http://localhost:8083/redis_phash_query/' +
+        'http://localhost:8083/redis_phash_query_result/' +
           count_a +
-          '/' +
           encodeURI(fullPath)
       )
     ).data.split('\0\n\0');

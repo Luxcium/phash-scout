@@ -16,8 +16,9 @@ const RpcWorkerPool = require('./rpc-worker.js');
 /* **************************************************************** */
 
 const [, , host] = process.argv;
+
 const [hostname, port] = host.split(':');
-const worker = new RpcWorkerPool('./worker.js', 4, 'leastbusy');
+const worker = new RpcWorkerPool('./worker.js', 4, 'roundrobin');
 
 // ++ ----------------------------------------------------------------
 const upstream = net
@@ -25,24 +26,32 @@ const upstream = net
     console.log('connected to server');
   })
   .on('data', async raw_data => {
-    const chunks = String(raw_data).split('\0\n\0'); // <1>
-    chunks.pop();
-    for (let chunk of chunks) {
-      const data = JSON.parse(chunk);
-      const result = await worker.exec(
-        data.method,
-        `- ${data.id}`,
-        ...data.args
-      );
-      upstream.write(
-        JSON.stringify({
-          jsonrpc: '2.0',
-          id: data.id,
-          result,
-          pid: 'actor:' + process.pid,
-        }) + '\0\n\0'
-      );
-    }
+    const chunks = String(raw_data)
+      .split('\0\n\0');
+
+    // + remove last (empty) chunk
+    chunks
+      .slice(0, -1)
+      .forEach(chunk => {
+        const data = JSON
+          .parse(chunk);
+        const result = await worker
+          .exec(
+            data.method,
+            `- ${data.id}`,
+            ...data.args
+          );
+        upstream
+          .write(
+            JSON
+              .stringify({
+                jsonrpc: '2.0',
+                id: data.id,
+                result,
+                pid: 'actor:' + process.pid,
+              }) + '\0\n\0'
+          );
+      });
   })
   .on('end', () => {
     console.log('disconnect from server');

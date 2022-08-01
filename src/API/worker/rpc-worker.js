@@ -12,7 +12,7 @@ const { Worker } = require('worker_threads');
 /* have precedence on the current license information in some cases */
 /*                                                                  */
 /* **************************************************************** */
-
+const VERBOSE = true;
 const CORES = require('os').cpus().length;
 
 const STRATEGIES = new Set(['roundrobin', 'random', 'leastbusy']);
@@ -83,7 +83,8 @@ module.exports = class RpcWorkerPool {
         }
       }
     }
-    console.log('Selected Worker:', id, 'for message id:', message_id || 0);
+    VERBOSE &&
+      console.log('Selected Worker:', id+1, 'for message id:', message_id || 0);
     return this.workers[id];
   }
 };

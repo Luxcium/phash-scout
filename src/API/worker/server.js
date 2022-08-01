@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 'use strict';
+import { normalize } from 'node:path';
+
 const http = require('http');
 const net = require('net');
 
@@ -22,31 +24,52 @@ const [actor_hostname, actor_port] = actor_host.split(':');
 let message_id = 0;
 let actors = new Set(); // collection of actor handlers
 let messages = new Map(); // message ID -> HTTP response
+
+const VERBOSE1 = true;
+const VERBOSE2 = false;
+// const controller = new AbortController();
+// const { signal } = controller;
+// dgram.createSocket({ type: 'udp4', signal }).on('message', (msg, rinfo) => {
+//   console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+// });
+
 // ++ ----------------------------------------------------------------
+
 net
   .createServer(client => {
     const handler = data => client.write(JSON.stringify(data) + '\0\n\0'); // <1>
     actors.add(handler);
-    console.log('actor pool connected', actors.size);
+    console.info('actor pool connected', actors.size, message_id);
     client
       .on('end', () => {
         actors.delete(handler); // <2>
-        console.log('actor pool disconnected', actors.size);
+        console.info('actor pool disconnected', actors.size);
       })
       .on('data', raw_data => {
-        const chunks = String(raw_data).split('\0\n\0'); // <3>
-        chunks.pop(); // <4>
-        for (let chunk of chunks) {
-          const data = JSON.parse(chunk);
-          const res = messages.get(data.id);
-          res.end(JSON.stringify(data) + '\0\n\0');
-          messages.delete(data.id);
-        }
+        String(raw_data)
+          .split('\0\n\0')
+          .slice(0, -1)
+          .forEach(chunk => {
+            const data = JSON.parse(chunk);
+            const res = messages.get(data.id);
+            res.end(JSON.stringify(data) + '\0\n\0');
+            messages.delete(data.id);
+          });
+
+        // const chunks = String(raw_data).split('\0\n\0'); // <3>
+        // chunks.pop(); // <4>
+        // for (let chunk of chunks) {
+        //   const data = JSON.parse(chunk);
+        //   const res = messages.get(data.id);
+        //   res.end(JSON.stringify(data) + '\0\n\0');
+        //   messages.delete(data.id);
+        // }
       });
   })
   .listen(actor_port, actor_hostname, () => {
-    console.log(`actor: tcp://${actor_hostname}:${actor_port}`);
+    console.info(`actor: tcp://${actor_hostname}:${actor_port}`);
   });
+
 // ++ ----------------------------------------------------------------
 
 http
@@ -59,24 +82,25 @@ http
 
     messages.set(message_id, res);
 
-    console.log(
-      req.url.split('/').slice(1, 2).pop(),
-      req.url.split('/').slice(2, 3).pop(),
-      '\n',
-      decodeURI(req.url.split('/').slice(3).join('/'))
-    );
+    VERBOSE2 &&
+      console.log(
+        req.url.split('/').slice(1, 2).pop(),
+        req.url.split('/').slice(2, 3).pop(),
+        '\n',
+        decodeURI(req.url.split('/').slice(3).join('/'))
+      );
 
     actor({
       id: message_id,
       method: req.url.split('/').slice(1, 2).pop(),
       args: [
-        decodeURI(req.url.split('/').slice(3).join('/')),
+        normalize('/' + decodeURI(req.url.split('/').slice(3).join('/'))),
         req.url.split('/').slice(2, 3).pop(),
       ],
     });
   })
   .listen(web_port, web_hostname, () => {
-    console.log(`web:   http://${web_hostname}:${web_port}`);
+    console.info(`web:   http://${web_hostname}:${web_port}`);
   });
 // ++ ----------------------------------------------------------------
 
@@ -96,13 +120,14 @@ const worker = new RpcWorkerPool(
 );
 
 actors.add(async data => {
+  VERBOSE1 && console.log('actors.add', data);
   const value = await worker.exec(data.method, data.id, ...data.args);
-
   const reply =
     JSON.stringify({
+      jsonrpc: '2.0',
       id: data.id,
       value,
-      pid: 'server:' + process.pid,
+      pid: 'server:' + process.pid + ' (' + data.id + ')',
     }) + '\0\n\0';
 
   messages.get(data.id).end(reply);
