@@ -166,9 +166,9 @@ parentPort.on(
     };
 
     try {
-      // ++thisWorkerLoopCount;
       const result = await commands[method](...params);
-
+      console.log(id, method, params);
+      // console.log(++thisWorkerLoopCount);
       return { ...messageRPC, result };
     } catch (error) {
       const errorRPC = {
