@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SideFunctionParam } from '../types';
+import type { SideFunctionParam } from '../types';
 import { averageReducer } from './averageReducer';
 
 export function sideFunctionBuilder(times: number[]) {
