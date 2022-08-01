@@ -15,12 +15,13 @@ const flags = {
   DEBUGS: true,
   AWAITS: false,
 };
-const count = { await: 0 };
+const counts = { await: 0 };
+
 void (async function __MAIN__(traverseDir: string) {
   const times: number[] = [];
   if (await isDir(traverseDir)) {
     // const RC = Rc();
     const sideFunction = sideFunctionBuilder(times);
-    doTraverseDirs(traverseDir, sideFunction, flags, count);
+    doTraverseDirs(traverseDir, sideFunction, flags, counts);
   }
 })(localFolderAbsolutePath);
