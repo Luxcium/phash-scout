@@ -30,21 +30,26 @@ const upstream = net
     console.log('connected to server!');
   })
   .on('data', raw_data => {
-    const chunks = String(raw_data).split('\0\n\0');
+    void String(raw_data)
+      .split('\0\n\0')
+      .slice(0, -1)
+      .forEach(async chunk => {
+        const data = JSON.parse(chunk);
+        const result = await worker.exec(
+          data.method,
+          `${data.id}`,
+          ...data.args
+        );
 
-    // + remove last (empty) chunk
-    chunks.slice(0, -1).forEach(async chunk => {
-      const data = JSON.parse(chunk);
-      const result = await worker.exec(data.method, `${data.id}`, ...data.args);
-      upstream.write(
-        JSON.stringify({
-          jsonrpc: '2.0',
-          id: data.id,
-          result,
-          pid: 'actor:' + process.pid,
-        }) + '\0\n\0'
-      );
-    });
+        void upstream.write(
+          JSON.stringify({
+            jsonrpc: '2.0',
+            id: data.id,
+            result,
+            pid: 'actor:' + process.pid,
+          }) + '\0\n\0'
+        );
+      });
   })
   .on('end', () => {
     console.log('disconnect from server');
