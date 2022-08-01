@@ -1538,6 +1538,9 @@
   "todo-tree.filtering.includeGlobs": [],
   "todo-tree.general.tagGroups": {},
   "todo-tree.highlights.backgroundColourScheme": [],
-  "todo-tree.highlights.foregroundColourScheme": []
+  "todo-tree.highlights.foregroundColourScheme": [],
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  }
   // #endregion: TODO TREE                                                      !
 }

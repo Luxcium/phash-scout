@@ -17,6 +17,7 @@
     "noErrorTruncation": false,
     "composite": true,
     "rootDir": ".",
+    "skipLibCheck": true,
     // We can't pass "noEmit" in incremental mode, but this is close enough.
     "outDir": "./.tmp/build",
     "emitDeclarationOnly": true,
