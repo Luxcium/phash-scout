@@ -1,46 +1,26 @@
 'use strict';
+// #!! Consumed by the RpcWorkerPool class via path to file.
+
 import { parse } from 'node:path';
+import { parentPort } from 'worker_threads';
 
 import { redisQuery } from '../../doRedisQuery';
 import { rConnect } from '../../rConnect';
+import { getBigStrPHashFromFile } from '../../tools';
 import { immediateZalgo } from '../../utils';
 import { SET } from '../SET';
 
-const { parentPort } = require('worker_threads');
-const { getBigStrPHashFromFile } = require('../../tools');
-
-/* **************************************************************** */
-/*                                                                  */
-/* MIT LICENSE                                                      */
-/*                                                                  */
-/* Copyright © 2021-2022 Benjamin Vincent Kasapoglu (Luxcium)       */
-/*                                                                  */
-/* NOTICE:                                                          */
-/* Additional Licensing information at the bottom of the page may   */
-/* have precedence on the current license information in some cases */
-/*                                                                  */
-/* **************************************************************** */
 const DEBUG = false;
 const VERBOSE1 = true;
 const VERBOSE2 = false;
 const VERBOSE3 = false;
 const Rc = rConnect();
 
-DEBUG && console.log('in worker');
-function asyncOnMessageWrap(fn) {
-  return async function (msg) {
-    parentPort.postMessage(await fn(msg));
-  };
-}
-let thisWorkerLoopCount = 0;
-
 const commands = {
   async redis_phash_query_result(imgFileAbsolutePath, count_a) {
-    DEBUG &&
-      console.error('in redis_phash_query_result ' + thisWorkerLoopCount);
+    DEBUG && console.error('in redis_phash_query_result');
 
-    VERBOSE2 &&
-      console.log(count_a, thisWorkerLoopCount++, imgFileAbsolutePath);
+    VERBOSE2 && console.log(count_a, imgFileAbsolutePath);
     try {
       const previousStepResult = await commands.redis_phash_query(
         imgFileAbsolutePath,
@@ -79,14 +59,14 @@ const commands = {
       const queryResult = await previousStepResult.queryResult();
       VERBOSE2 && console.log('queryResult:');
       VERBOSE2 && console.log(queryResult);
-      // return previousStepResult
+      return { ...previousStepResult, queryResult };
     } catch (error) {
       console.error('at: redis_phash_query_result([])↓\n    error:', error);
       return [];
     }
   },
   async redis_phash_query(imgFileAbsolutePath, count_a) {
-    DEBUG && console.error('in redis_phash_query ' + thisWorkerLoopCount);
+    DEBUG && console.error('in redis_phash_query');
     const RC = await Rc;
     try {
       const path = parse(imgFileAbsolutePath);
@@ -116,10 +96,8 @@ const commands = {
         immediateZalgo(cachedPhash)
       );
       redisQueryResult.queryResult();
-      // const queryResult = await redisQueryResult.queryResult();
       return {
         ...redisQueryResult,
-        // queryResult,
       };
     } catch (error) {
       console.error('at: redis_phash_query([])↓\n    error:', error);
@@ -127,7 +105,7 @@ const commands = {
     }
   },
   async get_cached_phash(imgFileAbsolutePath, count_a) {
-    DEBUG && console.error('in get_cached_phash ' + thisWorkerLoopCount);
+    DEBUG && console.error('in get_cached_phash');
     try {
       const K = `'cachedPhash:${imgFileAbsolutePath}'`;
       const R = await Rc;
@@ -146,7 +124,7 @@ const commands = {
     }
   },
   async bigstr_phash_from_file(imgFileAbsolutePath, count_a) {
-    DEBUG && console.error('in bigstr_phash_from_file ' + thisWorkerLoopCount);
+    DEBUG && console.error('in bigstr_phash_from_file');
 
     try {
       return getBigStrPHashFromFile(imgFileAbsolutePath);
@@ -157,7 +135,7 @@ const commands = {
   },
 };
 
-parentPort.on(
+void parentPort.on(
   'message',
   asyncOnMessageWrap(async ({ method, params, id }) => {
     const messageRPC = {
@@ -165,12 +143,9 @@ parentPort.on(
       id,
       pid: 'worker:' + process.pid,
     };
-
     try {
-      const result = await commands[method](...params);
-      console.log(id, method, params);
-      // console.log(++thisWorkerLoopCount);
-      return { ...messageRPC, result };
+      const resultRPC = await commands[method](...params);
+      return { ...messageRPC, result: resultRPC };
     } catch (error) {
       const errorRPC = {
         code: -32_603,
@@ -179,72 +154,24 @@ parentPort.on(
           (error.message || ''),
         data: error,
       };
-
-      return { error: errorRPC, ...messageRPC };
+      return { ...messageRPC, error: errorRPC };
     }
   })
 );
 
-/*
-
-
-    const redisQueryResult = redisQuery(
-      RC,
-      'key',
-      fullPath,
-      immediateZalgo(calculatedValue)
-    );
-
-
-export async function getCachedPhash(
-  RC: any,
-  k_FullPath: string,
-  getValueFnct: (fullPath: string) => Promise<string>
-) {
-  const K = `'cachedPhash:${k_FullPath}'`;
-  const R = await RC;
-
-  let value: Promise<string> | string = (await R.GET(K)) as string;
-  if (value !== null && value.toString().length < 10) {
-    return immediateZalgo(value);
-  }
-
-
-  value = commands.bigstr_phash_from_file(k_FullPath);
-  SET(R, K, value);
-  return immediateZalgo(value);
+function asyncOnMessageWrap(fn) {
+  return async function (msg) {
+    void parentPort.postMessage(await fn(msg));
+  };
 }
-
-msg => { // .. dosomething }
-      URL: https://www.jsonrpc.org/specification
-      5.1 Error object
-When a rpc call encounters an error, the Response Object MUST contain the error member with a value that is a Object with the following members:
-
-code
-A Number that indicates the error type that occurred.
-This MUST be an integer.
-message
-A String providing a short description of the error.
-The message SHOULD be limited to a concise single sentence.
-data
-A Primitive or Structured value that contains additional information about the error.
-This may be omitted.
-The value of this member is defined by the Server (e.g. detailed error information, nested errors etc.).
-The error codes from and including -32768 to -32000 are reserved for pre-defined errors. Any code within this range, but not defined explicitly below is reserved for future use. The error codes are nearly the same as those suggested for XML-RPC at the following url: http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php
-
-code	message	meaning
--32700	Parse error	Invalid JSON was received by the server.
-An error occurred on the server while parsing the JSON text.
--32600	Invalid Request	The JSON sent is not a valid Request object.
--32601	Method not found	The method does not exist / is not available.
--32602	Invalid params	Invalid method parameter(s).
--32603	Internal error	Internal JSON-RPC error.
--32000 to -32099	Server error	Reserved for implementation-defined server-errors.
-The remainder of the space is available for application defined errors.
-       */
 
 /* **************************************************************** */
 /*                                                                  */
+/*  MIT LICENSE                                                     */
+/*                                                                  */
+/*  Copyright © 2021-2022 Benjamin Vincent Kasapoglu (Luxcium)      */
+/*                                                                  */
+/*  NOTICE:                                                         */
 /*  O’Reilly Online Learning                                        */
 /*                                                                  */
 /*  Title: “Multithreaded JavaScript”                               */

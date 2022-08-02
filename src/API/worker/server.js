@@ -4,19 +4,8 @@ import { createServer as createHTTP_Server } from 'http';
 import { createServer as createTCP_Server } from 'net';
 import { normalize } from 'node:path';
 
-import { RpcWorkerPool } from './rpc-worker.js';
-
-/* **************************************************************** */
-/*                                                                  */
-/* MIT LICENSE                                                      */
-/*                                                                  */
-/* Copyright © 2021-2022 Benjamin Vincent Kasapoglu (Luxcium)       */
-/*                                                                  */
-/* NOTICE:                                                          */
-/* Additional Licensing information at the bottom of the page may   */
-/* have precedence on the current license information in some cases */
-/*                                                                  */
-/* **************************************************************** */
+// import { RpcWorkerPool } from './rpc-worker_2';
+import { RpcWorkerPool } from './rpc-worker';
 
 const [, , web_host, actor_host, threads] = process.argv;
 const [web_hostname, web_port] = web_host.split(':');
@@ -107,11 +96,11 @@ function randomActor() {
 }
 
 // ++ ---- PART TWO BEGINS BELOW -------------------------------------
-
+// HACK:------ Hard coded path will cause problems MUST FIX ----------
 const worker = new RpcWorkerPool(
   '/home/luxcium/projects/pHashScout/out/src/API/worker/worker.js',
   threads || 0,
-  'leastbusy'
+  'roundrobin'
 );
 
 actors.add(async data => {
@@ -131,6 +120,11 @@ actors.add(async data => {
 
 /* **************************************************************** */
 /*                                                                  */
+/*  MIT LICENSE                                                     */
+/*                                                                  */
+/*  Copyright © 2021-2022 Benjamin Vincent Kasapoglu (Luxcium)      */
+/*                                                                  */
+/*  NOTICE:                                                         */
 /*  O’Reilly Online Learning                                        */
 /*                                                                  */
 /*  Title: “Multithreaded JavaScript”                               */

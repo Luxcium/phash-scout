@@ -4,18 +4,6 @@ import { connect } from 'net';
 
 import { RpcWorkerPool } from './rpc-worker.js';
 
-/* **************************************************************** */
-/*                                                                  */
-/* MIT LICENSE                                                      */
-/*                                                                  */
-/* Copyright © 2021-2022 Benjamin Vincent Kasapoglu (Luxcium)       */
-/*                                                                  */
-/* NOTICE:                                                          */
-/* Additional Licensing information at the bottom of the page may   */
-/* have precedence on the current license information in some cases */
-/*                                                                  */
-/* **************************************************************** */
-
 const [, , host] = process.argv;
 const [hostname, port] = host.split(':');
 
@@ -49,6 +37,7 @@ const upstream = connect(port, hostname, () => {
     console.log('disconnect from server');
   });
 
+// HACK:------ Hard coded path will cause problems MUST FIX ----------
 function getWorker() {
   return new RpcWorkerPool(
     '/home/luxcium/projects/pHashScout/out/src/API/worker/worker.js',
@@ -56,8 +45,14 @@ function getWorker() {
     'roundrobin'
   );
 }
+
 /* **************************************************************** */
 /*                                                                  */
+/*  MIT LICENSE                                                     */
+/*                                                                  */
+/*  Copyright © 2021-2022 Benjamin Vincent Kasapoglu (Luxcium)      */
+/*                                                                  */
+/*  NOTICE:                                                         */
 /*  O’Reilly Online Learning                                        */
 /*                                                                  */
 /*  Title: “Multithreaded JavaScript”                               */

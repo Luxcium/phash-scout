@@ -2,52 +2,81 @@
 import { cpus } from 'os';
 import { Worker } from 'worker_threads';
 
-/* **************************************************************** */
-/*                                                                  */
-/* MIT LICENSE                                                      */
-/*                                                                  */
-/* Copyright © 2021-2022 Benjamin Vincent Kasapoglu (Luxcium)       */
-/*                                                                  */
-/* NOTICE:                                                          */
-/* Additional Licensing information at the bottom of the page may   */
-/* have precedence on the current license information in some cases */
-/*                                                                  */
-/* **************************************************************** */
 const VERBOSE = true;
-const CORES = cpus().length;
 
-const STRATEGIES = new Set(['roundrobin', 'random', 'leastbusy']);
+function setSize(self, size = 0) {
+  const CORES = cpus().length;
+  if (size === 0) self.size = CORES; // <1>
+  else if (size < 0) self.size = Math.max(CORES + size, 1);
+  else self.size = size;
+  return self;
+}
 export class RpcWorkerPool {
+  static STRATEGIES = new Set(['roundrobin', 'random', 'leastbusy']);
   /** @member {number} */
   size;
+  /** @member {number} */
+  worker_uid;
+  /** @member {number} */
+  next_command_id;
+
+  /** @member {number} */
+  rr_index;
   constructor(path, size = 0, strategy = 'roundrobin') {
-    if (size === 0) this.size = CORES; // <1>
-    else if (size < 0) this.size = Math.max(CORES + size, 1);
-    else this.size = size;
+    this.size = setSize(this, size).size;
 
-    if (!STRATEGIES.has(strategy)) throw new TypeError('invalid strategy');
-    this.strategy = strategy; // <2>
+    if (!RpcWorkerPool.STRATEGIES.has(strategy)) {
+      throw new TypeError('invalid strategy');
+    }
+    this.strategy = strategy;
     this.rr_index = -1;
-
+    this.worker_uid = 0;
     this.next_command_id = 0;
-    this.workers = []; // <3>
+    this._workers = new Map();
 
     for (let i = 0; i < this.size; i++) {
       const worker = new Worker(path);
-      this.workers.push({ worker, in_flight_commands: new Map() }); // <4>
+      this._workers.set(++this.worker_uid, {
+        worker_uid: this.worker_uid,
+        worker,
+        in_flight_commands: new Map(),
+      });
+
       worker.on('message', msg => {
-        this.onMessageHandler(msg, i);
+        console.log("worker.on('message'", msg);
+        this._onMessageHandler(msg, this.worker_uid);
       });
     }
   }
   // ++ ----------------------------------------------------------------
-  onMessageHandler(msg, worker_id) {
-    const worker = this.workers[worker_id];
+  _onMessageHandler(msg, worker_uid) {
+    const worker = this._workers.get(worker_uid);
     const { result, error, id } = msg;
     const { resolve, reject } = worker.in_flight_commands.get(id);
     worker.in_flight_commands.delete(id);
     if (error) reject(error);
     else resolve(result);
+  }
+
+  // ++ ----------------------------------------------------------------
+  _getWorker(data_id) {
+    let worker_id;
+    if (this.strategy === 'random') {
+      worker_id = Math.floor(Math.random() * this._workers.size) + 1;
+    } else if (this.strategy === 'roundrobin') {
+      if (++this.rr_index >= this._workers.size) this.rr_index = 1;
+      worker_id = this.rr_index;
+    } else if (this.strategy === 'leastbusy') {
+      let min = Infinity;
+      this._workers.forEach(worker => {
+        if (worker.in_flight_commands.size < min) {
+          min = worker.in_flight_commands.size;
+          worker_id = worker.worker_uid;
+        }
+      });
+    }
+    VERBOSE && console.log('Selected Worker:', worker_id, 'data_id:', data_id);
+    return this._workers.get(worker_id);
   }
   // ++ ----------------------------------------------------------------
   /**
@@ -60,44 +89,21 @@ export class RpcWorkerPool {
       resolve = res;
       reject = rej;
     });
-    const worker = this.getWorker(message_id); // <1>
+    const worker = this._getWorker(message_id); // <1>
     worker.in_flight_commands.set(id, { resolve, reject });
     worker.worker.postMessage({ method, params: args, id });
 
     return promise;
   }
-  // ++ ----------------------------------------------------------------
-  getWorker(message_id = -1) {
-    let id;
-    if (this.strategy === 'random') {
-      id = Math.floor(Math.random() * this.size);
-    } else if (this.strategy === 'roundrobin') {
-      this.rr_index++;
-      if (this.rr_index >= this.size) this.rr_index = 0;
-      id = this.rr_index;
-    } else if (this.strategy === 'leastbusy') {
-      let min = Infinity;
-      for (let i = 0; i < this.size; i++) {
-        let worker = this.workers[i];
-        if (worker.in_flight_commands.size < min) {
-          min = worker.in_flight_commands.size;
-          id = i;
-        }
-      }
-    }
-    VERBOSE &&
-      console.log(
-        'Selected Worker:',
-        id + 1,
-        'for message id:',
-        message_id || 0
-      );
-    return this.workers[id];
-  }
 }
 
 /* **************************************************************** */
 /*                                                                  */
+/*  MIT LICENSE                                                     */
+/*                                                                  */
+/*  Copyright © 2021-2022 Benjamin Vincent Kasapoglu (Luxcium)      */
+/*                                                                  */
+/*  NOTICE:                                                         */
 /*  O’Reilly Online Learning                                        */
 /*                                                                  */
 /*  Title: “Multithreaded JavaScript”                               */

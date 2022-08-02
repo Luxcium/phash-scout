@@ -2,17 +2,6 @@
 import { cpus } from 'os';
 import { Worker } from 'worker_threads';
 
-/* **************************************************************** */
-/*                                                                  */
-/* MIT LICENSE                                                      */
-/*                                                                  */
-/* Copyright © 2021-2022 Benjamin Vincent Kasapoglu (Luxcium)       */
-/*                                                                  */
-/* NOTICE:                                                          */
-/* Additional Licensing information at the bottom of the page may   */
-/* have precedence on the current license information in some cases */
-/*                                                                  */
-/* **************************************************************** */
 const VERBOSE = true;
 const CORES = cpus().length;
 
@@ -98,6 +87,11 @@ export class RpcWorkerPool {
 
 /* **************************************************************** */
 /*                                                                  */
+/*  MIT LICENSE                                                     */
+/*                                                                  */
+/*  Copyright © 2021-2022 Benjamin Vincent Kasapoglu (Luxcium)      */
+/*                                                                  */
+/*  NOTICE:                                                         */
 /*  O’Reilly Online Learning                                        */
 /*                                                                  */
 /*  Title: “Multithreaded JavaScript”                               */
