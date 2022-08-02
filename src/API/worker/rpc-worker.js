@@ -1,4 +1,5 @@
 'use strict';
+import { cpus } from 'os';
 import { Worker } from 'worker_threads';
 
 /* **************************************************************** */
@@ -13,7 +14,7 @@ import { Worker } from 'worker_threads';
 /*                                                                  */
 /* **************************************************************** */
 const VERBOSE = true;
-const CORES = require('os').cpus().length;
+const CORES = cpus().length;
 
 const STRATEGIES = new Set(['roundrobin', 'random', 'leastbusy']);
 export class RpcWorkerPool {
@@ -30,6 +31,7 @@ export class RpcWorkerPool {
 
     this.next_command_id = 0;
     this.workers = []; // <3>
+
     for (let i = 0; i < this.size; i++) {
       const worker = new Worker(path);
       this.workers.push({ worker, in_flight_commands: new Map() }); // <4>
