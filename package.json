@@ -29,7 +29,7 @@
     "base:check:version": "ts-node -vv;tsc -v",
     "base:lint": "echo \"Error: no linter specified\" && exit 0",
     "base:test": "jest",
-    "prebuild": "npm ci; npm run fix && npm run test || exit 7",
+    "prebuild": "npm ci; npm run fix:and:json || exit 9",
     "build": "mkdir -p \"./out/performance\" && tsc --noEmit false --generateCpuProfile \"./out/performance\" || exit 1",
     "precibuild": "npm run build || exit 2",
     "cibuild": "tsc --build \"tsconfig.src-build.json\" || exit 1",
