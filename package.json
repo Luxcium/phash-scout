@@ -13,8 +13,11 @@
   },
   "isLibrary": true,
   "scripts": {
-    "prestart": "tsc -b ./src/tsconfig.json",
+    "out": "tsc -b ./src/tsconfig.json",
+    "prestart": "npm run out",
     "start": "UV_THREADPOOL_SIZE=5; node 'out/src/API/worker/server.js' '127.0.0.1:8083' '127.0.0.1:9093' 100 &",
+    "predebug": "npm run out",
+    "debug": "UV_THREADPOOL_SIZE=5; node --inspect-brk 'out/src/API/worker/server.js' '127.0.0.1:8083' '127.0.0.1:9093' 5",
     "base:build": "parcel build --no-cache",
     "local:redis": "scripts/start_6383.sh",
     "base:prerelease": "./scripts/prerelease.sh",
