@@ -2,8 +2,8 @@ import { isDir } from '../tools';
 import { sideFunctionBuilder } from './sideFunctionBuilder';
 import { doTraverseDirs } from './sync-directory-traversal';
 
-const localFolderAbsolutePath =
-  '/media/luxcium/Archive_Locale/import/GAYBOYSTUBE/users';
+const localFolderAbsolutePath = '/tmp/jpgs';
+  // '/media/luxcium/Archive_Locale/import/GAYBOYSTUBE/users';
 
 // const Rc = () => rConnect();
 

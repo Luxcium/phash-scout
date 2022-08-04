@@ -10,21 +10,13 @@ import { getBigStrPHashFromFile } from '../../tools';
 import { immediateZalgo } from '../../utils';
 import { SET } from '../SET';
 
-const DEBUG = false;
-const VERBOSE1 = true;
-const VERBOSE2 = false;
-const VERBOSE3 = false;
 const Rc = rConnect();
 
 const commands = {
-  async redis_phash_query_result(imgFileAbsolutePath, count_a) {
-    DEBUG && console.error('in redis_phash_query_result');
-
-    VERBOSE2 && console.log(count_a, imgFileAbsolutePath);
+  async redis_phash_query_result(imgFileAbsolutePath) {
     try {
       const previousStepResult = await commands.redis_phash_query(
-        imgFileAbsolutePath,
-        count_a
+        imgFileAbsolutePath
       );
       if (Array.isArray(previousStepResult)) {
         if (previousStepResult.length > 0) {
@@ -33,107 +25,124 @@ const commands = {
           console.error(
             'at: redis_phash_query_result([])↓\n    error:',
             'TypeError: previousStepResult is an empty array for ' +
-              'messageId: ' +
-              count_a
+            'messageId: '
           );
           return [];
         }
       } else {
       }
       if (!previousStepResult || !previousStepResult.queryResult) {
-        DEBUG &&
-          console.error(
-            'at: redis_phash_query_result([])↓\n    error:',
-            `TypeError: previousStepResult${
-              !previousStepResult
-                ? ' is ' + undefined
-                : !previousStepResult.queryResult
-                ? '.queryResult is undefined' + previousStepResult
-                : typeof previousStepResult.queryResult !== 'function'
+        console.error(
+          'at: redis_phash_query_result([])↓\n    error:',
+          `TypeError: previousStepResult${!previousStepResult
+            ? ' is ' + undefined
+            : !previousStepResult.queryResult
+              ? '.queryResult is undefined' + previousStepResult
+              : typeof previousStepResult.queryResult !== 'function'
                 ? '.queryResult is not a function'
                 : ' is' + null + 'will return [](`never`)↓'
-            }`
-          );
+          }`
+        );
         return [];
       }
       const queryResult = await previousStepResult.queryResult();
-      VERBOSE2 && console.log('queryResult:');
-      VERBOSE2 && console.log(queryResult);
+      console.log(queryResult);
       return { ...previousStepResult, queryResult };
     } catch (error) {
       console.error('at: redis_phash_query_result([])↓\n    error:', error);
       return [];
     }
   },
-  async redis_phash_query(imgFileAbsolutePath, count_a) {
-    DEBUG && console.error('in redis_phash_query');
-    const RC = await Rc;
-    try {
-      const path = parse(imgFileAbsolutePath);
-      const pathInfos = {
-        ...path,
-        fullPath: imgFileAbsolutePath,
-        extname: path.ext.toLowerCase(),
-        baseName: path.base,
-      };
-      if (pathInfos.extname !== '.jpg') {
-        VERBOSE3 && console.error('at: redis_phash_query error:', 'not .jpg');
-        return ['not .jpg'];
-      }
-    } catch (error) {
-      console.error('at: redis_phash_query([])↓\n    error:', error);
-      return [];
-    }
+  async redis_phash_query(imgFileAbsolutePath) {
+    const fnct = redisPhashQuery;
 
-    try {
-      const cachedPhash =
-        (await commands.get_cached_phash(imgFileAbsolutePath)) || '-4';
+    const errVal = '[]';
+    const errMsg = 'redis_phash_query([])↓';
 
-      const redisQueryResult = redisQuery(
-        RC,
-        'key',
-        imgFileAbsolutePath,
-        immediateZalgo(cachedPhash)
-      );
-      redisQueryResult.queryResult();
-      return {
-        ...redisQueryResult,
-      };
-    } catch (error) {
-      console.error('at: redis_phash_query([])↓\n    error:', error);
-      return [];
-    }
+    const p = { fnct, errMsg, errVal };
+
+    return theTryCathBlock(p, imgFileAbsolutePath);
   },
-  async get_cached_phash(imgFileAbsolutePath, count_a) {
-    DEBUG && console.error('in get_cached_phash');
-    try {
-      const K = `'cachedPhash:${imgFileAbsolutePath}'`;
-      const R = await Rc;
+  async get_cached_phash(imgFileAbsolutePath) {
+    const fnct = getCachedPhash;
 
-      let value = await R.GET(K);
-      if (value !== null && value.toString().length < 10) {
-        return immediateZalgo(value);
-      }
+    const errVal = '-3';
+    const errMsg = 'get_cached_phash(-3)↓';
 
-      value = commands.bigstr_phash_from_file(imgFileAbsolutePath);
-      SET(R, K, value);
-      return immediateZalgo(value);
-    } catch (error) {
-      console.error('at: get_cached_phash(-3)↓\n    error:', error);
-      return '-3';
-    }
+    const p = { fnct, errMsg, errVal };
+
+    return theTryCathBlock(p, imgFileAbsolutePath);
   },
-  async bigstr_phash_from_file(imgFileAbsolutePath, count_a) {
-    DEBUG && console.error('in bigstr_phash_from_file');
 
-    try {
-      return getBigStrPHashFromFile(imgFileAbsolutePath);
-    } catch (error) {
-      console.error('at: bigstr_phash_from_file(-2)↓\n    error:', error);
-      return '-2';
-    }
+  async bigstr_phash_from_file(imgFileAbsolutePath) {
+    const fnct = getBigStrPHashFromFile;
+
+    const errVal = '-2';
+    const errMsg = 'bigstr_phash_from_file(-2)↓';
+
+    const p = { fnct, errMsg, errVal };
+
+    return theTryCathBlock(p, imgFileAbsolutePath);
   },
 };
+
+async function redisPhashQuery(imgFileAbsolutePath) {
+  const RC = await Rc;
+
+  const { pathInfos } = pathPaser(imgFileAbsolutePath);
+  if (pathInfos.extname !== '.jpg') {
+    return ['not .jpg'];
+  }
+
+  const cachedPhash = commands.get_cached_phash(imgFileAbsolutePath);
+  return getRedisQueryResult(imgFileAbsolutePath, cachedPhash);
+}
+
+function pathPaser(imgFileAbsolutePath) {
+  const path = parse(imgFileAbsolutePath);
+  return {
+    pathInfos: {
+      ...path,
+      fullPath: imgFileAbsolutePath,
+      extname: path.ext.toLowerCase(),
+      baseName: path.base,
+    },
+  };
+}
+
+async function getRedisQueryResult(imgFileAbsolutePath, cachedPhash) {
+  const RC = await Rc;
+  const redisQueryResult = redisQuery(
+    RC,
+    'key',
+    imgFileAbsolutePath,
+    cachedPhash
+  );
+  return redisQueryResult;
+}
+getCachedPhash.count = 0;
+async function getCachedPhash(imgFileAbsolutePath) {
+  const K = `'cachedPhash:${imgFileAbsolutePath}'`;
+  const R = await Rc;
+
+  let value = await R.GET(K);
+
+  if (value !== null && value.toString().length > 10) {
+    return immediateZalgo(value);
+  }
+  value = commands.bigstr_phash_from_file(imgFileAbsolutePath);
+
+  SET(R, K, value);
+  return immediateZalgo(value);
+}
+async function theTryCathBlock({ fnct, errMsg, errVal }, ...args) {
+  try {
+    return fnct(...args);
+  } catch (error) {
+    console.error(`at: ${errMsg}\n    error:`, error);
+    return errVal;
+  }
+}
 
 void parentPort.on(
   'message',
