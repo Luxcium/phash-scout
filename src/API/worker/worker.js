@@ -1,147 +1,14 @@
 'use strict';
 // #!! Consumed by the RpcWorkerPool class via path to file.
 
-import { parse } from 'node:path';
 import { parentPort } from 'worker_threads';
 
-import { redisQuery } from '../../doRedisQuery';
-import { rConnect } from '../../rConnect';
-import { getBigStrPHashFromFile } from '../../tools';
-import { immediateZalgo } from '../../utils';
-import { SET } from '../SET';
+import { commands } from './commands';
 
-const Rc = rConnect();
-
-const commands = {
-  async redis_phash_query_result(imgFileAbsolutePath) {
-    try {
-      const previousStepResult = await commands.redis_phash_query(
-        imgFileAbsolutePath
-      );
-      if (Array.isArray(previousStepResult)) {
-        if (previousStepResult.length > 0) {
-          return previousStepResult;
-        } else {
-          console.error(
-            'at: redis_phash_query_result([])↓\n    error:',
-            'TypeError: previousStepResult is an empty array for ' +
-            'messageId: '
-          );
-          return [];
-        }
-      } else {
-      }
-      if (!previousStepResult || !previousStepResult.queryResult) {
-        console.error(
-          'at: redis_phash_query_result([])↓\n    error:',
-          `TypeError: previousStepResult${!previousStepResult
-            ? ' is ' + undefined
-            : !previousStepResult.queryResult
-              ? '.queryResult is undefined' + previousStepResult
-              : typeof previousStepResult.queryResult !== 'function'
-                ? '.queryResult is not a function'
-                : ' is' + null + 'will return [](`never`)↓'
-          }`
-        );
-        return [];
-      }
-      const queryResult = await previousStepResult.queryResult();
-      console.log(queryResult);
-      return { ...previousStepResult, queryResult };
-    } catch (error) {
-      console.error('at: redis_phash_query_result([])↓\n    error:', error);
-      return [];
-    }
-  },
-  async redis_phash_query(imgFileAbsolutePath) {
-    const fnct = redisPhashQuery;
-
-    const errVal = '[]';
-    const errMsg = 'redis_phash_query([])↓';
-
-    const p = { fnct, errMsg, errVal };
-
-    return theTryCathBlock(p, imgFileAbsolutePath);
-  },
-  async get_cached_phash(imgFileAbsolutePath) {
-    const fnct = getCachedPhash;
-
-    const errVal = '-3';
-    const errMsg = 'get_cached_phash(-3)↓';
-
-    const p = { fnct, errMsg, errVal };
-
-    return theTryCathBlock(p, imgFileAbsolutePath);
-  },
-
-  async bigstr_phash_from_file(imgFileAbsolutePath) {
-    const fnct = getBigStrPHashFromFile;
-
-    const errVal = '-2';
-    const errMsg = 'bigstr_phash_from_file(-2)↓';
-
-    const p = { fnct, errMsg, errVal };
-
-    return theTryCathBlock(p, imgFileAbsolutePath);
-  },
-};
-
-async function redisPhashQuery(imgFileAbsolutePath) {
-  const RC = await Rc;
-
-  const { pathInfos } = pathPaser(imgFileAbsolutePath);
-  if (pathInfos.extname !== '.jpg') {
-    return ['not .jpg'];
-  }
-
-  const cachedPhash = commands.get_cached_phash(imgFileAbsolutePath);
-  return getRedisQueryResult(imgFileAbsolutePath, cachedPhash);
-}
-
-function pathPaser(imgFileAbsolutePath) {
-  const path = parse(imgFileAbsolutePath);
-  return {
-    pathInfos: {
-      ...path,
-      fullPath: imgFileAbsolutePath,
-      extname: path.ext.toLowerCase(),
-      baseName: path.base,
-    },
+function asyncOnMessageWrap(fn) {
+  return async function (msg) {
+    void parentPort.postMessage(await fn(msg));
   };
-}
-
-async function getRedisQueryResult(imgFileAbsolutePath, cachedPhash) {
-  const RC = await Rc;
-  const redisQueryResult = redisQuery(
-    RC,
-    'key',
-    imgFileAbsolutePath,
-    cachedPhash
-  );
-  return redisQueryResult;
-}
-getCachedPhash.count = 0;
-async function getCachedPhash(imgFileAbsolutePath) {
-  const K = `'cachedPhash:${imgFileAbsolutePath}'`;
-  const R = await Rc;
-
-  let value = await R.GET(K);
-
-  if (value !== null && value.toString().length > 10) {
-    return immediateZalgo(value);
-  }
-  value = commands.bigstr_phash_from_file(imgFileAbsolutePath);
-
-  SET(R, K, value);
-  return immediateZalgo(value);
-}
-async function theTryCathBlock({ fnct, errMsg, errVal }, ...args) {
-  try {
-    return fnct(...args);
-  } catch (error) {
-    console.error(`at: ${errMsg}\n    error:`, error);
-    return errVal;
-  }
 }
 
 void parentPort.on(
@@ -167,12 +34,6 @@ void parentPort.on(
     }
   })
 );
-
-function asyncOnMessageWrap(fn) {
-  return async function (msg) {
-    void parentPort.postMessage(await fn(msg));
-  };
-}
 
 /* **************************************************************** */
 /*                                                                  */
