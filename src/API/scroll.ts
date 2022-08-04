@@ -1,4 +1,4 @@
-import { CSI } from './vtfeatures';
+import { CSI } from '../utils/vtFeatures/vtfeatures';
 
 export function scroll(Ps = -1) {
   if (Ps < 0) {
