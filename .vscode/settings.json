@@ -1548,6 +1548,8 @@
   "todo-tree.highlights.foregroundColourScheme": [],
   "[javascript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
-  }
+  },
+  "workbench.editor.titleScrollbarSizing": "large",
+  "task.allowAutomaticTasks": true
   // #endregion: TODO TREE                                                      !
 }
