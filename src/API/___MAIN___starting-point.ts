@@ -3,7 +3,11 @@ import { sideFunctionBuilder } from './sideFunctionBuilder';
 import { doTraverseDirs } from './sync-directory-traversal';
 
 const localFolderAbsolutePath = '/tmp/jpgs';
-  // '/media/luxcium/Archive_Locale/import/GAYBOYSTUBE/users';
+// '/media/luxcium/Archive_Locale/jpgs';
+
+//
+
+// '/media/luxcium/Archive_Locale/import/GAYBOYSTUBE/users';
 
 // const Rc = () => rConnect();
 
