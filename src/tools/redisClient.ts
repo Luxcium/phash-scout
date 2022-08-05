@@ -48,7 +48,7 @@ export function redisCreateClient(
     return client
       .on('error', err => errorLoger('Redis Client Error', err))
       .on('connect', () => {
-        console.error('Redis Client connect');
+        console.error('\nRedis Client connect');
       })
       .on('ready', () => {
         console.error('Redis Client ready');
