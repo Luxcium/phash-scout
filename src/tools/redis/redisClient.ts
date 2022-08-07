@@ -1,6 +1,6 @@
 import { createClient } from 'redis';
 
-import { RedisCStrOptions } from '../types';
+import { RedisCStrOptions } from '../../types';
 
 const DEBUG = false;
 if (DEBUG) console.log('DEBUG = true in:', __filename);

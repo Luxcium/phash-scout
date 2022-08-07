@@ -10,9 +10,9 @@ import {
   PHashGet,
   PHashGetter,
   QueryResultObject,
-} from '../types';
-import { doUniqueAddObj } from './doUniqueAddObj';
-import { notExcluded, notNull } from './notExclude';
+} from '../../types';
+import { doUniqueAddObj } from '../doUniqueAddObj';
+import { notExcluded, notNull } from '../notExclude';
 
 export type MyReturnType = (bgPaths: Bg<PathWithStats & PHashGet>) => Bg<
   {

@@ -39,7 +39,7 @@ export {
 } from './notExclude';
 export { parsePath } from './parsePath';
 export { getTransact, readListRx } from './readListR1';
-export { redisConnectionString, redisCreateClient } from './redisClient';
+export { redisConnectionString, redisCreateClient } from './redis/redisClient';
 export { reorder } from './reorder';
 export { toObj } from './toObj';
 export { toQueryResultObj } from './toQueryResultObj';

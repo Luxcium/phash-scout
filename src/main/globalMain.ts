@@ -1,7 +1,7 @@
 import { getPhash } from '../tools';
-import { doRedisQuery } from '../tools/doRedisQuery';
 import { listFiles } from '../tools/listFiles';
-import { manageRedisQuery } from '../tools/manageRedisQuery';
+import { doRedisQuery } from '../tools/redis/doRedisQuery';
+import { manageRedisQuery } from '../tools/redis/manageRedisQuery';
 import { endAsyncSpark } from '../utils/endAsyncSpark';
 import { filterExtensions } from '../utils/filterExtensions';
 

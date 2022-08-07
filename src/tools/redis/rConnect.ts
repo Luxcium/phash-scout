@@ -1,4 +1,4 @@
-import { redisCreateClient } from '.';
+import { redisCreateClient } from '..';
 
 export async function rConnect(port = 6383, dbNumber = 0, host = '0.0.0.0') {
   /** REDIS CLIENT */
