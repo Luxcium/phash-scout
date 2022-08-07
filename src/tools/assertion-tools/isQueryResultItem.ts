@@ -1,4 +1,4 @@
-import { QueryResultItem } from '../types';
+import { QueryResultItem } from '../../types';
 
 export function isQueryResultItem(item: unknown): item is QueryResultItem {
   return (

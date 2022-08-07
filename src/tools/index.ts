@@ -22,11 +22,11 @@ export { getPathStatsInfos } from './getPathStatsInfos';
 export { getRawDirList, getRawDirListSync } from './getRawDirList';
 export { getSplit } from './getSplit';
 export { getStats, getStatsSync } from './getStats';
-export { isA_Promise } from './isA_Promise';
-export { isDir, isDirSync } from './isDir';
-export { isQueryResult } from './isQueryResult';
-export { isQueryResultItem } from './isQueryResultItem';
-export { isQueryResultList } from './isQueryResultList';
+export { isA_Promise } from './assertion-tools/isA_Promise';
+export { isDir, isDirSync } from './assertion-tools/isDir';
+export { isQueryResult } from './assertion-tools/isQueryResult';
+export { isQueryResultItem } from './assertion-tools/isQueryResultItem';
+export { isQueryResultList } from './assertion-tools/isQueryResultList';
 export { MayBe, Nothing, Right } from './Maybe';
 export {
   isExcluded,
