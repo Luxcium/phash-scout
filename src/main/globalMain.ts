@@ -1,9 +1,9 @@
-import { doRedisQuery } from './doRedisQuery';
-import { endAsyncSpark } from './endAsyncSpark';
-import { filterExtensions } from './filterExtensions';
-import { listFiles } from './listFiles';
-import { manageRedisQuery } from './manageRedisQuery';
-import { getPhash } from './tools';
+import { getPhash } from '../tools';
+import { doRedisQuery } from '../tools/doRedisQuery';
+import { listFiles } from '../tools/listFiles';
+import { manageRedisQuery } from '../tools/manageRedisQuery';
+import { endAsyncSpark } from '../utils/endAsyncSpark';
+import { filterExtensions } from '../utils/filterExtensions';
 
 export const globalMain = async (dir: S, grpKey: S, validExt: Ss, rC: any) => {
   const R = await rC;

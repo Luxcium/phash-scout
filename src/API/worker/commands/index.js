@@ -1,5 +1,5 @@
-import { rConnect } from '../../../rConnect';
 import { getBigStrPHashFromFile } from '../../../tools';
+import { rConnect } from '../../../tools/rConnect';
 import { getCachedPhash } from './getCachedPhash';
 import { redisPhashQuery } from './redisPhashQuery';
 import { redisPhashQueryResult } from './redisPhashQueryResult';

@@ -1,5 +1,5 @@
+import { rConnect } from '../tools/rConnect';
 import { globalMain } from './globalMain';
-import { rConnect } from './rConnect';
 
 const dir = '/home/luxcium/Téléchargements/test';
 const grpKey = 'x00998b';

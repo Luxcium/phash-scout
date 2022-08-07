@@ -2,8 +2,6 @@ import { Dir } from 'node:fs';
 import * as fs from 'node:fs/promises';
 import { join } from 'node:path';
 
-import { doUniqueAddObj } from '../doUniqueAddObj';
-import { rConnect } from '../rConnect';
 import {
   getBigStrPHashFromFile,
   getPathInfos,
@@ -11,6 +9,8 @@ import {
   Nothing,
   Right,
 } from '../tools';
+import { doUniqueAddObj } from '../tools/doUniqueAddObj';
+import { rConnect } from '../tools/rConnect';
 
 export const count = { a: 1, b: 1, c: 1, d: 1 };
 export const steps = {

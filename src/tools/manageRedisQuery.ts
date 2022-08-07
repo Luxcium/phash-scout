@@ -1,5 +1,5 @@
-import { notExcluded } from './tools/notExclude';
-import { Bg, Strange } from './types';
+import { Bg, Strange } from '../types';
+import { notExcluded } from './notExclude';
 
 const count2 = { a1: 0, b: 0, len: 0 };
 

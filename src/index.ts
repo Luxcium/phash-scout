@@ -1,1 +1,1 @@
-export type { globalMain } from './globalMain';
+export type { globalMain } from './main/globalMain';

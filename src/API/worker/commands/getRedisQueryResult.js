@@ -1,5 +1,5 @@
 'use strict';
-import { redisQuery } from '../../../doRedisQuery';
+import { redisQuery } from '../../../tools/doRedisQuery';
 import { Rc } from '.';
 
 export async function getRedisQueryResult(imgFileAbsPath, cachedPhash) {

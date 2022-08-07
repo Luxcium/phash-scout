@@ -1,7 +1,5 @@
 import { parse } from 'node:path';
 
-import { doUniqueAddObj } from './doUniqueAddObj';
-import { notExcluded, notNull } from './tools/notExclude';
 import {
   Bg,
   CurrentPathError,
@@ -12,7 +10,9 @@ import {
   PHashGet,
   PHashGetter,
   QueryResultObject,
-} from './types';
+} from '../types';
+import { doUniqueAddObj } from './doUniqueAddObj';
+import { notExcluded, notNull } from './notExclude';
 
 export type MyReturnType = (bgPaths: Bg<PathWithStats & PHashGet>) => Bg<
   {
