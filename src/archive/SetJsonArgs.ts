@@ -1,5 +1,5 @@
-import { Tedis } from 'tedis';
-
+type Tedis = any;
+const Tedis: Tedis = null;
 export type SetJsonArgs = {
   prefix: string;
   jsonPath: string;

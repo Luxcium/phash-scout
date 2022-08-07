@@ -1,4 +1,5 @@
-import { Tedis } from 'tedis';
+type Tedis = any;
+const Tedis: Tedis = null;
 
 const RDSServer_6382 = () => {
   const tedis = new Tedis({
