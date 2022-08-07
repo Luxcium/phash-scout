@@ -42,7 +42,7 @@
     "removeComments": false,
     "rootDir": ".",
     "stripInternal": false,
-    "tsBuildInfoFile": "../out/src/ts-out-info.lib",
+    "tsBuildInfoFile": "../out/src-ts-out-info.lib",
     "preserveWatchOutput": false,
     "watch": true,
     /* Source Map and declaration options */

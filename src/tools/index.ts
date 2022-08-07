@@ -1,6 +1,5 @@
 import { devPaths } from '../constants/devPaths';
 import { filesTypeList } from '../constants/filesTypes';
-import { zalgo, zalgo1, zalgo2, zalgo3 } from './restrainingZalgo';
 import { dirListWithFileType } from './dirListWithFileType';
 import { getCurrentPaths } from './dirListWithFileType/getCurrentPaths';
 import { currentPath } from './getCurrentPaths';
@@ -9,6 +8,7 @@ import { getPathInfos } from './getPathInfos';
 import { getRawDirList } from './getRawDirList';
 import { getSign } from './getSign';
 import { getStats } from './getStats';
+import { zalgo, zalgo1, zalgo2, zalgo3 } from './restrainingZalgo';
 import {
   immediateZalgo,
   nextTickZalgo,
@@ -19,6 +19,12 @@ import {
 export { IMGSCOUT } from '../commands';
 export { replaceStr } from '../tools/replaceStr';
 export { shiftTitle } from '../tools/shiftTitle';
+export { isA_Promise } from './assertion-tools/isA_Promise';
+export { isDir, isDirSync } from './assertion-tools/isDir';
+export { isQueryResult } from './assertion-tools/isQueryResult';
+export { isQueryResultItem } from './assertion-tools/isQueryResultItem';
+export { isQueryResultList } from './assertion-tools/isQueryResultList';
+export { getBigStrPHashFromFile, getPhash } from './computePHash';
 export {
   filter,
   filterBlockDevices,
@@ -29,17 +35,10 @@ export {
   filterSockets,
   filterSymbolicLinks,
 } from './file-filter';
-export { isA_Promise } from './assertion-tools/isA_Promise';
-export { isDir, isDirSync } from './assertion-tools/isDir';
-export { isQueryResult } from './assertion-tools/isQueryResult';
-export { isQueryResultItem } from './assertion-tools/isQueryResultItem';
-export { isQueryResultList } from './assertion-tools/isQueryResultList';
-export { getBigStrPHashFromFile, getPhash } from './computePHash';
 export type { FileType } from './FileTypeEnum';
 export { FileType as FileTypes } from './FileTypeEnum';
 export { getDirsSync, getFilesAsync, getListing } from './fsTools';
 export { getDirListFileTypes } from './getDirListWithFileType';
-export { getNewTedis } from './getNewTedis';
 export { getPathInfos } from './getPathInfos';
 export { getPathStatsInfos } from './getPathStatsInfos';
 export { getPathWithStats } from './getPathWithStats';
