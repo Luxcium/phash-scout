@@ -10,7 +10,7 @@ import {
   Right,
 } from '../tools';
 import { doUniqueAddObj } from '../tools/doUniqueAddObj';
-import { rConnect } from '../tools/rConnect';
+import { rConnect } from '../tools/redis/rConnect';
 
 export const count = { a: 1, b: 1, c: 1, d: 1 };
 export const steps = {

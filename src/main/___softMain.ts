@@ -1,4 +1,4 @@
-import { rConnect } from '../tools/rConnect';
+import { rConnect } from '../tools/redis/rConnect';
 import { globalMain } from './globalMain';
 
 const dir = '/home/luxcium/Téléchargements/test';
