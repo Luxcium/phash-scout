@@ -1,4 +1,4 @@
-import { isA_Promise } from '../../tools';
+import { isA_Promise } from '..';
 import type {
   CurrentPath,
   DirentWithFileType,

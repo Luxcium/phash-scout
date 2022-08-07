@@ -1,5 +1,5 @@
 import { getSign } from '../tools/getSign';
-import { zalgo, zalgo1, zalgo2, zalgo3 } from './restrainingZalgo';
+import { zalgo, zalgo1, zalgo2, zalgo3 } from '../tools/restrainingZalgo';
 import {
   immediateZalgo,
   nextTickZalgo,
@@ -20,7 +20,7 @@ export {
   filterFiles,
   filterSockets,
   filterSymbolicLinks,
-} from './file-filter';
+} from '../tools/file-filter';
 
 export { replaceStr } from '../tools/replaceStr';
 export { shiftTitle } from '../tools/shiftTitle';

@@ -1,7 +1,7 @@
 import { stat } from 'fs-extra';
 
 import { GetStats, PathAndStats, PathWithStats } from '../types';
-import { immediateZalgo } from '../utils/restrainingZalgo';
+import { immediateZalgo } from './restrainingZalgo';
 import { FileTypes } from '.';
 import { dirListWithFileType } from './dirListWithFileType';
 import { getChildPaths } from './getChildPaths';
