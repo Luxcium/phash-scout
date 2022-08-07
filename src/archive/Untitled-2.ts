@@ -5,7 +5,7 @@ import { Tedis } from 'tedis';
 
 import { devPaths } from '../constants/devPaths';
 import { getDirsSync, getFilesAsync, getListing } from '../tools';
-import { dirListWithFileType } from '../utils/dirListWithFileType';
+import { dirListWithFileType } from '../tools/dirListWithFileType';
 import { jsonGet, jsonSet } from './jsonRedis';
 // export const SUBSET = 1000;
 // const DEBUG = true;

@@ -1,13 +1,16 @@
-import { getSign } from './getSign';
-import { isArray } from './isArray';
+import { getSign } from '../tools/getSign';
 import { zalgo, zalgo1, zalgo2, zalgo3 } from './restrainingZalgo';
 import {
   immediateZalgo,
   nextTickZalgo,
   restrainingZalgo,
   timeoutZalgo,
-} from './utils';
+} from '../tools/utils';
 
+export { getPathWithStats } from '../tools/getPathWithStats';
+export { hasSameTitleInclude } from '../tools/hasSameTitleInclude';
+export { isArray } from '../tools/isArray';
+export { titleBuilder } from '../tools/titleBuilder';
 export {
   filter,
   filterBlockDevices,
@@ -18,21 +21,9 @@ export {
   filterSockets,
   filterSymbolicLinks,
 } from './file-filter';
-export { getCurrentPath } from './getCurrentPath';
-export { getPathWithStats } from './getPathWithStats';
-export {
-  getExt,
-  getFile,
-  getGroup,
-  getHSize,
-  getPath,
-  getSize,
-} from './getSplit';
-export { hasSameTitleInclude } from './hasSameTitleInclude';
-export { isArray } from './isArray';
-export { replaceStr } from './replaceStr';
-export { shiftTitle } from './shiftTitle';
-export { titleBuilder } from './titleBuilder';
+
+export { replaceStr } from '../tools/replaceStr';
+export { shiftTitle } from '../tools/shiftTitle';
 export { getSign };
 export {
   immediateZalgo,
@@ -43,9 +34,4 @@ export {
   zalgo1,
   zalgo2,
   zalgo3,
-};
-
-export const utils = {
-  getSign,
-  isArray,
 };

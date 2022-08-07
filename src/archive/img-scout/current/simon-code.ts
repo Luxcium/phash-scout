@@ -4,7 +4,7 @@ import { createClient } from 'redis';
 
 import { BASE_SRC_PATH1, devPaths } from '../../../constants/devPaths';
 import { redisConnectionString } from '../../../tools';
-import { replaceStr } from '../../../utils/replaceStr';
+import { replaceStr } from '../../../tools/replaceStr';
 
 type RedisClientType = ReturnType<typeof createClient>;
 type WriterTool = (

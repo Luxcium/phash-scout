@@ -4,6 +4,7 @@ import { Tedis } from 'tedis';
 
 import { devPaths } from '../constants/devPaths';
 import { fsTools, getPathStatsInfos } from '../tools';
+import { dirListWithFileType } from '../tools/dirListWithFileType';
 import { tedis_jsonGet, tedis_jsonSet } from '../tools/redis/tedis_json';
 import {
   DirentWithFileType,
@@ -12,7 +13,6 @@ import {
   RedisJson_InfoGetterFunct,
 } from '../types';
 import { immediateZalgo } from '../utils';
-import { dirListWithFileType } from '../utils/dirListWithFileType';
 
 const CLOSE = 'close';
 const PREFIX = 'TESTING:JSON:REDIS';

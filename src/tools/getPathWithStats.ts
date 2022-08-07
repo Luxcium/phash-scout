@@ -1,11 +1,11 @@
 import { stat } from 'fs-extra';
 
-import { FileTypes } from '../tools';
 import { GetStats, PathAndStats, PathWithStats } from '../types';
+import { immediateZalgo } from '../utils/restrainingZalgo';
+import { FileTypes } from '.';
 import { dirListWithFileType } from './dirListWithFileType';
 import { getChildPaths } from './getChildPaths';
 import { getCurrentPath } from './getCurrentPath';
-import { immediateZalgo } from './restrainingZalgo';
 
 const humanSize = require('human-size');
 

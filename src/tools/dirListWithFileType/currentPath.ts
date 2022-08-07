@@ -1,5 +1,5 @@
 import { DirentWithFileType } from '../../types';
-import { getCurrentPath } from '../../utils';
+import { getCurrentPath } from '../getCurrentPath';
 
 export function currentPath(folderPath: string) {
   return (f: DirentWithFileType) => getCurrentPath(f, folderPath);

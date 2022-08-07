@@ -9,9 +9,9 @@ import {
   getListing,
   redisCreateClient,
 } from '../../../tools';
+import { dirListWithFileType } from '../../../tools/dirListWithFileType';
 import { immediateZalgo } from '../../../utils';
-import { dirListWithFileType } from '../../../utils/dirListWithFileType';
-import { replaceStr } from '../../../utils/replaceStr';
+import { replaceStr } from '../../../tools/replaceStr';
 
 const SPARK = true;
 const PREFIX = '1001:TESTING:1001::JSON:REDIS';

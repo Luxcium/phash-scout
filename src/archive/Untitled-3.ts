@@ -4,7 +4,7 @@ import path from 'path';
 import { devPaths } from '../constants/devPaths';
 import { getDirsSync, getFilesAsync } from '../tools';
 import { immediateZalgo } from '../utils';
-import { replaceStr } from '../utils/replaceStr';
+import { replaceStr } from '../tools/replaceStr';
 
 const PREFIX = 'TESTING:001::JSON:REDIS';
 const STEPS = 1;
