@@ -26,14 +26,14 @@
         "-b",
         "${workspaceFolder}/src/tsconfig.json",
         "--generateCpuProfile",
-        "${workspaceFolder}/out/performance/cpu-info.cpuprofile",
+        "${workspaceFolder}/out/src/performance/cpu-info.cpuprofile",
         "--verbose"
       ],
       "isBackground": false,
       "runOptions": {
         "reevaluateOnRerun": true,
         "instanceLimit": 1,
-        "runOn": "default"
+        "runOn": "folderOpen"
       },
       "presentation": {
         "clear": true,
@@ -61,14 +61,14 @@
         "runOn": "folderOpen"
       },
       "presentation": {
-        "panel": "new",
-        "group": "redis",
-        "focus": false,
-        "echo": true,
         "clear": true,
-        "revealProblems": "onProblem",
         "close": true,
+        "echo": true,
+        "focus": false,
+        "group": "TSC Builder",
+        "panel": "dedicated",
         "reveal": "always",
+        "revealProblems": "onProblem",
         "showReuseMessage": false
       }
     },
