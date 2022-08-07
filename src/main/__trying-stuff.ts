@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import { getListing } from './fsTools';
+import { getListing } from '../tools/fsTools';
 
 const localPAth =
   '/media/luxcium/D:\\ Archive locale/import/GAYBOYSTUBE/users/marcuscarrandi/';
