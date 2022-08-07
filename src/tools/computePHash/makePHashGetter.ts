@@ -1,5 +1,5 @@
 import { PathWithStats, PHashGet } from '../../types';
-import { immediateZalgo } from '../../utils';
+import { immediateZalgo } from '../../tools/';
 import { notExcluded } from '../notExclude';
 import { getBigStrPHashFromFile } from './getBigStrPHash';
 

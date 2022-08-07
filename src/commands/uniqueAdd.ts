@@ -1,6 +1,6 @@
 import { isQueryResultList } from '../tools';
 import type { PQuerryAndAdd, QueryResultItem, RawQueryResult } from '../types';
-import { immediateZalgo } from '../utils';
+import { immediateZalgo } from '../tools/';
 import { hasSameTitleInclude } from '../tools/hasSameTitleInclude';
 import { shiftTitle } from '../tools/shiftTitle';
 import { addPhash } from './addPhash';

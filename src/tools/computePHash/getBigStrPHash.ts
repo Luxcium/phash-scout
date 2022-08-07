@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-import { immediateZalgo } from '../../utils';
+import { immediateZalgo } from '../../tools/';
 import { bigString } from '../bigString';
 
 const sharpPhash = require('sharp-phash');

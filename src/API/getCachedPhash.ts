@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { immediateZalgo } from '../utils';
+import { immediateZalgo } from '../tools';
 import { SET } from './SET';
 
 export async function getCachedPhash(

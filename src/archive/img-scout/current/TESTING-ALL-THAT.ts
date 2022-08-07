@@ -7,10 +7,10 @@ import {
   getDirsSync,
   getFilesAsync,
   getListing,
+  immediateZalgo,
   redisCreateClient,
 } from '../../../tools';
 import { dirListWithFileType } from '../../../tools/dirListWithFileType';
-import { immediateZalgo } from '../../../utils';
 import { replaceStr } from '../../../tools/replaceStr';
 
 const SPARK = true;

@@ -3,7 +3,7 @@ import { ParsedPath } from 'path';
 import { Tedis } from 'tedis';
 
 import { devPaths } from '../constants/devPaths';
-import { fsTools, getPathStatsInfos } from '../tools';
+import { fsTools, getPathStatsInfos, immediateZalgo } from '../tools';
 import { dirListWithFileType } from '../tools/dirListWithFileType';
 import { tedis_jsonGet, tedis_jsonSet } from '../tools/redis/tedis_json';
 import {
@@ -12,7 +12,6 @@ import {
   MyStats,
   RedisJson_InfoGetterFunct,
 } from '../types';
-import { immediateZalgo } from '../utils';
 
 const CLOSE = 'close';
 const PREFIX = 'TESTING:JSON:REDIS';

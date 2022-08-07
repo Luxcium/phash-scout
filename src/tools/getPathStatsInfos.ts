@@ -11,7 +11,7 @@ import {
   RedisJson_PathStatsTuple,
   RedisJson_StatsInfoGetterFunct,
 } from '../types';
-import { immediateZalgo } from '../utils';
+import { immediateZalgo } from '../tools/';
 import { dirListWithFileType } from './dirListWithFileType';
 
 type PathStatsTuple<T> = RedisJson_PathStatsTuple<T>;
