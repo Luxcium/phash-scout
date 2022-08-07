@@ -55,7 +55,7 @@ createTCP_Server(client => {
       //   messages.delete(data.id);
       // }
     });
-}).listen(actor_port, actor_hostname, () => {
+}).listen(Number(actor_port), actor_hostname, () => {
   console.info(`\nactor: tcp://${actor_hostname}:${actor_port}`);
 });
 
@@ -86,7 +86,7 @@ createHTTP_Server(async (req, res) => {
       req.url.split('/').slice(2, 3).pop(),
     ],
   });
-}).listen(web_port, web_hostname, () => {
+}).listen(Number(web_port), web_hostname, () => {
   console.info(`web:   http://${web_hostname}:${web_port}`);
 });
 // ++ ----------------------------------------------------------------
@@ -100,7 +100,7 @@ function randomActor() {
 // HACK:------ Hard coded path will cause problems MUST FIX ----------
 const worker = new RpcWorkerPool(
   '/home/luxcium/projects/pHashScout/out/src/API/worker/worker.js',
-  threads || 0,
+  Number(threads || 0),
   'roundrobin'
 );
 

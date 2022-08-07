@@ -12,8 +12,8 @@ export async function getCachedPhash(imgFileAbsPath) {
   if (value !== null && value.toString().length > 10) {
     return immediateZalgo(value);
   }
-  value = commands.bigstr_phash_from_file(imgFileAbsPath);
+  value = await commands.bigstr_phash_from_file(imgFileAbsPath);
 
-  SET(R, K, value);
+  SET(R, K, immediateZalgo(value));
   return immediateZalgo(value);
 }

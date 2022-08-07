@@ -1,6 +1,10 @@
 {
   // "extends": "../tsconfig.json",
-  "exclude": ["node_modules", "out"],
+  "exclude": ["*"],
+  // "exclude": ["node_modules", "out", "*"],
+  "include": [],
+  "files": ["./rpc-worker.js", "./worker.js", "./server.js", "./actor.js"],
+
   "compilerOptions": {
     /* Module Resolution Interop Constraints */
     "target": "ESNext",
@@ -9,30 +13,56 @@
     "esModuleInterop": true,
     /* JavaScript Support */
     "allowJs": true,
-    "checkJs": false,
+    "checkJs": true,
     "maxNodeModuleJsDepth": 1,
     "disableSizeLimit": false,
-    /* Source Map and declaration options */
-    "declaration": true,
-    "declarationMap": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
-    "sourceMap": false,
-    "emitDeclarationOnly": false,
+
     /* Specify a set of bundled library declaration files that describe the target runtime environment. */
     "lib": ["esnext"],
     /* Specify type package names to be included without being referenced in a source file. */
     "types": ["node"],
     /* Emit Options */
     "emitBOM": false,
-    "outDir": "./out/worker",
-    "declarationDir": "./out/typings",
-    "tsBuildInfoFile": "./out/ts-out-info.lib",
-    "generateCpuProfile": "./out/performance/cpu-info.cpuprofile",
+    // "rootDir": ".",
+    "outDir": "../../../out/worker",
+    "declarationDir": "../../../out/worker/typings",
+    "tsBuildInfoFile": "../../../out/worker/ts-out-info.lib",
+    "generateCpuProfile": "../../../out/worker/performance/cpu-info.cpuprofile",
     "importsNotUsedAsValues": "remove",
-    "incremental": true,
     "newLine": "lf",
     "noEmit": false,
+    "importHelpers": false,
+    "noEmitHelpers": false,
+    /* Source Map and declaration options */
+    "declaration": true,
+    "declarationMap": false,
+    "inlineSourceMap": false,
+    "inlineSources": false,
+    "sourceMap": false,
+    "emitDeclarationOnly": false,
+
+    //     "declaration":"",
+    // "declarationDir":"",
+    // "declarationMap":"",
+    // "downlevelIteration":"",
+    // "emitBOM":"",
+    // "emitDeclarationOnly":"",
+    // "importHelpers":"",
+    // "importsNotUsedAsValues":"",
+    // "inlineSourceMap":"",
+    // "inlineSources":"",
+    // "newLine":"",
+    // "noEmit":"",
+    // "noEmitHelpers":"",
+    // "noEmitOnError":"",
+    // "outDir":"",
+    // "preserveConstEnums":"",
+    // "preserveValueImports":"",
+    // "removeComments":"",
+    // "sourceMap":"",
+    // "stripInternal":"",
+
+    "incremental": true,
     "pretty": true,
     /* Vebosity */
     "diagnostics": true,
@@ -46,18 +76,15 @@
     // "preserveSymlinks": true,
     // "resolveJsonModule": true,
     // "allowSyntheticDefaultImports": true,
-    // "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": true,
     //
     // "downlevelIteration": true,
     // "emitDecoratorMetadata": true,
     // "experimentalDecorators": true,
-    // "importHelpers": true,
-    // "noEmitHelpers": false,
     // "noEmitOnError": false,
     // "preserveConstEnums": true,
     // "preserveValueImports": false,
     // "removeComments": false,
-    // "rootDir": ".",
     // "stripInternal": false,
     // "preserveWatchOutput": false,
     // "watch": true,
@@ -68,14 +95,9 @@
     // "disableSolutionSearching": false,
     // "disableReferencedProjectLoad": false,
     /* Compilation Options */
-    "noErrorTruncation": true
+    "noErrorTruncation": true,
     // "useDefineForClassFields": true,
     // "assumeChangesOnlyAffectDirectDependencies": false,
-
-    /* Completeness */
-    // "skipDefaultLibCheck": false,
-    // "skipLibCheck": true,
-    // "noResolve": false
 
     // /* Type Checking */
     // /* ALWAYS FALSE NEVER ALLOW-UNUSED-LABELS & ALLOW-UNREACHABLE-CODE FALSE!  */
@@ -119,6 +141,10 @@
     // "jsxFragmentFactory": "",
     // "jsxImportSource": "",
     // "reactNamespace": "",
+    /* Completeness */
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "noResolve": false
   }
   // "references": [],
   // "buildOptions": {"verbose": false},
@@ -126,6 +152,5 @@
   // "ts-node": {},
   // "typeAcquisition": {},
   // "watchOptions": {},
-  // "files": [],
   // "include": ["./**/*.*"]
 }

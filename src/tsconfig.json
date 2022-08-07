@@ -2,6 +2,7 @@
   "extends": "../tsconfig.json",
   "include": ["./**/*.*"],
   "exclude": [
+    "out"
     /* "./packages" */
   ],
   "compilerOptions": {
@@ -21,12 +22,12 @@
     "maxNodeModuleJsDepth": 1,
     "disableSizeLimit": false,
     /* Emit Options */
-    "declarationDir": "../out/typings",
+    "declarationDir": "../out/src/typings",
     "downlevelIteration": true,
     "emitBOM": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "generateCpuProfile": "../out/performance/cpu-info.cpuprofile",
+    "generateCpuProfile": "../out/src/performance/cpu-info.cpuprofile",
     "importHelpers": true,
     "importsNotUsedAsValues": "remove",
     "incremental": true,
@@ -41,7 +42,7 @@
     "removeComments": false,
     "rootDir": ".",
     "stripInternal": false,
-    "tsBuildInfoFile": "../out/ts-out-info.lib",
+    "tsBuildInfoFile": "../out/src/ts-out-info.lib",
     "preserveWatchOutput": false,
     "watch": true,
     /* Source Map and declaration options */

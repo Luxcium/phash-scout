@@ -8,7 +8,7 @@ const [, , host] = process.argv;
 const [hostname, port] = host.split(':');
 
 // ++ ----------------------------------------------------------------
-const upstream = connect(port, hostname, () => {
+const upstream = connect(Number(port), hostname, () => {
   console.log('connected to server!');
 })
   .on('data', raw_data => {
