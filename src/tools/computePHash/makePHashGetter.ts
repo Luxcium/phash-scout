@@ -1,5 +1,5 @@
 import { PathWithStats, PHashGet } from '../../types';
-import { immediateZalgo } from '../../tools/';
+import { immediateZalgo } from '..';
 import { notExcluded } from '../notExclude';
 import { getBigStrPHashFromFile } from './getBigStrPHash';
 
@@ -25,7 +25,7 @@ export function makePHashGetter<T extends PathWithStats>(imgFile: T): PHashGet {
       imgFile
     );
   }
-  //++ implied else and catched error return here: -------------------
+  // ++ implied else and catched error return here: -------------------
   return {
     await: {
       getPHash: async () => {
@@ -36,5 +36,5 @@ export function makePHashGetter<T extends PathWithStats>(imgFile: T): PHashGet {
       },
     },
   };
-  //++ ---------------------------------------------------------------
+  // ++ ---------------------------------------------------------------
 }

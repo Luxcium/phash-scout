@@ -1,11 +1,12 @@
 import { getBigStrPHashFromFile } from '../../../tools';
-import { rConnect } from '../../../tools/rConnect';
+import { rConnect } from '../../../tools/redis';
 import { getCachedPhash } from './getCachedPhash';
 import { redisPhashQuery } from './redisPhashQuery';
 import { redisPhashQueryResult } from './redisPhashQueryResult';
 import { theTryCathBlock } from './theTryCathBlock';
 
-export const Rc = rConnect();
+const REDIS_DB_NUMBER = 2;
+export const Rc = rConnect(null, REDIS_DB_NUMBER, null);
 
 export const commands = {
   async redis_phash_query_result(imgFileAbsPath) {

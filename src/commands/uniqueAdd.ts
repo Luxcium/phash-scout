@@ -1,8 +1,7 @@
-import { isQueryResultList } from '../tools';
-import type { PQuerryAndAdd, QueryResultItem, RawQueryResult } from '../types';
-import { immediateZalgo } from '../tools/';
+import { immediateZalgo, isQueryResultList } from '../tools';
 import { hasSameTitleInclude } from '../tools/hasSameTitleInclude';
 import { shiftTitle } from '../tools/shiftTitle';
+import type { PQuerryAndAdd, QueryResultItem, RawQueryResult } from '../types';
 import { addPhash } from './addPhash';
 import { queryPhash } from './queryPhash';
 
@@ -41,7 +40,7 @@ export async function uniqueAdd(
   if (queryResultList.length > 0 && isQueryResultList(queryResultList)) {
     if (hasSameTitleInclude(title, queryResultList)) {
       let tCount = -15;
-      //++ already added previously will be lower than -15 -----------
+      // ++ already added previously will be lower than -15 -----------
       return immediateZalgo(
         queryResultList
           .map(shiftTitle(title, `${tCount--}`))
@@ -50,12 +49,12 @@ export async function uniqueAdd(
     }
 
     id = await addPhash(R, k, phash_, title);
-    //++ add as the the next and more as -10 -------------------------
+    // ++ add as the the next and more as -10 -------------------------
     queryResultList.unshift([title, id, '-10']);
     return immediateZalgo(queryResultList);
   }
 
   id = await addPhash(R, k, phash_, title);
-  //++ add as the first and only as -5 -------------------------------
+  // ++ add as the first and only as -5 -------------------------------
   return immediateZalgo([[title, id, '-5']]);
 }

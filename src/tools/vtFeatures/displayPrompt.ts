@@ -23,7 +23,7 @@ export const SM12 = SM(12);
 /** 20	Automatic Newline (LNM). Always off.	✗ */
 export const SM20 = SM(20);
 export const RM = (Ps: number) => CSI(`${Ps}l`);
-/**2	Keyboard Action Mode (KAM). Always on.	✗   */
+/** 2	Keyboard Action Mode (KAM). Always on.	✗   */
 export const RM2 = RM(2);
 /** 4	Replace Mode (IRM). (default)	✓   */
 export const RM4 = RM(4);

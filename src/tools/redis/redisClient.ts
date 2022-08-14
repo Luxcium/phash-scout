@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import { createClient } from 'redis';
 
 import { RedisCStrOptions } from '../../types';
@@ -5,6 +6,7 @@ import { RedisCStrOptions } from '../../types';
 const DEBUG = false;
 if (DEBUG) console.log('DEBUG = true in:', __filename);
 
+const errLog = console.error;
 /*
 
   The code below connects to localhost on port 6379. To connect to a
@@ -34,30 +36,40 @@ export const redisConnectionString = (options?: RedisCStrOptions) => {
 
 export function redisCreateClient(
   options?: RedisCStrOptions,
-  errorLoger: (...par: any[]) => void = console.error,
+  errorLoger: (...par: any[]) => void = errLog,
   verbosa: boolean = true
 ) {
   const client = createClient(redisConnectionString(options));
   if (verbosa) {
-    /*
-.on('connect',()=>{console.log('Redis Client connect')})
-.on('ready',()=>{console.log('Redis Client ready')})
-.on('end',()=>{console.log('Redis Client end')})
-.on('reconnecting',()=>{console.log('Redis Client reconnecting')})
-     */
-    return client
-      .on('error', err => errorLoger('Redis Client Error', err))
+    client
+      .on('error', err =>
+        errorLoger('  >', chalk.red('Redis Client Error'), err)
+      )
       .on('connect', () => {
-        console.error('\nRedis Client connect');
+        errLog(
+          '\n' + '  >',
+          chalk.green('Connect'),
+          `${chalk.yellow(
+            `redis:\/\/${options?.host || '127.0.0.1'}`
+          )}:${chalk.magenta(`${options?.port || 6379}`)}/${
+            options?.dbNumber || 0
+          }`
+        );
       })
       .on('ready', () => {
-        console.error('Redis Client ready');
+        errLog(
+          '  >',
+          chalk.greenBright('Redis Client ready') +
+            ` ${chalk.magenta(`${options?.port || 6379}`)}, ${
+              'db: ' + options?.dbNumber || 0
+            }`
+        );
       })
       .on('end', () => {
-        console.error('Redis Client end');
+        errLog('  >', chalk.yellowBright('Redis Client end'));
       })
       .on('reconnecting', () => {
-        console.error('Redis Client reconnecting');
+        errLog('  >', chalk.yellow('Redis Client reconnecting'));
       });
   }
 

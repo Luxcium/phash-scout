@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["./**/*.*"],
+  "include": ["../src/**/*.*"],
   "exclude": [
     "out"
     /* "./packages" */
@@ -48,9 +48,9 @@
     /* Source Map and declaration options */
     "declaration": true,
     "declarationMap": true,
-    "inlineSourceMap": false,
+    "inlineSourceMap": true,
     "inlineSources": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "emitDeclarationOnly": false,
     /* Projects */
     "composite": true,
@@ -101,7 +101,7 @@
     /* ALWAYS TRUE */ "noImplicitOverride": true /*                ALWAYS TRUE */,
     /* ALWAYS TRUE */ "noImplicitReturns": true /*                 ALWAYS TRUE */,
     /* ALWAYS TRUE */ "noImplicitThis": true /*                    ALWAYS TRUE */,
-    /* ALWAYS TRUE */ "noPropertyAccessFromIndexSignature": true /*ALWAYS TRUE */,
+    /* ALWAYS TRUE */ "noPropertyAccessFromIndexSignature": true /* ALWAYS TRUE */,
     /* ALWAYS TRUE */ "noUnusedLocals": true /*                    ALWAYS TRUE */,
     /* ALWAYS TRUE */ "noUnusedParameters": true /*                ALWAYS TRUE */,
     /* ALWAYS TRUE */ "strictBindCallApply": true /*               ALWAYS TRUE */,

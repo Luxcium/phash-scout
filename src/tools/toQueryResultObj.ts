@@ -1,4 +1,3 @@
-import { isA_Promise } from '../tools';
 import {
   P,
   QueryResultItem,
@@ -6,6 +5,7 @@ import {
   QueryResultSize,
   SplitPath,
 } from '../types';
+import { isA_Promise } from '.';
 import { getSplit } from './getSplit';
 import { reorder } from './reorder';
 
@@ -18,7 +18,7 @@ export function toQueryResultObj(
 export function toQueryResultObj(
   queryItems: QueryResultItem | P<QueryResultItem[]>
 ): (QueryResultObject & QueryResultSize) | P<QueryResultObject[]> {
-  //++----------------------------------------------------------------
+  // ++----------------------------------------------------------------
 
   return isA_Promise(queryItems)
     ? (async () => {
@@ -26,7 +26,7 @@ export function toQueryResultObj(
       })()
     : toSizedObj(queryItems);
 
-  //++----------------------------------------------------------------
+  // ++----------------------------------------------------------------
 }
 
 function queryItemsResult(queryItem: QueryResultItem[]) {
@@ -40,7 +40,7 @@ function queryItemsResult(queryItem: QueryResultItem[]) {
     .sort((a, b) => b.size - a.size || a.path.length - b.path.length)
     .map((item, _i, array) => {
       item.diff = item.size - array[0].size;
-      return reorder(item); //{ ...itm };
+      return reorder(item); // { ...itm };
     });
 }
 

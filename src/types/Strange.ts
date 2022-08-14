@@ -1,4 +1,4 @@
-import { PHashGetter, QueryResultObject } from '../types';
+import { PHashGetter, QueryResultObject } from '.';
 import { CurrentPathError } from './complex-types';
 import { FilePathInfo } from './FilePathInfo';
 import { GetStats } from './GetStats';

@@ -1,14 +1,15 @@
 'use strict';
 import { commands } from '.';
 import { getRedisQueryResult } from './getRedisQueryResult';
-import { pathPaser } from './pathPaser';
-
+/**
+ *
+ * @param {string} imgFileAbsPath
+ */
 export async function redisPhashQuery(imgFileAbsPath) {
-  const { pathInfos } = pathPaser(imgFileAbsPath);
-  if (pathInfos.extname !== '.jpg') {
-    return ['not .jpg'];
+  try {
+    const cachedPhash = commands.get_cached_phash(imgFileAbsPath);
+    return getRedisQueryResult(imgFileAbsPath, cachedPhash);
+  } catch (error) {
+    throw error;
   }
-
-  const cachedPhash = commands.get_cached_phash(imgFileAbsPath);
-  return getRedisQueryResult(imgFileAbsPath, cachedPhash);
 }

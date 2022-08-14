@@ -1,5 +1,6 @@
 import {
   CurrentPathError,
+  FileType,
   GetStats,
   IsExcluded,
   IsNotValidPHash,
@@ -8,8 +9,7 @@ import {
   PathAndStats,
   PathWithStats,
   QueryResultObject,
-} from '../types';
-import { FileType } from '.';
+} from '.';
 
 export type RedisQueryResult<Bool extends boolean = true | false> = {
   baseName: string;

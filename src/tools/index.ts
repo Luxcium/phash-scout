@@ -17,8 +17,6 @@ import {
 } from './utils';
 
 export { IMGSCOUT } from '../commands';
-export { replaceStr } from '../tools/replaceStr';
-export { shiftTitle } from '../tools/shiftTitle';
 export { isA_Promise } from './assertion-tools/isA_Promise';
 export { isDir, isDirSync } from './assertion-tools/isDir';
 export { isQueryResult } from './assertion-tools/isQueryResult';
@@ -66,9 +64,22 @@ export {
   notUndefined,
 } from './notExclude';
 export { parsePath } from './parsePath';
+export { pathParser } from './pathParser';
 export { getTransact, readListRx } from './readListR1';
-export { redisConnectionString, redisCreateClient } from './redis/redisClient';
+export type { MyReturnType } from './redis';
+export {
+  doRedisQuery,
+  manageRedisQuery,
+  rConnect,
+  redis6382Test,
+  redisConnectionString,
+  redisCreateClient,
+  redisQuery,
+} from './redis';
+export { reduceQuerryResults } from './reduceQuerryResults';
 export { reorder } from './reorder';
+export { replaceStr } from './replaceStr';
+export { shiftTitle } from './shiftTitle';
 export { titleBuilder } from './titleBuilder';
 export { toObj } from './toObj';
 export { toQueryResultObj } from './toQueryResultObj';

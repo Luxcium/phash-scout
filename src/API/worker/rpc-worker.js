@@ -2,7 +2,7 @@
 import { cpus } from 'os';
 import { Worker } from 'worker_threads';
 
-const VERBOSE = true;
+const VERBOSE = false;
 const CORES = cpus().length;
 
 const STRATEGIES = new Set(['roundrobin', 'random', 'leastbusy']);

@@ -1,9 +1,13 @@
 'use strict';
-import { redisQuery } from '../../../tools/doRedisQuery';
+import { redisQuery } from '../../../tools';
 import { Rc } from '.';
 
 export async function getRedisQueryResult(imgFileAbsPath, cachedPhash) {
-  const RC = await Rc;
-  const redisQueryResult = redisQuery(RC, 'key', imgFileAbsPath, cachedPhash);
-  return redisQueryResult;
+  try {
+    const RC = await Rc;
+    const redisQueryResult = redisQuery(RC, 'key', imgFileAbsPath, cachedPhash);
+    return redisQueryResult;
+  } catch (error) {
+    throw error;
+  }
 }

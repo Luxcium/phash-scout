@@ -9,7 +9,7 @@ const [hostname, port] = host.split(':');
 
 // ++ ----------------------------------------------------------------
 const upstream = connect(Number(port), hostname, () => {
-  console.log('connected to server!');
+  console.log('  >', 'connected to server!');
 })
   .on('data', raw_data => {
     void String(raw_data)
@@ -34,7 +34,7 @@ const upstream = connect(Number(port), hostname, () => {
       });
   })
   .on('end', () => {
-    console.log('disconnect from server');
+    console.log('  >', 'disconnect from server');
   });
 
 // HACK:------ Hard coded path will cause problems MUST FIX ----------

@@ -1,7 +1,6 @@
 import { RADIUS } from '../constants/radius';
-import { IMGSCOUT } from '../tools';
+import { IMGSCOUT, immediateZalgo } from '../tools';
 import type { S } from '../types';
-import { immediateZalgo } from '../tools/';
 import { syncPhash } from './syncPhash';
 
 export async function queryPhash(

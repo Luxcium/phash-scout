@@ -1,5 +1,5 @@
 import { CurrentPath } from '../../types';
-import { immediateZalgo } from '../../tools/';
+import { immediateZalgo } from '..';
 import { isA_Promise } from '../assertion-tools/isA_Promise';
 import { currentPath } from './currentPath';
 import { dirListWithFileType } from './dirListWithFileType';
@@ -43,4 +43,4 @@ export async function test() {
   console.log(dirListWithFileType('/').map(currentPath('/')));
 }
 
-test; //(); //();
+test; // (); //();

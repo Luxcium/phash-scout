@@ -9,4 +9,4 @@ export async function test_currentPath() {
   console.log(currentPath('/'));
 }
 
-test_currentPath; //();
+test_currentPath; // ();

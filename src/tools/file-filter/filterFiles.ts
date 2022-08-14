@@ -1,10 +1,10 @@
-import { isA_Promise } from '..';
 import type {
   CurrentPath,
   DirentWithFileType,
   PathAndStats,
   PathWithStats,
 } from '../../types';
+import { isA_Promise } from '..';
 
 export function filterFiles(
   element: Promise<PathAndStats | PathWithStats>

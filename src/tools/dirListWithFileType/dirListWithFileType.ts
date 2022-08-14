@@ -29,4 +29,4 @@ export function dirListWithFileType(
 export function test() {
   console.log(dirListWithFileType('/'));
 }
-test; //();
+test; // ();

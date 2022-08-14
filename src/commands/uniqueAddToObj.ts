@@ -1,4 +1,4 @@
-import { toQueryResultObj } from '../tools/toQueryResultObj';
+import { toQueryResultObj } from '../tools';
 import type { PQuerryAndAdd, QueryResultItem } from '../types';
 import { uniqueAdd } from './uniqueAdd';
 

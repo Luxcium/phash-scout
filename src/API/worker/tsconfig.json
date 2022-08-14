@@ -13,7 +13,7 @@
     "esModuleInterop": true,
     /* JavaScript Support */
     "allowJs": true,
-    "checkJs": true,
+    "checkJs": false,
     "maxNodeModuleJsDepth": 1,
     "disableSizeLimit": false,
 

@@ -10,7 +10,7 @@ export function getSplit(qPath: string): SplitPath {
     size: getSize(qPath),
     file: getFile(qPath),
     ext: getExt(qPath),
-    fullPath: `${getPath(qPath)}/${getFile(qPath)}.${getExt(qPath)}`,
+    fullPath: `${getPath(qPath)}/${getFile(qPath)}`, //.${getExt(qPath)}
   };
 }
 

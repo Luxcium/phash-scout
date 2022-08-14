@@ -1,5 +1,4 @@
 {
-  // "extends": "tsconfig.main.json",
   "references": [
     {
       "path": "src"
@@ -9,9 +8,15 @@
     }
   ],
   // Exclude references and emitted output
-  "exclude": ["test", "dist", "**/archive", "out"],
+  "exclude": ["dist", "**/archive", "out"],
   "compilerOptions": {
-    "target": "es6",
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["src/*"],
+      "test/*": ["test/*"],
+      "@utils": ["src/utils/*"]
+    },
+    "target": "ESNext",
     "module": "CommonJS",
     "moduleResolution": "node",
     "noErrorTruncation": false,

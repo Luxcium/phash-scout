@@ -13,20 +13,20 @@ export function buildFileIfoObject() {
   const result = {
     ...stats,
     ...listings.count,
-    //@ts-ignore
+    // @ts-ignore
     ...getThisFileType(f),
-    //@ts-ignore
+    // @ts-ignore
     dirname: srtPath(dirname),
     extname: path.extname(pathStr),
     isAbsolute: path.isAbsolute(pathStr),
-    //@ts-ignore
+    // @ts-ignore
     normalized: srtPath(path.normalize(pathStr)),
-    //@ts-ignore
+    // @ts-ignore
     ...parsed,
     dir,
-    //@ts-ignore
+    // @ts-ignore
     toNamespacedPath: srtPath(path.toNamespacedPath(pathStr)),
-    //@ts-ignore
+    // @ts-ignore
     userDirName: user.shortName,
     collectionDirName: collctn.shortName,
     keywords: collctn.shortName
@@ -41,9 +41,9 @@ export function buildFileIfoObject() {
       .split('-')
       .filter(csn => csn !== '')
       .slice(-1)[0],
-    //@ts-ignore
+    // @ts-ignore
     fileName: f,
-    //@ts-ignore
+    // @ts-ignore
     displaycount,
   };
   return result;

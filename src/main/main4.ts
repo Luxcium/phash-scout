@@ -1,33 +1,33 @@
 import { globalMain } from './globalMain';
 
 process.title = 'Sharp pHash';
-//+ cliCursor hide
+// + cliCursor hide
 console.error('cliCursor hide [?25l]');
 process.stderr.write('\u009B?25l');
-//+ Use Alternate Screen Buffer.
+// + Use Alternate Screen Buffer.
 console.error(
   'Save cursor and switch to alternate buffer clearing it. [?1049h]'
 );
 console.error('\u009B?1049h');
 
 process.on('SIGINT', () => {
-  process.exitCode = 2; //+ 128;
+  process.exitCode = 2; // + 128;
   throw new Error();
 });
 
 process.on('SIGTERM', () => {
-  process.exitCode = 15; //+ 128;
+  process.exitCode = 15; // + 128;
   throw new Error();
 });
 process.on('beforeExit', code => {
   console.error('\u009B!p');
   console.error('\u001Bc');
-  //+ Use Normal Screen Buffer (clearing screen if in alt).
+  // + Use Normal Screen Buffer (clearing screen if in alt).
   console.error('Use Normal Screen Buffer [?1049l]');
   console.error('\u009B?1049l');
   console.error(code - 128);
   console.error('Use Normal Screen Buffer and restore cursor. [?1049l]');
-  //+ cliCursor show
+  // + cliCursor show
   console.error('cliCursor show [?25h]');
   console.error('\u009B?25h');
   console.error(`About to exit with code: ${code - 128}`);

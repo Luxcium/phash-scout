@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 'use strict';
+import chalk from 'chalk';
 import { createServer as createHTTP_Server } from 'http';
 import { createServer as createTCP_Server } from 'net';
 import { normalize } from 'node:path';
 
 import { RpcWorkerPool } from './rpc-worker';
+
 // import { RpcWorkerPool } from './rpc-worker_2';
 // import { RpcWorkerPool } from './rpc-worker_3';
 
@@ -16,7 +18,7 @@ let message_id = 0;
 let actors = new Set(); // collection of actor handlers
 let messages = new Map(); // message ID -> HTTP response
 
-const VERBOSE1 = true;
+const VERBOSE1 = false;
 const VERBOSE2 = false;
 // const controller = new AbortController();
 // const { signal } = controller;
@@ -56,7 +58,13 @@ createTCP_Server(client => {
       // }
     });
 }).listen(Number(actor_port), actor_hostname, () => {
-  console.info(`\nactor: tcp://${actor_hostname}:${actor_port}`);
+  console.info(
+    '\n\n> ' +
+    chalk.green('actor: ') +
+    chalk.yellow(`tcp:\/\/${actor_hostname}`) +
+    ':' +
+    chalk.magenta(`${actor_port}`)
+  );
 });
 
 // ++ ----------------------------------------------------------------
@@ -86,8 +94,15 @@ createHTTP_Server(async (req, res) => {
       req.url.split('/').slice(2, 3).pop(),
     ],
   });
+  chalk.yellow;
 }).listen(Number(web_port), web_hostname, () => {
-  console.info(`web:   http://${web_hostname}:${web_port}`);
+  console.info(
+    '> ' +
+    chalk.green('web:  ') +
+    chalk.yellow(`http:\/\/${web_hostname}`) +
+    ':' +
+    chalk.magenta(`${web_port}`)
+  );
 });
 // ++ ----------------------------------------------------------------
 

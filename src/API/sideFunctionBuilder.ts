@@ -1,18 +1,36 @@
 import axios from 'axios';
 
+import { validExts } from '../constants/validExts';
+import { pathParser } from '../tools';
 import type { SideFunctionParam } from '../types';
 import { averageReducer } from './averageReducer';
 
+// HACK: must be moved outside to CONST or else
 export function sideFunctionBuilder(times: number[]) {
   return async ({ fullPath, count, DEBUGS }: SideFunctionParam) => {
-    DEBUGS &&
+    try {
+      const { pathInfos } = pathParser(fullPath);
+      const ext = pathInfos.ext.toLowerCase();
+      const thumb = '_thumb';
+      if (validExts.has(ext) && !fullPath.includes(thumb)) {
+        DEBUGS &&
+          process.stdout.write(
+            `\u009B33m[\u009B93m ${(++count.a).toLocaleString()}\u009B33m] \u009B32m${averageReducer(
+              times
+            ).toFixed(2)} > \u009B37m${fullPath}\u009B0m\n`
+          );
+        const redisQueryResult = await calculatedFromWorker(fullPath, count.a);
+        return [redisQueryResult];
+      }
       process.stdout.write(
-        `\u009B33m[\u009B93m ${(++count.a).toLocaleString()}\u009B33m] \u009B32m${averageReducer(
-          times
-        ).toFixed(2)} > \u009B37m${fullPath}\u009B0m\n`
+        `\u009B33m[\u009B93m ${(++count.b).toLocaleString()}\u009B33m] \u009B32m${
+          'SKIPED EXT:' + ext
+        } > \u009B36m${fullPath}\u009B0m\n`
       );
-    const redisQueryResult = await calculatedFromWorker(fullPath, count.a);
-    return redisQueryResult;
+    } catch (error) {
+      console.error('at: sideFunctionBuilder', error);
+    }
+    return [];
   };
 }
 

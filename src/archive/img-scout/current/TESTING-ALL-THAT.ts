@@ -91,7 +91,7 @@ async function main() {
       if (DEBUG > 7) console.log('users: count.c3:', count.c3++);
       return users.map(collections => {
         if (DEBUG > 6) console.log('collections: count.c4:', count.c4++);
-        //++  setTheSith(withPrefix, jsonSet6382, server_6382)(fInfos)
+        // ++  setTheSith(withPrefix, jsonSet6382, server_6382)(fInfos)
         return collections.map(async fInfos => {
           if (DEBUG > 5) console.log('fInfos: count.c6:', count.c6++);
           const fullKey = withPrefix(await fInfos);
@@ -120,7 +120,7 @@ async function main() {
           immediateZalgo;
           return (async () => {
             try {
-              //++ + == == == == == == == == == == == == == == == == -->
+              // ++ + == == == == == == == == == == == == == == == == -->
               const timeoutScheduled = Date.now();
               const count1 = ++count.c5;
               setTimeout(() => {
@@ -151,7 +151,7 @@ async function main() {
                 }
               }, 100);
               countx.jsonSeted++;
-              //++ + == == == == == == == == == == == == == == == == -->
+              // ++ + == == == == == == == == == == == == == == == == -->
               const result = await client.json.get(fullKey);
               count.result++;
               const resCnt = count.result;

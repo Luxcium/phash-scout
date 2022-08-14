@@ -1,4 +1,3 @@
-import { FileTypes, parsePath } from '../tools';
 import {
   BlockDevicePath,
   CharacterDevicePath,
@@ -11,6 +10,7 @@ import {
   SymbolicLinkPath,
   UnknownTypePath,
 } from '../types';
+import { FileTypes, parsePath } from '.';
 
 export function getCurrentPath(f: DirentWithFileType, folderPath: string) {
   const fullPath = `${folderPath}/${f.fileName}`;

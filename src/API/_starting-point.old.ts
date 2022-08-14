@@ -12,7 +12,7 @@ import {
 } from '../tools';
 import { getBigStrPHashFromFile } from '../tools/computePHash';
 import { doUniqueAddObj } from '../tools/doUniqueAddObj';
-import { rConnect } from '../tools/redis/rConnect';
+import { rConnect } from '../tools/redis';
 import { SideFunctionParam } from '../types';
 import { getCachedPhash } from './getCachedPhash';
 import { doTraverseDirs } from './sync-directory-traversal';
@@ -94,7 +94,7 @@ export const CSI = '\u009B';
     traverseOpenDirForFor(traverseDir);
   }
   // console.log('step last');
-}); //();
+}); // ();
 
 export async function traverseOpenDirForFor(dir: string) {
   // const subfolders = (await isDir(dir)) && (await fs.readdir(dir));

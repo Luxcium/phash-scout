@@ -13,4 +13,4 @@ export function dirListWithFileTypeSync(
 export function test() {
   console.log(dirListWithFileTypeSync('/', true));
 }
-test; //(); //();
+test; // (); //();

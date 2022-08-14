@@ -7,7 +7,11 @@ import { commands } from './commands';
 
 function asyncOnMessageWrap(fn) {
   return async function (msg) {
-    void parentPort.postMessage(await fn(msg));
+    try {
+      void parentPort.postMessage(await fn(msg));
+    } catch (error) {
+      console.error(error);
+    }
   };
 }
 

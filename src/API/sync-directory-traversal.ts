@@ -33,6 +33,7 @@ import { SideFunctionParam } from '../types';
 
 const count = {
   a: 0,
+  b: 0,
 };
 
 const isOpenDirSYNC = true;
@@ -81,7 +82,7 @@ async function scan(
       // HACK:- //-! ------- Add the side effect on files here -------
       try {
         void AWAITS;
-        console.log('counts.await++', ++counts.await);
+        // console.log('counts.await++', ++counts.await);
         counts.await % 1000 === 0
           ? await sideFunction({ fullPath, count, DEBUGS })
           : sideFunction({ fullPath, count, DEBUGS });
