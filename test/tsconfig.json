@@ -6,8 +6,15 @@
     }
   ],
   "exclude": [],
+  "include": ["../src"],
   "compilerOptions": {
-    "rootDir": ".",
+    "baseUrl": "..",
+    "paths": {
+      "src/*": ["src/*"],
+      "test/*": ["test/*"]
+    },
+    // "paths": { "src": ["../src/*"] },
+    // "rootDir": ".",
     "outDir": "../.tmp/tsc/test"
   }
 }
