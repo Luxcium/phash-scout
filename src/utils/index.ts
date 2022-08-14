@@ -1,1 +1,1 @@
-export { bigString } from './bigString';
+export { bigString } from './bigintString/bigString';

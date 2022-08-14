@@ -8,8 +8,8 @@
   // "editor.fontLigatures": true,
   // "editor.fontSize": 20,
   // "editor.fontWeight": "500",
-  // "terminal.integrated.fontFamily": "'TerminessTTF Nerd Font Mono', 'Anonymice NF', '3270Narrow NF', mono",
-  // "terminal.integrated.fontSize": 14,
+  "terminal.integrated.fontFamily": "mono, 'TerminessTTF Nerd Font Mono', mono, 'Anonymice NF', '3270Narrow NF', mono",
+  "terminal.integrated.fontSize": 16,
   // "terminal.integrated.fontWeight": "600",
   // "terminal.integrated.fontWeightBold": "bold",
   // #endregion: EDITOR & TERMINAL                                   !
@@ -1550,6 +1550,11 @@
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "workbench.editor.titleScrollbarSizing": "large",
-  "task.allowAutomaticTasks": true
+  "task.allowAutomaticTasks": "on",
+  "jest.autoRun": {
+    "watch": true,
+    "onSave": "test-only",
+    "onStartup": ["all-tests"]
+  }
   // #endregion: TODO TREE                                                      !
 }

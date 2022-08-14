@@ -11,6 +11,7 @@
     "clear": true,
     "group": "watchers"
   },
+  // "watch-tests-1"
   "tasks": [
     {
       "label": "TSC Build Task",
@@ -39,7 +40,7 @@
         "clear": true,
         "echo": true,
         "focus": false,
-        "group": "TSC Builder",
+        // "group": "TSC Builder",
         "panel": "dedicated",
         "reveal": "never",
         "revealProblems": "onProblem",
@@ -65,7 +66,7 @@
         "close": true,
         "echo": true,
         "focus": false,
-        "group": "TSC Builder",
+        // "group": "TSC Builder",
         "panel": "dedicated",
         "reveal": "always",
         "revealProblems": "onProblem",
