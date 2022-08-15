@@ -1,4 +1,5 @@
-import { CurrentPath, DirentWithFileType } from '../types';
+import { CurrentPath, DirentWithFileType } from '$types/';
+
 import { isA_Promise } from '.';
 import { dirListWithFileType } from './dirListWithFileType';
 import { getCurrentPath } from './getCurrentPath';

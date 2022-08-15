@@ -1,8 +1,9 @@
 import axios from 'axios';
 
+import type { SideFunctionParam } from '$types/';
+
 import { validExts } from '../constants/validExts';
 import { pathParser } from '../tools';
-import type { SideFunctionParam } from '../types';
 import { averageReducer } from './averageReducer';
 
 // HACK: must be moved outside to CONST or else

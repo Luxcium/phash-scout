@@ -46,11 +46,11 @@
     "preserveWatchOutput": false,
     "watch": true,
     /* Source Map and declaration options */
+    "sourceMap": false,
     "declaration": true,
     "declarationMap": true,
     "inlineSourceMap": true,
     "inlineSources": true,
-    "sourceMap": false,
     "emitDeclarationOnly": false,
     /* Projects */
     "composite": true,

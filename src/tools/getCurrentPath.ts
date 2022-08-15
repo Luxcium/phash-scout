@@ -9,7 +9,8 @@ import {
   SocketPath,
   SymbolicLinkPath,
   UnknownTypePath,
-} from '../types';
+} from '$types/';
+
 import { FileTypes, parsePath } from '.';
 
 export function getCurrentPath(f: DirentWithFileType, folderPath: string) {

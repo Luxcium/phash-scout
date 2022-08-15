@@ -2,6 +2,8 @@ import { readdirSync } from 'node:fs';
 import * as fs from 'node:fs/promises';
 import path, { join } from 'node:path';
 
+import { SideFunctionParam } from '$types/';
+
 import {
   getPathInfos,
   immediateZalgo,
@@ -13,7 +15,6 @@ import {
 import { getBigStrPHashFromFile } from '../tools/computePHash';
 import { doUniqueAddObj } from '../tools/doUniqueAddObj';
 import { rConnect } from '../tools/redis';
-import { SideFunctionParam } from '../types';
 import { getCachedPhash } from './getCachedPhash';
 import { doTraverseDirs } from './sync-directory-traversal';
 

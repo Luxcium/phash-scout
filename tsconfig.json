@@ -12,9 +12,28 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "src/*": ["src/*"],
-      "test/*": ["test/*"],
-      "@utils": ["src/utils/*"]
+      "$API/": ["src/API/"],
+      "$API/*": ["src/API/*"],
+      "$archive/": ["src/archive/"],
+      "$archive/*": ["src/archive/*"],
+      "$commands/": ["src/commands/"],
+      "$commands/*": ["src/commands/*"],
+      "$constants/": ["src/constants/"],
+      "$constants/*": ["src/constants/*"],
+      "$main/": ["src/main/"],
+      "$main/*": ["src/main/*"],
+      "$src/*": ["src/*"],
+      "$test/*": ["test/*"],
+      "$tools/": ["src/tools/"],
+      "$tools/*": ["src/tools/*"],
+      "$types/": ["src/types/"],
+      "$types/*": ["src/types/*"],
+      "@types/": ["src/types/"],
+      "@types/*": ["src/types/*"],
+      "$utils/": ["src/utils/"],
+      "$utils/*": ["src/utils/*"],
+      "$worker/": ["src/API/worker"],
+      "$worker/*": ["src/API/worker/*"]
     },
     "target": "ESNext",
     "module": "CommonJS",
@@ -25,6 +44,10 @@
     "skipLibCheck": true,
     // We can't pass "noEmit" in incremental mode, but this is close enough.
     "outDir": "./.tmp/build",
+    "inlineSourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "inlineSources": true,
     "emitDeclarationOnly": true,
     "allowSyntheticDefaultImports": true,
     "generateCpuProfile": "./.tmp/performance/cpu-info.cpuprofile"

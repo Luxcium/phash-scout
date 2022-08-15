@@ -1,5 +1,6 @@
+import { PathWithStats } from '$types/';
+
 import { validExts } from '../constants/validExts';
-import { PathWithStats } from '../types';
 import { Bg } from '../types/Bg';
 
 export function filterExtensions(

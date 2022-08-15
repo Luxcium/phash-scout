@@ -1,4 +1,5 @@
-import { WithExclude } from '../types';
+import { WithExclude } from '$types/';
+
 import { notExcluded } from './notExclude';
 
 export function notExcludeList(list: WithExclude[]) {

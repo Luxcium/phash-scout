@@ -1,6 +1,7 @@
+import type { S } from '$types/';
+
 import { RADIUS } from '../constants/radius';
 import { IMGSCOUT, immediateZalgo } from '../tools';
-import type { S } from '../types';
 import { syncPhash } from './syncPhash';
 
 export async function queryPhash(

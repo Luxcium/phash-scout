@@ -8,7 +8,8 @@ import {
   RedisJson_PathInfoGetterFunct,
   RedisJson_PathStatsTuple,
   RedisJson_StatsInfoGetterFunct,
-} from '../types';
+} from '$types/';
+
 import { getPathInfos, getStats, immediateZalgo } from '.';
 import { dirListWithFileType } from './dirListWithFileType';
 import { dirListWithFileTypeAsync } from './dirListWithFileType/dirListWithFileTypeAsync';
