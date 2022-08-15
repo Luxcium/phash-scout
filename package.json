@@ -15,7 +15,8 @@
   "scripts": {
     "out": "tsc -b ./src/tsconfig.json",
     "prestart": "npm run out",
-    "start": "UV_THREADPOOL_SIZE=15; node 'out/src/API/worker/server.js' '127.0.0.1:8083' '127.0.0.1:9093' 10 &",
+    "start": "UV_THREADPOOL_SIZE=15; node 'out/src/API/worker/server.js' '127.0.0.1:8083' '127.0.0.1:9093' 15 &",
+    "start:watch": "npm run out;UV_THREADPOOL_SIZE=15; nodemon 'out/src/API/worker/server.js' '127.0.0.1:8083' '127.0.0.1:9093' 15",
     "predebug": "npm run out",
     "debug": "UV_THREADPOOL_SIZE=1; node --inspect-brk 'out/src/API/worker/server.js' '127.0.0.1:8083' '127.0.0.1:9093' 5",
     "base:build": "parcel build --no-cache",
