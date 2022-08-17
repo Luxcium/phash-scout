@@ -1,4 +1,4 @@
-import { SplitPath } from '$types/';
+import { SplitPath } from '$types';
 
 ('../utils/getSplit');
 

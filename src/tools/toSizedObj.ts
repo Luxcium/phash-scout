@@ -1,4 +1,4 @@
-import type { QueryResultItem, QueryResultObject, SplitPath } from '$types/';
+import type { QueryResultItem, QueryResultObject, SplitPath } from '$types';
 
 import { getSplit } from './getSplit';
 

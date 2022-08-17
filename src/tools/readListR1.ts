@@ -1,4 +1,4 @@
-import { QueryResultItem } from '$types/';
+import { QueryResultItem } from '$types';
 
 import { TX } from '../types/TX';
 

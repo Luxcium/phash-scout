@@ -1,4 +1,4 @@
-import { PathWithStats } from '$types/';
+import { PathWithStats } from '$types';
 
 import { validExts } from '../constants/validExts';
 import { Bg } from '../types/Bg';

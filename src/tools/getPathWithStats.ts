@@ -1,6 +1,6 @@
 import { stat } from 'fs-extra';
 
-import { GetStats, PathAndStats, PathWithStats } from '$types/';
+import { GetStats, PathAndStats, PathWithStats } from '$types';
 
 import { FileTypes } from '.';
 import { dirListWithFileType } from './dirListWithFileType';

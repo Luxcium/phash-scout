@@ -1,4 +1,4 @@
-import { N, S } from '$types/';
+import { N, S } from '$types';
 
 import { IMGSCOUT } from '../tools';
 import { syncPhash } from './syncPhash';

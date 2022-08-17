@@ -45,7 +45,36 @@
     "tsBuildInfoFile": "../out/src-ts-out-info.lib",
     "preserveWatchOutput": false,
     "watch": true,
-    /* Source Map and declaration options */
+    "baseUrl": "..",
+    "paths": {
+      "$types": ["src/types/"],
+      "@types": ["src/types/"],
+      "@types/*": ["src/types/*"],
+      "$API": ["src/API/"],
+      "$API/*": ["src/API/*"],
+      "$archive": ["src/archive/"],
+      "$archive/*": ["src/archive/*"],
+      "$commands": ["src/commands/"],
+      "$commands/*": ["src/commands/*"],
+      "$constants": ["src/constants/"],
+      "$constants/*": ["src/constants/*"],
+      "$main": ["src/main/"],
+      "$main/*": ["src/main/*"],
+      "$src/*": ["src/*"],
+      "$test/*": ["test/*"],
+      "$tools": ["src/tools/"],
+      "$tools/*": ["src/tools/*"],
+      "$types/*": ["src/types/*"],
+      "$utils": ["src/utils/"],
+      "$utils/*": ["src/utils/*"],
+      "$worker": ["src/API/worker"],
+      "$worker/*": ["src/API/worker/*"]
+    },
+    /* Source Map and declaration options
+    VSCODE  emitting temporary error messages (that disappears and reappears all the time) in relation to my usage of the path property in my tsconfig file //++ !title VSCODE  Emitting Temporary Error Messages Due To Paths
+Emitting Temporary Error Messages In Relation To Usage Of Path Property In My Tsconfig File
+
+     */
     "sourceMap": false,
     "declaration": true,
     "declarationMap": true,

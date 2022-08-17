@@ -24,7 +24,7 @@ import { constants } from 'node:os';
 import { normalize } from 'node:path';
 import { chdir } from 'node:process';
 
-import { SideFunctionParam } from '$types/';
+import { SideFunctionParam } from '$types';
 
 // const timeThen = performance.now();
 // const timeNow = () => performance.now();

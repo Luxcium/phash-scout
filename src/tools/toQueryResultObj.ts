@@ -4,7 +4,7 @@ import {
   QueryResultObject,
   QueryResultSize,
   SplitPath,
-} from '$types/';
+} from '$types';
 
 import { isA_Promise } from '.';
 import { getSplit } from './getSplit';

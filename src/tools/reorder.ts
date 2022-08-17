@@ -1,4 +1,4 @@
-import { QueryResultObject, QueryResultSize } from '$types/';
+import { QueryResultObject, QueryResultSize } from '$types';
 
 export function reorder({
   radius,

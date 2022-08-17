@@ -1,6 +1,6 @@
 import type { Dirent } from 'node:fs';
 
-import type { DirentWithFileType } from '$types/';
+import type { DirentWithFileType } from '$types';
 // import { FileType as filesTypes } from './FileTypeEnum';
 // spacin' matters dirent
 

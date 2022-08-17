@@ -26,12 +26,12 @@
       "$test/*": ["test/*"],
       "$tools/": ["src/tools/"],
       "$tools/*": ["src/tools/*"],
-      "$types/": ["src/types/"],
       "$types/*": ["src/types/*"],
       "@types/": ["src/types/"],
       "@types/*": ["src/types/*"],
       "$utils/": ["src/utils/"],
       "$utils/*": ["src/utils/*"],
+      "$types": ["src/types/"],
       "$worker/": ["src/API/worker"],
       "$worker/*": ["src/API/worker/*"]
     },
