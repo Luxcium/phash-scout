@@ -3,7 +3,7 @@ import { statSync } from 'fs-extra';
 import path from 'path';
 
 import { devPaths } from '../constants/devPaths';
-import { getDirsSync, getFilesAsync, getListing } from '../tools';
+import { getDirsSync, getFilesAsync, getListing } from '../tools/paths';
 import { dirListWithFileType } from '../tools/dirListWithFileType';
 import { jsonGet, jsonSet } from './jsonRedis';
 

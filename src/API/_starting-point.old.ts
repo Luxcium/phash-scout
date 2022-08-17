@@ -5,15 +5,9 @@ import path, { join } from 'node:path';
 import { SideFunctionParam } from '$types';
 
 import { doUniqueAddObj } from '../commands/doUniqueAddObj';
-import {
-  getPathInfos,
-  immediateZalgo,
-  isDir,
-  isDirSync,
-  Nothing,
-  Right,
-} from '../tools';
+import { immediateZalgo, isDir, isDirSync, Nothing, Right } from '../tools';
 import { getBigStrPHashFromFile } from '../tools/computePHash';
+import { getPathInfos } from '../tools/paths';
 import { rConnect } from '../tools/redis';
 import { getCachedPhash } from './getCachedPhash';
 import { doTraverseDirs } from './sync-directory-traversal';

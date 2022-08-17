@@ -58,23 +58,23 @@ export {
   notNullOrUndef,
   notUndefined,
 } from './notExclude';
-export {
-  getCurrentPath,
-  getDirListFileTypes,
-  getDirsSync,
-  getFilesAsync,
-  getListing,
-  getPathInfos,
-  getPathStatsInfos,
-  getPathWithStats,
-  getRawDirList,
-  getRawDirListSync,
-  getStats,
-  getStatsSync,
-  listFiles,
-  parsePath,
-  pathParser,
-} from './paths';
+// export {
+//   getCurrentPath,
+//   getDirListFileTypes,
+//   getDirsSync,
+//   getFilesAsync,
+//   getListing,
+//   getPathInfos,
+//   getPathStatsInfos,
+//   getPathWithStats,
+//   getRawDirList,
+//   getRawDirListSync,
+//   getStats,
+//   getStatsSync,
+//   listFiles,
+//   parsePath,
+//   pathParser,
+// } from './paths';
 export { getTransact, readListRx } from './readListR1';
 export type { MyReturnType } from './redis';
 export {

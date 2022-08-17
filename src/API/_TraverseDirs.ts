@@ -4,8 +4,10 @@ import { join } from 'node:path';
 
 import { doUniqueAddObj } from '../commands/doUniqueAddObj';
 import {
-  getBigStrPHashFromFile,
   getPathInfos,
+} from '../tools/paths';
+import {
+  getBigStrPHashFromFile,
   isDir,
   Nothing,
   Right,

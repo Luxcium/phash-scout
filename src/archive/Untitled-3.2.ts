@@ -1,7 +1,7 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
 import path from 'path';
 
-import { getDirsSync, getFilesAsync } from '../tools';
+import { getDirsSync, getFilesAsync } from '../tools/paths';
 import { getUserPathsGen } from './img-scout/current/getUserPathsGen';
 import { srtPath } from './img-scout/current/srtPath';
 import { withPrefix } from './img-scout/current/withPrefix';

@@ -1,4 +1,5 @@
-import { doRedisQuery, getPhash, listFiles, manageRedisQuery } from '../tools';
+import { doRedisQuery, getPhash,  manageRedisQuery } from '../tools';
+import { listFiles, } from '../tools/paths';
 import { endAsyncSpark } from '../tools/endAsyncSpark';
 import { filterExtensions } from '../tools/paths/filterExtensions';
 

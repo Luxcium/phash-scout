@@ -4,12 +4,17 @@ import path from 'path';
 
 import { devPaths } from '../../../constants/devPaths';
 import {
-  getDirsSync,
-  getFilesAsync,
-  getListing,
+
   immediateZalgo,
   redisCreateClient,
 } from '../../../tools';
+
+import {
+  getDirsSync,
+  getFilesAsync,
+  getListing,
+
+} from '../../../tools/paths';
 import { dirListWithFileType } from '../../../tools/dirListWithFileType';
 import { replaceStr } from '../../../tools/replaceStr';
 

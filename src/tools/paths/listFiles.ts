@@ -3,7 +3,7 @@ import { BoxedGenerator } from '@luxcium/boxed-list';
 import type { Bg, PathAndStats, PathWithStats } from '$types';
 import { FileTypeInfos } from '$types';
 
-import { getPathWithStats } from '..';
+import { getPathWithStats } from '../paths';
 import { newGetPathWithStats } from './getPathWithStats';
 
 export function old_listFiles(

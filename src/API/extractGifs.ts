@@ -1,6 +1,6 @@
 import { link, lstat } from 'fs/promises';
 
-import { getPathInfos } from '../tools';
+import { getPathInfos } from '../tools/paths';
 
 export function extractGifs(fullPath: string) {
   const infos = getPathInfos(fullPath).parsed();
