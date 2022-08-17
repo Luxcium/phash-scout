@@ -7,7 +7,10 @@ const CORES = cpus().length;
 
 const STRATEGIES = new Set(['roundrobin', 'random', 'leastbusy']);
 export class RpcWorkerPool {
-  /** @member {number} */
+  /**
+   * The size of the worker pool
+   * @member {number}
+   */
   size;
   constructor(path, size = 0, strategy = 'roundrobin') {
     if (size === 0) this.size = CORES; // <1>
