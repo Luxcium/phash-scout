@@ -1,3 +1,4 @@
+export { getDirsSync, getFilesAsync, getListing } from './fsTools';
 export { getCurrentPath } from './getCurrentPath';
 export { currentPath } from './getCurrentPaths';
 export { getDirListFileTypes } from './getDirListWithFileType';

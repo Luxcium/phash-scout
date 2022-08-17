@@ -37,7 +37,6 @@ export {
 } from './file-filter';
 export type { FileType } from './FileTypeEnum';
 export { FileType as FileTypes } from './FileTypeEnum';
-export { getDirsSync, getFilesAsync, getListing } from './fsTools';
 export {
   getExt,
   getFile,
@@ -62,6 +61,9 @@ export {
 export {
   getCurrentPath,
   getDirListFileTypes,
+  getDirsSync,
+  getFilesAsync,
+  getListing,
   getPathInfos,
   getPathStatsInfos,
   getPathWithStats,
