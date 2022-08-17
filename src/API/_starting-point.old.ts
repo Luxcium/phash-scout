@@ -4,6 +4,7 @@ import path, { join } from 'node:path';
 
 import { SideFunctionParam } from '$types';
 
+import { doUniqueAddObj } from '../commands/doUniqueAddObj';
 import {
   getPathInfos,
   immediateZalgo,
@@ -13,7 +14,6 @@ import {
   Right,
 } from '../tools';
 import { getBigStrPHashFromFile } from '../tools/computePHash';
-import { doUniqueAddObj } from '../tools/doUniqueAddObj';
 import { rConnect } from '../tools/redis';
 import { getCachedPhash } from './getCachedPhash';
 import { doTraverseDirs } from './sync-directory-traversal';

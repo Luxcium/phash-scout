@@ -1,7 +1,7 @@
 import { statSync } from 'fs-extra';
 
-import { uniqueAddToObj } from '../commands';
-import { titleBuilder } from './titleBuilder';
+import { titleBuilder } from '../tools/titleBuilder';
+import { uniqueAddToObj } from '.';
 
 export function doUniqueAddObj(
   R: any,

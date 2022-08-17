@@ -54,6 +54,7 @@ export type {
 } from './FileCurrentPath';
 // export type { FilePath } from './FilePath';
 export type { FilePathInfo } from './FilePathInfo';
+export type { FileTypeInfos } from './FileTypeInfos';
 export type { GetChild } from './GetChild';
 export type { GetStats } from './GetStats';
 export type { IQueryListPhash } from './IQueryListPhash';
@@ -95,6 +96,7 @@ export type {
   NotExcluded,
   WithExclude,
 } from './WithExclude';
+
 export type P<T> = Promise<T>;
 export type S = string;
 export type N = number;

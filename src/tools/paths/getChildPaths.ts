@@ -1,8 +1,8 @@
 import { CurrentPathError, PathAndStats, PathWithStats } from '$types';
 
-import { FileType, FileTypes } from '.';
+import { FileType, FileTypes } from '..';
+import { immediateZalgo } from '../restrainingZalgo';
 import { getPathWithStats } from './getPathWithStats';
-import { immediateZalgo } from './restrainingZalgo';
 
 export function getChildPaths(
   fullPath: string,

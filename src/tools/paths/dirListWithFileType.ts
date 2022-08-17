@@ -1,6 +1,6 @@
 import { DirentWithFileType } from '$types';
 
-import { getDirListFileTypes, getRawDirList, getRawDirListSync } from '.';
+import { getDirListFileTypes, getRawDirList, getRawDirListSync } from '..';
 
 export async function asyncDirListWithFileType(
   folderPath: string

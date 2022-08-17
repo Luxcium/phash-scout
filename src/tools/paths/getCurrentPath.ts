@@ -11,7 +11,8 @@ import {
   UnknownTypePath,
 } from '$types';
 
-import { FileTypes, parsePath } from '.';
+import { FileTypes } from '..';
+import { parsePath } from '.';
 
 export function getCurrentPath(f: DirentWithFileType, folderPath: string) {
   const fullPath = `${folderPath}/${f.fileName}`;

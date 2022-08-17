@@ -1,6 +1,6 @@
 import { DirentWithFileType } from '../../types';
 import { getRawDirList } from '..';
-import { getDirListFileTypes } from '../getDirListWithFileType';
+import { getDirListFileTypes } from '../paths/getDirListWithFileType';
 
 export async function dirListWithFileTypeAsync(
   folderPath: string

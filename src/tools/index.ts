@@ -2,12 +2,14 @@ import { devPaths } from '../constants/devPaths';
 import { filesTypeList } from '../constants/filesTypes';
 import { dirListWithFileType } from './dirListWithFileType';
 import { getCurrentPaths } from './dirListWithFileType/getCurrentPaths';
-import { currentPath } from './getCurrentPaths';
-import { getDirListFileTypes } from './getDirListWithFileType';
-import { getPathInfos } from './getPathInfos';
-import { getRawDirList } from './getRawDirList';
 import { getSign } from './getSign';
-import { getStats } from './getStats';
+import {
+  currentPath,
+  getDirListFileTypes,
+  getPathInfos,
+  getRawDirList,
+  getStats,
+} from './paths';
 import { zalgo, zalgo1, zalgo2, zalgo3 } from './restrainingZalgo';
 import {
   immediateZalgo,
@@ -36,11 +38,6 @@ export {
 export type { FileType } from './FileTypeEnum';
 export { FileType as FileTypes } from './FileTypeEnum';
 export { getDirsSync, getFilesAsync, getListing } from './fsTools';
-export { getDirListFileTypes } from './getDirListWithFileType';
-export { getPathInfos } from './getPathInfos';
-export { getPathStatsInfos } from './getPathStatsInfos';
-export { getPathWithStats } from './getPathWithStats';
-export { getRawDirList, getRawDirListSync } from './getRawDirList';
 export {
   getExt,
   getFile,
@@ -50,7 +47,6 @@ export {
   getSize,
   getSplit,
 } from './getSplit';
-export { getStats, getStatsSync } from './getStats';
 export { hasSameTitleInclude } from './hasSameTitleInclude';
 export { isArray } from './isArray';
 export { MayBe, Nothing, Right } from './Maybe';
@@ -63,8 +59,20 @@ export {
   notNullOrUndef,
   notUndefined,
 } from './notExclude';
-export { parsePath } from './parsePath';
-export { pathParser } from './pathParser';
+export {
+  getCurrentPath,
+  getDirListFileTypes,
+  getPathInfos,
+  getPathStatsInfos,
+  getPathWithStats,
+  getRawDirList,
+  getRawDirListSync,
+  getStats,
+  getStatsSync,
+  listFiles,
+  parsePath,
+  pathParser,
+} from './paths';
 export { getTransact, readListRx } from './readListR1';
 export type { MyReturnType } from './redis';
 export {
@@ -84,7 +92,6 @@ export { titleBuilder } from './titleBuilder';
 export { toObj } from './toObj';
 export { toQueryResultObj } from './toQueryResultObj';
 export { toSizedObj } from './toSizedObj';
-export { toTup } from './toTup';
 export { getSign };
 export {
   immediateZalgo,
