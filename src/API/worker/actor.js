@@ -2,6 +2,7 @@
 'use strict';
 import { connect } from 'net';
 
+import { Strategie } from './consts';
 import { RpcWorkerPool } from './rpc-worker.js';
 
 const [, , host] = process.argv;
@@ -40,9 +41,10 @@ const upstream = connect(Number(port), hostname, () => {
 // HACK:------ Hard coded path will cause problems MUST FIX ----------
 function getWorker() {
   return new RpcWorkerPool(
-    '/home/luxcium/projects/pHashScout/out/src/API/worker/worker.js',
+    // '/home/luxcium/projects/pHashScout/out/src/API/worker/worker.js',
+    '/home/luxcium/projects/phash-scout/out/src/API/worker/worker.js',
     4,
-    'roundrobin'
+    Strategie.leastbusy
   );
 }
 

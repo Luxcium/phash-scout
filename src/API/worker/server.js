@@ -114,7 +114,8 @@ function randomActor() {
 // ++ ---- PART TWO BEGINS BELOW -------------------------------------
 // HACK:------ Hard coded path will cause problems MUST FIX ----------
 const worker = new RpcWorkerPool(
-  '/home/luxcium/projects/pHashScout/out/src/API/worker/worker.js',
+  // '/home/luxcium/projects/pHashScout/out/src/API/worker/worker.js',
+  '/home/luxcium/projects/phash-scout/out/src/API/worker/worker.js',
   Number(threads || 0),
   'roundrobin'
 );

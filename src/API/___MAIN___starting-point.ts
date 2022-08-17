@@ -9,7 +9,7 @@ import { doTraverseDirs } from './sync-directory-traversal';
 // /media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/archives
 
 const dirList = [
-  '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/downloads',
+  // '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/downloads',
   /*
   '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/unknown',
     '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/jpgs_ipn_impt_2022-02-04',
@@ -39,6 +39,7 @@ const dirList = [
   // '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/results.txt',
   // '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/showFiles',
   // '/media/luxcium/01a90322-9216-4729-85ce-6949708e69b6/video_files-ChatExport_2022-05-18',
+  '/media/luxcium/Archive_Locale/import/',
 ];
 
 const flags = {
