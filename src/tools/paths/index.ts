@@ -1,5 +1,5 @@
-export { getCurrentPath  } from './getCurrentPath';
-export {  currentPath } from './getCurrentPaths';
+export { getCurrentPath } from './getCurrentPath';
+export { currentPath } from './getCurrentPaths';
 export { getDirListFileTypes } from './getDirListWithFileType';
 export { getPathInfos } from './getPathInfos';
 export { getPathStatsInfos } from './getPathStatsInfos';

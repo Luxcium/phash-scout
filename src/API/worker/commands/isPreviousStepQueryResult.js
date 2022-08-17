@@ -16,13 +16,14 @@ export async function isPreviousStepQueryResult(previousStepResult) {
     if (!previousStepResult || !previousStepResult.queryResult) {
       console.error(
         'at: 002 redis_phash_query_result([])↓\n    error:',
-        `TypeError: previousStepResult${!previousStepResult
-          ? ' is ' + undefined
-          : !previousStepResult.queryResult
+        `TypeError: previousStepResult${
+          !previousStepResult
+            ? ' is ' + undefined
+            : !previousStepResult.queryResult
             ? '.queryResult is undefined' + previousStepResult
             : typeof previousStepResult.queryResult !== 'function'
-              ? '.queryResult is not a function'
-              : ' is' + null + 'will return [](`never`)↓'
+            ? '.queryResult is not a function'
+            : ' is' + null + 'will return [](`never`)↓'
         }`
       );
       return false;
