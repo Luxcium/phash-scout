@@ -7,55 +7,16 @@
     "reveal": "always",
     "focus": false,
     "panel": "shared",
-    "showReuseMessage": true,
+    "showReuseMessage": false,
     "clear": true,
     "group": "watchers"
   },
-  // "watch-tests-1"
   "tasks": [
-    {
-      "label": "TSC Build Task",
-      "type": "shell",
-      "detail": "Output watcher for this Type-Script project",
-      "command": "npx",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "args": [
-        "tsc",
-        "-b",
-        "${workspaceFolder}/src/tsconfig.json",
-        "--generateCpuProfile",
-        "${workspaceFolder}/out/src/performance/cpu-info.cpuprofile",
-        "--verbose"
-      ],
-      "isBackground": false,
-      "runOptions": {
-        "reevaluateOnRerun": true,
-        "instanceLimit": 1,
-        "runOn": "folderOpen"
-      },
-      "presentation": {
-        "clear": true,
-        "echo": true,
-        "focus": false,
-        // "group": "TSC Builder",
-        "panel": "dedicated",
-        "reveal": "never",
-        "revealProblems": "onProblem",
-        "showReuseMessage": false
-      },
-      "problemMatcher": {
-        "base": "$tsc",
-        "applyTo": "allDocuments"
-      },
-      "icon": { "id": "server-process", "color": "terminal.ansiYellow" }
-    },
     {
       "label": "Start_6383",
       "type": "shell",
-      "command": "sh ${workspaceFolder}/scripts/start_6383.sh",
+      "command": "sh",
+      "args": ["${workspaceFolder}/scripts/start_6383.sh"],
       "runOptions": {
         "reevaluateOnRerun": true,
         "instanceLimit": 1,
@@ -66,18 +27,68 @@
         "close": true,
         "echo": true,
         "focus": false,
-        // "group": "TSC Builder",
         "panel": "dedicated",
         "reveal": "always",
-        "revealProblems": "onProblem",
-        "showReuseMessage": false
+        "revealProblems": "onProblem"
       }
     },
     {
+      "label": "Build Task (tsc)",
+      "type": "shell",
+      "detail": "Output watcher for this Type-Script project",
+      "isBackground": false,
+      "runOptions": {
+        "reevaluateOnRerun": true,
+        "instanceLimit": 1,
+        "runOn": "folderOpen"
+      },
+      "presentation": {
+        "clear": true,
+        "echo": true,
+        "focus": false,
+        "panel": "dedicated",
+        "reveal": "never",
+        "revealProblems": "onProblem"
+      },
+      "problemMatcher": {
+        "base": "$tsc",
+        "applyTo": "allDocuments"
+      },
+      "icon": { "id": "server-process", "color": "terminal.ansiYellow" },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "command": "npx",
+      "args": [
+        "tsc",
+        "-b",
+        "${workspaceFolder}/src/tsconfig.json",
+        "--generateCpuProfile",
+        "${workspaceFolder}/out/src/performance/cpu-info.cpuprofile",
+        "--verbose"
+      ]
+    },
+
+    {
       "label": "test",
       "type": "shell",
-      "command": "echo test",
-      "icon": { "id": "light-bulb", "color": "terminal.ansiBlue" }
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "command": "echo",
+      "args": ["test"],
+      "icon": { "id": "light-bulb", "color": "terminal.ansiBlue" },
+      "presentation": {
+        "clear": true,
+        "close": true,
+        "echo": true,
+        "focus": false,
+        "panel": "dedicated",
+        "reveal": "always",
+        "revealProblems": "onProblem"
+      }
     },
 
     {
@@ -88,8 +99,7 @@
       "dependsOn": "TSC Build Task",
       "runOptions": {
         "instanceLimit": 1,
-        "reevaluateOnRerun": true,
-        "runOn": "default"
+        "reevaluateOnRerun": true
       },
       "presentation": {
         "clear": true,
@@ -98,8 +108,7 @@
         "group": "TSC Builder",
         "panel": "dedicated",
         "reveal": "always",
-        "revealProblems": "never",
-        "showReuseMessage": false
+        "revealProblems": "onProblem"
       },
       "problemMatcher": {
         "base": "$tsc",
