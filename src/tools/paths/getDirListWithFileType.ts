@@ -12,7 +12,6 @@ export function getDirListFileTypes(
     const dirListWithFileType = rawDirListing.map(d => {
       const curent = { fileName: d.name };
 
-      console.log('fileName:', d.name);
       // HACK:
       // @ts-ignore
       // filesTypeList.map(method => (curent[method] = d[method]()));

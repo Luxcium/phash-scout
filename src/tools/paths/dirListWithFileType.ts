@@ -1,11 +1,11 @@
 import { DirentWithFileType } from '$types';
 
-import { getDirListFileTypes, getRawDirList, getRawDirListSync } from '../paths';
+import { getDirListFileTypes, getRawDirListAsync, getRawDirListSync } from '.';
 
 export async function asyncDirListWithFileType(
   folderPath: string
 ): Promise<DirentWithFileType[]> {
-  const rawDirList = await getRawDirList(folderPath);
+  const rawDirList = await getRawDirListAsync(folderPath);
   return getDirListFileTypes(rawDirList);
 }
 

@@ -1,0 +1,55 @@
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/FileType.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/FileType.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/immediateZalgo.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/immediateZalgo.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/dirListWithFileType.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/dirListWithFileType.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/getDirsSync.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/getDirsSync.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/getChildPaths.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/getChildPaths.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/getCurrentPath.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/getCurrentPath.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/currentPath.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/currentPath.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/getDirListFileTypes.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/getDirListFileTypes.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/getPathInfos.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/getPathInfos.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/getPathStatsInfos.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/getPathStatsInfos.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/getPathWithStats.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/getPathWithStats.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/getStatsgetRawDirList.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/getStatsgetRawDirList.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/getStatsgetRawDirListAsync.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/getStatsgetRawDirListAsync.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/getStatsgetRawDirListSync.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/getStatsgetRawDirListSync.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/getStats.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/getStats.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/listFiles.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/listFiles.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/parsePath.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/parsePath.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/pathParser.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/pathParser.ts' | grep log
+// echo '/home/luxcium/projects/phash-scout/src/tools/paths/FileTypes.ts';
+// cat '/home/luxcium/projects/phash-scout/src/tools/paths/FileTypes.ts' | grep log
+
+// /home/luxcium/projects/phash-scout/src/tools/paths/} from '..';
+// } from '../restrainingZalgo';
+// } from './dirListWithFileType';
+// } from './fsTools';
+// } from './getChildPaths';
+// } from './getCurrentPath';
+// } from './getCurrentPaths';
+// } from './getDirListWithFileType';
+// } from './getPathInfos';
+// } from './getPathStatsInfos';
+// } from './getPathWithStats';
+// } from './getRawDirList';
+// } from './getStats';
+// } from './listFiles';
+// } from './parsePath';
+// } from './pathParser';

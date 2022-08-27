@@ -4,8 +4,6 @@ import * as fsp from 'fs/promises';
 import path from 'path';
 // import { BoxedList } from '../imports';
 
-path.parse('').ext;
-
 export function getListing(pathSrc: string = '') {
   const files = BoxedGenerator.of(...getFiles(pathSrc));
   const dirs = BoxedGenerator.of(...getDirsSync(pathSrc));
