@@ -8,6 +8,6 @@ export async function getRedisQueryResult(imgFileAbsPath, cachedPhash) {
     const redisQueryResult = redisQuery(RC, 'key', imgFileAbsPath, cachedPhash);
     return redisQueryResult;
   } catch (error) {
-    throw error;
+    console.log('error:', error);
   }
 }

@@ -1,14 +1,19 @@
+import { DB_NUMBER } from '../../../constants';
 import { getBigStrPHashFromFile } from '../../../tools';
 import { rConnect } from '../../../tools/redis';
+import { allInOne } from './allInOne';
 import { getCachedPhash } from './getCachedPhash';
 import { redisPhashQuery } from './redisPhashQuery';
 import { redisPhashQueryResult } from './redisPhashQueryResult';
 import { theTryCathBlock } from './theTryCathBlock';
 
-const REDIS_DB_NUMBER = 2;
+const REDIS_DB_NUMBER = DB_NUMBER;
 export const Rc = rConnect(null, REDIS_DB_NUMBER, null);
 
 export const commands = {
+  async all_in_one(imgFileAbsPath) {
+    return allInOne(imgFileAbsPath);
+  },
   async redis_phash_query_result(imgFileAbsPath) {
     const fnct = redisPhashQueryResult;
 
@@ -37,7 +42,7 @@ export const commands = {
 
     const p = { fnct, errMsg, errVal };
 
-    return theTryCathBlock(p, imgFileAbsPath);
+    return theTryCathBlock(p, imgFileAbsPath, false);
   },
 
   async bigstr_phash_from_file(imgFileAbsPath) {

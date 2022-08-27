@@ -1,26 +1,37 @@
 'use strict';
-import { reduceQuerryResults } from '../../../tools';
 import { commands } from '.';
-import { isPreviousStepQueryResult } from './isPreviousStepQueryResult';
 
+const VERBOSA = false;
 export async function redisPhashQueryResult(imgFileAbsPath) {
   try {
     const result = await commands.redis_phash_query(imgFileAbsPath);
-    if (!isPreviousStepQueryResult(result)) {
+
+    if (Array.isArray(result)) {
+      VERBOSA && console.log(['CACHED']);
       return [];
     }
-    const queryResult = [...(await result.queryResult())];
-    (queryResult.length > 1 &&
-      console.log({
-        queryResult: queryResult
-          .map(reduceQuerryResults)
-          .sort((a, b) => a.diff - b.diff)
-          .sort((a, b) => b.radius - a.radius),
-        length: queryResult.length,
-      })) ||
-      (false && console.log(['Skip']));
-    return { ...result, queryResult };
+
+    if (result && typeof result.queryResult === 'function') {
+      let queryResult = [...(await result.queryResult())];
+
+      // if (queryResult.length > 1) {
+      //   queryResult = queryResult
+      //     .map(reduceQuerryResults)
+      //     .sort((a, b) => a.diff - b.diff)
+      //     .sort((a, b) => b.radius - a.radius);
+      // }
+
+      VERBOSA && queryResult.length > 1
+        ? console.log({
+          queryResult,
+          length: queryResult.length,
+        })
+        : false && console.log(['SKIPPED']);
+      return { ...result, queryResult };
+    }
+    return [];
   } catch (error) {
-    throw error;
+    console.log(error);
+    return [];
   }
 }

@@ -11,7 +11,6 @@ export class RpcWorkerPool {
    * The size of the worker pool
    * @member {number}
    */
-  size;
   constructor(path, size = 0, strategy = 'roundrobin') {
     if (size === 0) this.size = CORES; // <1>
     else if (size < 0) this.size = Math.max(CORES + size, 1);
