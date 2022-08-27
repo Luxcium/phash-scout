@@ -3,7 +3,7 @@ export { delPhash } from './delPhash';
 export { queryPhash } from './queryPhash';
 export { syncPhash } from './syncPhash';
 export { uniqueAdd } from './uniqueAdd';
-export { uniqueAddToObj } from './uniqueAddToObj';
+export { uniqueAddToObj } from '../tools/uniqueAddToObj';
 
 export const IMGSCOUT = {
   QUERY: 'IMGSCOUT.QUERY',

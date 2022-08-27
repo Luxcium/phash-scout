@@ -1,3 +1,4 @@
+import { REDIS_DEFAULT_PORT } from '../../constants';
 import { redisCreateClient } from '..';
 
 /**
@@ -17,14 +18,14 @@ import { redisCreateClient } from '..';
  * @returns *REDIS CLIENT*
  */
 export async function rConnect(
-  port: number | null = 6383,
+  port: number | null = REDIS_DEFAULT_PORT,
   dbNumber: number | null = 0,
   host: string | null = '0.0.0.0'
 ): Promise<any> {
   /** *REDIS CLIENT* */
 
   const R = redisCreateClient({
-    port: port || 6383,
+    port: port || REDIS_DEFAULT_PORT,
     dbNumber: dbNumber || 0,
     host: host || '0.0.0.0',
   });
@@ -33,4 +34,4 @@ export async function rConnect(
   return R as REDIS_CLIENT;
 }
 
-//  = 6383,  -  dbNumber = 0, host = '0. @default [6383] @default 6383 description 0.0.0'
+//  = REDIS_DEFAULT_PORT,  -  dbNumber = 0, host = '0. @default [REDIS_DEFAULT_PORT] @default REDIS_DEFAULT_PORT description 0.0.0'

@@ -1,7 +1,7 @@
 import type { PQuerryAndAdd, QueryResultItem } from '$types';
 
-import { toQueryResultObj } from '../tools';
-import { uniqueAdd } from './uniqueAdd';
+import { toQueryResultObj } from '.';
+import { uniqueAdd } from '../commands/uniqueAdd';
 
 export async function uniqueAddToObj(querryAndAddParam: PQuerryAndAdd) {
   const addRes: Promise<QueryResultItem[]> = uniqueAdd(querryAndAddParam);
