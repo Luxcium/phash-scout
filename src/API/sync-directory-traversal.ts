@@ -26,6 +26,8 @@ import { chdir } from 'node:process';
 
 import { SideFunctionParam } from '$types';
 
+import { AWAIT_EACH } from '../constants';
+
 // const timeThen = performance.now();
 // const timeNow = () => performance.now();
 // const timeSinceThen = () => timeNow() - timeThen;
@@ -36,8 +38,8 @@ const count = {
   b: 0,
 };
 
-const isOpenDirSYNC = true;
-const isReadSYNC = true;
+const isOpenDirSYNC = false;
+const isReadSYNC = false;
 const isCloseDirSYNC = false;
 
 export async function doTraverseDirs(
@@ -46,18 +48,17 @@ export async function doTraverseDirs(
   flags: { [keys: string]: boolean },
   counts: any
 ) {
-  const { VERBOSE, DEBUGS, AWAITS } = flags;
+  const { VERBOSE, DEBUGS } = flags;
   const parents_ς: string[] = [];
   let cwd_ς = { path: '' };
 
   const queue_ς = [absolutePath];
   while (queue_ς.length > 0) {
     traverse(queue_ς, parents_ς, cwd_ς, DEBUGS, VERBOSE) &&
-      (await scan(queue_ς, sideFunction, cwd_ς, DEBUGS, AWAITS, counts));
+      (await scan(queue_ς, sideFunction, cwd_ς, counts));
   }
   return;
 }
-
 /**
  * Scans the current directory
  */
@@ -65,8 +66,7 @@ async function scan(
   queue: string[],
   sideFunction: (args: SideFunctionParam) => Promise<unknown>,
   cwd: { path: string },
-  DEBUGS = true,
-  AWAITS = true,
+
   counts: any
 ) {
   const dir = isOpenDirSYNC ? opendirSync('.', {}) : await opendir('.', {});
@@ -81,11 +81,9 @@ async function scan(
       const fullPath = normalize(`${cwd.path}/${ent.name}`);
       // HACK:- //-! ------- Add the side effect on files here -------
       try {
-        void AWAITS;
-        // console.log('counts.await++', ++counts.await);
-        counts.await % 1000 === 0
-          ? await sideFunction({ fullPath, count, DEBUGS })
-          : sideFunction({ fullPath, count, DEBUGS });
+        counts.await % AWAIT_EACH === 0
+          ? await sideFunction({ fullPath, count })
+          : sideFunction({ fullPath, count });
       } catch (error) {
         console.error(error);
       }
@@ -93,7 +91,7 @@ async function scan(
     }
   }
 
-  const noAWAIT = false;
+  const noAWAIT = true;
   isCloseDirSYNC ? dir.closeSync() : noAWAIT ? dir.close() : await dir.close();
 }
 

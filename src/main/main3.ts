@@ -1,5 +1,6 @@
 import fs from 'fs';
 
+import { REDIS_DEFAULT_PORT } from '../constants';
 import { CURRENT_PATH } from '../constants/radius';
 import { redisCreateClient } from '../tools';
 
@@ -7,7 +8,7 @@ const phash = require('sharp-phash');
 
 export async function main3(
   folder = CURRENT_PATH,
-  port = 6383,
+  port = REDIS_DEFAULT_PORT,
   dbNumber = 0,
   host = '0.0.0.0'
 ) {

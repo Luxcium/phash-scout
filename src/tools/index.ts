@@ -7,7 +7,7 @@ import {
   currentPath,
   getDirListFileTypes,
   getPathInfos,
-  getRawDirList,
+  getRawDirListAsync,
   getStats,
 } from './paths';
 import { zalgo, zalgo1, zalgo2, zalgo3 } from './restrainingZalgo';
@@ -111,7 +111,7 @@ export const fsTools = {
   filesTypeList,
   getDirListFileTypes,
   getPathInfos,
-  getRawDirList,
+  getRawDirListAsync,
   getStats,
   currentPath,
   dirListWithFileType,

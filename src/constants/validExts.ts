@@ -1,1 +1,1 @@
-export const validExts = new Set(['.jpeg', '.jpg']);
+export const validExts = new Set(['.jpeg', '.jpg', '.png']);

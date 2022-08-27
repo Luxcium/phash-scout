@@ -1,33 +1,30 @@
 import axios from 'axios';
 
-import type { SideFunctionParam } from '$types';
+import type { Count, SideFunctionParam } from '$types';
 
+import { AVERAGE_EACH, PRINT_EACH } from '../constants';
 import { validExts } from '../constants/validExts';
 import { pathParser } from '../tools/paths';
 import { averageReducer } from './averageReducer';
+import { commands } from './worker/commands';
 
-// HACK: must be moved outside to CONST or else
-export function sideFunctionBuilder(times: number[]) {
-  return async ({ fullPath, count, DEBUGS }: SideFunctionParam) => {
+export function sideFunctionBuilder(
+  times: number[],
+  useWorker: boolean = false,
+  VERBOSA: boolean = false
+) {
+  return async ({ fullPath, count }: SideFunctionParam) => {
     try {
       const { pathInfos } = pathParser(fullPath);
       const ext = pathInfos.ext.toLowerCase();
       const thumb = '_thumb';
+      let averageReduced = averageReducer(times, AVERAGE_EACH).toFixed(2);
       if (validExts.has(ext) && !fullPath.includes(thumb)) {
-        DEBUGS &&
-          process.stdout.write(
-            `\u009B33m[\u009B93m ${(++count.a).toLocaleString()}\u009B33m] \u009B32m${averageReducer(
-              times
-            ).toFixed(2)} > \u009B37m${fullPath}\u009B0m\n`
-          );
-        const redisQueryResult = await calculatedFromWorker(fullPath, count.a);
-        return [redisQueryResult];
+        messageFn(count, VERBOSA, averageReduced, fullPath);
+        return calculating(fullPath, count, useWorker);
       }
-      process.stdout.write(
-        `\u009B33m[\u009B93m ${(++count.b).toLocaleString()}\u009B33m] \u009B32m${
-          'SKIPED EXT:' + ext
-        } > \u009B36m${fullPath}\u009B0m\n`
-      );
+
+      loggingFn(fullPath, count, averageReduced, ext, VERBOSA);
     } catch (error) {
       console.error('at: sideFunctionBuilder', error);
     }
@@ -35,6 +32,79 @@ export function sideFunctionBuilder(times: number[]) {
   };
 }
 
+async function calculating(
+  fullPath: string,
+  count: Count,
+  useWorker: boolean = false
+) {
+  try {
+    /* eslint no-constant-condition: "off"*/
+    const withWorker = useWorker ? calculatedFromWorker : calculatedFromCurrent;
+    const redisQueryResult = await withWorker(fullPath, count.a - 1);
+    return [redisQueryResult];
+  } catch (error) {
+    console.error('at: sideFunctionBuilder when calculating →', error);
+    return [];
+  }
+}
+
+function messageFn(
+  count: Count,
+  VERBOSE: boolean,
+  averageReduced: string,
+  fullPath: string
+) {
+  count.a++ % PRINT_EACH === 0 &&
+    VERBOSE &&
+    process.stdout.write(
+      `\u009B33m[ \u009B93m${(
+        count.a - 1
+      ).toLocaleString()}\u009B33m ] \u009B32m${averageReduced} > \u009B37m${fullPath}\u009B0m\n`
+    );
+}
+
+function loggingFn(
+  fullPath: string,
+  count: Count,
+  averageReduced: string,
+  ext: string,
+  VERBOSE: boolean
+) {
+  ++count.b;
+  let len1 = (count.a - 1).toLocaleString().length;
+  let len2 = count.b.toLocaleString().length;
+  let len3 = averageReduced.length;
+  let tmpString =
+    `[ \u009B93m${count.b.toLocaleString()}\u009B33m ]` +
+    ` \u009B32m${ext.padStart(len1 - len2 + len3, ' ')}\u009B37m `;
+
+  VERBOSE &&
+    process.stderr.write(
+      `\u009B33m${tmpString}\u009B32m${'> '}\u009B35m${fullPath}\u009B0m\n`
+    );
+}
+
+export async function calculatedFromCurrent(fullPath: string, count_a: number) {
+  const id = count_a;
+  //  params, id
+  // async ({   params, id }: any) => {
+  const messageRPC = {
+    jsonrpc: '2.0',
+    id,
+    pid: 'worker:' + process.pid,
+  };
+  try {
+    const resultRPC = await commands['redis_phash_query_result'](fullPath);
+    return { ...messageRPC, result: resultRPC };
+  } catch (error) {
+    const errorRPC = {
+      code: -32_603,
+      message: 'Internal error!!! (Internal JSON-RPC error). ' + (error || ''),
+      data: error,
+    };
+    return { ...messageRPC, error: errorRPC };
+  }
+}
 async function calculatedFromWorker(fullPath: string, count_a: number) {
   try {
     const phashValue: string[] = (
@@ -45,66 +115,8 @@ async function calculatedFromWorker(fullPath: string, count_a: number) {
       )
     ).data.split('\0\n\0');
 
-    return JSON.parse(phashValue.shift() || '{"value" : "-6"}').value;
+    return JSON.parse(phashValue.shift() || '{"value" : "-6"}').value as string;
   } catch {
     return '-5';
   }
 }
-
-// const axios = new Axios(); // getCachedPhash(RC, fullPath, getBigStrPHashFromFile);
-// JSON.parse(phashValue.shift()).value;
-
-// const multi = true;
-// if (multi) {
-//   try {
-//     const phashValue: string[] = (
-//       await axios.get(
-//         'http://localhost:8083/bigstr_phash_from_file' + encodeURI(fullPath)
-//       )
-//     ).data.split('\0\n\0');
-
-//     calculatedValue = JSON.parse(
-//       phashValue.shift() || '{"value" : "-1"}'
-//     ).value;
-//   } catch {
-//     calculatedValue = '-2';
-//   }
-// } else {
-//   calculatedValue = await getCachedPhash(
-//     RC,
-//     fullPath,
-//     getBigStrPHashFromFile
-//   );
-//   calculatedValue = await getBigStrPHashFromFile(fullPath);
-// }
-// // calculatedValue = '';
-
-// let calculatedValue: string;
-
-// void calculatedFromFile;
-// void calculatedFromCache;
-// void calculatedFromWorker;
-// calculatedValue = '';
-// calculatedValue;
-
-// calculatedValue = await calculatedFromFile(fullPath);
-// calculatedValue = await calculatedFromCache(fullPath, RC);
-
-// const redisQueryResult = redisQuery(
-//   RC,
-//   'key',
-//   fullPath,
-//   immediateZalgo(calculatedValue)
-// );
-// console.log(
-//   'redisQueryResult.queryResult() :>>',
-// /* await */ redisQueryResult.queryResult();
-// );
-
-// async function calculatedFromCache(fullPath: string, RC: any) {
-//   return getCachedPhash(RC, fullPath, getBigStrPHashFromFile);
-// }
-
-// async function calculatedFromFile(fullPath: string) {
-//   return getBigStrPHashFromFile(fullPath);
-// }
