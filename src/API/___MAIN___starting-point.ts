@@ -1,4 +1,4 @@
-import { USEWORKER, VERBOSA_SideFunction } from '../constants';
+import { USEWORKER, VERBOSA } from '../constants';
 import { isDir } from '../tools';
 import { sideFunctionBuilder } from './sideFunctionBuilder';
 import { doTraverseDirs } from './sync-directory-traversal';
@@ -18,7 +18,7 @@ function main() {
       const sideFunction = sideFunctionBuilder(
         times,
         USEWORKER,
-        VERBOSA_SideFunction
+        VERBOSA.sideFunction
       );
       await doTraverseDirs(traverseDir, sideFunction, flags, counts);
     }
