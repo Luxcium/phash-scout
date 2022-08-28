@@ -49,7 +49,7 @@ export const colors = {
   indexed: (INDEX: any) => SGR(`${38}:${5}:${INDEX}`),
   extended: (R: number, G: number, B: number) =>
     SGR(`${38}:${2}::${R}:${G}:${B}`),
-  default: SGR(39),
+  normal: SGR(39),
   bg: {
     black: SGR(40),
     red: SGR(41),
@@ -62,7 +62,7 @@ export const colors = {
     extended: (R: number, G: number, B: number) =>
       SGR(`${48}:${2}::${R}:${G}:${B}`),
     indexed: (INDEX: any) => SGR(`${48}:${5}:${INDEX}`),
-    default: SGR(49),
+    normal: SGR(49),
   },
   bright: {
     black: SGR(30 + 60),
@@ -76,7 +76,7 @@ export const colors = {
     indexed: (INDEX: any) => SGR(`${38 + 60}:${5}:${INDEX}`),
     extended: (R: number, G: number, B: number) =>
       SGR(`${38 + 60}:${2}::${R}:${G}:${B}`),
-    default: SGR(39),
+    normal: SGR(39),
     bg: {
       black: SGR(40 + 60),
       red: SGR(41 + 60),
@@ -89,7 +89,7 @@ export const colors = {
       indexed: (INDEX: any) => SGR(`${48 + 60}:${5}:${INDEX}`),
       extended: (R: number, G: number, B: number) =>
         SGR(`${48 + 60}:${2}::${R}:${G}:${B}`),
-      default: SGR(49),
+      normal: SGR(49),
     },
   },
 };
