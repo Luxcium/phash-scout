@@ -52,8 +52,8 @@
     "plugin:jsonc/recommended-with-json",
     "plugin:jsonc/recommended-with-jsonc",
     "plugin:jsonc/recommended-with-json5",
-    "plugin:jsonc/auto-config",
-    "plugin:prettier/recommended"
+    "plugin:jsonc/auto-config"
+    // "plugin:prettier/recommended"
     // "prettier/@typescript-eslint",
     // "prettier/babel",
     // "prettier/flowtype",
@@ -82,7 +82,8 @@
     // ],
     "lines-around-comment": "off",
     "spaced-comment": "warn",
-    "max-len": "off", // export function  /*eslint max-len: ["error", { "ignorePattern": "^\\s*var\\s.+=\\s*require\\s*\\(" }]*/
+    "max-len": "off",
+    // export function  /*eslint max-len: ["error", { "ignorePattern": "^\\s*var\\s.+=\\s*require\\s*\\(" }]*/
     "no-mixed-operators": "off",
     "no-tabs": "off",
     "no-unexpected-multiline": "off",
