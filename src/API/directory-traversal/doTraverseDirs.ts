@@ -18,43 +18,33 @@
 /* *                                                                        * */
 /* ************************************************************************** */
 
+import { SideFunctionParam } from '@types';
 import { opendirSync } from 'node:fs';
 import { opendir } from 'node:fs/promises';
 import { constants } from 'node:os';
 import { normalize } from 'node:path';
 import { chdir } from 'node:process';
 
-import { SideFunctionParam } from '$types';
+import { flags, logError, logHigh, logLow } from '../../constants';
 
-import { AWAIT_EACH } from '../constants';
-
-// const timeThen = performance.now();
-// const timeNow = () => performance.now();
-// const timeSinceThen = () => timeNow() - timeThen;
-// timeSinceThen;
+const { AWAIT_EACH, isOpenDirSYNC, isReadSYNC, isCloseDirSYNC } = flags;
 
 const count = {
   a: 0,
   b: 0,
 };
 
-const isOpenDirSYNC = false;
-const isReadSYNC = false;
-const isCloseDirSYNC = false;
-
 export async function doTraverseDirs(
   absolutePath: string,
   sideFunction: (args: SideFunctionParam) => Promise<unknown>,
-  flags: { [keys: string]: boolean },
   counts: any
 ) {
-  const { VERBOSE, DEBUGS } = flags;
   const parents_ς: string[] = [];
   let cwd_ς = { path: '' };
 
   const queue_ς = [absolutePath];
   while (queue_ς.length > 0) {
-    traverse(queue_ς, parents_ς, cwd_ς, DEBUGS, VERBOSE) &&
+    traverse(queue_ς, parents_ς, cwd_ς) &&
       (await scan(queue_ς, sideFunction, cwd_ς, counts));
   }
   return;
@@ -85,7 +75,7 @@ async function scan(
           ? await sideFunction({ fullPath, count })
           : sideFunction({ fullPath, count });
       } catch (error) {
-        console.error(error);
+        logError(String(error), 'ERROR');
       }
       // : : : //-! --------------------------------------------------
     }
@@ -99,13 +89,7 @@ async function scan(
  * Changes to a new working directory
  * Returns true if the directory should be scanned
  */
-function traverse(
-  queue: string[],
-  parents: string[],
-  cwd: { path: string },
-  debug = true,
-  verbose = false
-) {
+function traverse(queue: string[], parents: string[], cwd: { path: string }) {
   const next = queue.pop()!;
   try {
     chdir(next);
@@ -113,11 +97,11 @@ function traverse(
     if (error instanceof Error) {
       if (hasKey(error, 'errno')) {
         if (error.errno === -constants.errno.EACCES) {
-          debug && console.error('EACCES: skipping', next, error);
+          logLow([next, error].toString(), 'EACCES: skipping');
           return false;
         }
         if (error.errno === -constants.errno.ENOENT) {
-          debug && console.error('ENOENT: skipping', next, error);
+          logLow([next, error].toString(), 'ENOENT: skipping');
           return false;
         }
       }
@@ -131,7 +115,7 @@ function traverse(
   } else {
     parents.push(next);
     cwd.path = cwd.path.length === 0 ? next : normalize(`${cwd.path}/${next}`);
-    verbose && console.log(cwd.path);
+    logHigh(cwd.path);
     queue.push('..');
     return true;
   }

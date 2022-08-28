@@ -10,7 +10,7 @@ function asyncOnMessageWrap(fn) {
     try {
       void parentPort.postMessage(await fn(msg));
     } catch (error) {
-      console.error(error);
+      logError(error);
     }
   };
 }
@@ -34,6 +34,7 @@ void parentPort.on(
           (error.message || ''),
         data: error,
       };
+      logMedium(String({ ...messageRPC, error: errorRPC }));
       return { ...messageRPC, error: errorRPC };
     }
   })

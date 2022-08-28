@@ -31,7 +31,7 @@ export async function redisPhashQueryResult(imgFileAbsPath) {
     }
     return [];
   } catch (error) {
-    console.log(error);
+    logError(error);
     return [];
   }
 }

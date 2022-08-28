@@ -7,8 +7,6 @@ import { getRedisQueryResult } from './getRedisQueryResult';
  * @param {string} imgFileAbsPath
  */
 // HACK: -------------------------------------------------------------
-const DEBUG = true;
-const VERBOSA = false;
 const ingestOnly = true;
 export async function redisPhashQuery(imgFileAbsPath) {
   try {
@@ -22,9 +20,9 @@ export async function redisPhashQuery(imgFileAbsPath) {
       return processedResult;
     }
   } catch (error) {
-    DEBUG && console.log(error);
+    logError(error);
     return [];
   }
-  VERBOSA && console.log('already processed');
+  logDebug('already processed');
   return [];
 }

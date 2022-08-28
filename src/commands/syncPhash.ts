@@ -1,15 +1,12 @@
+import { logError } from '../constants';
 import { IMGSCOUT } from '../tools';
 
-export async function syncPhash(
-  R: any,
-  k: string,
-  failSilently: boolean = true
-) {
+export async function syncPhash(R: any, k: string) {
   try {
     await R.sendCommand([IMGSCOUT.SYNC, k]);
     return true;
   } catch (error) {
-    if (!failSilently) console.log(error);
+    logError(String(error));
   }
   return false;
 }

@@ -1,25 +1,14 @@
 import * as fsSync from 'node:fs';
 import * as fs from 'node:fs/promises';
 
-/*
- const thisImage = fs.promises.readFile(imgFile.fullPath);
-      return {
-        await: {
-          getPHash: async () => {
-            return immediateZalgo({
-              pHash: bigString(sharpPhash(await thisImage)),
-              exclude: false,
-            });
-          },
-        },
-      };
- */
+import { logError } from '../../constants';
+
 export async function isDir(dir: string) {
   try {
     const stats = await fs.stat(dir);
     return stats.isDirectory();
   } catch (error) {
-    console.error(error);
+    logError(String(error));
     return null;
   }
 }
@@ -29,7 +18,7 @@ export function isDirSync(dir: string) {
     const stats = fsSync.statSync(dir);
     return stats.isDirectory();
   } catch (error) {
-    console.error(error);
+    logError(String(error));
     return null;
   }
 }

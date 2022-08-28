@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import type { Count, SideFunctionParam } from '$types';
 
-import { AVERAGE_EACH, PRINT_EACH } from '../constants';
+import { AVERAGE_EACH, logError, logMedium, PRINT_EACH } from '../constants';
 import { validExts } from '../constants/validExts';
 import { pathParser } from '../tools/paths';
 import { averageReducer } from './averageReducer';
@@ -26,7 +26,7 @@ export function sideFunctionBuilder(
 
       loggingFn(fullPath, count, averageReduced, ext, VERBOSA);
     } catch (error) {
-      console.error('at: sideFunctionBuilder', error);
+      logError(String(error), 'at: sideFunctionBuilder');
     }
     return [];
   };
@@ -43,7 +43,7 @@ async function calculating(
     const redisQueryResult = await withWorker(fullPath, count.a - 1);
     return [redisQueryResult];
   } catch (error) {
-    console.error('at: sideFunctionBuilder when calculating →', error);
+    logError(String(error), 'at: sideFunctionBuilder when calculating →');
     return [];
   }
 }
@@ -86,8 +86,6 @@ function loggingFn(
 
 export async function calculatedFromCurrent(fullPath: string, count_a: number) {
   const id = count_a;
-  //  params, id
-  // async ({   params, id }: any) => {
   const messageRPC = {
     jsonrpc: '2.0',
     id,
@@ -102,6 +100,11 @@ export async function calculatedFromCurrent(fullPath: string, count_a: number) {
       message: 'Internal error!!! (Internal JSON-RPC error). ' + (error || ''),
       data: error,
     };
+    logMedium(
+      String({ ...messageRPC, error: errorRPC }),
+      'at: sideFunctionBuilder when calculating →'
+    );
+
     return { ...messageRPC, error: errorRPC };
   }
 }

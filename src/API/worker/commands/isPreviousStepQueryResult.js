@@ -4,15 +4,16 @@ export async function isPreviousStepQueryResult(previousStepResult) {
   try {
     if (Array.isArray(previousStepResult)) {
       if (previousStepResult.length > 0) {
-        console.error(
-          'at: 001 redis_phash_query_result([])↓\n    error:',
+        logWarn(
           'TypeError: previousStepResult is an array of length ' +
-          previousStepResult.length
+          previousStepResult.length,
+          'at: 001 redis_phash_query_result([])↓'
         );
       } else {
-        console.error(
-          'at: 001 redis_phash_query_result([])↓\n    error:',
-          'TypeError: previousStepResult is an empty array for ' + 'messageId: '
+        logWarn(
+          'TypeError: previousStepResult is an empty array for ' +
+          'messageId: ',
+          'at: 001 redis_phash_query_result([])↓'
         );
       }
       return false;
@@ -23,8 +24,7 @@ export async function isPreviousStepQueryResult(previousStepResult) {
     ) {
       return true;
     } else {
-      console.error(
-        'at: 002 redis_phash_query_result([])↓\n    error:',
+      logWarn(
         `TypeError: previousStepResult${!previousStepResult
           ? ' is ' + undefined
           : !previousStepResult.queryResult
@@ -32,11 +32,12 @@ export async function isPreviousStepQueryResult(previousStepResult) {
             : typeof previousStepResult.queryResult !== 'function'
               ? '.queryResult is not a function'
               : ' is' + null + 'will return [](`never`)↓'
-        }`
+        }`,
+        'at: 002 redis_phash_query_result([])↓'
       );
     }
     return false;
   } catch (error) {
-    console.log('isPreviousStepQueryResult', error);
+    logError(error, 'isPreviousStepQueryResult');
   }
 }

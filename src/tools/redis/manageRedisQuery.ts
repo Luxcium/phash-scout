@@ -1,3 +1,4 @@
+import { logError } from '../../constants';
 import { Bg, Strange } from '../../types';
 import { notExcluded } from '../notExclude';
 
@@ -84,7 +85,7 @@ export function manageRedisQuery(bgItem: Bg<Strange<true | false>>) {
         // }
       }
     } catch (error) {
-      console.error('in manageRedisQuery (bgItem.map)', error);
+      logError(String(error), 'in manageRedisQuery (bgItem.map)');
     }
     return item;
   });

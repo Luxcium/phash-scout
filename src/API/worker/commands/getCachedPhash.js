@@ -43,7 +43,7 @@ export async function getCachedPhash(imgFileAbsPath) {
 
     // return setCachedPhash(R, imgFileAbsPath, calculatedValue, processed);
   } catch (error) {
-    console.log(error);
+    logFatal(error);
     throw error;
   }
 }
