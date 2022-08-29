@@ -5,7 +5,7 @@ import { VerboLevels } from './VerboLevels';
 export const VERBOSA = { sideFunction: true };
 export const VERBO_LEVEL: VerboLevels = VerboLevels.INFO;
 export const DEBUG: boolean = true;
-export const DEBUG_LEVEL: DebugLevels = DebugLevels.HIGH;
+export const DEBUG_LEVEL: DebugLevels = DebugLevels.DEBUG;
 
 const logers = new Logers(VERBO_LEVEL, DEBUG, DEBUG_LEVEL);
 
@@ -23,7 +23,7 @@ export const {
 export { logers };
 export const REDIS_DEFAULT_PORT = 6383;
 export const DB_NUMBER = 5;
-export const PRINT_EACH = 1000;
+export const PRINT_EACH = 1;
 export const AVERAGE_EACH = 125;
 export const AWAIT_EACH = 250;
 export const USEWORKER = false;
@@ -34,3 +34,13 @@ export const flags = {
   isCloseDirSYNC: false,
   AWAIT_EACH,
 };
+
+// logLog(',');
+// logFatal(',');
+// logError(',');
+// logWarn(',');
+// logInfo(',');
+// logDebug(',');
+// logLow(',');
+// logMedium(',');
+// logHigh(',');

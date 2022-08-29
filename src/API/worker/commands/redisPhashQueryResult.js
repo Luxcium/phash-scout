@@ -1,4 +1,5 @@
 'use strict';
+import { logError } from '../../../constants';
 import { commands } from '.';
 
 const VERBOSA = false;

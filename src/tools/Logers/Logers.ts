@@ -1,4 +1,5 @@
 import { stderr } from 'node:process';
+import { inspect } from 'node:util';
 
 import { DebugLevels } from '../../constants/DebugLevels';
 import { VerboLevels } from '../../constants/VerboLevels';
@@ -12,40 +13,42 @@ export class Logers {
     private _debug = false,
     private _DebugLevels: DebugLevels = DebugLevels.DEBUG
   ) {}
-  logLog = (message = '_', title?: string) => {
-    this._cmprV(VerboLevels.LOG) && this._logLog(message, title);
+
+  // inspect(object[, options])
+  logLog = (message: any = '_', title?: string) => {
+    this._cmprV(VerboLevels.LOG) && this._logLog(inspect(message), title);
     return message;
   };
-  logFatal = (message = '_', title?: string) => {
-    this._cmprV(VerboLevels.FATAL) && this._logFatal(message, title);
+  logFatal = (message: any = '_', title?: string) => {
+    this._cmprV(VerboLevels.FATAL) && this._logFatal(inspect(message), title);
     return message;
   };
-  logError = (message = '_', title?: string) => {
-    this._cmprV(VerboLevels.ERROR) && this._logError(message, title);
+  logError = (message: any = '_', title?: string) => {
+    this._cmprV(VerboLevels.ERROR) && this._logError(inspect(message), title);
     return message;
   };
-  logWarn = (message = '_', title?: string) => {
-    this._cmprV(VerboLevels.WARN) && this._logWarn(message, title);
+  logWarn = (message: any = '_', title?: string) => {
+    this._cmprV(VerboLevels.WARN) && this._logWarn(inspect(message), title);
     return message;
   };
-  logInfo = (message = '_', title?: string) => {
-    this._cmprV(VerboLevels.INFO) && this._logInfo(message, title);
+  logInfo = (message: any = '_', title?: string) => {
+    this._cmprV(VerboLevels.INFO) && this._logInfo(inspect(message), title);
     return message;
   };
-  logDebug = (message = '_', title?: string) => {
-    this._cmprD(DebugLevels.DEBUG) && this._logDebug(message, title);
+  logDebug = (message: any = '_', title?: string) => {
+    this._cmprD(DebugLevels.DEBUG) && this._logDebug(inspect(message), title);
     return message;
   };
-  logLow = (message = '_', title?: string) => {
-    this._cmprD(DebugLevels.LOW) && this._logLow(message, title);
+  logLow = (message: any = '_', title?: string) => {
+    this._cmprD(DebugLevels.LOW) && this._logLow(inspect(message), title);
     return message;
   };
-  logMedium = (message = '_', title?: string) => {
-    this._cmprD(DebugLevels.MEDIUM) && this._logMedium(message, title);
+  logMedium = (message: any = '_', title?: string) => {
+    this._cmprD(DebugLevels.MEDIUM) && this._logMedium(inspect(message), title);
     return message;
   };
-  logHigh = (message = '_', title?: string) => {
-    this._cmprD(DebugLevels.HIGH) && this._logHigh(message, title);
+  logHigh = (message: any = '_', title?: string) => {
+    this._cmprD(DebugLevels.HIGH) && this._logHigh(inspect(message), title);
     return message;
   };
 

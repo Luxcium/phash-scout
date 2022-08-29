@@ -1,3 +1,4 @@
+import { logFatal } from '../../../constants';
 import { SET } from '../../SET';
 import { commands, Rc } from '.';
 

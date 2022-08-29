@@ -42,8 +42,8 @@ async function calculating(
     const withWorker = useWorker ? calculatedFromWorker : calculatedFromCurrent;
     const redisQueryResult = await withWorker(fullPath, count.a - 1);
     return [redisQueryResult];
-  } catch (error) {
-    logError(String(error), 'at: sideFunctionBuilder when calculating →');
+  } catch (error: any) {
+    logError(error.message, 'at: sideFunctionBuilder when calculating →');
     return [];
   }
 }
@@ -101,7 +101,7 @@ export async function calculatedFromCurrent(fullPath: string, count_a: number) {
       data: error,
     };
     logMedium(
-      String({ ...messageRPC, error: errorRPC }),
+      { ...messageRPC, error: errorRPC },
       'at: sideFunctionBuilder when calculating →'
     );
 

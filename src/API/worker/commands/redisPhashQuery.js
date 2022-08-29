@@ -1,4 +1,5 @@
 'use strict';
+import { logError, logHigh } from '../../../constants';
 import { commands, Rc } from '.';
 import { setCachedPhash } from './getCachedPhash';
 import { getRedisQueryResult } from './getRedisQueryResult';
@@ -23,6 +24,6 @@ export async function redisPhashQuery(imgFileAbsPath) {
     logError(error);
     return [];
   }
-  logDebug('already processed');
+  logHigh('already processed');
   return [];
 }
