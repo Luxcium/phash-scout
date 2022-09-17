@@ -1,7 +1,8 @@
 import { stderr } from 'node:process';
-import { inspect } from 'node:util';
+import { inspect, stripVTControlCharacters } from 'node:util';
 
 import { DebugLevels } from '../../constants/DebugLevels';
+import { inspectOptions } from '../../constants/inspectOptions';
 import { VerboLevels } from '../../constants/VerboLevels';
 import { colors } from '../../layout';
 
@@ -13,66 +14,88 @@ export class Logers {
     private _debug = false,
     private _DebugLevels: DebugLevels = DebugLevels.DEBUG
   ) {}
-
-  // inspect(object[, options])
-  logLog = (message: any = '_', title?: string) => {
-    this._cmprV(VerboLevels.LOG) && this._logLog(inspect(message), title);
-    return message;
-  };
-  logFatal = (message: any = '_', title?: string) => {
-    this._cmprV(VerboLevels.FATAL) && this._logFatal(inspect(message), title);
-    return message;
-  };
-  logError = (message: any = '_', title?: string) => {
-    this._cmprV(VerboLevels.ERROR) && this._logError(inspect(message), title);
-    return message;
-  };
-  logWarn = (message: any = '_', title?: string) => {
-    this._cmprV(VerboLevels.WARN) && this._logWarn(inspect(message), title);
-    return message;
-  };
-  logInfo = (message: any = '_', title?: string) => {
-    this._cmprV(VerboLevels.INFO) && this._logInfo(inspect(message), title);
-    return message;
-  };
-  logDebug = (message: any = '_', title?: string) => {
-    this._cmprD(DebugLevels.DEBUG) && this._logDebug(inspect(message), title);
-    return message;
-  };
-  logLow = (message: any = '_', title?: string) => {
-    this._cmprD(DebugLevels.LOW) && this._logLow(inspect(message), title);
-    return message;
-  };
-  logMedium = (message: any = '_', title?: string) => {
-    this._cmprD(DebugLevels.MEDIUM) && this._logMedium(inspect(message), title);
-    return message;
-  };
-  logHigh = (message: any = '_', title?: string) => {
-    this._cmprD(DebugLevels.HIGH) && this._logHigh(inspect(message), title);
-    return message;
-  };
-
+  _msgStr(message: any): string {
+    if (typeof message === 'string') {
+      // LOG: console.log(message.split('\n').length, message.split('\n'));
+      const str_ = message.trim().split('\n');
+      if (str_.some(str => str.length > 0)) {
+        return `\n${str_.map(str => '  ' + str).join('\n')}\n`;
+      }
+      return `${message}`.trim() || '_';
+    }
+    const result = this._msgStr(inspect(message, inspectOptions).trim() || '_');
+    return result;
+  }
+  _titleStr(title: any) {
+    return stripVTControlCharacters(String(title).trim()).trim() || '';
+  }
   _cmprV(setTo: VerboLevels) {
     return this._verboLevel >= setTo;
   }
-
   _cmprD(setTo: DebugLevels) {
     return this._DebugLevels >= setTo && this._debug;
   }
+  get _performNow() {
+    return performance.now().toLocaleString();
+  }
 
+  logLog = (message: any = '_', title?: string) => {
+    this._cmprV(VerboLevels.LOG) &&
+      this._logLog(this._msgStr(message), this._titleStr(title || ''));
+    return message;
+  };
+  logFatal = (message: any = '_', title?: string) => {
+    this._cmprV(VerboLevels.FATAL) &&
+      this._logFatal(this._msgStr(message), this._titleStr(title || ''));
+    return message;
+  };
+  logError = (message: any = '_', title?: string) => {
+    this._cmprV(VerboLevels.ERROR) &&
+      this._logError(this._msgStr(message), this._titleStr(title || ''));
+    return message;
+  };
+  logWarn = (message: any = '_', title?: string) => {
+    this._cmprV(VerboLevels.WARN) &&
+      this._logWarn(this._msgStr(message), this._titleStr(title || ''));
+    return message;
+  };
+  logInfo = (message: any = '_', title?: string) => {
+    this._cmprV(VerboLevels.INFO) &&
+      this._logInfo(this._msgStr(message), this._titleStr(title || ''));
+    return message;
+  };
+  logDebug = (message: any = '_', title?: string) => {
+    this._cmprD(DebugLevels.DEBUG) &&
+      this._logDebug(this._msgStr(message), this._titleStr(title || ''));
+    return message;
+  };
+  logLow = (message: any = '_', title?: string) => {
+    this._cmprD(DebugLevels.LOW) &&
+      this._logLow(this._msgStr(message), this._titleStr(title || ''));
+    return message;
+  };
+  logMedium = (message: any = '_', title?: string) => {
+    this._cmprD(DebugLevels.MEDIUM) &&
+      this._logMedium(this._msgStr(message), this._titleStr(title || ''));
+    return message;
+  };
+  logHigh = (message: any, title?: string) => {
+    this._cmprD(DebugLevels.HIGH) &&
+      this._logHigh(this._msgStr(message), this._titleStr(title || ''));
+    return message;
+  };
   _logLog(message = '', title = 'Log') {
-    return stderr.write(
+    stderr.write(
       `[${/**/ ''}${normal}"Log"${normal}    ${','} {${t(
-        title
-      )}${normal} ${message}}, ${performance.now().toLocaleString()}], \n`,
+        title || 'Log'
+      )}${normal} ${message}}, ${this._performNow}], \n`,
       'utf8'
     );
   }
-
   _logFatal(message = '', title = 'Fatal') {
     stderr.write(
       `[${/**/ ''}${colors.bright.red}"Fatal"${normal}  ${','} {${t(
-        title
+        title || 'Fatal'
       )}${normal} ${message}}, ${performance.now().toLocaleString()}], \n`,
       'utf8'
     );
@@ -80,7 +103,7 @@ export class Logers {
   _logError(message = '', title = 'Error') {
     stderr.write(
       `[${/**/ ''}${red}"Error"${normal}  ${','} {${t(
-        title
+        title || 'Error'
       )}${normal} ${message}}, ${performance.now().toLocaleString()}], \n`,
       'utf8'
     );
@@ -88,7 +111,7 @@ export class Logers {
   _logWarn(message = '', title = 'Warn') {
     stderr.write(
       `[${/**/ ''}${colors.bright.yellow}"Warn"${normal}   ${','} {${t(
-        title
+        title || 'Warn'
       )}${normal} ${message}}, ${performance.now().toLocaleString()}], \n`,
       'utf8'
     );
@@ -96,7 +119,7 @@ export class Logers {
   _logInfo(message = '', title = 'Info') {
     stderr.write(
       `[${/**/ ''}${colors.bright.blue}"Info"${normal}   ${','} {${t(
-        title
+        title || 'Info'
       )}${normal} ${message}}, ${performance.now().toLocaleString()}], \n`,
       'utf8'
     );
@@ -104,7 +127,7 @@ export class Logers {
   _logDebug(message = '', title = 'Debug') {
     stderr.write(
       `[${/**/ ''}${green}"Debug"${normal}  ${','} {${t(
-        title
+        title || 'Debug'
       )}${normal} ${message}}, ${performance.now().toLocaleString()}], \n`,
       'utf8'
     );
@@ -112,7 +135,7 @@ export class Logers {
   _logLow(message = '', title = 'Low') {
     stderr.write(
       `[${/**/ ''}${colors.bright.magenta}"Low"${normal}    ${','} {${t(
-        title
+        title || 'Low'
       )}${normal} ${message}}, ${performance.now().toLocaleString()}], \n`,
       'utf8'
     );
@@ -120,7 +143,7 @@ export class Logers {
   _logMedium(message = '', title = 'Medium') {
     stderr.write(
       `[${/**/ ''}${colors.bright.green}"Medium"${normal} ${','} {${t(
-        title
+        title || 'Medium'
       )}${normal} ${message}}, ${performance.now().toLocaleString()}], \n`,
       'utf8'
     );
@@ -128,7 +151,7 @@ export class Logers {
   _logHigh(message = '', title = 'High') {
     stderr.write(
       `[${/**/ ''}${yellow}"High"${normal}   ${','} {${t(
-        title
+        title || 'High'
       )}${normal} ${message}}, ${performance.now().toLocaleString()}], \n`,
       'utf8'
     );
@@ -136,8 +159,11 @@ export class Logers {
 }
 
 function t(str = '') {
-  return `${colors.bright.yellow}"${(str.trim() || '_').replaceAll(
-    '"',
-    '\\"'
-  )}${normal}${colors.bright.yellow}" ${yellow}:${normal}`;
+  return `${colors.bright.yellow}"${str
+    .trim()
+    .replaceAll('"', '\\"')}${normal}${
+    colors.bright.yellow
+  }" ${yellow}:${normal}`;
 }
+
+inspectOptions;

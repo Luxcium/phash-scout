@@ -24,8 +24,8 @@ export { logers };
 export const REDIS_DEFAULT_PORT = 6383;
 export const DB_NUMBER = 5;
 export const PRINT_EACH = 1;
-export const AVERAGE_EACH = 125;
-export const AWAIT_EACH = 250;
+export const AVERAGE_EACH = 50;
+export const AWAIT_EACH = 100;
 export const USEWORKER = false;
 
 export const flags = {

@@ -42,7 +42,7 @@ const upstream = connect(Number(port), hostname, () => {
 function getWorker() {
   return new RpcWorkerPool(
     // '/home/luxcium/projects/pHashScout/out/src/API/worker/worker.js',
-    '/home/luxcium/projects/phash-scout/out/src/API/worker/worker.js',
+    '/home/luxcium/projects/phash-scout/out/API/worker/worker.js',
     4,
     Strategie.leastbusy
   );

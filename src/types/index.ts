@@ -57,6 +57,7 @@ export type { FilePathInfo } from './FilePathInfo';
 export type { FileTypeInfos } from './FileTypeInfos';
 export type { GetChild } from './GetChild';
 export type { GetStats } from './GetStats';
+export type { InspectOptions } from './InspectOptions';
 export type { IQueryListPhash } from './IQueryListPhash';
 export type { Listing } from './Listing';
 // export type { FileType } from './FileType';

@@ -18,10 +18,12 @@ export async function getBigStrPHashFromFile(
   } catch (error) {
     logError(
       String([
-        `    \u009B91m> \u009B01m\u009B4m${error}\u009B0m`.replace(/\n/g, ''),
-        `\n\n     > '${imgFilePath}' !!!\u009B0m\n\u009B0m`,
+        `    \u009B91m> \u009B01m\u009B4m${error}\u009B0m '${imgFilePath}' !!!\u009B0m\n\u009B0m`.replace(
+          /\n/g,
+          ''
+        ),
       ]),
-      '> at getBigStrPHashFromFile'
+      'at getBigStrPHashFromFile'
     );
     return '0';
   }
@@ -32,8 +34,8 @@ export async function readFileImgFile(imgFilePath: string): Promise<Buffer> {
     return await fs.promises.readFile(imgFilePath);
   } catch (error) {
     logFatal(
-      String(error),
-      '> at readFileImgFile in getBigStrPHashFromFile can not readFile from:'
+      String(error).replace(/\n/g, ''),
+      'at readFileImgFile in getBigStrPHashFromFile can not readFile from:'
     );
     throw error;
   }
@@ -44,8 +46,8 @@ async function calculateSharpPhash(thisImage: Buffer): Promise<string> {
     return await sharpPhash(thisImage);
   } catch (error) {
     logFatal(
-      String(error),
-      '> at calculateSharpPhash in getBigStrPHashFromFile can not process image file'
+      String(error).replace(/\n/g, ''),
+      'at calculateSharpPhash in getBigStrPHashFromFile can not process image file'
     );
     throw error;
   }
@@ -56,8 +58,8 @@ function calculateBigString(sharpPhashValue: string): string {
     return bigString(sharpPhashValue);
   } catch (error) {
     logFatal(
-      String(error),
-      '> at calculateBigString in getBigStrPHashFromFile can not calcualate bigString'
+      String(error).replace(/\n/g, ''),
+      'at calculateBigString in getBigStrPHashFromFile can not calcualate bigString'
     );
     throw error;
   }

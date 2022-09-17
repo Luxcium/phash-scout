@@ -1,8 +1,9 @@
-import { USEWORKER, VERBOSA } from '../constants';
+import { VERBOSA } from '../constants';
 import { isDir } from '../tools';
 import { doTraverseDirs } from './directory-traversal';
 import { sideFunctionBuilder } from './sideFunctionBuilder';
 
+const MULTI = false;
 function main() {
   const counts = { await: 0 };
   dirList.map(async traverseDir => {
@@ -10,7 +11,7 @@ function main() {
     if (await isDir(traverseDir)) {
       const sideFunction = sideFunctionBuilder(
         times,
-        USEWORKER,
+        MULTI,
         VERBOSA.sideFunction
       );
       await doTraverseDirs(traverseDir, sideFunction, counts);
@@ -18,9 +19,6 @@ function main() {
   });
 }
 
-const dirList = [
-  '/tmp/jpgs',
-  // '/media/luxcium/Archive_Locale/import/',
-];
+const dirList = ['/media/luxcium/Archive_Locale/import/'];
 
 main();

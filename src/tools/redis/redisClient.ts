@@ -1,12 +1,8 @@
-import chalk from 'chalk';
 import { createClient } from 'redis';
 
+import { logDebug, logError, logInfo } from '../../constants';
 import { RedisCStrOptions } from '../../types';
 
-const DEBUG = false;
-if (DEBUG) console.log('DEBUG = true in:', __filename);
-
-const errLog = console.error;
 /*
 
   The code below connects to localhost on port 6379. To connect to a
@@ -34,61 +30,44 @@ export const redisConnectionString = (options?: RedisCStrOptions) => {
   };
 };
 
-export function redisCreateClient(
-  options?: RedisCStrOptions,
-  errorLoger: (...par: any[]) => void = errLog,
-  verbosa: boolean = true
-) {
+export function redisCreateClient(options?: RedisCStrOptions) {
   const client = createClient(redisConnectionString(options));
-  if (verbosa) {
-    client
-      .on('error', err =>
-        errorLoger('  >', chalk.red('Redis Client Error'), err)
-      )
-      .on('connect', () => {
-        errLog(
-          '\n' + '  >',
-          chalk.green('Connect'),
-          `${chalk.yellow(
-            `redis:\/\/${options?.host || '127.0.0.1'}`
-          )}:${chalk.magenta(`${options?.port || 6379}`)}/${
-            options?.dbNumber || 0
-          }`
-        );
-      })
-      .on('ready', () => {
-        errLog(
-          '  >',
-          chalk.greenBright('Redis Client ready') +
-            ` ${chalk.magenta(`${options?.port || 6379}`)}, ${
-              'db: ' + options?.dbNumber || 0
-            }`
-        );
-      })
-      .on('end', () => {
-        errLog('  >', chalk.yellowBright('Redis Client end'));
-      })
-      .on('reconnecting', () => {
-        errLog('  >', chalk.yellow('Redis Client reconnecting'));
-      });
-  }
+
+  client
+    .on('error', (err: any) => logError(err, 'Redis Client Error'))
+    .on('connect', () => {
+      logDebug(
+        `${`redis:\/\/${options?.host || '127.0.0.1'}`}:${`${
+          options?.port || 6379
+        }`}/${options?.dbNumber || 0}`,
+        'Redis Client Connected'
+      );
+    })
+    .on('ready', () => {
+      logDebug(
+        `${options?.port || 6379} , ${'db: ' + options?.dbNumber || 0}`,
+        'Redis Client ready'
+      );
+    })
+    .on('end', () => {
+      logDebug('Redis client Reconnecting(?)...', 'Redis Client end');
+    })
+    .on('reconnecting', () => {
+      logDebug('Redis Client Reconnecting', 'Redis Client Reconnecting');
+    });
 
   return client;
 }
 
-// export const redisConnTest = () => redisCreateClient({ port: 6382 });
-
-// if (DEBUG) main();
-
-export async function redis6382Test(verbosa: boolean = false) {
-  const R = redisCreateClient({ port: 6382 });
+export async function redis6382Test() {
+  const R = redisCreateClient({ port: 6383 });
   await R.connect();
-  const result = await R.PING();
-  if (verbosa) console.warn(result);
+  const result = String(await R.PING());
+  logInfo(result, 'redis6382Test:');
   await R.QUIT();
-  return result === 'pong';
+  return result.toLowerCase() === 'pong';
 }
-
+// (async () => logInfo(await redis6382Test()))();
 /*
 Events
 The Node Redis client class is an Nodejs EventEmitter and it emits an event each time the network status changes:
