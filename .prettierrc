@@ -9,12 +9,14 @@
     {
       "files": [
         "scripts/*.ts",
+        "/home/luxcium/projects/phash-scout/src/tools/redis/keys/keyMake.1.ts",
+        "/home/luxcium/projects/phash-scout/src/tools/redis/keys/keyMake.ts",
         "src/constants/DebugLevels.ts",
         "src/private/sharp-phash/listFiles.ts"
       ],
       "options": {
         "printWidth": 120,
-        "proseWrap": "always"
+        "proseWrap": "never"
       }
     }
   ],

@@ -67,7 +67,8 @@
     /*
   ―――――――― eslint-config-prettier ――――――――――――――――――――――――――――――――――――
     */
-    "prettier/prettier": ["warn"],
+    // "prettier/prettier": ["warn"],
+    "prettier/prettier": ["off"],
     "arrow-body-style": "off",
     "no-confusing-arrow": "off",
     "prefer-arrow-callback": "off",
@@ -137,7 +138,7 @@
     "unicorn/no-for-loop": "warn",
     "unicorn/no-hex-escape": "warn",
     "unicorn/no-new-buffer": "warn",
-    "unicorn/no-useless-undefined": "warn",
+    "unicorn/no-useless-undefined": "off",
     "unicorn/no-zero-fractions": "warn",
     "unicorn/numeric-separators-style": "warn",
     "unicorn/prefer-add-event-listener": "warn",
