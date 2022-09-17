@@ -34,30 +34,31 @@ const count = {
   b: 0,
 };
 
+const DEBUG = false as const;
+
 export async function doTraverseDirs(
   absolutePath: string,
   sideFunction: (args: SideFunctionParam) => Promise<unknown>,
-  counts: any
+  counts: any = null
 ) {
   const parents_ς: string[] = [];
-  let cwd_ς = { path: '' };
-
+  const cwd_ς = { path: '' };
   const queue_ς = [absolutePath];
+
   while (queue_ς.length > 0) {
-    traverse(queue_ς, parents_ς, cwd_ς) &&
-      (await scan(queue_ς, sideFunction, cwd_ς, counts));
+    _traverse(queue_ς, parents_ς, cwd_ς) &&
+      (await _scan(queue_ς, sideFunction, cwd_ς, counts));
   }
   return;
 }
 /**
  * Scans the current directory
  */
-async function scan(
+async function _scan(
   queue: string[],
   sideFunction: (args: SideFunctionParam) => Promise<unknown>,
   cwd: { path: string },
-
-  counts: any
+  counts: any = null
 ) {
   const dir = isOpenDirSYNC ? opendirSync('.', {}) : await opendir('.', {});
   for (
@@ -71,7 +72,9 @@ async function scan(
       const fullPath = normalize(`${cwd.path}/${ent.name}`);
       // HACK:- //-! ------- Add the side effect on files here -------
       try {
-        counts.await % AWAIT_EACH === 0
+        counts
+          ? counts?.await || 0 % AWAIT_EACH === 0
+          : !counts
           ? await sideFunction({ fullPath, count })
           : sideFunction({ fullPath, count });
       } catch (error) {
@@ -89,7 +92,7 @@ async function scan(
  * Changes to a new working directory
  * Returns true if the directory should be scanned
  */
-function traverse(queue: string[], parents: string[], cwd: { path: string }) {
+function _traverse(queue: string[], parents: string[], cwd: { path: string }) {
   const next = queue.pop()!;
   try {
     chdir(next);
@@ -126,3 +129,18 @@ function hasKey<K extends PropertyKey>(
 ): o is { [P in K]: unknown } {
   return typeof o === 'object' && o !== null && key in o;
 }
+
+async function test(debug: boolean = false) {
+  if (debug) {
+    const sideFN = async (sideFunctionParam: SideFunctionParam) => [
+      console.dir(sideFunctionParam.count.a++),
+      console.dir(sideFunctionParam.fullPath),
+    ];
+
+    doTraverseDirs('/media/luxcium/Archive_Locale/import/', sideFN);
+    return true as const;
+  }
+  return false as const;
+}
+DEBUG && console.log(`DEBUG = ${DEBUG}`, __dirname, __filename);
+DEBUG && test(DEBUG);
