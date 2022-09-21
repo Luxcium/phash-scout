@@ -18,7 +18,7 @@
 /* *                                                                        * */
 /* ************************************************************************** */
 
-import { SideFunctionParam } from '@types';
+import type { SideFunctionParam } from '@types';
 import { opendirSync } from 'node:fs';
 import { opendir } from 'node:fs/promises';
 import { constants } from 'node:os';
@@ -70,22 +70,28 @@ async function _scan(
       queue.push(ent.name);
     } else {
       const fullPath = normalize(`${cwd.path}/${ent.name}`);
-      // HACK:- //-! ------- Add the side effect on files here -------
-      try {
-        counts
-          ? counts?.await || 0 % AWAIT_EACH === 0
-          : !counts
-          ? await sideFunction({ fullPath, count })
-          : sideFunction({ fullPath, count });
-      } catch (error) {
-        logError(String(error), 'ERROR');
-      }
-      // : : : //-! --------------------------------------------------
+      await sideEffects(sideFunction)(fullPath, counts);
     }
   }
 
   const noAWAIT = true;
   isCloseDirSYNC ? dir.closeSync() : noAWAIT ? dir.close() : await dir.close();
+}
+
+function sideEffects(
+  sideFunction: (args: SideFunctionParam) => Promise<unknown>
+) {
+  return async (fullPath: string, counts: any) => {
+    try {
+      counts
+        ? counts?.await || 0 % AWAIT_EACH === 0
+        : !counts
+        ? await sideFunction({ fullPath, count })
+        : sideFunction({ fullPath, count });
+    } catch (error) {
+      logError(String(error), 'ERROR');
+    }
+  };
 }
 
 /**
