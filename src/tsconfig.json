@@ -1,10 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "include": ["../src/**/*.*"],
-  "exclude": [
-    "out"
-    /* "./packages" */
-  ],
+  "exclude": ["out"],
   "compilerOptions": {
     /* Module Resolution Interop Constraints */
     "target": "ESNext",
@@ -67,6 +64,8 @@
       "$types/*": ["src/types/*"],
       "$utils": ["src/utils/"],
       "$utils/*": ["src/utils/*"],
+      "@utils": ["src/utils/"],
+      "@utils/*": ["src/utils/*"],
       "$worker": ["src/API/worker"],
       "$worker/*": ["src/API/worker/*"]
     },
