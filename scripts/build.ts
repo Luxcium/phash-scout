@@ -25,9 +25,7 @@ export const copyPackageJson: Build<void> = C =>
 
       return clone;
     }),
-    TE.chain(json =>
-      C.writeFile(path.join(OUTPUT_FOLDER, PKG), JSON.stringify(json, null, 2))
-    )
+    TE.chain(json => C.writeFile(path.join(OUTPUT_FOLDER, PKG), JSON.stringify(json, null, 2)))
   );
 
 export const FILES: ReadonlyArray<string> = [
@@ -39,9 +37,7 @@ export const FILES: ReadonlyArray<string> = [
 export const copyFiles: Build<ReadonlyArray<void>> = C =>
   pipe(
     FILES,
-    TE.traverseReadonlyArrayWithIndex((_, from) =>
-      C.copyFile(from, path.resolve(OUTPUT_FOLDER, from))
-    )
+    TE.traverseReadonlyArrayWithIndex((_, from) => C.copyFile(from, path.resolve(OUTPUT_FOLDER, from)))
   );
 
 export const makeModules: Build<void> = C => {
@@ -55,21 +51,15 @@ export const makeModules: Build<void> = C => {
 };
 
 function getModules(paths: ReadonlyArray<string>): ReadonlyArray<string> {
-  return paths
-    .map(filePath => path.basename(filePath, '.js'))
-    .filter(x => x !== 'index');
+  return paths.map(filePath => path.basename(filePath, '.js')).filter(x => x !== 'index');
 }
 
-function makeSingleModule(
-  C: FileSystem
-): (module: string) => TE.TaskEither<Error, void> {
+function makeSingleModule(C: FileSystem): (module: string) => TE.TaskEither<Error, void> {
   return m =>
     pipe(
       C.mkdir(path.join(OUTPUT_FOLDER, m)),
       TE.chain(() => makePkgJson(m)),
-      TE.chain(data =>
-        C.writeFile(path.join(OUTPUT_FOLDER, m, 'package.json'), data)
-      )
+      TE.chain(data => C.writeFile(path.join(OUTPUT_FOLDER, m, 'package.json'), data))
     );
 }
 
@@ -107,18 +97,9 @@ const fixHKT = (folder: string): Build<void> =>
     ),
     RTE.chain(
       () => C =>
-        C.moveFile(
-          path.join(OUTPUT_FOLDER, folder, 'HKT.js'),
-          path.join(OUTPUT_FOLDER, folder, 'HKT', 'index.js')
-        )
+        C.moveFile(path.join(OUTPUT_FOLDER, folder, 'HKT.js'), path.join(OUTPUT_FOLDER, folder, 'HKT', 'index.js'))
     ),
-    RTE.chain(
-      () => C =>
-        C.moveFile(
-          path.join(OUTPUT_FOLDER, folder, 'HKT.d.ts'),
-          path.join(OUTPUT_FOLDER, 'HKT.d.ts')
-        )
-    )
+    RTE.chain(() => C => C.moveFile(path.join(OUTPUT_FOLDER, folder, 'HKT.d.ts'), path.join(OUTPUT_FOLDER, 'HKT.d.ts')))
   );
 
 const main: Build<void> = pipe(

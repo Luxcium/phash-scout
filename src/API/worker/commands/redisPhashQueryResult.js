@@ -24,9 +24,9 @@ export async function redisPhashQueryResult(imgFileAbsPath) {
 
       VERBOSA && queryResult.length > 1
         ? console.log({
-          queryResult,
-          length: queryResult.length,
-        })
+            queryResult,
+            length: queryResult.length,
+          })
         : false && console.log(['SKIPPED']);
       return { ...result, queryResult };
     }

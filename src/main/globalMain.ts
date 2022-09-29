@@ -1,6 +1,6 @@
-import { doRedisQuery, getPhash,  manageRedisQuery } from '../tools';
-import { listFiles, } from '../tools/paths';
+import { doRedisQuery, getPhash, manageRedisQuery } from '../tools';
 import { endAsyncSpark } from '../tools/endAsyncSpark';
+import { listFiles } from '../tools/paths';
 import { filterExtensions } from '../tools/paths/filterExtensions';
 
 export const globalMain = async (dir: S, grpKey: S, validExt: Ss, rC: any) => {

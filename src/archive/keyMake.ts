@@ -1,13 +1,26 @@
 export interface KeyMake {
   (keyName?: string | undefined | null): KeyMake;
   (keyName: string | undefined | null, idValue_0: null): string;
-  (keyName: string | undefined | null, idValue_0: string, ...idValue_1: string[]): string;
+  (
+    keyName: string | undefined | null,
+    idValue_0: string,
+    ...idValue_1: string[]
+  ): string;
 }
 
 export function keyMake(keyName?: string | undefined | null): KeyMake;
-export function keyMake(keyName: string | undefined | null, ...idValue: [string, ...string[]]): string;
-export function keyMake(keyName: string | undefined | null, ...idValue: [null]): string;
-export function keyMake(keyName?: string | undefined | null, ...idValue: any[]): any {
+export function keyMake(
+  keyName: string | undefined | null,
+  ...idValue: [string, ...string[]]
+): string;
+export function keyMake(
+  keyName: string | undefined | null,
+  ...idValue: [null]
+): string;
+export function keyMake(
+  keyName?: string | undefined | null,
+  ...idValue: any[]
+): any {
   const key = keyName ? `${keyName}:` : ''; // .replace('::', ':');
   const jusID = idValue ? idValue.join(':') : null;
   const id = jusID ? `#${jusID}` : '';

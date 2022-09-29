@@ -3,19 +3,9 @@ import { statSync } from 'fs-extra';
 import path from 'path';
 
 import { devPaths } from '../../../constants/devPaths';
-import {
-
-  immediateZalgo,
-  redisCreateClient,
-} from '../../../tools';
-
-import {
-  getDirsSync,
-  getFilesAsync,
-  getListing,
-
-} from '../../../tools/paths';
+import { immediateZalgo, redisCreateClient } from '../../../tools';
 import { dirListWithFileType } from '../../../tools/dirListWithFileType';
+import { getDirsSync, getFilesAsync, getListing } from '../../../tools/paths';
 import { replaceStr } from '../../../tools/replaceStr';
 
 const SPARK = true;

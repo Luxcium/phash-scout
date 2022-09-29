@@ -1,15 +1,22 @@
 type KeyMake = (keyName?: string, ...idValue: string[]) => string | KeyMake;
 
 function keyMake(keyName?: string | undefined): KeyMake;
-function keyMake(keyName?: string | undefined, ...idValues: [string, ...string[]]): string;
-function keyMake(keyName?: string | undefined, ...idValues: string[]): string | KeyMake {
+function keyMake(
+  keyName?: string | undefined,
+  ...idValues: [string, ...string[]]
+): string;
+function keyMake(
+  keyName?: string | undefined,
+  ...idValues: string[]
+): string | KeyMake {
   const key = keyName ? `${keyName}:` : '';
   const id = idValues.length > 0 ? `#${idValues.join(':')}` : '';
   if (!key && !id) {
     return (keyName_ = '', idValues_ = '') => keyMake(keyName_, idValues_);
   }
   if (key && !id) {
-    return (keyName_ = '', idValue_ = '') => keyMake(`${key}${keyName_}`, idValue_);
+    return (keyName_ = '', idValue_ = '') =>
+      keyMake(`${key}${keyName_}`, idValue_);
   }
 
   return `${key}${id}→` as string;
@@ -60,7 +67,10 @@ console.log('listKey(ID)', listKey2('undefined', 'id'));
 // console.log('bitfieldKey(ID)', bitfieldKey('undefined', 'id'));
 
 // type KeyMake = (keyName?: string, ...idValue: string[]) => string |KeyMake;
-export function keyMakeX2(keyName: string | undefined, idVal: string = ''): any {
+export function keyMakeX2(
+  keyName: string | undefined,
+  idVal: string = ''
+): any {
   const key = keyName ? `${keyName}:` : ``;
   const id = idVal ? `#${idVal}` : ``;
   idVal;
@@ -68,7 +78,8 @@ export function keyMakeX2(keyName: string | undefined, idVal: string = ''): any 
     return (keyName_ = '', idValues_ = '') => keyMakeX2(keyName_, idValues_);
   }
   if (key && !id) {
-    return (keyName_ = '', idValue_ = '') => keyMakeX2(`${key}${keyName_}`, idValue_);
+    return (keyName_ = '', idValue_ = '') =>
+      keyMakeX2(`${key}${keyName_}`, idValue_);
   }
 
   return `${key}${id}→` as string;
@@ -155,7 +166,8 @@ export function keyMakeX(keyName: string | undefined, idVal: string = ''): any {
     return (keyName_ = '', idValues_ = '') => keyMakeX(keyName_, idValues_);
   }
   if (key && !id) {
-    return (keyName_ = '', idValue_ = '') => keyMakeX(`${key}${keyName_}`, idValue_);
+    return (keyName_ = '', idValue_ = '') =>
+      keyMakeX(`${key}${keyName_}`, idValue_);
   }
 
   return `${key}${id}→` as string;

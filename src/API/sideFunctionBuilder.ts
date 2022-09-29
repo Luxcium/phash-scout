@@ -14,9 +14,7 @@ export function sideFunctionBuilder(
   VERBOSA: boolean = false,
   count: Count
 ) {
-  const result: Mapper<string, Promise<any[]>> = async (
-    fullPath: string
-  ) => {
+  const result: Mapper<string, Promise<any[]>> = async (fullPath: string) => {
     // return async ({ fullPath, count }: SideFunctionParam) => {
     try {
       const { pathInfos } = pathParser(fullPath);
@@ -36,7 +34,6 @@ export function sideFunctionBuilder(
   };
   return result;
 }
-
 
 /*
 Promise<(string | {

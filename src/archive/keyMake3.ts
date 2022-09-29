@@ -1,4 +1,7 @@
-export type KeyMake = (keyName?: string | undefined | null, jusID?: string | undefined) => KeyMake;
+export type KeyMake = (
+  keyName?: string | undefined | null,
+  jusID?: string | undefined
+) => KeyMake;
 
 export interface IKeyMake {
   (keyName?: string | undefined | null, jusID?: undefined): IKeyMake;
@@ -8,13 +11,22 @@ export interface IKeyMake {
 
 export interface IKeyMake2 {
   (keyName?: string | undefined | null): IKeyMake2;
-  (keyName: string | undefined | null, ...idValue: [string, ...string[]]): string;
+  (
+    keyName: string | undefined | null,
+    ...idValue: [string, ...string[]]
+  ): string;
   (keyName?: string | undefined | null, ...idValue: string[]): any;
 }
 
 export function keyMake2(keyName?: string | undefined | null): IKeyMake2;
-export function keyMake2(keyName: string | undefined | null, ...idValue: [string, ...string[]]): string;
-export function keyMake2(keyName?: string | undefined | null, ...idValue: string[]): any {
+export function keyMake2(
+  keyName: string | undefined | null,
+  ...idValue: [string, ...string[]]
+): string;
+export function keyMake2(
+  keyName?: string | undefined | null,
+  ...idValue: string[]
+): any {
   const jusID = idValue.join(':');
   const key = (keyName ? `${keyName}:` : '').replace('::', ':');
   const id = jusID ? `#${jusID}` : '';
@@ -33,9 +45,18 @@ export function keyMake2(keyName?: string | undefined | null, ...idValue: string
   return `${key}${id}→` as string;
 }
 
-export function keyMake(keyName?: string | undefined | null, jusID?: undefined): IKeyMake;
-export function keyMake(keyName: string | undefined | null, jusID: string): string;
-export function keyMake(keyName?: string | undefined | null, jusID?: string | undefined): any {
+export function keyMake(
+  keyName?: string | undefined | null,
+  jusID?: undefined
+): IKeyMake;
+export function keyMake(
+  keyName: string | undefined | null,
+  jusID: string
+): string;
+export function keyMake(
+  keyName?: string | undefined | null,
+  jusID?: string | undefined
+): any {
   const key = (keyName ? `${keyName}:` : '').replace('::', ':');
   const id = jusID ? `#${jusID}` : '';
   if (!key && !id) {

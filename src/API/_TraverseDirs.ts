@@ -3,15 +3,8 @@ import * as fs from 'node:fs/promises';
 import { join } from 'node:path';
 
 import { doUniqueAddObj } from '../commands/doUniqueAddObj';
-import {
-  getPathInfos,
-} from '../tools/paths';
-import {
-  getBigStrPHashFromFile,
-  isDir,
-  Nothing,
-  Right,
-} from '../tools';
+import { getBigStrPHashFromFile, isDir, Nothing, Right } from '../tools';
+import { getPathInfos } from '../tools/paths';
 import { rConnect } from '../tools/redis';
 
 export const count = { a: 1, b: 1, c: 1, d: 1 };

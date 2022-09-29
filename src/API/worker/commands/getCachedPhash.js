@@ -28,15 +28,14 @@ export async function getCachedPhash(imgFileAbsPath) {
   } catch (error) {
     logFatal(error);
     return {
-      processed: null, value: '-2',
+      processed: null,
+      value: '-2',
       toString() {
         return `${this.processed ? PROCESSED : UNPROCESSED}:${this.value}`;
       },
-
     };
   }
 }
-
 
 function isValid(result) {
   return (
@@ -48,7 +47,6 @@ function isValid(result) {
   );
 }
 
-
 function getK(R, imgFileAbsPath) {
   const K = cachedPhash_K(imgFileAbsPath);
   return R.GET(K);
@@ -57,7 +55,6 @@ function getK(R, imgFileAbsPath) {
 function cachedPhash_K(imgFileAbsPath) {
   return `'cachedPhash:${imgFileAbsPath}'`;
 }
-
 
 /**
  *
@@ -72,8 +69,6 @@ function getBigstr(bigstr) {
   }
   return bigStrObjFactory(bigstr, UNPROCESSED);
 }
-
-
 
 export function setCachedPhash(R, imgFileAbsPath, value, processed) {
   const K = cachedPhash_K(imgFileAbsPath);
@@ -104,19 +99,19 @@ export function bigStrObjFactory(value, processed) {
   };
 }
 
-   // const { value, processed } = {
-    //   value: '',
-    //   processed: false,
-    //   ...optionalValue,
-    // };
-    // const K = cachedPhash_K(imgFilecAbsPath);
-    // const R = await Rc;
+// const { value, processed } = {
+//   value: '',
+//   processed: false,
+//   ...optionalValue,
+// };
+// const K = cachedPhash_K(imgFilecAbsPath);
+// const R = await Rc;
 
-    // const calculatedValue =
-    //   value ||
-    //   getBigstr(
-    //     (await R.GET(K)) ||
-    //     (await commands.bigstr_phash_from_file(imgFileAbsPath))
-    //   ).value;
+// const calculatedValue =
+//   value ||
+//   getBigstr(
+//     (await R.GET(K)) ||
+//     (await commands.bigstr_phash_from_file(imgFileAbsPath))
+//   ).value;
 
-    // return setCachedPhash(R, imgFileAbsPath, calculatedValue, processed);
+// return setCachedPhash(R, imgFileAbsPath, calculatedValue, processed);

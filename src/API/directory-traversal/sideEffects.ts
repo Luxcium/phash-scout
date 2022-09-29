@@ -7,7 +7,7 @@ const count = {
   b: 0,
 };
 export default sideMapperAwaitCounts;
-export function sideMapperAwaitCounts<U =  unknown >(
+export function sideMapperAwaitCounts<U = unknown>(
   sideFunctionMapper: Mapper<string, Promise<U>>, // (args: SideFunctionParam) => Promise<unknown>
   counts: { await: number } | null = null
 ) {
