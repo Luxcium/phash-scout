@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import type { Count, SideFunctionParam } from '$types';
+import type { Count, Mapper } from '$types';
 
 import { AVERAGE_EACH, logError, logMedium, PRINT_EACH } from '../constants';
 import { validExts } from '../constants/validExts';
@@ -11,9 +11,13 @@ import { commands } from './worker/commands';
 export function sideFunctionBuilder(
   times: number[],
   useWorker: boolean = false,
-  VERBOSA: boolean = false
+  VERBOSA: boolean = false,
+  count: Count
 ) {
-  return async ({ fullPath, count }: SideFunctionParam) => {
+  const result: Mapper<string, Promise<any[]>> = async (
+    fullPath: string
+  ) => {
+    // return async ({ fullPath, count }: SideFunctionParam) => {
     try {
       const { pathInfos } = pathParser(fullPath);
       const ext = pathInfos.ext.toLowerCase();
@@ -30,8 +34,27 @@ export function sideFunctionBuilder(
     }
     return [];
   };
+  return result;
 }
 
+
+/*
+Promise<(string | {
+    result: any;
+    jsonrpc: string;
+    id: number;
+    pid: string;
+} | {
+    error: {
+        code: number;
+        message: string;
+        data: unknown;
+    };
+    jsonrpc: string;
+    id: number;
+    pid: string;
+})[]>
+ */
 async function calculating(
   fullPath: string,
   count: Count,

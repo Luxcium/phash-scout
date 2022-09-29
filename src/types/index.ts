@@ -60,6 +60,7 @@ export type { GetStats } from './GetStats';
 export type { InspectOptions } from './InspectOptions';
 export type { IQueryListPhash } from './IQueryListPhash';
 export type { Listing } from './Listing';
+export type { Mapper } from './Mapper';
 // export type { FileType } from './FileType';
 export type { PathAndStats } from './PathAndStats';
 export type {

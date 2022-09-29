@@ -18,27 +18,24 @@
 /* *                                                                        * */
 /* ************************************************************************** */
 
-import type { SideFunctionParam } from '@types';
+import type { Mapper } from '@types';
 import { opendirSync } from 'node:fs';
 import { opendir } from 'node:fs/promises';
 import { constants } from 'node:os';
 import { normalize } from 'node:path';
 import { chdir } from 'node:process';
 
-import { flags, logError, logHigh, logLow } from '../../constants';
+import { flags, logHigh, logLow } from '../../constants';
+import sideMapperCounter from './sideEffects';
 
-const { AWAIT_EACH, isOpenDirSYNC, isReadSYNC, isCloseDirSYNC } = flags;
-
-const count = {
-  a: 0,
-  b: 0,
-};
+const { isOpenDirSYNC, isReadSYNC, isCloseDirSYNC } = flags;
 
 const DEBUG = false as const;
 
-export async function doTraverseDirs(
+export async function doTraverseDirs<U = unknown>(
   absolutePath: string,
-  sideFunction: (args: SideFunctionParam) => Promise<unknown>,
+  sideFunction: Mapper<string, Promise<U>>, //  (args: SideFunctionParam) => Promise<unknown>,
+  // sideFunction: (args: SideFunctionParam) => Promise<unknown>,
   counts: any = null
 ) {
   const parents_ς: string[] = [];
@@ -47,16 +44,16 @@ export async function doTraverseDirs(
 
   while (queue_ς.length > 0) {
     _traverse(queue_ς, parents_ς, cwd_ς) &&
-      (await _scan(queue_ς, sideFunction, cwd_ς, counts));
+      (await _scan<U>(queue_ς, sideFunction, cwd_ς, counts));
   }
   return;
 }
 /**
  * Scans the current directory
  */
-async function _scan(
+async function _scan<U = Promise<unknown>>(
   queue: string[],
-  sideFunction: (args: SideFunctionParam) => Promise<unknown>,
+  sideFunction: Mapper<string, Promise<U>>, //  (args: SideFunctionParam) => Promise<unknown>,
   cwd: { path: string },
   counts: any = null
 ) {
@@ -70,28 +67,12 @@ async function _scan(
       queue.push(ent.name);
     } else {
       const fullPath = normalize(`${cwd.path}/${ent.name}`);
-      await sideEffects(sideFunction)(fullPath, counts);
+      await sideMapperCounter(sideFunction, counts)(fullPath);
     }
   }
 
   const noAWAIT = true;
   isCloseDirSYNC ? dir.closeSync() : noAWAIT ? dir.close() : await dir.close();
-}
-
-function sideEffects(
-  sideFunction: (args: SideFunctionParam) => Promise<unknown>
-) {
-  return async (fullPath: string, counts: any) => {
-    try {
-      counts
-        ? counts?.await || 0 % AWAIT_EACH === 0
-        : !counts
-        ? await sideFunction({ fullPath, count })
-        : sideFunction({ fullPath, count });
-    } catch (error) {
-      logError(String(error), 'ERROR');
-    }
-  };
 }
 
 /**
@@ -138,10 +119,10 @@ function hasKey<K extends PropertyKey>(
 
 async function test(debug: boolean = false) {
   if (debug) {
-    const sideFN = async (sideFunctionParam: SideFunctionParam) => [
-      console.dir(sideFunctionParam.count.a++),
-      console.dir(sideFunctionParam.fullPath),
-    ];
+    const sideFN: Mapper<string, Promise<any>> = async (
+      filePath: string,
+      count?: number
+    ) => [console.dir([count, filePath])];
 
     doTraverseDirs('/media/luxcium/Archive_Locale/import/', sideFN);
     return true as const;

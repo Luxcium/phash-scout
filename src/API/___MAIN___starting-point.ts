@@ -3,7 +3,12 @@ import { isDir } from '../tools';
 import { doTraverseDirs } from './directory-traversal';
 import { sideFunctionBuilder } from './sideFunctionBuilder';
 
-const MULTI = false;
+const count = {
+  a: 0,
+  b: 0,
+};
+
+const MULTI = true;
 function main() {
   const counts = { await: 0 };
   dirList.map(async traverseDir => {
@@ -12,7 +17,8 @@ function main() {
       const sideFunction = sideFunctionBuilder(
         times,
         MULTI,
-        VERBOSA.sideFunction
+        VERBOSA.sideFunction,
+        count
       );
       await doTraverseDirs(traverseDir, sideFunction, counts);
     }

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { immediateZalgo } from '../tools';
 import { SET } from './SET';
 
-export async function getCachedPhash(
+export async function getCachedPHash(
   RC: any,
   k_FullPath: string,
   getValueFnct: (fullPath: string) => Promise<string>
