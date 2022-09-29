@@ -1,10 +1,11 @@
-import { logFatal } from '../../../constants';
+import {
+  logFatal,
+  PRE_CACHING,
+  PROCESSED,
+  UNPROCESSED
+} from '../../../constants';
 import { SET } from '../../SET';
 import { commands, Rc } from '.';
-
-const PROCESSED = 'PROCESSED';
-const UNPROCESSED = 'UNPROCESSED';
-const PRE_CACHING = true;
 
 const { bigstr_phash_from_file } = commands;
 
@@ -16,15 +17,18 @@ const { bigstr_phash_from_file } = commands;
 export async function getCachedPhash(imgFileAbsPath) {
   const R = await Rc;
   try {
-    const result = getBigstr((await getK(R, imgFileAbsPath)) || '');
-    if (!isValid(result)) {
+    const redisGetK_ = await redisGetK(R, imgFileAbsPath);
+    const bigStrObj_ = bigStrObj(redisGetK_ || '');
+    if (!isValid(bigStrObj_)) {
       const val = await bigstr_phash_from_file(imgFileAbsPath);
+
       if (PRE_CACHING) {
-        return setCachedPhash(R, imgFileAbsPath, val, false);
+        return redisSetK(R, imgFileAbsPath, val, false);
       }
+
       return bigStrObjFactory(val, false);
     }
-    return result;
+    return bigStrObj_;
   } catch (error) {
     logFatal(error);
     return {
@@ -37,17 +41,17 @@ export async function getCachedPhash(imgFileAbsPath) {
   }
 }
 
-function isValid(result) {
+function isValid(bigStrObj) {
   return (
-    result &&
-    result.value &&
-    result.value !== 'undefined' &&
-    result.value !== 'null' &&
-    result.value.length > 10
+    bigStrObj &&
+    bigStrObj.value &&
+    bigStrObj.value !== 'undefined' &&
+    bigStrObj.value !== 'null' &&
+    bigStrObj.value.length > 10
   );
 }
 
-function getK(R, imgFileAbsPath) {
+function redisGetK(R, imgFileAbsPath) {
   const K = cachedPhash_K(imgFileAbsPath);
   return R.GET(K);
 }
@@ -61,16 +65,15 @@ function cachedPhash_K(imgFileAbsPath) {
  * @param {string} bigstr phash as bigString
  * @returns {{processed:*; value:string; toString(): string}} bigString phash with value "-2" if not valid image file
  */
-function getBigstr(bigstr) {
+function bigStrObj(bigstr) {
   if (bigstr.includes(':')) {
     const [processed, value] = bigstr.split(':');
-
     return bigStrObjFactory(value, processed);
   }
   return bigStrObjFactory(bigstr, UNPROCESSED);
 }
 
-export function setCachedPhash(R, imgFileAbsPath, value, processed) {
+export function redisSetK(R, imgFileAbsPath, value, processed) {
   const K = cachedPhash_K(imgFileAbsPath);
 
   const bigstr = bigStrObjFactory(value, processed);

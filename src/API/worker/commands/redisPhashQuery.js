@@ -1,7 +1,7 @@
 'use strict';
 import { logError, logHigh } from '../../../constants';
 import { commands, Rc } from '.';
-import { setCachedPhash } from './getCachedPhash';
+import { redisSetK } from './getCachedPhash';
 import { getRedisQueryResult } from './getRedisQueryResult';
 /**
  *
@@ -17,7 +17,7 @@ export async function redisPhashQuery(imgFileAbsPath) {
     if (!ingestOnly || !processed) {
       const processedResult = getRedisQueryResult(imgFileAbsPath, value);
       const R = await Rc;
-      setCachedPhash(R, imgFileAbsPath, value, true);
+      redisSetK(R, imgFileAbsPath, value, true);
       return processedResult;
     }
   } catch (error) {

@@ -2,6 +2,9 @@ import { Logers } from '../tools/Logers/Logers';
 import { DebugLevels } from './DebugLevels';
 import { VerboLevels } from './VerboLevels';
 
+export const PROCESSED = 'PROCESSED';
+export const UNPROCESSED = 'UNPROCESSED';
+export const PRE_CACHING = true;
 export const VERBOSA = { sideFunction: true };
 export const VERBO_LEVEL: VerboLevels = VerboLevels.INFO;
 export const DEBUG: boolean = true;
