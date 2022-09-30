@@ -44,6 +44,7 @@
     "watch": true,
     "baseUrl": "..",
     "paths": {
+      "sharp-phash": ["./types/sharp-phash.d.ts"],
       "$types": ["src/types/"],
       "@types": ["src/types/"],
       "@types/*": ["src/types/*"],
