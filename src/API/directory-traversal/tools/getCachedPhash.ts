@@ -1,27 +1,24 @@
 import {
+  DB_NUMBER as REDIS_DB_NUMBER,
   logFatal,
   PRE_CACHING,
   PROCESSED,
-  UNPROCESSED
+  UNPROCESSED,
 } from '../../../constants';
+import { rConnect } from '../../../tools';
 import { SET } from '../../SET';
-import { commands, Rc } from '.';
+import { getBigStrPHashFromFile } from './getBigStrPHash';
 
-// const { bigstr_phash_from_file } = commands;
+export const Rc = rConnect(null, REDIS_DB_NUMBER, null);
 
-/**
- *
- * @param {string} imgFileAbsPath if path is valid image file, returns phash as bigString
- * @returns {{processed:*; value:string; toString(): string}} bigString phash or "-2" if not valid image file
- */
-export async function getCachedPhash(imgFileAbsPath) {
+export async function getCachedPhash(imgFileAbsPath: string) {
   const R = await Rc;
   try {
     const redisGetK_ = await redisGetK(R, imgFileAbsPath);
     const bigStrObj_ = bigStrObj(redisGetK_ || '');
     if (!isValid(bigStrObj_)) {
-      const val = await commands.bigstr_phash_from_file(imgFileAbsPath);
-// getBigStrPHashFromFile
+      const val = await getBigStrPHashFromFile(imgFileAbsPath);
+      // getBigStrPHashFromFile
       if (PRE_CACHING) {
         return redisSetK(R, imgFileAbsPath, val, false);
       }
@@ -40,8 +37,12 @@ export async function getCachedPhash(imgFileAbsPath) {
     };
   }
 }
-
-function isValid(bigStrObj) {
+type BigStrObj = {
+  processed: any;
+  value: any;
+  toString(): string;
+};
+function isValid(bigStrObj: BigStrObj) {
   return (
     bigStrObj &&
     bigStrObj.value &&
@@ -51,21 +52,16 @@ function isValid(bigStrObj) {
   );
 }
 
-function redisGetK(R, imgFileAbsPath) {
+function redisGetK(R: any, imgFileAbsPath: string) {
   const K = cachedPhash_K(imgFileAbsPath);
   return R.GET(K);
 }
 
-function cachedPhash_K(imgFileAbsPath) {
+function cachedPhash_K(imgFileAbsPath: string) {
   return `'cachedPhash:${imgFileAbsPath}'`;
 }
 
-/**
- *
- * @param {string} bigstr phash as bigString
- * @returns {{processed:*; value:string; toString(): string}} bigString phash with value "-2" if not valid image file
- */
-function bigStrObj(bigstr) {
+function bigStrObj(bigstr: string) {
   if (bigstr.includes(':')) {
     const [processed, value] = bigstr.split(':');
     return bigStrObjFactory(value, processed);
@@ -73,7 +69,12 @@ function bigStrObj(bigstr) {
   return bigStrObjFactory(bigstr, UNPROCESSED);
 }
 
-export function redisSetK(R, imgFileAbsPath, value, processed) {
+export function redisSetK(
+  R: any,
+  imgFileAbsPath: string,
+  value: string,
+  processed: any
+) {
   const K = cachedPhash_K(imgFileAbsPath);
 
   const bigstr = bigStrObjFactory(value, processed);
@@ -81,18 +82,7 @@ export function redisSetK(R, imgFileAbsPath, value, processed) {
   return bigstr;
 }
 
-/**
- * BigString Object factory function for phash values.
- *
- * @remarks BigString Object `{processed:any; value:string; toString(): string;}` is a string with a property "processed"
- * that is either "PROCESSED" or "UNPROCESSED" but can be `null` or
- * `false`.
- *
- * @param {string} value phash as bigString
- * @param {*} processed null, false, PROCESSED or UNPROCESSED
- * @returns {{processed:any; value:string; toString(): string;}} bigString Object with value pointing to bigString phash.
- */
-export function bigStrObjFactory(value, processed) {
+export function bigStrObjFactory(value: string, processed: any) {
   return {
     processed,
     value,

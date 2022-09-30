@@ -1,9 +1,8 @@
 import fs from 'fs';
+import sharpPhash from 'sharp-phash';
 
-import { logError } from '../../constants';
-import { bigString } from '../../utils';
-
-const sharpPhash = require('sharp-phash');
+import { logError } from '../../../constants';
+import { bigString } from '../../../utils';
 
 export async function getBigStrPHashFromFile(
   imgFilePath: string

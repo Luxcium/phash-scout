@@ -1,6 +1,6 @@
 import { BoxedAsyncGenerator } from '@luxcium/boxed-list';
 
-import { getCachedPhash } from '../../worker/commands/getCachedPhash';
+import { getCachedPhash } from '../tools/getCachedPhash';
 import { ScanDirs } from './ScanDirs';
 
 export async function main() {
