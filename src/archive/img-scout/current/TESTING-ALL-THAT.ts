@@ -1,5 +1,5 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
-import { statSync } from 'fs-extra';
+import { statSync } from 'fs';
 import path from 'path';
 
 import { devPaths } from '../../../constants/devPaths';

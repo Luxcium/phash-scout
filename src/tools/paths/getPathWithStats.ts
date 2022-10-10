@@ -1,4 +1,4 @@
-import { stat } from 'fs-extra';
+import { stat } from 'fs/promises';
 
 import { GetStats, PathAndStats, PathWithStats } from '$types';
 

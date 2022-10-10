@@ -20,24 +20,26 @@
 
 import { opendirSync } from 'node:fs';
 import { constants } from 'node:os';
-import { normalize } from 'node:path';
+import path, { normalize } from 'node:path';
 import { chdir } from 'node:process';
 
 import { logHigh, logLow } from '../../../constants';
 import { Mapper } from '../../../types';
 
 export class ScanDirs {
-  _cwd: { path: string };
-  _parents: string[];
-  _queue: string[];
+  private _cwd: { path: string };
+  private _parents: string[];
+  private _queue: string[];
+
+  private _validExts: Set<string>;
 
   static from(absolutePath: string) {
     return new ScanDirs(absolutePath);
   }
+
   static scanFrom(absolutePath: string) {
     return new ScanDirs(absolutePath).scan();
   }
-
   static mapFrom<U = unknown>(
     absolutePath: string[] | string,
     transformFn: Mapper<any, U>
@@ -46,13 +48,14 @@ export class ScanDirs {
     return new ScanDirs(absolutePath).map(transformFn);
   }
   private _absolutePath: string[];
-  constructor(absolutePath: string | string[]) {
+  private constructor(absolutePath: string | string[]) {
     this._absolutePath = Array.isArray(absolutePath)
       ? [...absolutePath]
       : [absolutePath];
     this._parents = [];
     this._cwd = { path: '' };
     this._queue = [...this._absolutePath];
+    this._validExts = new Set();
   }
   public get scan() {
     const self = this;
@@ -66,14 +69,20 @@ export class ScanDirs {
       return false;
     };
   }
-
   public get map() {
     const self = this;
     return async function* (
-      transformFn: (path: string) => unknown = (t: string) => t
+      transformFn: (fullPath: string) => unknown = (fullPath: string) =>
+        fullPath
     ) {
-      for await (const path of self.scan()) {
-        yield transformFn(path);
+      for await (const fullPath of self.scan()) {
+        const extname = path.extname(fullPath).toLowerCase();
+        extname;
+        if (self.hasValidExts) {
+          if (self.hasExt(extname)) {
+            yield transformFn(fullPath);
+          }
+        }
       }
       return false;
     };
@@ -97,7 +106,6 @@ export class ScanDirs {
       }
       throw error;
     }
-
     if (next === '..') {
       this._cwd.path = this._cwd.path.slice(
         0,
@@ -115,7 +123,6 @@ export class ScanDirs {
       return true;
     }
   }
-
   private _scanGenerator() {
     const d = opendirSync('.', {});
     const self = this;
@@ -132,6 +139,51 @@ export class ScanDirs {
       return false;
     };
   }
+  addValidExt(ext: string | string[]) {
+    if (!Array.isArray(ext)) {
+      if (this._validExts.has(ext.toLowerCase())) {
+        return this;
+      }
+      this._validExts.add(ext.toLowerCase());
+    } else {
+      for (const xt of ext) {
+        if (!this._validExts.has(xt.toLowerCase())) {
+          this._validExts.add(xt.toLowerCase());
+        }
+      }
+    }
+    return this;
+  }
+  remValidExt(ext: string | string[]) {
+    if (!Array.isArray(ext)) {
+      if (!this._validExts.has(ext.toLowerCase())) {
+        return this;
+      }
+      this._validExts.delete(ext.toLowerCase());
+    } else {
+      for (const xt of ext) {
+        if (this._validExts.has(xt.toLowerCase())) {
+          this._validExts.delete(xt.toLowerCase());
+        }
+      }
+    }
+    return this;
+  }
+  get validExts() {
+    if (this._validExts.size === 0) {
+      return [];
+    }
+    return [...this._validExts.values()];
+  }
+  get hasValidExts() {
+    if (this._validExts.size === 0) {
+      return false;
+    }
+    return true;
+  }
+  hasExt(ext: string) {
+    return this._validExts.has(ext.toLowerCase());
+  }
   private _hasKey<K extends PropertyKey>(
     o: unknown,
     key: K
@@ -139,7 +191,6 @@ export class ScanDirs {
     return typeof o === 'object' && o !== null && key in o;
   }
 }
-
 export default ScanDirs;
 
 export const scanFrom = ScanDirs.scanFrom;

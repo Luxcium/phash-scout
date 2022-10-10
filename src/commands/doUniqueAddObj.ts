@@ -1,4 +1,4 @@
-import { statSync } from 'fs-extra';
+import { statSync } from 'fs';
 
 import { titleBuilder } from '../tools/titleBuilder';
 import { uniqueAddToObj } from '.';

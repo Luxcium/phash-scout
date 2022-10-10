@@ -1,8 +1,8 @@
 import { flow } from 'fp-ts/function';
 import * as TE from 'fp-ts/TaskEither';
-import * as fs from 'fs';
-import fse from 'fs-extra';
+import fse, * as fs from 'fs';
 import G from 'glob';
+
 export interface FileSystem {
   readonly readFile: (path: string) => TE.TaskEither<Error, string>;
   readonly writeFile: (path: string, content: string) => TE.TaskEither<Error, void>;

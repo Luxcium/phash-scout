@@ -6,7 +6,7 @@ import { ScanDirs } from './ScanDirs';
 export async function main() {
   const scaner = ScanDirs.from(
     '/media/luxcium/Archive_Locale/import/GAYBOYSTUBE/users'
-  );
+  ).addValidExt(['jpg']);
 
   void ((filePath: string) => {
     // console.log(filePath);

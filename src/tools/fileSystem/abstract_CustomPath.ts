@@ -1,4 +1,4 @@
-import { PathLike } from 'fs-extra';
+import { PathLike } from 'fs';
 import { BigIntStats, Stats } from 'node:fs';
 import path, { parse } from 'node:path';
 

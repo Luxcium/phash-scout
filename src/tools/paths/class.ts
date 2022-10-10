@@ -1,9 +1,10 @@
 // import { getCurrentPath } from './getCurrentPath';
 // import { getDirListFileTypes } from './getDirListWithFileType';
 // import { parsePath } from './parsePath';
-import { Dirent, readdir, readdirSync } from 'fs-extra';
+import type { Dirent } from 'fs';
+import { readdir } from 'fs/promises';
 import humanSize from 'human-size';
-import { statSync } from 'node:fs';
+import { readdirSync, statSync } from 'node:fs';
 import path, { FormatInputPathObject, parse } from 'node:path';
 
 import {
