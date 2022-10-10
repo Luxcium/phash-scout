@@ -1575,6 +1575,10 @@
     "watch": true,
     "onSave": "test-only",
     "onStartup": ["all-tests"]
-  }
+  },
+  "[dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "conventionalCommits.scopes": ["human-size"]
   // #endregion: TODO TREE                                                      !
 }
