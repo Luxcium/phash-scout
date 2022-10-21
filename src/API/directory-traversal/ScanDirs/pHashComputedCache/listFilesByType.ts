@@ -1,4 +1,4 @@
-import { ScanDirs } from './ScanDirs';
+import { ScanDirs } from '../ScanDirs';
 
 export function listFilesByType(pathStr: string, validExt: string[]) {
   return ScanDirs.from(pathStr)
