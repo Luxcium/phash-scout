@@ -1033,6 +1033,7 @@
     "ERROR HANDLER:",
     "RETURNS:",
     "HACK:",
+    "UNSAFE:",
     "HINT:",
     "→",
     "->",
@@ -1190,6 +1191,18 @@
       "iconColour": "#93F",
       "rulerLane": "center"
     },
+
+    // UNSAFE: //-*
+    "UNSAFE:": {
+      "background": "#900",
+      "foreground": "#FB3",
+      "gutterIcon": true,
+      "borderRadius": "7px",
+      "icon": "flame",
+      "iconColour": "#900",
+      "rulerLane": "center"
+    },
+
     //-*
     "-*": {
       "background": "#0BF",
