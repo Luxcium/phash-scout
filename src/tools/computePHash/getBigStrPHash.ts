@@ -12,7 +12,12 @@ export async function getBigStrPHashFromFile(
     const thisImage = readFileImgFile(imgFilePath);
     const sharpPhashValue = calculateSharpPhash(await thisImage);
     const returnValue = calculateBigString(await sharpPhashValue);
+    /*
+    return await fs.promises.readFile(imgFilePath);
+    return await sharpPhash(thisImage);
+    return bigString(sharpPhashValue);
 
+ */
     return returnValue;
   } catch (error) {
     logError(
