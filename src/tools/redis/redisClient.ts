@@ -1,4 +1,4 @@
-import { createClient } from 'redis';
+import { createClient, RedisClientType } from 'redis';
 
 import { logDebug, logError, logInfo } from '../../constants';
 import { RedisCStrOptions } from '../../types';
@@ -8,6 +8,7 @@ import { RedisCStrOptions } from '../../types';
   The code below connects to localhost on port 6379. To connect to a
   different host or port, use a connection string in the format
   redis[s]://[[username][:password]@][host][:port][/db-number]
+sudo apt update -y && sudo apt upgrade && sudo apt autoclean -y && sudo apt autoremove -y; flatpak update; sudo snap refresh;
 
 */
 
@@ -30,7 +31,7 @@ export const redisConnectionString = (options?: RedisCStrOptions) => {
   };
 };
 
-export function redisCreateClient(options?: RedisCStrOptions) {
+export function redisCreateClient(options?: RedisCStrOptions): RedisClientType {
   const client = createClient(redisConnectionString(options));
 
   client

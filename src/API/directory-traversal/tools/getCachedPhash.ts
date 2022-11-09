@@ -9,7 +9,7 @@ import { rConnect } from '../../../tools';
 import { SET } from '../../SET';
 import { getBigStrPHashFromFile } from './getBigStrPHash';
 
-export const Rc = rConnect(null, REDIS_DB_NUMBER, null);
+  const Rc = rConnect(null, REDIS_DB_NUMBER, null);
 
 export async function getCachedPhash(imgFileAbsPath: string) {
   const R = await Rc;

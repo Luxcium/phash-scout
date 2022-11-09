@@ -29,7 +29,8 @@ export async function addPhash(
 
   return result[2];
 }
-async function zaddPhash(cardinality: any, pHash: string, redis: any) {
+
+export async function zaddPhash(cardinality: any, pHash: string, redis: any) {
   const ZADD = 'ZADD';
   // HACK: remove hardcoded name:
   const KEY = pHsCardKey();

@@ -7,8 +7,11 @@ import { normalize } from 'node:path';
 
 import { RpcWorkerPool } from './rpc-worker';
 
-// import { RpcWorkerPool } from './rpc-worker_2';
-// import { RpcWorkerPool } from './rpc-worker_3';
+
+// HACK:------ Hard coded path will cause problems MUST FIX ----------
+const workerScriptFileUri =
+  '/home/luxcium/projects/phash-scout/out/API/worker/worker.js';
+
 
 const [, , web_host, actor_host, threads] = process.argv;
 const [web_hostname, web_port] = web_host.split(':');
@@ -20,15 +23,13 @@ let messages = new Map(); // message ID -> HTTP response
 
 const VERBOSE1 = false;
 const VERBOSE2 = false;
-// const controller = new AbortController();
-// const { signal } = controller;
-// dgram.createSocket({ type: 'udp4', signal }).on('message', (msg, rinfo) => {
-//   console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
-// });
+
+
+
 
 // ++ ----------------------------------------------------------------
 
-createTCP_Server(client => {
+const tcpServer = createTCP_Server(client => {
   const handler = data => client.write(JSON.stringify(data) + '\0\n\0'); // <1>
   actors.add(handler);
   console.info('actor pool connected', actors.size, message_id);
@@ -57,19 +58,21 @@ createTCP_Server(client => {
       //   messages.delete(data.id);
       // }
     });
-}).listen(Number(actor_port), actor_hostname, () => {
+});
+
+tcpServer.listen(Number(actor_port), actor_hostname, () => {
   console.info(
     '\n\n> ' +
-      chalk.green('actor: ') +
-      chalk.yellow(`tcp:\/\/${actor_hostname}`) +
-      ':' +
-      chalk.magenta(`${actor_port}`)
+    chalk.green('actor: ') +
+    chalk.yellow(`tcp:\/\/${actor_hostname}`) +
+    ':' +
+    chalk.magenta(`${actor_port}`)
   );
 });
 
 // ++ ----------------------------------------------------------------
 
-createHTTP_Server(async (req, res) => {
+const httpServer = createHTTP_Server(async (req, res) => {
   message_id++;
 
   if (actors.size === 0) return res.end('ERROR: EMPTY ACTOR POOL');
@@ -95,15 +98,18 @@ createHTTP_Server(async (req, res) => {
     ],
   });
   chalk.yellow;
-}).listen(Number(web_port), web_hostname, () => {
+});
+
+httpServer.listen(Number(web_port), web_hostname, () => {
   console.info(
     '> ' +
-      chalk.green('web:  ') +
-      chalk.yellow(`http:\/\/${web_hostname}`) +
-      ':' +
-      chalk.magenta(`${web_port}`)
+    chalk.green('web:  ') +
+    chalk.yellow(`http:\/\/${web_hostname}`) +
+    ':' +
+    chalk.magenta(`${web_port}`)
   );
 });
+
 // ++ ----------------------------------------------------------------
 
 function randomActor() {
@@ -112,9 +118,10 @@ function randomActor() {
 }
 
 // ++ ---- PART TWO BEGINS BELOW -------------------------------------
-// HACK:------ Hard coded path will cause problems MUST FIX ----------
+
+
 const worker = new RpcWorkerPool(
-  '/home/luxcium/projects/phash-scout/out/API/worker/worker.js',
+  workerScriptFileUri,
   Number(threads || 0),
   'roundrobin'
 );

@@ -1,7 +1,7 @@
 import { promises } from 'fs';
 
-import { Rc } from '../../tools/getCachedPhash';
-import { ScanDirs } from '../ScanDirs';
+import { Rc } from '../../../worker/commands';
+import { ScanDirs } from '..';
 import { getCachedPhashString_core } from './getCachedPhashString_core';
 
 export async function main() {

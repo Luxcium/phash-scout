@@ -15,13 +15,13 @@ import { redisCreateClient } from '..';
  * Redis. where, REDIS_HOST - IP address of the interface for Redis
  * to bind **this project use default of '0.0.0.0'**
  *
- * @returns *REDIS CLIENT*
+ * @returns Promise<RedisClientType<M, F, S>>
  */
 export async function rConnect(
   port: number | null = REDIS_DEFAULT_PORT,
   dbNumber: number | null = 0,
   host: string | null = '0.0.0.0'
-): Promise<any> {
+) {
   /** *REDIS CLIENT* */
 
   const R = redisCreateClient({

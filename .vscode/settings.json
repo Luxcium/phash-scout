@@ -62,6 +62,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.printWidth": 80,
   "prettier.proseWrap": "preserve",
+  "prettier.semi": true,
   // #endregion: PRETTIER                                            !
   /*
   |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
@@ -1031,15 +1032,20 @@
     "CONSOLE:",
     "ERROR:",
     "ERROR HANDLER:",
+    "SEND COMMAND:",
     "RETURNS:",
     "HACK:",
     "UNSAFE:",
     "HINT:",
+    ":→",
     "→",
+    "→:",
     "->",
     "FIXME:",
     "eslint-disable",
     "INFO:",
+    ":←",
+    "←",
     "←:",
     "-!",
     "SECTION:",
@@ -1227,30 +1233,8 @@
       "gutterIcon": true,
       "rulerLane": "center"
     },
-    //→
-    "→": {
-      "foreground": "#CF2",
-      "background": "#CF2",
-      "iconColour": "#CF2",
-      "opacity": 50,
-      "type": "whole-line",
-      "icon": "cross-reference",
-      "gutterIcon": true,
-      "rulerLane": "full",
-      "hideFromTree": true,
-      "borderRadius": "0px",
-      "hideFromStatusBar": true
-    },
-    "←": {
-      "foreground": "#5CF",
-      "background": "#5CF",
-      "opacity": 30,
-      "gutterIcon": false,
-      "type": "text-and-comment",
-      "rulerLane": "center",
-      "hideFromTree": true,
-      "hideFromStatusBar": true
-    },
+
+    // BUG:
     "BUG:": {
       "foreground": "#224",
       "background": "#F15",
@@ -1259,6 +1243,7 @@
       "gutterIcon": true,
       "rulerLane": "center"
     },
+    // CONSOLE:
     "CONSOLE:": {
       "foreground": "#224",
       "background": "#4B9",
@@ -1267,6 +1252,7 @@
       "gutterIcon": true,
       "rulerLane": "center"
     },
+    // ERROR:
     "ERROR:": {
       "foreground": "#224",
       "background": "#F36",
@@ -1287,6 +1273,7 @@
       "rulerLane": "center"
       // "ERROR HANDLER:",
     },
+    // -?
     "-?": {
       "foreground": "#FDB",
       "background": "#F14",
@@ -1298,6 +1285,7 @@
       "rulerLane": "none",
       "borderRadius": "0px"
     },
+    // FIXME:
     "FIXME:": {
       "foreground": "#224",
       "background": "#F80",
@@ -1306,6 +1294,7 @@
       "gutterIcon": true,
       "rulerLane": "center"
     },
+    // SECTION:
     "SECTION:": {
       "foreground": "#224",
       "background": "#FD7",
@@ -1318,6 +1307,7 @@
       "hideFromTree": true,
       "hideFromStatusBar": true
     },
+    // LOG:
     "LOG:": {
       "foreground": "#224",
       "background": "#9BE",
@@ -1326,6 +1316,7 @@
       "gutterIcon": true,
       "rulerLane": "center"
     },
+    // -#
     "-#": {
       "foreground": "#224",
       "background": "#9BE",
@@ -1336,6 +1327,7 @@
       "hideFromStatusBar": true,
       "rulerLane": "none"
     },
+    // TODO:
     "TODO:": {
       "foreground": "#224",
       "background": "#FB3",
@@ -1344,6 +1336,7 @@
       "gutterIcon": true,
       "rulerLane": "center"
     },
+    // -$
     "-$": {
       "foreground": "#224",
       "background": "#FB3",
@@ -1354,6 +1347,7 @@
       "hideFromStatusBar": true,
       "rulerLane": "none"
     },
+    // WARNING:
     "WARNING:": {
       "foreground": "#224",
       "background": "#BF2",
@@ -1362,6 +1356,7 @@
       "gutterIcon": true,
       "rulerLane": "center"
     },
+    // -%
     "-%": {
       "foreground": "#224",
       "background": "#BF2",
@@ -1372,6 +1367,7 @@
       "hideFromStatusBar": true,
       "rulerLane": "none"
     },
+    // XXX:
     "XXX:": {
       "foreground": "#224",
       "background": "#E22",
@@ -1380,6 +1376,52 @@
       "gutterIcon": true,
       "rulerLane": "center"
     },
+    // ←:
+    "←:": {
+      "background": "#FB0",
+      "borderRadius": "5px",
+      "foreground": "#07F",
+      "gutterIcon": true,
+      "hideFromStatusBar": true,
+      "icon": "package-dependencies",
+      "iconColour": "#FB7",
+      "fontWeight": "bold",
+      "opacity": 75,
+      "rulerColour": "#FB7",
+      "rulerLane": "left",
+      "type": "whole-line"
+    },
+    // :→
+    ":→": {
+      "background": "#07F",
+      "borderRadius": "5px",
+      "foreground": "#FB7",
+      "gutterIcon": true,
+      "hideFromStatusBar": true,
+      "icon": "package-dependents",
+      "iconColour": "#07F",
+      "fontWeight": "bold",
+      "opacity": 75,
+      "rulerColour": "#07F",
+      "rulerLane": "right",
+      "type": "whole-line"
+    },
+    // SEND COMMAND:
+    "SEND COMMAND:": {
+      "background": "#07F",
+      "borderRadius": "0px",
+      "foreground": "#FB7",
+      "gutterIcon": true,
+      "hideFromStatusBar": true,
+      "icon": "package-dependents",
+      "iconColour": "#07F",
+      "opacity": 75,
+      "fontWeight": "bold",
+      "rulerColour": "#07F",
+      "rulerLane": "right",
+      "type": "line"
+    },
+    // FUNC DEF:
     "FUNC DEF:": {
       "foreground": "#07F",
       "background": "#FB0",
@@ -1392,6 +1434,7 @@
       // "hideFromTree": true,
       "hideFromStatusBar": true
     },
+    // FUNC CALL:
     "FUNC CALL:": {
       "foreground": "#FB7",
       "background": "#07F",
@@ -1403,6 +1446,7 @@
       "type": "tag",
       "hideFromStatusBar": true
     },
+    // -&
     "-&": {
       "foreground": "#07F",
       "background": "#07F",

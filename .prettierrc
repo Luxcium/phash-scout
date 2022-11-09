@@ -5,6 +5,13 @@
   "htmlWhitespaceSensitivity": "css",
   "insertPragma": false,
   "jsxSingleQuote": false,
+  "printWidth": 80,
+  "proseWrap": "preserve",
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "useTabs": false,
   "overrides": [
     {
       "files": [
@@ -19,12 +26,5 @@
         "proseWrap": "never"
       }
     }
-  ],
-  "printWidth": 80,
-  "proseWrap": "preserve",
-  "semi": true,
-  "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "es5",
-  "useTabs": false
+  ]
 }
