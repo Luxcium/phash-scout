@@ -1,6 +1,6 @@
-aaron-bond.better-comments ++
+aaron-bond.better-comments !!
 ahmadalli.vscode-nginx-conf ++
-albymor.increment-selection ++
+albymor.increment-selection !!
 alefragnani.Bookmarks ++
 AleksandarDev.vscode-sequence-diagrams
 AlexShen.classdiagram-ts
@@ -24,20 +24,20 @@ cschlosser.doxdocgen
 cweijan.vscode-mysql-client2
 danielpinto8zz6.c-cpp-compile-run
 davidbabel.clever
-dbaeumer.vscode-eslint ++
+dbaeumer.vscode-eslint !!
 dbizzy.dbizzy
 DenisGolovin.dependencies-diagram-generator
-dlech.chmod ++
+dlech.chmod !!
 donjayamanne.githistory ++
 dplain.jest-test-language-support
 Dunn.redis
 dustypomerleau.rust-syntax
-earshinov.sort-lines-by-selection ++
+earshinov.sort-lines-by-selection !!
 ecmel.vscode-html-css ++
-EditorConfig.EditorConfig ++
+EditorConfig.EditorConfig !!
 ee92.folderize
 EQuimper.react-native-react-redux ++
-esbenp.prettier-vscode ++
+esbenp.prettier-vscode !!
 fabiospampinato.vscode-diff
 fagnercarvalho.redis-lsp
 folke.vscode-monorepo-workspace
@@ -47,7 +47,7 @@ formulahendry.code-runner
 formulahendry.iot-extension-pack
 formulahendry.platformio
 formulahendry.vscode-node-red
-foxundermoon.shell-format ++
+foxundermoon.shell-format !!
 fvclaus.sort-json-array
 GabrielCastello.g4br13l-js-snippets
 gencer.html-slim-scss-css-class-completion
@@ -55,20 +55,20 @@ ghmcadams.lintlens ++
 GitHub.codespaces
 GitHub.copilot
 gluons.vscode-atom-javascript-snippet
-Gruntfuggly.todo-tree ++
+Gruntfuggly.todo-tree !!
 hbenl.vscode-test-explorer ++
-hedinne.popping-and-locking-vscode ++
+hedinne.popping-and-locking-vscode !!
 huizhou.githd ++
 humao.rest-client
 idered.npm ++
 idleberg.applescript
 iocave.customize-ui
 iocave.monkey-patch
-ipatalas.vscode-postfix-ts ++
+ipatalas.vscode-postfix-ts !!
 jabacchetta.vscode-essentials ++
 Jacano.vscode-pnpm ++
 jeff-hykin.better-cpp-syntax
-jerrygoyal.shortcut-menu-bar ++
+jerrygoyal.shortcut-menu-bar !!
 jkjustjoshing.vscode-text-pastry
 JoeBerria.statusbarerror
 johnpapa.vscode-peacock ++
@@ -82,10 +82,10 @@ kolodziejczakmn.functional-js-snippets
 krainboltgreene.all-builtin-commands
 Latitude55.jest-snippets
 leandro-rodrigues.crt-vscode
-Luxcium.pop-n-lock-theme-vscode ++
-Luxcium.pop-n-lock-theme-vscode-rajin ++
+Luxcium.pop-n-lock-theme-vscode !!
+Luxcium.pop-n-lock-theme-vscode-rajin !!
 magicstack.MagicPython
-melMass.vscode-mono-workspace ++
+melMass.vscode-mono-workspace !!
 metaseed.metago
 metaseed.MetaJump
 metaseed.MetaWord
@@ -115,21 +115,21 @@ ms-vscode.cpptools-extension-pack
 ms-vscode.cpptools-themes
 ms-vscode.hexeditor
 ms-vscode.test-adapter-converter ++
-ms-vscode.typescript-javascript-grammar ++
+ms-vscode.typescript-javascript-grammar !!
 myxvisual.vscode-ts-uml
-naumovs.color-highlight ++
-nico-castell.linux-desktop-file ++
+naumovs.color-highlight !!
+nico-castell.linux-desktop-file !!
 nicoespeon.abracadabra ++
 nitayneeman.puppeteer-snippets
 Noctarya.terminals ++
 nwhatt.chai-snippets
 octref.vetur
-PKief.material-icon-theme ++
+PKief.material-icon-theme !!
 pranaygp.vscode-css-peek ++
 raathigeshan.jest-tools
 ravioshankar.scala-gurus
 rbbit.typescript-hero
-rebornix.toggle ++
+rebornix.toggle !!
 redhat.java
 redhat.vscode-commons
 redhat.vscode-yaml
@@ -146,19 +146,19 @@ shakram02.bash-beautify
 sketchbuch.vsc-quokka-statusbar
 sleistner.vscode-fileutils
 SonarSource.sonarlint-vscode
-SophodorosLLC.codevalet-vscode ++
+SophodorosLLC.codevalet-vscode !!
 stkb.rewrap
 sumneko.lua
 svenliebig.jest-typescript-toolbox
 Swellaby.rust-pack
 t7yang.hyper-javascript-snippets
 tanhakabir.node-js-education-extension-pack ++
-timonwong.shellcheck ++
+timonwong.shellcheck !!
 tombonnike.vscode-status-bar-format-toggle
 twxs.cmake
-Tyriar.sort-lines ++
-ue.alphabetical-sorter ++
-usernamehw.errorlens ++
+Tyriar.sort-lines !!
+ue.alphabetical-sorter !!
+usernamehw.errorlens !!
 vadimcn.vscode-lldb
 Vallentin.vscode-bnf
 VisualStudioExptTeam.intellicode-api-usage-examples
@@ -166,7 +166,7 @@ VisualStudioExptTeam.vscodeintellicode
 VisualStudioExptTeam.vscodeintellicode-completions
 VisualStudioExptTeam.vscodeintellicode-insiders
 vitorsalgado.vscode-redis
-vivaxy.vscode-conventional-commits ++
+vivaxy.vscode-conventional-commits !!
 vsciot-vscode.azure-iot-edge
 vsciot-vscode.azure-iot-toolkit
 vscjava.vscode-java-debug
@@ -177,7 +177,7 @@ vscodevim.vim
 walter-ribeiro.full-react-snippets
 wscats.html-snippets ++
 xabikos.JavaScriptSnippets ++
-ypresto.vscode-intelli-refactor ++
+ypresto.vscode-intelli-refactor !!
 yzhang.markdown-all-in-one ++
 zh9528.file-size ++
 Zignd.html-css-class-completion ++

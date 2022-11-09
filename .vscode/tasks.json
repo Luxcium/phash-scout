@@ -21,7 +21,7 @@
       "runOptions": {
         "reevaluateOnRerun": true,
         "instanceLimit": 1,
-        "runOn": "folderOpen"
+        "runOn": "default"
       },
       "presentation": {
         "clear": true,
@@ -59,7 +59,7 @@
       "runOptions": {
         "reevaluateOnRerun": true,
         "instanceLimit": 1,
-        "runOn": "folderOpen"
+        "runOn": "default"
       },
       "presentation": {
         "clear": true,
