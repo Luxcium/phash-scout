@@ -33,6 +33,7 @@ out/
 /out
 /target
 /bin
+/lib
 
 ## FILES
 *.zwc
