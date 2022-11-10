@@ -87,6 +87,8 @@ export class RpcWorkerPool {
   }
 }
 
+export default RpcWorkerPool
+
 /* **************************************************************** */
 /*                                                                  */
 /*  MIT LICENSE                                                     */
