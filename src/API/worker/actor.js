@@ -3,49 +3,50 @@
 import { connect } from 'net';
 
 import { Strategie } from './consts';
-import { RpcWorkerPool } from './rpc-worker.js';
+import { RpcWorkerPool } from './RpcWorkerPool';
+
+// HACK:------ Hard coded path will cause problems MUST FIX ----------
+const workerScriptFileUri =
+  '/home/luxcium/projects/phash-scout/out/API/worker/worker.js';
 
 const [, , host] = process.argv;
 const [hostname, port] = host.split(':');
 
 // ++ ----------------------------------------------------------------
-const upstream = connect(Number(port), hostname, () => {
-  console.log('  >', 'connected to server!');
-})
-  .on('data', raw_data => {
-    void String(raw_data)
-      .split('\0\n\0')
-      .slice(0, -1)
-      .forEach(async chunk => {
-        const data = JSON.parse(chunk);
-        const result = await getWorker().exec(
-          data.method,
-          `${data.id}`,
-          ...data.args
-        );
 
-        void upstream.write(
-          JSON.stringify({
-            jsonrpc: '2.0',
-            id: data.id,
-            result,
-            pid: 'actor:' + process.pid,
-          }) + '\0\n\0'
-        );
-      });
-  })
-  .on('end', () => {
-    console.log('  >', 'disconnect from server');
-  });
+const upstream = connect(Number(port), hostname, e => {
+  console.log('  >', e, '  > connected to server!');
+});
 
-// HACK:------ Hard coded path will cause problems MUST FIX ----------
+void upstream.on('data', raw_data => {
+  void String(raw_data)
+    .split('\0\n\0')
+    .slice(0, -1)
+    .forEach(async chunk => {
+      const data = JSON.parse(chunk);
+      const result = await getWorker().exec(
+        data.method,
+        `${data.id}`,
+        ...data.args
+      );
+
+      void upstream.write(
+        JSON.stringify({
+          jsonrpc: '2.0',
+          id: data.id,
+          result,
+          pid: 'actor:' + process.pid,
+        }) + '\0\n\0'
+      );
+    });
+});
+
+void upstream.on('end', () => {
+  console.log('  >', 'disconnect from server');
+});
+
 function getWorker() {
-  return new RpcWorkerPool(
-    // '/home/luxcium/projects/pHashScout/out/src/API/worker/worker.js',
-    '/home/luxcium/projects/phash-scout/out/API/worker/worker.js',
-    4,
-    Strategie.leastbusy
-  );
+  return new RpcWorkerPool(workerScriptFileUri, 4, Strategie.leastbusy);
 }
 
 /* **************************************************************** */

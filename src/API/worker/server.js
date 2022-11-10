@@ -5,13 +5,11 @@ import { createServer as createHTTP_Server } from 'http';
 import { createServer as createTCP_Server } from 'net';
 import { normalize } from 'node:path';
 
-import { RpcWorkerPool } from './rpc-worker';
-
+import { RpcWorkerPool } from './RpcWorkerPool';
 
 // HACK:------ Hard coded path will cause problems MUST FIX ----------
 const workerScriptFileUri =
   '/home/luxcium/projects/phash-scout/out/API/worker/worker.js';
-
 
 const [, , web_host, actor_host, threads] = process.argv;
 const [web_hostname, web_port] = web_host.split(':');
@@ -24,49 +22,38 @@ let messages = new Map(); // message ID -> HTTP response
 const VERBOSE1 = false;
 const VERBOSE2 = false;
 
-
-
-
 // ++ ----------------------------------------------------------------
 
 const tcpServer = createTCP_Server(client => {
   const handler = data => client.write(JSON.stringify(data) + '\0\n\0'); // <1>
   actors.add(handler);
   console.info('actor pool connected', actors.size, message_id);
-  client
-    .on('end', () => {
-      actors.delete(handler); // <2>
-      console.info('actor pool disconnected', actors.size);
-    })
-    .on('data', raw_data => {
-      String(raw_data)
-        .split('\0\n\0')
-        .slice(0, -1)
-        .forEach(chunk => {
-          const data = JSON.parse(chunk);
-          const res = messages.get(data.id);
-          res.end(JSON.stringify(data) + '\0\n\0');
-          messages.delete(data.id);
-        });
 
-      // const chunks = String(raw_data).split('\0\n\0'); // <3>
-      // chunks.pop(); // <4>
-      // for (let chunk of chunks) {
-      //   const data = JSON.parse(chunk);
-      //   const res = messages.get(data.id);
-      //   res.end(JSON.stringify(data) + '\0\n\0');
-      //   messages.delete(data.id);
-      // }
-    });
+  void client.on('end', () => {
+    actors.delete(handler); // <2>
+    console.info('actor pool disconnected', actors.size);
+  });
+
+  void client.on('data', raw_data => {
+    void String(raw_data)
+      .split('\0\n\0')
+      .slice(0, -1)
+      .forEach(chunk => {
+        const data = JSON.parse(chunk);
+        const res = messages.get(data.id);
+        res.end(JSON.stringify(data) + '\0\n\0');
+        messages.delete(data.id);
+      });
+  });
 });
 
-tcpServer.listen(Number(actor_port), actor_hostname, () => {
+void tcpServer.listen(Number(actor_port), actor_hostname, () => {
   console.info(
     '\n\n> ' +
-    chalk.green('actor: ') +
-    chalk.yellow(`tcp:\/\/${actor_hostname}`) +
-    ':' +
-    chalk.magenta(`${actor_port}`)
+      chalk.green('actor: ') +
+      chalk.yellow(`tcp:\/\/${actor_hostname}`) +
+      ':' +
+      chalk.magenta(`${actor_port}`)
   );
 });
 
@@ -79,7 +66,7 @@ const httpServer = createHTTP_Server(async (req, res) => {
 
   const actor = randomActor();
 
-  messages.set(message_id, res);
+  void messages.set(message_id, res);
 
   VERBOSE2 &&
     console.log(
@@ -89,7 +76,7 @@ const httpServer = createHTTP_Server(async (req, res) => {
       decodeURI(req.url.split('/').slice(3).join('/'))
     );
 
-  actor({
+  void actor({
     id: message_id,
     method: req.url.split('/').slice(1, 2).pop(),
     args: [
@@ -100,13 +87,13 @@ const httpServer = createHTTP_Server(async (req, res) => {
   chalk.yellow;
 });
 
-httpServer.listen(Number(web_port), web_hostname, () => {
+void httpServer.listen(Number(web_port), web_hostname, () => {
   console.info(
     '> ' +
-    chalk.green('web:  ') +
-    chalk.yellow(`http:\/\/${web_hostname}`) +
-    ':' +
-    chalk.magenta(`${web_port}`)
+      chalk.green('web:  ') +
+      chalk.yellow(`http:\/\/${web_hostname}`) +
+      ':' +
+      chalk.magenta(`${web_port}`)
   );
 });
 
@@ -119,14 +106,13 @@ function randomActor() {
 
 // ++ ---- PART TWO BEGINS BELOW -------------------------------------
 
-
 const worker = new RpcWorkerPool(
   workerScriptFileUri,
   Number(threads || 0),
   'roundrobin'
 );
 
-actors.add(async data => {
+void actors.add(async data => {
   VERBOSE1 && console.log('actors.add', data);
   const value = await worker.exec(data.method, data.id, ...data.args);
   const reply =
@@ -137,8 +123,8 @@ actors.add(async data => {
       pid: 'server:' + process.pid + ' (' + data.id + ')',
     }) + '\0\n\0';
 
-  messages.get(data.id).end(reply);
-  messages.delete(data.id);
+  void messages.get(data.id).end(reply);
+  void messages.delete(data.id);
 });
 
 /* **************************************************************** */
