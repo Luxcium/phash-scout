@@ -72,7 +72,6 @@ actors.add(async data => {
   );
   messages.delete(data.id);
 });
-
 /* **************************************************************** */
 /*                                                                  */
 /*  MIT LICENSE                                                     */

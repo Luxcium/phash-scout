@@ -29,7 +29,6 @@ const upstream = net
   .on('end', () => {
     console.log('disconnect from server');
   });
-
 /* **************************************************************** */
 /*                                                                  */
 /*  MIT LICENSE                                                     */

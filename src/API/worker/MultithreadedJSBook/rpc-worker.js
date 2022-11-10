@@ -68,7 +68,6 @@ module.exports = class RpcWorkerPool {
     return this.workers[id];
   }
 };
-
 /* **************************************************************** */
 /*                                                                  */
 /*  MIT LICENSE                                                     */
