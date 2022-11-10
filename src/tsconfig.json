@@ -18,13 +18,33 @@
     "checkJs": false,
     "maxNodeModuleJsDepth": 1,
     "disableSizeLimit": false,
+    /* Completeness */
+    "skipDefaultLibCheck": false,
+    "skipLibCheck": true,
+    "noResolve": false,
+    /* Vebosity */
+    "diagnostics": true,
+    "extendedDiagnostics": true,
+    "listEmittedFiles": false,
+    "listFiles": false,
+    "traceResolution": false,
+    "listFilesOnly": false,
     /* Emit Options */
-    "declarationDir": "../out/typings",
+    "rootDir": ".",
+    "outDir": "../lib",
+    "declarationDir": "../lib/typings",
+    "tsBuildInfoFile": "../lib/src-ts-out-info.lib",
+    "generateCpuProfile": "../lib/performance/cpu-info.cpuprofile",
+    "sourceMap": false,
+    "declaration": true,
+    "declarationMap": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
     "downlevelIteration": true,
     "emitBOM": false,
+    "emitDeclarationOnly": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "generateCpuProfile": "../out/performance/cpu-info.cpuprofile",
     "importHelpers": true,
     "importsNotUsedAsValues": "remove",
     "incremental": true,
@@ -32,55 +52,13 @@
     "noEmit": false,
     "noEmitHelpers": false,
     "noEmitOnError": false,
-    "outDir": "../out",
     "preserveConstEnums": true,
     "preserveValueImports": false,
+    "preserveWatchOutput": false,
     "pretty": true,
     "removeComments": false,
-    "rootDir": ".",
     "stripInternal": false,
-    "tsBuildInfoFile": "../out/src-ts-out-info.lib",
-    "preserveWatchOutput": false,
     "watch": true,
-    "baseUrl": "..",
-    "paths": {
-      "sharp-phash": ["./types/sharp-phash.d.ts"],
-      "$types": ["src/types/"],
-      "@types": ["src/types/"],
-      "@types/*": ["src/types/*"],
-      "$API": ["src/API/"],
-      "$API/*": ["src/API/*"],
-      "$archive": ["src/archive/"],
-      "$archive/*": ["src/archive/*"],
-      "$commands": ["src/commands/"],
-      "$commands/*": ["src/commands/*"],
-      "$constants": ["src/constants/"],
-      "$constants/*": ["src/constants/*"],
-      "$main": ["src/main/"],
-      "$main/*": ["src/main/*"],
-      "$src/*": ["src/*"],
-      "$test/*": ["test/*"],
-      "$tools": ["src/tools/"],
-      "$tools/*": ["src/tools/*"],
-      "$types/*": ["src/types/*"],
-      "$utils": ["src/utils/"],
-      "$utils/*": ["src/utils/*"],
-      "@utils": ["src/utils/"],
-      "@utils/*": ["src/utils/*"],
-      "$worker": ["src/API/worker"],
-      "$worker/*": ["src/API/worker/*"]
-    },
-    /* Source Map and declaration options
-    VSCODE  emitting temporary error messages (that disappears and reappears all the time) in relation to my usage of the path property in my tsconfig file //++ !title VSCODE  Emitting Temporary Error Messages Due To Paths
-Emitting Temporary Error Messages In Relation To Usage Of Path Property In My Tsconfig File
-
-     */
-    "sourceMap": false,
-    "declaration": true,
-    "declarationMap": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
-    "emitDeclarationOnly": false,
     /* Projects */
     "composite": true,
     "disableSourceOfProjectReferenceRedirect": false,
@@ -94,17 +72,41 @@ Emitting Temporary Error Messages In Relation To Usage Of Path Property In My Ts
     "lib": ["dom", "esnext"],
     /* Specify type package names to be included without being referenced in a source file. */
     "types": ["node", "jest"],
-    /* Completeness */
-    "skipDefaultLibCheck": false,
-    "skipLibCheck": true,
-    "noResolve": false,
-    /* Vebosity */
-    "diagnostics": true,
-    "extendedDiagnostics": true,
-    "listEmittedFiles": false,
-    "listFiles": false,
-    "traceResolution": false,
-    "listFilesOnly": false,
+    // Source Map and declaration options
+    // VSCODE  emitting temporary error messages (that disappears and
+    // reappears all the time) in relation to my usage of the path
+    // property in my tsconfig file
+    // title VSCODE  Emitting Temporary Error Messages Due To Paths
+    // Emitting Temporary Error Messages In Relation To Usage Of Path
+    // Property In My Tsconfig File
+    // src/API/worker
+    "baseUrl": "..",
+    "paths": {
+      "@worker": ["src/API/worker"],
+      "@types": ["src/types/"],
+      "@utils": ["src/utils/"],
+      "$types/*": ["src/types/*"],
+      "$utils/*": ["src/utils/*"],
+      "$worker/*": ["src/API/worker/*"]
+      // "$types": ["src/types/"],
+      // "@types/*": ["src/types/*"],
+      // "$API": ["src/API/"],
+      // "$API/*": ["src/API/*"],
+      // "$archive": ["src/archive/"],
+      // "$archive/*": ["src/archive/*"],
+      // "$commands": ["src/commands/"],
+      // "$commands/*": ["src/commands/*"],
+      // "$constants": ["src/constants/"],
+      // "$constants/*": ["src/constants/*"],
+      // "$main": ["src/main/"],
+      // "$main/*": ["src/main/*"],
+      // "$src/*": ["src/*"],
+      // "$test/*": ["test/*"],
+      // "$tools": ["src/tools/"],
+      // "$tools/*": ["src/tools/*"],
+      // "$utils": ["src/utils/"],
+      // "@utils/*": ["src/utils/*"]
+    },
     /* Type Checking */
     /* ALWAYS FALSE NEVER ALLOW-UNUSED-LABELS & ALLOW-UNREACHABLE-CODE FALSE!  */
     /* ALWAYS FALSE                                               ALWAYS FALSE */
@@ -141,18 +143,5 @@ Emitting Temporary Error Messages In Relation To Usage Of Path Property In My Ts
     /* ALWAYS TRUE                                                 ALWAYS TRUE */
     /* ALWAYS TRUE STRICT TYPE-CHECKING ADDITIONAL CHECKS MUST ALWAYS BE TRUE! */
     /*                                                                         */
-    /* React Environment and jsx Language */
-    // "jsx": "preserve"
-    // "jsxFactory": "",
-    // "jsxFragmentFactory": "",
-    // "jsxImportSource": "",
-    // "reactNamespace": "",
   }
-  // "references": [],
-  // "buildOptions": {"verbose": false},
-  // "compileOnSave": false,
-  // "ts-node": {},
-  // "typeAcquisition": {},
-  // "watchOptions": {},
-  // "files": []
 }

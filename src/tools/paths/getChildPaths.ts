@@ -1,4 +1,4 @@
-import { CurrentPathError, PathAndStats, PathWithStats } from '$types';
+import { CurrentPathError, PathAndStats, PathWithStats } from '@types';
 
 import { FileType, FileTypes } from '..';
 import { immediateZalgo } from '../restrainingZalgo';

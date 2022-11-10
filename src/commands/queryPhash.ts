@@ -1,4 +1,4 @@
-import type { S } from '$types';
+import type { S } from '@types';
 
 import { RADIUS } from '../constants/radius';
 import { IMGSCOUT, immediateZalgo } from '../tools';

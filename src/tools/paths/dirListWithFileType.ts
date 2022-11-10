@@ -1,4 +1,4 @@
-import { DirentWithFileType } from '$types';
+import { DirentWithFileType } from '@types';
 
 import { getDirListFileTypes, getRawDirListAsync, getRawDirListSync } from '.';
 

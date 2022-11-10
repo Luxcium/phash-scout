@@ -1,4 +1,4 @@
-import type { QueryResultItem, RawQueryResult, S } from '$types';
+import type { QueryResultItem, RawQueryResult, S } from '@types';
 
 // import { RADIUS } from '../constants/radius';
 import { IMGSCOUT, immediateZalgo, isQueryResultItem } from '../tools';

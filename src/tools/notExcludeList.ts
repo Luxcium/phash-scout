@@ -1,4 +1,4 @@
-import { WithExclude } from '$types';
+import { WithExclude } from '@types';
 
 import { notExcluded } from './notExclude';
 

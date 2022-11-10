@@ -1,6 +1,5 @@
 import { BoxedGenerator } from '@luxcium/boxed-list';
-
-import type { Bg, PathWithStats } from '$types';
+import type { Bg, PathWithStats } from '@types';
 
 import { newGetPathWithStats } from './getPathWithStats';
 

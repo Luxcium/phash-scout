@@ -1,6 +1,5 @@
+import type { MyParsedPath } from '@types';
 import path from 'path';
-
-import type { MyParsedPath } from '$types';
 
 export function parsePath(fullPath: string): MyParsedPath {
   const parsed = path.parse(fullPath);

@@ -1,5 +1,3 @@
-import type { ParsedPath, PlatformPath } from 'path';
-
 import {
   DirentWithFileType,
   MyPInfos,
@@ -8,7 +6,8 @@ import {
   RedisJson_PathInfoGetterFunct,
   RedisJson_PathStatsTuple,
   RedisJson_StatsInfoGetterFunct,
-} from '$types';
+} from '@types';
+import type { ParsedPath, PlatformPath } from 'path';
 
 import { immediateZalgo } from '..';
 import { dirListWithFileTypeAsync } from '../dirListWithFileType/dirListWithFileTypeAsync';

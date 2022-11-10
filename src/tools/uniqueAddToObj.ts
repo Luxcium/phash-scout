@@ -1,4 +1,4 @@
-import type { PQuerryAndAdd, QueryResultItem } from '$types';
+import type { PQuerryAndAdd, QueryResultItem } from '@types';
 
 import { uniqueAdd } from '../commands/uniqueAdd';
 import { toQueryResultObj } from '.';

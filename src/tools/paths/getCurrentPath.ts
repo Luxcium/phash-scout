@@ -9,7 +9,7 @@ import {
   SocketPath,
   SymbolicLinkPath,
   UnknownTypePath,
-} from '$types';
+} from '@types';
 
 import { FileTypes } from '..';
 import { parsePath } from '.';

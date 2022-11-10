@@ -1,6 +1,5 @@
+import { GetStats, PathAndStats, PathWithStats } from '@types';
 import { stat } from 'fs/promises';
-
-import { GetStats, PathAndStats, PathWithStats } from '$types';
 
 import { FileTypes } from '..';
 import { immediateZalgo } from '../restrainingZalgo';

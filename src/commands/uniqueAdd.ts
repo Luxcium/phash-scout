@@ -1,4 +1,4 @@
-import type { PQuerryAndAdd, QueryResultItem, RawQueryResult } from '$types';
+import type { PQuerryAndAdd, QueryResultItem, RawQueryResult } from '@types';
 
 import { immediateZalgo, isQueryResultList } from '../tools';
 import { hasSameTitleInclude } from '../tools/hasSameTitleInclude';

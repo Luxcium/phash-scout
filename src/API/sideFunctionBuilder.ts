@@ -1,6 +1,5 @@
+import type { Count, Mapper } from '@types';
 import axios from 'axios';
-
-import type { Count, Mapper } from '$types';
 
 import { AVERAGE_EACH, logError, logMedium, PRINT_EACH } from '../constants';
 import { validExts } from '../constants/validExts';
