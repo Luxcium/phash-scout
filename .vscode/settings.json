@@ -32,10 +32,10 @@
   |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
   */
   // #region: FORMAT BEHAVIOUR                                       !
-  "editor.formatOnPaste": true,
+  "editor.formatOnPaste": false,
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",
-  "editor.formatOnType": true,
+  "editor.formatOnType": false,
   "editor.suggest.showFiles": true,
   "editor.suggest.showFolders": true,
   "editor.tabSize": 2,
@@ -1197,7 +1197,6 @@
       "iconColour": "#93F",
       "rulerLane": "center"
     },
-
     // UNSAFE: //-*
     "UNSAFE:": {
       "background": "#900",
@@ -1208,7 +1207,6 @@
       "iconColour": "#900",
       "rulerLane": "center"
     },
-
     //-*
     "-*": {
       "background": "#0BF",
@@ -1233,7 +1231,6 @@
       "gutterIcon": true,
       "rulerLane": "center"
     },
-
     // BUG:
     "BUG:": {
       "foreground": "#224",
@@ -1624,18 +1621,22 @@
   "todo-tree.highlights.backgroundColourScheme": [],
   "todo-tree.highlights.foregroundColourScheme": [],
   "[javascript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "workbench.editor.titleScrollbarSizing": "large",
   "task.allowAutomaticTasks": "on",
   "jest.autoRun": {
     "watch": true,
     "onSave": "test-only",
-    "onStartup": ["all-tests"]
+    "onStartup": [
+      "all-tests"
+    ]
   },
   "[dotenv]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
-  "conventionalCommits.scopes": ["human-size"]
+  "conventionalCommits.scopes": [
+    "human-size"
+  ]
   // #endregion: TODO TREE                                                      !
 }
