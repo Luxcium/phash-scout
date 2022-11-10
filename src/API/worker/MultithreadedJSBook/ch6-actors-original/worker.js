@@ -1,0 +1,61 @@
+const { parentPort } = require('worker_threads');
+
+function asyncOnMessageWrap(fn) {
+  return async function (msg) {
+    parentPort.postMessage(await fn(msg));
+  };
+}
+
+const commands = {
+  async square_sum(max) {
+    await new Promise(res => setTimeout(res, 100));
+    let sum = 0;
+    for (let i = 0; i < max; i++) sum += Math.sqrt(i);
+    return sum;
+  },
+};
+
+parentPort.on(
+  'message',
+  asyncOnMessageWrap(async ({ method, params, id }) => ({
+    result: await commands[method](...params),
+    id,
+  }))
+);
+/* **************************************************************** */
+/*                                                                  */
+/*  MIT LICENSE                                                     */
+/*                                                                  */
+/*  Copyright © 2021-2022 Benjamin Vincent Kasapoglu (Luxcium)      */
+/*                                                                  */
+/*  NOTICE:                                                         */
+/*  O’Reilly Online Learning                                        */
+/*                                                                  */
+/*  Title: “Multithreaded JavaScript”                               */
+/*  Author: “by Thomas Hunter II and Bryan English”                 */
+/*  Publisher: “O’Reilly”                                           */
+/*  Copyright: “© 2022 Thomas Hunter II and Bryan English”          */
+/*  ISBN: “978-1-098-10443-6.”                                      */
+/*                                                                  */
+/*  Using Code Examples                                             */
+/*  Supplemental material (code examples, exercises, etc.)          */
+/*  is available for download at                                    */
+/*  https://github.com/MultithreadedJSBook/code-samples.            */
+/*                                                                  */
+/*  In general, if example code is offered with this book, you may  */
+/*  use it in your programs and documentation. You do not need to   */
+/*  contact us for permission unless you’re reproducing a           */
+/*  significant portion of the code. For example, writing a         */
+/*  program that uses several chunks of code from this book does    */
+/*  not require permission. Selling or distributing examples from   */
+/*  O’Reilly books does require permission. Answering a question by */
+/*  citing this book and quoting example code does not require      */
+/*  permission. Incorporating a significant amount of example code  */
+/*  from this book into your product’s documentation does require   */
+/*  permission.                                                     */
+/*                                                                  */
+/*  If you feel your use of code examples falls outside fair use or */
+/*  the permission given above, feel free to contact us at          */
+/*  permissions@oreilly.com.                                        */
+/*                                                                  */
+/* **************************************************************** */
