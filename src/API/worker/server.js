@@ -8,8 +8,10 @@ import { normalize } from 'node:path';
 import { RpcWorkerPool } from './RpcWorkerPool';
 
 // HACK:------ Hard coded path will cause problems MUST FIX ----------
-const workerScriptFileUri =
-  '/home/luxcium/projects/phash-scout/out/API/worker/worker.js';
+
+const workerScriptFileUri = `${__dirname}/worker.js`;
+// const workerScriptFileUri =
+// '/home/luxcium/projects/phash-scout/out/API/worker/worker.js';
 
 const [, , web_host, actor_host, threads] = process.argv;
 const [web_hostname, web_port] = web_host.split(':');

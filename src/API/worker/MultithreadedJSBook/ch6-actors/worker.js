@@ -7,6 +7,12 @@ function asyncOnMessageWrap(fn) {
 }
 
 const commands = {
+  async increment_sum(max) {
+    await new Promise(res => setTimeout(res, 100));
+    let sum = 0;
+    for (let i = 0; i < max; i++) sum++;
+    return sum;
+  },
   async square_sum(max) {
     await new Promise(res => setTimeout(res, 100));
     let sum = 0;

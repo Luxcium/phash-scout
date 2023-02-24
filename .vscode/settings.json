@@ -8,10 +8,10 @@
   // "editor.fontLigatures": true,
   // "editor.fontSize": 20,
   // "editor.fontWeight": "500",
-  "terminal.integrated.fontFamily": "mono, 'TerminessTTF Nerd Font Mono', mono, 'Anonymice NF', '3270Narrow NF', mono",
-  // "terminal.integrated.fontSize": 14,
-  // "terminal.integrated.fontWeight": "600",
-  // "terminal.integrated.fontWeightBold": "bold",
+  "terminal.integrated.fontFamily": "'TerminessTTF Nerd Font', mono, 'Anonymice NF', '3270Narrow NF', mono",
+  "terminal.integrated.fontSize": 18,
+  "terminal.integrated.fontWeight": "600",
+  "terminal.integrated.fontWeightBold": "bold",
   // #endregion: EDITOR & TERMINAL                                   !
   /*
   |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
@@ -154,21 +154,244 @@
   "better-comments.highlightPlainText": true,
   "better-comments.multilineComments": true,
   "better-comments.tags": [
-    // #region
+    // {
+    //   // !
+    //   "tag": "!",
+    //   "color": "#FF8C00",
+    //   "strikethrough": false,
+    //   "backgroundColor": "transparent"
+    // },
+    // {
+    //   // !!
+    //   "tag": "!!",
+    //   "color": "#FF2D00",
+    //   "strikethrough": false,
+    //   "backgroundColor": "transparent"
+    // },
+    // {
+    //   // =
+    //   "tag": "=",
+    //   "color": "#F36B",
+    //   "strikethrough": false,
+    //   "backgroundColor": "transparent"
+    // },
+    // {
+    //   // ~
+    //   "tag": "~",
+    //   "color": "#FF6600DD",
+    //   "strikethrough": false,
+    //   "backgroundColor": "transparent"
+    // },
+    // {
+    //   // -
+    //   "tag": "-",
+    //   "color": "#9BEA",
+    //   "strikethrough": false,
+    //   "backgroundColor": "transparent"
+    // },
+    // {
+    //   "tag": "LOG",
+    //   "color": "#ACF",
+    //   "strikethrough": false,
+    //   "backgroundColor": "transparent"
+    // },
+    // {
+    //   "tag": "TODO:",
+    //   "color": "#FB3",
+    //   "strikethrough": false,
+    //   "backgroundColor": "transparent"
+    // },
+
     {
-      "tag": "#region",
+      // WARNING
+      "tag": "WARNING:",
+      "color": "#FD3E",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      "tag": "WARNING",
+      "color": "#BF2",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+
+    {
+      // ?
+      "tag": "?",
+      "color": "#3498DB",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // ${
+      "tag": "${",
+      "color": "#D89",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // $
+      "tag": "$",
+      "color": "#f48e41",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // #
+      "tag": "#",
+      "color": "#4AE",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // IIFE
+      "tag": "IIFE",
       "color": "#FF3",
       "strikethrough": false,
-      "backgroundColor": "#FF34"
+      "backgroundColor": "transparent"
     },
-    // #endregion
     {
-      "tag": "#endregion",
+      // private
+      "tag": "private",
       "color": "#F15",
       "strikethrough": false,
-      "backgroundColor": "#F154"
+      "backgroundColor": "transparent"
     },
-    //:
+    {
+      // protected
+      "tag": "protected",
+      "color": "#FD3E",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // TEST_MODULE
+      "tag": "TEST_MODULE",
+      "color": "#6EB",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // public
+      "tag": "public",
+      "color": "#FC5D", // "#FA0E",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // static
+      "tag": "static",
+      "color": "#F70E",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // get
+      "tag": "get",
+      "color": "#6BFC",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // set
+      "tag": "set",
+      "color": "#85FE",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // %
+      "tag": "%",
+      "color": "#41e2f4",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // # -c-54442
+      // †
+      "tag": "†",
+      "color": "#c54442",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // +
+      "tag": "+",
+      "color": "#c5f442",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // async
+      "tag": "async",
+      "color": "#FB3F",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // +@
+      "tag": "+@",
+      "color": "#FB3F",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // http
+      "tag": "http",
+      "color": "#FB3F",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // &
+      "tag": "&",
+      "color": "#a041f4",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // todo
+      "tag": "todo",
+      "color": "#FF8C00",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // *
+      "tag": "*",
+      "color": "#98C379",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // ¬
+      "tag": "¬",
+      "color": "#ffa0a0",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // async function
+      "tag": "async function",
+      "color": "#FB3F",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // -
+      "tag": "-",
+      "color": "#9BEA",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
+    {
+      // ====
+      "tag": "//",
+      "color": "#9BEA",
+      "strikethrough": false,
+      "backgroundColor": "transparent"
+    },
     {
       // ~!---------------------------------------------------------!~
       "tag": "~!",
@@ -245,7 +468,7 @@
 ~ #0F0B
 ~ #39FB
 ~ #93FB
-    // ©
+    // :©
     */
     // :©
     {
@@ -820,14 +1043,6 @@
       "backgroundColor": "transparent"
     },
     {
-      // $
-      "tag": "$",
-      "color": "#f48e41",
-      "strikethrough": false,
-      "backgroundColor": "transparent"
-    },
-    //
-    {
       // %
       "tag": "%",
       "color": "#41e2f4",
@@ -862,13 +1077,7 @@
       "strikethrough": false,
       "backgroundColor": "transparent"
     },
-    // {
-    //   // =
-    //   "tag": "=",
-    //   "color": "#F36B",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
+
     {
       // +
       "tag": "+",
@@ -890,20 +1099,7 @@
       "strikethrough": false,
       "backgroundColor": "transparent"
     },
-    // {
-    //   // ~
-    //   "tag": "~",
-    //   "color": "#FF6600DD",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   // -
-    //   "tag": "-",
-    //   "color": "#9BEA",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
+
     {
       "tag": "BUG",
       "color": "#F15",
@@ -946,24 +1142,7 @@
       "strikethrough": false,
       "backgroundColor": "transparent"
     },
-    // {
-    //   "tag": "LOG",
-    //   "color": "#ACF",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    // {
-    //   "tag": "TODO:",
-    //   "color": "#FB3",
-    //   "strikethrough": false,
-    //   "backgroundColor": "transparent"
-    // },
-    {
-      "tag": "WARNING",
-      "color": "#BF2",
-      "strikethrough": false,
-      "backgroundColor": "transparent"
-    },
+
     {
       "tag": "XXX",
       "color": "#E22",
@@ -1002,179 +1181,380 @@
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
   // #endregion: CUSTOMS RULES                                       !
+
+  /*
+  |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
+  */
   // #region: TODO TREE                                                         !
+  "todo-tree.filtering.excludeGlobs": ["**/node_modules"],
   "todo-tree.highlights.defaultHighlight": {
     "background": "#FFF",
-    "borderRadius": "10px",
+    "borderRadius": "0px",
+    "fontWeight": "500",
     "foreground": "#224",
+    "opacity": 50,
     "gutterIcon": true,
     "hideFromStatusBar": true,
-    "hideFromTree": true,
+    "hideFromTree": false,
     "icon": "alert",
-    "iconColour": "#05F",
-    "rulerLane": "center",
-    "type": "tag",
-    "opacity": 80
-    // "rulerColour":   ,
+    "iconColour": "#37B",
+    // "rulerOpacity": 100,
+    // "rulerColour": "#FFF",
+    "rulerLane": "none",
+    "type": "line"
   },
-  // "todo-tree.highlights.schemes": [
-  //   "file",
-  //   "untitled",
-  //   "vscode-userdata",
-  //   "output",
-  // ],
-  "todo-tree.general.tags": [
-    "#region:",
-    "-+",
-    "#endregion:",
-    "-:",
-    "BUG:",
-    "CONSOLE:",
-    "ERROR:",
-    "ERROR HANDLER:",
-    "SEND COMMAND:",
-    "RETURNS:",
-    "HACK:",
-    "UNSAFE:",
-    "HINT:",
-    ":→",
-    "→",
-    "→:",
-    "->",
-    "FIXME:",
-    "eslint-disable",
-    "INFO:",
-    ":←",
-    "←",
-    "←:",
-    "-!",
-    "SECTION:",
-    "-@",
-    "LOG:",
-    "-#",
-    "TODO:",
-    "-$",
-    "WARNING:",
-    "-%",
-    "XXX:",
-    "-?",
-    "FUNC DEF:",
-    "-&",
-    "FUNC CALL:",
-    "|-::",
-    "#-|",
-    "-*",
-    "!:",
-    "@:",
-    "$:",
-    "#:",
-    "%:",
-    "?:",
-    "&:",
-    "*:",
-    "+:",
-    "::"
-  ],
   "todo-tree.highlights.customHighlight": {
-    // #region: //-+
+    // #region: ------------------------------------------------------
     "#region:": {
-      "foreground": "#224",
+      "foreground": "#DF3",
+      "background": "#DF3",
+      "iconColour": "#DF3",
+      "opacity": 30,
+      "icon": "mirror",
+      "gutterIcon": true
+      // "type": "tag-and-comment",
+      // "borderRadius": "7px",
+    },
+    // #endregion: ---------------------------------------------------
+    "#endregion:": {
+      "foreground": "#F15",
+      "background": "#F15",
+      "iconColour": "#F15",
+      "opacity": 30,
+      "icon": "mirror",
+      "gutterIcon": true,
+      // "type": "tag-and-comment",
+      // "borderRadius": "7px",
+      "hideFromTree": true,
+      "hideFromStatusBar": true
+    },
+    // BUG: ----------------------------------------------------------
+    "BUG:": {
+      "foreground": "#F15",
+      "background": "#F15",
+      "iconColour": "#F15",
+      "fontWeight": "800",
+      "opacity": 10,
+      "icon": "bug",
+      "gutterIcon": true
+    },
+    // TODO: ---------------------------------------------------------
+    "TODO:": {
+      "foreground": "#F80",
+      "background": "#F80",
+      "iconColour": "#F80",
+      "fontWeight": "700",
+      "opacity": 20,
+      "icon": "bookmark",
+      "gutterIcon": true
+    },
+    // FIXME: --------------------------------------------------------
+    "FIXME:": {
+      "foreground": "#FB3",
+      "background": "#FB3",
+      "iconColour": "#FB3",
+      "fontWeight": "600",
+      "opacity": 30,
+      "icon": "tools",
+      "gutterIcon": true
+    },
+    // SECTION: ------------------------------------------------------
+    "SECTION:": {
+      "foreground": "#DF3",
       "background": "#DF3",
       "iconColour": "#DF3",
       "icon": "mirror",
       "gutterIcon": true,
-      "type": "tag-and-comment",
-      "borderRadius": "7px",
-      "rulerLane": "right"
+      "fontWeight": "500",
+      "opacity": 40,
+      // "type": "whole-line",
+      "hideFromTree": true,
+      "hideFromStatusBar": true
     },
-    // -+
+    // "REVIEW NEEDED:" search
+    // REVIEW NEEDED: ------------------------------------------------
+    "REVIEW NEEDED:": {
+      "foreground": "#FC9",
+      "background": "#05F",
+      "opacity": 50,
+      "fontWeight": "400",
+      "gutterIcon": true,
+      // "borderRadius": "7px",
+      "icon": "search",
+      "iconColour": "#93F"
+    },
+    // HACK: ---------------------------------------------------------
+    "HACK:": {
+      "background": "#74F",
+      "foreground": "#FC9",
+      "opacity": 60,
+      "fontWeight": "300",
+      "gutterIcon": true,
+      "icon": "squirrel",
+      "iconColour": "#93F"
+    },
+    // XXX: ----------------------------------------------------------
+    "XXX:": {
+      "foreground": "#E22",
+      "iconColour": "#E22",
+      "background": "#000",
+      "fontWeight": "200",
+      "opacity": 30,
+      "icon": "law",
+      "gutterIcon": true
+    },
+    // INFO: ---------------------------------------------------------
+    "INFO:": {
+      "foreground": "#FB7",
+      "background": "#05F",
+      "iconColour": "#05F",
+      "icon": "info",
+      "gutterIcon": true,
+      "fontWeight": "300",
+      "opacity": 30,
+      "rulerLane": "full",
+      "rulerColour": "#BBB",
+      "rulerOpacity": 50
+    },
+    // WARNING: ------------------------------------------------------
+    "WARNING:": {
+      "foreground": "#BF2",
+      "background": "#BF2",
+      "iconColour": "#BF2",
+      "fontWeight": "400",
+      "opacity": 30,
+      "icon": "alert",
+      "gutterIcon": true
+    },
+    // ERROR: --------------------------------------------------------
+    "ERROR:": {
+      "foreground": "#F36",
+      "background": "#F36",
+      "iconColour": "#F36",
+      "fontWeight": "500",
+      "opacity": 30,
+      "icon": "x-circle",
+      "gutterIcon": true
+    },
+    // UNIMPLEMENTED: ------------------------------------------------
+    "UNIMPLEMENTED:": {
+      "foreground": "#FC9",
+      "background": "#F35",
+      "fontWeight": "500",
+      "icon": "skip",
+      "iconColour": "#EE3366EE",
+      "opacity": 50
+    },
+    // UNSAFE: -------------------------------------------------------
+    "UNSAFE:": {
+      "background": "#900",
+      "foreground": "#FB3",
+      "iconColour": "#900",
+      "gutterIcon": true,
+      "fontWeight": "900",
+      "icon": "flame"
+    },
+    // FUNC DEF: (Special function xyz) ------------------------------
+    "FUNC DEF:": {
+      "foreground": "#FB7",
+      "background": "#07F",
+      "iconColour": "#55BBFFBB",
+      "icon": "package-dependencies",
+      "gutterIcon": true,
+      "opacity": 50,
+      "fontWeight": "700",
+      "rulerColour": "#FB7",
+      "hideFromStatusBar": true
+    },
+    // FUNC CALL:  (Special function xyz)  ---------------------------
+    "FUNC CALL:": {
+      "foreground": "#07F",
+      "background": "#ADE",
+      "opacity": 100,
+      "fontWeight": "700",
+      "iconColour": "#ADE",
+      "icon": "package-dependents",
+      "gutterIcon": true,
+      "rulerColour": "#07F",
+      // "": "#FB7",
+      // "type": "tag",
+      "hideFromStatusBar": true
+    },
+    // RETURNS: ------------------------------------------------------
+    "RETURNS:": {
+      "foreground": "#224",
+      "background": "#CF2",
+      "iconColour": "#CF2",
+      "icon": "cross-reference",
+      // "borderRadius": "7px",
+      "gutterIcon": true
+    },
+    // CONSOLE: ------------------------------------------------------
+    "CONSOLE:": {
+      "foreground": "#224",
+      "background": "#4B9",
+      "iconColour": "#4B9",
+      "icon": "terminal",
+      "gutterIcon": true
+    },
+    // HARDCODE: -----------------------------------------------------
+    "HARDCODE:": {
+      "foreground": "#FC9",
+      "background": "#F35",
+      // "borderRadius": "7px",
+      "iconColour": "#F149",
+      "icon": "cpu",
+      "fontWeight": "400",
+      "gutterIcon": true
+      // "type": "tag-and-comment",
+      // "ERROR HANDLER:", -------------------------------------------
+    },
+    // ERROR HANDLER: ------------------------------------------------
+    "ERROR HANDLER:": {
+      "foreground": "#FC9",
+      "background": "#F35",
+      // "borderRadius": "7px",
+      "iconColour": "#F149",
+      "icon": "note",
+      "gutterIcon": true
+      // "type": "tag-and-comment",
+      // "ERROR HANDLER:", -------------------------------------------
+    },
+    // LOG: ----------------------------------------------------------
+    "LOG:": {
+      "foreground": "#9BE",
+      "background": "#9BE",
+      "iconColour": "#9BE",
+      "icon": "checklist",
+      "gutterIcon": true
+    },
+    // !: ------------------------------------------------------------
+    "!:": {
+      "foreground": "#F20",
+      "background": "#F20",
+      "iconColour": "#F20",
+      "icon": "stop",
+      "gutterIcon": true,
+      "hideFromTree": true,
+      "hideFromStatusBar": true,
+      "opacity": 20
+      // "borderRadius": "0px",
+      // "type": "whole-line",
+    },
+    // @: ------------------------------------------------------------
+    "@:": {
+      "foreground": "#F36",
+      "background": "#F36",
+      "iconColour": "#F36",
+      "icon": "mention",
+      "gutterIcon": true,
+      "hideFromTree": true,
+      "hideFromStatusBar": true,
+      "opacity": 20
+      // "borderRadius": "0px",
+      // "type": "whole-line",
+    },
+    // #: ------------------------------------------------------------
+    "#:": {
+      "foreground": "#9BE",
+      "background": "#9BE",
+      "iconColour": "#9BE",
+      "icon": "file-binary",
+      "gutterIcon": true,
+      "hideFromTree": true,
+      "hideFromStatusBar": true,
+      "opacity": 20
+      // "borderRadius": "0px",
+      // "type": "whole-line",
+    },
+    // $: ------------------------------------------------------------
+    "$:": {
+      "foreground": "#F84",
+      "background": "#F84",
+      "iconColour": "#F84",
+      "icon": "star",
+      "gutterIcon": true,
+      "hideFromTree": true,
+      "hideFromStatusBar": true,
+      "opacity": 20
+      // "borderRadius": "0px",
+      // "type": "whole-line",
+    },
+    // %: ------------------------------------------------------------
+    "%:": {
+      "foreground": "#4EF",
+      "background": "#4EF",
+      "iconColour": "#4EF",
+      "icon": "file-code",
+      "gutterIcon": true,
+      "hideFromTree": true,
+      "hideFromStatusBar": true,
+      "opacity": 20
+      // "borderRadius": "0px",
+      // "type": "whole-line",
+    },
+    // ?: ------------------------------------------------------------
+    "?:": {
+      "foreground": "#39F",
+      "background": "#39F",
+      "iconColour": "#39F",
+      "icon": "unverified",
+      "gutterIcon": true,
+      "hideFromTree": true,
+      "hideFromStatusBar": true,
+      "opacity": 20
+      // "borderRadius": "0px",
+      // "type": "whole-line",
+    },
+    // &: ------------------------------------------------------------
+    "&:": {
+      "foreground": "#93F",
+      "background": "#93F",
+      "iconColour": "#93F",
+      "icon": "squirrel",
+      "gutterIcon": true,
+      "hideFromTree": true,
+      "hideFromStatusBar": true,
+      "opacity": 20
+      // "borderRadius": "0px",
+      // "type": "whole-line",
+    },
+    // *: ------------------------------------------------------------
+    "*:": {
+      "foreground": "#9C7",
+      "background": "#9C7",
+      "iconColour": "#9C7",
+      "icon": "north-star",
+      "gutterIcon": true,
+      "hideFromTree": true,
+      "hideFromStatusBar": true,
+      "opacity": 20
+      // "borderRadius": "0px",
+      // "type": "whole-line",
+    },
+    // -+ ------------------------------------------------------------
     "-+": {
       "foreground": "#DF3",
       "background": "#DF3",
       "opacity": 25,
-      "type": "whole-line",
+      // "type": "whole-line",
       "gutterIcon": false,
-      "borderRadius": "0px",
-      "hideFromTree": true,
-      "hideFromStatusBar": true,
-      "rulerLane": "full"
-    },
-    // #endregion: // -:
-    "#endregion:": {
-      "foreground": "#224",
-      "background": "#F15",
-      "iconColour": "#F15",
-      "icon": "mirror",
-      "gutterIcon": true,
-      "type": "tag-and-comment",
-      "rulerLane": "left",
-      "borderRadius": "7px",
+      // "borderRadius": "0px",
       "hideFromTree": true,
       "hideFromStatusBar": true
     },
-    // -:
+    // -: ------------------------------------------------------------
     "-:": {
       "background": "#F15",
       "foreground": "#F15",
       "gutterIcon": false,
       "hideFromStatusBar": true,
       "hideFromTree": true,
-      "borderRadius": "0px",
-      "opacity": 15,
-      "rulerLane": "full",
-      "type": "whole-line"
+      // "borderRadius": "0px",
+      "opacity": 15
+      // "type": "whole-line",
     },
-    // eslint-disable
-    "eslint-disable": {
-      "foreground": "#5CF",
-      "background": "#93F",
-      "type": "whole-line",
-      "opacity": 30,
-      "iconColour": "#FB0",
-      "borderRadius": "0px",
-      "icon": "report",
-      "gutterIcon": true,
-      "rulerLane": "full"
-    },
-    // INFO: //-!
-    "INFO:": {
-      "background": "#BBB",
-      "foreground": "#224",
-      "gutterIcon": true,
-      "hideFromStatusBar": false,
-      "hideFromTree": false,
-      "icon": "info",
-      "borderRadius": "7px",
-      "iconColour": "#BBB",
-      "rulerLane": "right",
-      "type": "tag",
-      "opacity": 90,
-      "rulerColour": "#FFF"
-    },
-    //-!
-    "-!": {
-      "background": "#9BF",
-      "foreground": "#BBB",
-      "gutterIcon": false,
-      "hideFromStatusBar": true,
-      "hideFromTree": true,
-      "opacity": 20,
-      "rulerLane": "full",
-      "borderRadius": "0px",
-      "rulerColour": "#FFF5",
-      "type": "whole-line"
-    },
-    // HINT: //->
-    "HINT:": {
-      "background": "#FB0",
-      "foreground": "#224",
-      "gutterIcon": true,
-      "icon": "report",
-      "borderRadius": "7px",
-      "iconColour": "#FB0",
-      "rulerLane": "center"
-    },
-    //->
+    // -> ------------------------------------------------------------
     "->": {
       "background": "#93F",
       "foreground": "#5CF",
@@ -1182,32 +1562,11 @@
       "icon": "report",
       "iconColour": "#FB0",
       "opacity": 30,
-      "rulerLane": "full",
-      "borderRadius": "0px",
-      "rulerColour": "#5CF5",
-      "type": "whole-line"
+      // "borderRadius": "0px",
+      "rulerColour": "#5CF5"
+      // "type": "whole-line",
     },
-    // HACK: //-*
-    "HACK:": {
-      "background": "#74F",
-      "foreground": "#DDD",
-      "gutterIcon": true,
-      "borderRadius": "7px",
-      "icon": "squirrel",
-      "iconColour": "#93F",
-      "rulerLane": "center"
-    },
-    // UNSAFE: //-*
-    "UNSAFE:": {
-      "background": "#900",
-      "foreground": "#FB3",
-      "gutterIcon": true,
-      "borderRadius": "7px",
-      "icon": "flame",
-      "iconColour": "#900",
-      "rulerLane": "center"
-    },
-    //-*
+    // -* ------------------------------------------------------------
     "-*": {
       "background": "#0BF",
       "foreground": "#FB0",
@@ -1216,357 +1575,248 @@
       "hideFromTree": true,
       "opacity": 20,
       "iconColour": "#FB0",
-      "rulerLane": "full",
-      "borderRadius": "0px",
-      "rulerColour": "#FB05",
-      "type": "whole-line"
+      // "borderRadius": "0px",
+      "rulerColour": "#FB05"
+      // "type": "whole-line",
     },
-    // RETURNS: //→
-    "RETURNS:": {
-      "foreground": "#224",
-      "background": "#CF2",
-      "iconColour": "#CF2",
-      "icon": "cross-reference",
-      "borderRadius": "7px",
-      "gutterIcon": true,
-      "rulerLane": "center"
-    },
-    // BUG:
-    "BUG:": {
-      "foreground": "#224",
-      "background": "#F15",
-      "iconColour": "#F15",
-      "icon": "bug",
-      "gutterIcon": true,
-      "rulerLane": "center"
-    },
-    // CONSOLE:
-    "CONSOLE:": {
-      "foreground": "#224",
-      "background": "#4B9",
-      "iconColour": "#4B9",
-      "icon": "terminal",
-      "gutterIcon": true,
-      "rulerLane": "center"
-    },
-    // ERROR:
-    "ERROR:": {
-      "foreground": "#224",
-      "background": "#F36",
-      "iconColour": "#F36",
-      "icon": "x-circle",
-      "gutterIcon": true,
-      "rulerLane": "center"
-    },
-    // ERROR HANDLER: //-?
-    "ERROR HANDLER:": {
-      "foreground": "#FC9",
-      "background": "#F359",
-      "borderRadius": "7px",
-      "iconColour": "#F149",
-      "icon": "note",
-      "gutterIcon": true,
-      "type": "tag-and-comment",
-      "rulerLane": "center"
-      // "ERROR HANDLER:",
-    },
-    // -?
+    // -? ------------------------------------------------------------
     "-?": {
       "foreground": "#FDB",
       "background": "#F14",
       "opacity": 30,
-      "type": "whole-line",
+      // "type": "whole-line",
       "gutterIcon": false,
-      "hideFromTree": true,
-      "hideFromStatusBar": true,
-      "rulerLane": "none",
-      "borderRadius": "0px"
-    },
-    // FIXME:
-    "FIXME:": {
-      "foreground": "#224",
-      "background": "#F80",
-      "iconColour": "#F80",
-      "icon": "tools",
-      "gutterIcon": true,
-      "rulerLane": "center"
-    },
-    // SECTION:
-    "SECTION:": {
-      "foreground": "#224",
-      "background": "#FD7",
-      "iconColour": "#FD7",
-      "icon": "mirror",
-      "gutterIcon": true,
-      "rulerColour": "#FB0",
-      "rulerLane": "full",
-      "type": "whole-line",
       "hideFromTree": true,
       "hideFromStatusBar": true
+      // "borderRadius": "0px",
     },
-    // LOG:
-    "LOG:": {
-      "foreground": "#224",
-      "background": "#9BE",
-      "iconColour": "#9BE",
-      "icon": "checklist",
-      "gutterIcon": true,
-      "rulerLane": "center"
-    },
-    // -#
-    "-#": {
-      "foreground": "#224",
-      "background": "#9BE",
-      "opacity": 25,
-      "type": "whole-line",
-      "gutterIcon": false,
-      "hideFromTree": true,
-      "hideFromStatusBar": true,
-      "rulerLane": "none"
-    },
-    // TODO:
-    "TODO:": {
-      "foreground": "#224",
-      "background": "#FB3",
-      "iconColour": "#FB3",
-      "icon": "bookmark",
-      "gutterIcon": true,
-      "rulerLane": "center"
-    },
-    // -$
-    "-$": {
-      "foreground": "#224",
-      "background": "#FB3",
-      "opacity": 25,
-      "type": "whole-line",
-      "gutterIcon": false,
-      "hideFromTree": true,
-      "hideFromStatusBar": true,
-      "rulerLane": "none"
-    },
-    // WARNING:
-    "WARNING:": {
-      "foreground": "#224",
-      "background": "#BF2",
-      "iconColour": "#BF2",
-      "icon": "alert",
-      "gutterIcon": true,
-      "rulerLane": "center"
-    },
-    // -%
-    "-%": {
-      "foreground": "#224",
-      "background": "#BF2",
-      "opacity": 25,
-      "type": "whole-line",
-      "gutterIcon": false,
-      "hideFromTree": true,
-      "hideFromStatusBar": true,
-      "rulerLane": "none"
-    },
-    // XXX:
-    "XXX:": {
-      "foreground": "#224",
-      "background": "#E22",
-      "iconColour": "#E22",
-      "icon": "law",
-      "gutterIcon": true,
-      "rulerLane": "center"
-    },
-    // ←:
-    "←:": {
-      "background": "#FB0",
-      "borderRadius": "5px",
-      "foreground": "#07F",
-      "gutterIcon": true,
-      "hideFromStatusBar": true,
-      "icon": "package-dependencies",
-      "iconColour": "#FB7",
-      "fontWeight": "bold",
-      "opacity": 75,
-      "rulerColour": "#FB7",
-      "rulerLane": "left",
-      "type": "whole-line"
-    },
-    // :→
-    ":→": {
-      "background": "#07F",
-      "borderRadius": "5px",
-      "foreground": "#FB7",
-      "gutterIcon": true,
-      "hideFromStatusBar": true,
-      "icon": "package-dependents",
-      "iconColour": "#07F",
-      "fontWeight": "bold",
-      "opacity": 75,
-      "rulerColour": "#07F",
-      "rulerLane": "right",
-      "type": "whole-line"
-    },
-    // SEND COMMAND:
-    "SEND COMMAND:": {
-      "background": "#07F",
-      "borderRadius": "0px",
-      "foreground": "#FB7",
-      "gutterIcon": true,
-      "hideFromStatusBar": true,
-      "icon": "package-dependents",
-      "iconColour": "#07F",
-      "opacity": 75,
-      "fontWeight": "bold",
-      "rulerColour": "#07F",
-      "rulerLane": "right",
-      "type": "line"
-    },
-    // FUNC DEF:
-    "FUNC DEF:": {
-      "foreground": "#07F",
-      "background": "#FB0",
-      "iconColour": "#FB7",
-      "icon": "package-dependents",
-      "gutterIcon": true,
-      "rulerColour": "#FB7",
-      "rulerLane": "left",
-      "type": "tag",
-      // "hideFromTree": true,
-      "hideFromStatusBar": true
-    },
-    // FUNC CALL:
-    "FUNC CALL:": {
-      "foreground": "#FB7",
-      "background": "#07F",
-      "iconColour": "#07F",
-      "icon": "package-dependencies",
-      "gutterIcon": true,
-      "rulerColour": "#07F",
-      "rulerLane": "right",
-      "type": "tag",
-      "hideFromStatusBar": true
-    },
-    // -&
+    // -& ------------------------------------------------------------
     "-&": {
-      "foreground": "#07F",
-      "background": "#07F",
+      "background": "#93F",
+      "foreground": "#5CF",
       "opacity": 25,
-      "type": "whole-line",
+      // "type": "whole-line",
       "gutterIcon": false,
       "hideFromTree": true,
       "hideFromStatusBar": true,
-      "rulerColour": "#F45",
-      "rulerLane": "center"
+      "rulerColour": "#F45"
     },
-    // !:
-    "!:": {
-      "foreground": "#F20",
-      "background": "#F20",
-      "iconColour": "#F20",
-      "icon": "stop",
-      "gutterIcon": true,
+    // -% ------------------------------------------------------------
+    "-%": {
+      "foreground": "#FDB",
+      "background": "#BF2",
+      "opacity": 25,
+      // "type": "whole-line",
+      "gutterIcon": false,
+      "hideFromTree": true,
+      "hideFromStatusBar": true
+    },
+    // eslint-disable ------------------------------------------------
+    "eslint-disable": {
+      "foreground": "#5CF",
+      "background": "#93F",
+      // "type": "whole-line",
+      "opacity": 30,
+      "iconColour": "#FB0",
+      // "borderRadius": "0px",
+      "icon": "report",
+      "gutterIcon": true
+    },
+    // -! ------------------------------------------------------------
+    "-!": {
+      "background": "#9BF",
+      "foreground": "#BBB",
+      "gutterIcon": false,
+      "hideFromStatusBar": true,
+      "hideFromTree": true,
       "opacity": 20,
-      "rulerLane": "center",
-      "borderRadius": "0px",
-      "type": "whole-line"
+      // "borderRadius": "0px",
+      "rulerColour": "#FFF5"
+      // "type": "whole-line",
     },
-    // @:
-    "@:": {
-      "foreground": "#F36",
-      "background": "#F36",
-      "iconColour": "#F36",
-      "icon": "mention",
-      "gutterIcon": true,
-      "opacity": 20,
-      "rulerLane": "center",
-      "borderRadius": "0px",
-      "type": "whole-line"
-    },
-    // #-|
+    // #-| -----------------------------------------------------------
     "#-|": {
       "foreground": "#F36",
       "background": "#F36",
       "iconColour": "#F36",
       "icon": "cpu",
       "gutterIcon": true,
-      "opacity": 20,
-      "rulerLane": "center",
-      "borderRadius": "0px",
-      "type": "whole-line"
+      "opacity": 20
+      // "borderRadius": "0px",
+      // "type": "whole-line",
     },
-    // ::
-    "::": {
+    // → -------------------------------------------------------------
+    "→": {
+      "foreground": "#CF2",
+      "background": "#CF2",
+      "iconColour": "#CF2",
+      "opacity": 50,
+      // "type": "whole-line",
+      "icon": "cross-reference",
+      "gutterIcon": true,
+      "hideFromTree": true,
+      // "borderRadius": "0px",
+      "hideFromStatusBar": true
+    },
+    // ← -------------------------------------------------------------
+    "←": {
+      "foreground": "#5CF",
+      "background": "#5CF",
+      "opacity": 30,
+      "gutterIcon": false,
+      // "type": "text-and-comment",
+      "hideFromTree": true,
+      "hideFromStatusBar": true
+    },
+    // -# ------------------------------------------------------------
+    "-#": {
+      "foreground": "#9BE",
+      "background": "#9BE",
+      "iconColour": "#9BE",
+      "icon": "star",
+      "opacity": 30,
+      "type": "line",
+      "gutterIcon": true,
+      "hideFromTree": true,
+      "hideFromStatusBar": true,
+      "rulerColour": "#9BE",
+      "rulerOpacity": 50,
+      "rulerLane": "center"
+    },
+    // -$ ------------------------------------------------------------
+    "-$": {
       "foreground": "#F84",
       "background": "#F84",
       "iconColour": "#F84",
-      "icon": "gear",
+      "icon": "star",
+      "opacity": 30,
+      "type": "line",
       "gutterIcon": true,
-      "opacity": 20,
-      "rulerLane": "center",
-      "borderRadius": "0px",
-      "type": "whole-line"
+      "hideFromTree": true,
+      "hideFromStatusBar": true,
+      "rulerColour": "#F84",
+      "rulerOpacity": 50,
+      "rulerLane": "center"
     },
-    // %:
-    "%:": {
-      "foreground": "#4EF",
-      "background": "#4EF",
-      "iconColour": "#4EF",
-      "icon": "gear",
-      "gutterIcon": true,
-      "opacity": 20,
-      "rulerLane": "center",
-      "borderRadius": "0px",
-      "type": "whole-line"
-    },
-    // ?:
-    "?:": {
-      "foreground": "#39F",
-      "background": "#39F",
-      "iconColour": "#39F",
-      "icon": "unverified",
-      "gutterIcon": true,
-      "opacity": 20,
-      "rulerLane": "center",
-      "borderRadius": "0px",
-      "type": "whole-line"
-    },
-    // &:
-    "&:": {
-      "foreground": "#93F",
-      "background": "#93F",
-      "iconColour": "#93F",
-      "icon": "squirrel",
-      "gutterIcon": true,
-      "opacity": 20,
-      "rulerLane": "center",
-      "borderRadius": "0px",
-      "type": "whole-line"
-    },
-    // *:
-    "*:": {
-      "foreground": "#9C7",
-      "background": "#9C7",
-      "iconColour": "#9C7",
-      "icon": "north-star",
-      "gutterIcon": true,
-      "opacity": 20,
-      "rulerLane": "center",
-      "borderRadius": "0px",
-      "type": "whole-line"
-    },
-    // $:
-    "$:": {
+    // ::
+    "::": {
       "foreground": "#9BE",
       "background": "#9BE",
       "iconColour": "#9BE",
       "icon": "grabber",
       "gutterIcon": true,
-      "opacity": 20,
-      "rulerLane": "center",
-      "borderRadius": "0px",
-      "type": "whole-line"
+      "opacity": 30,
+      "type": "whole-line",
+      "rulerColour": "#9BE",
+      "rulerOpacity": 50,
+      "rulerLane": "full"
+    },
+    // :::
+    ":::": {
+      "foreground": "#F84",
+      "background": "#F84",
+      "iconColour": "#F84",
+      "icon": "grabber",
+      "gutterIcon": true,
+      "opacity": 30,
+      "type": "whole-line",
+      "rulerColour": "#F84",
+      "rulerOpacity": 50,
+      "rulerLane": "full"
     }
   },
+  "todo-tree.general.tags": [
+    "-:",
+    "-!",
+    "-?",
+    "-@",
+    "-*",
+    "-&",
+    "-#",
+    "-%",
+    "-%0",
+    "-%1",
+    "-%2",
+    "-%3",
+    "-%4",
+    "-%5",
+    "-%6",
+    "-+",
+    "->",
+    "-$",
+    ":::",
+    "::",
+    "!:",
+    "?:",
+    "[ ]",
+    "[x]",
+    "@:",
+    "*:",
+    "&:",
+    "#-|",
+    "#:",
+    "#endregion:",
+    "#region:",
+    "%:",
+    "←:",
+    "→",
+    "+:",
+    "|-::",
+    "$:",
+    "BUG:",
+    "CONSOLE:",
+    "REVIEW NEEDED:",
+    "ERROR HANDLER:",
+    "ERROR:",
+    "eslint-disable",
+    "FIXME:",
+    "FUNC CALL:",
+    "FUNC DEF:",
+    "HACK:",
+    "HARDCODE:",
+    "HINT:",
+    "INFO:",
+    "LOG:",
+    "RETURNS:",
+    "SECTION:",
+    "SEND COMMAND:",
+    "SIDE EFFECTS:",
+    "TODO:",
+    "UNIMPLEMENTED:",
+    "UNSAFE:",
+    "WARNING:",
+    "XXX:",
+    ":→",
+    "→:",
+    ":←",
+    "←",
+    "::"
+  ],
+  // "todo-tree.highlights.foregroundColourScheme": [
+  //   "white",
+  //   "black",
+  //   "black",
+  //   "white",
+  //   "white",
+  //   "white",
+  //   "black"
+  // ],
+  // "todo-tree.highlights.backgroundColourScheme": [
+  //   "red",
+  //   "orange",
+  //   "yellow",
+  //   "green",
+  //   "blue",
+  //   "indigo",
+  //   "violet"
+  // ],
+  "todo-tree.filtering.excludedWorkspaces": [], // new items
   "todo-tree.filtering.ignoreGitSubmodules": false,
+  "todo-tree.filtering.includedWorkspaces": [], // new items
+  "todo-tree.filtering.includeGlobs": [], // new items
   "todo-tree.filtering.includeHiddenFiles": false,
   "todo-tree.filtering.passGlobsToRipgrep": true,
+  "todo-tree.filtering.scopes": [], // new items
   "todo-tree.filtering.useBuiltInExcludes": "file and search excludes",
   "todo-tree.general.debug": false,
   "todo-tree.general.enableFileWatcher": true,
@@ -1574,13 +1824,18 @@
   "todo-tree.general.fileWatcherGlob": "**/*",
   "todo-tree.general.revealBehaviour": "end of todo",
   "todo-tree.general.rootFolder": "",
+  "todo-tree.general.showActivityBarBadge": false, // new items
+  "todo-tree.general.showIconsInsteadOfTagsInStatusBar": false, // new items
   "todo-tree.general.statusBar": "current file",
   "todo-tree.general.statusBarClickBehaviour": "cycle",
+  "todo-tree.general.tagGroups": {}, // new items
   "todo-tree.highlights.enabled": true,
   "todo-tree.highlights.highlightDelay": 100,
   "todo-tree.highlights.useColourScheme": true,
+  "todo-tree.regex.enableMultiLine": false, // new items
   "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^)\\s*($TAGS)|^\\s*- \\[ \\])",
   "todo-tree.regex.regexCaseSensitive": true,
+  "todo-tree.regex.subTagRegex": "^\\s*\\((.*)\\)",
   "todo-tree.ripgrep.ripgrep": "",
   "todo-tree.ripgrep.ripgrepArgs": "--max-columns=1000 --no-config ",
   "todo-tree.ripgrep.ripgrepMaxBuffer": 200,
@@ -1589,6 +1844,7 @@
   "todo-tree.tree.buttons.expand": true,
   "todo-tree.tree.buttons.export": false,
   "todo-tree.tree.buttons.filter": true,
+  "todo-tree.tree.buttons.groupBySubTag": false, // new items
   "todo-tree.tree.buttons.groupByTag": true,
   "todo-tree.tree.buttons.refresh": true,
   "todo-tree.tree.buttons.reveal": true,
@@ -1598,7 +1854,8 @@
   "todo-tree.tree.expanded": true,
   "todo-tree.tree.filterCaseSensitive": false,
   "todo-tree.tree.flat": false,
-  // "todo-tree.tree.grouped": true,
+  "todo-tree.tree.groupedBySubTag": false, // new items
+  "todo-tree.tree.groupedByTag": false, // new items
   "todo-tree.tree.hideIconsWhenGroupedByTag": false,
   "todo-tree.tree.hideTreeWhenEmpty": false,
   "todo-tree.tree.labelFormat": "${tag} ${after} ― Line ${line}",
@@ -1607,36 +1864,76 @@
   "todo-tree.tree.showBadges": true,
   "todo-tree.tree.showCountsInTree": true,
   "todo-tree.tree.showCurrentScanMode": true,
-  // "todo-tree.tree.showScanModeButton": false,
   "todo-tree.tree.sort": true,
   "todo-tree.tree.sortTagsOnlyViewAlphabetically": false,
+  "todo-tree.tree.subTagClickUrl": "", // new items
   "todo-tree.tree.tagsOnly": true,
   "todo-tree.tree.tooltipFormat": "${filepath}, line ${line}",
   "todo-tree.tree.trackFile": true,
-  "todo-tree.filtering.excludedWorkspaces": [],
-  "todo-tree.filtering.excludeGlobs": [],
-  "todo-tree.filtering.includedWorkspaces": [],
-  "todo-tree.filtering.includeGlobs": [],
-  "todo-tree.general.tagGroups": {},
-  "todo-tree.highlights.backgroundColourScheme": [],
-  "todo-tree.highlights.foregroundColourScheme": [],
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "workbench.editor.titleScrollbarSizing": "large",
-  "task.allowAutomaticTasks": "on",
-  "jest.autoRun": {
-    "watch": true,
-    "onSave": "test-only",
-    "onStartup": [
-      "all-tests"
-    ]
-  },
-  "[dotenv]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  },
-  "conventionalCommits.scopes": [
-    "human-size"
-  ]
+  "[shellscript]": {
+    "editor.defaultFormatter": "shakram02.bash-beautify"
+  }
+  // "todo-tree.filtering.excludedWorkspaces": [], // new items
+  // "todo-tree.filtering.ignoreGitSubmodules": false,
+  // "todo-tree.filtering.includedWorkspaces": [], // new items
+  // "todo-tree.filtering.includeGlobs": [], // new items
+  // "todo-tree.filtering.includeHiddenFiles": false,
+  // "todo-tree.filtering.passGlobsToRipgrep": true,
+  // "todo-tree.filtering.scopes": [], // new items
+  // "todo-tree.filtering.useBuiltInExcludes": "file and search excludes",
+  // "todo-tree.general.debug": false,
+  // "todo-tree.general.enableFileWatcher": true,
+  // "todo-tree.general.exportPath": "~/todo-tree-%Y%m%d-%H%M.txt",
+  // "todo-tree.general.fileWatcherGlob": "**/*",
+  // "todo-tree.general.revealBehaviour": "end of todo",
+  // "todo-tree.general.rootFolder": "",
+  // "todo-tree.general.showActivityBarBadge": false, // new items
+  // "todo-tree.general.showIconsInsteadOfTagsInStatusBar": false, // new items
+  // "todo-tree.general.statusBar": "current file",
+  // "todo-tree.general.statusBarClickBehaviour": "cycle",
+  // "todo-tree.general.tagGroups": {}, // new items
+  // "todo-tree.highlights.enabled": true,
+  // "todo-tree.highlights.highlightDelay": 100,
+  // "todo-tree.highlights.useColourScheme": true,
+  // "todo-tree.regex.enableMultiLine": false, // new items
+  // "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^)\\s*($TAGS)|^\\s*- \\[ \\])",
+  // "todo-tree.regex.regexCaseSensitive": true,
+  // "todo-tree.regex.subTagRegex": "^\\s*\\((.*)\\)",
+  // "todo-tree.ripgrep.ripgrep": "",
+  // "todo-tree.ripgrep.ripgrepArgs": "--max-columns=1000 --no-config ",
+  // "todo-tree.ripgrep.ripgrepMaxBuffer": 200,
+  // "todo-tree.ripgrep.usePatternFile": true,
+  // "todo-tree.tree.autoRefresh": true,
+  // "todo-tree.tree.buttons.expand": true,
+  // "todo-tree.tree.buttons.export": false,
+  // "todo-tree.tree.buttons.filter": true,
+  // "todo-tree.tree.buttons.groupBySubTag": false, // new items
+  // "todo-tree.tree.buttons.groupByTag": true,
+  // "todo-tree.tree.buttons.refresh": true,
+  // "todo-tree.tree.buttons.reveal": true,
+  // "todo-tree.tree.buttons.scanMode": false,
+  // "todo-tree.tree.buttons.viewStyle": true,
+  // "todo-tree.tree.disableCompactFolders": false,
+  // "todo-tree.tree.expanded": true,
+  // "todo-tree.tree.filterCaseSensitive": false,
+  // "todo-tree.tree.flat": false,
+  // "todo-tree.tree.groupedBySubTag": false, // new items
+  // "todo-tree.tree.groupedByTag": false, // new items
+  // "todo-tree.tree.hideIconsWhenGroupedByTag": false,
+  // "todo-tree.tree.hideTreeWhenEmpty": false,
+  // "todo-tree.tree.labelFormat": "${tag} ${after} ― Line ${line}",
+  // "todo-tree.tree.scanAtStartup": true,
+  // "todo-tree.tree.scanMode": "workspace",
+  // "todo-tree.tree.showBadges": true,
+  // "todo-tree.tree.showCountsInTree": true,
+  // "todo-tree.tree.showCurrentScanMode": true,
+  // "todo-tree.tree.sort": true,
+  // "todo-tree.tree.sortTagsOnlyViewAlphabetically": false,
+  // "todo-tree.tree.subTagClickUrl": "", // new items
+  // "todo-tree.tree.tagsOnly": true,
+  // "todo-tree.tree.tooltipFormat": "${filepath}, line ${line}",
   // #endregion: TODO TREE                                                      !
+  /*
+  |-····―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――··-|
+  */
 }

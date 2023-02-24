@@ -36,16 +36,21 @@ net
     console.log(`actor: tcp://${actor_hostname}:${actor_port}`);
   });
 // THIS TEXT SHOULD NOT APPEAR IN BOOK
+const methods = ['increment_sum', 'square_sum'];
 http
   .createServer(async (req, res) => {
     message_id++;
     if (actors.size === 0) return res.end('ERROR: EMPTY ACTOR POOL');
     const actor = randomActor();
     messages.set(message_id, res);
+    console.log('req.url', req.url.split('/'));
+    const len = methods.length;
+    const recivedMethod = Number(req.url.slice(-2));
+    const method = methods[recivedMethod % len];
     actor({
       id: message_id,
-      method: 'square_sum',
-      args: [Number(req.url.slice(1))],
+      method,
+      args: [Number(req.url.slice(-1))],
     });
   })
   .listen(web_port, web_hostname, () => {
@@ -60,7 +65,12 @@ function randomActor() {
 // PART TWO BEGINS BELOW. THIS TEXT SHOULD NOT APPEAR IN BOOK
 const RpcWorkerPool = require('./rpc-worker.js');
 
-const worker = new RpcWorkerPool('./worker.js', 4, 'leastbusy');
+// XXX:
+const worker = new RpcWorkerPool(
+  '/home/luxcium/projects/phash-scout/src/API/worker/MultithreadedJSBook/ch6-actors/worker.js',
+  4,
+  'roundrobin'
+);
 actors.add(async data => {
   const value = await worker.exec(data.method, ...data.args);
   messages.get(data.id).end(
@@ -68,10 +78,12 @@ actors.add(async data => {
       id: data.id,
       value,
       pid: 'server',
-    }) + '\0'
+    }) + '\n\0\n' // XXX:
   );
   messages.delete(data.id);
 });
+// 127.0.0.1:9000
+//  /home/luxcium/projects/phash-scout/src/API/worker/MultithreadedJSBook/ch6-actors/actor.js 127.0.0.1:9000
 /* **************************************************************** */
 /*                                                                  */
 /*  MIT LICENSE                                                     */

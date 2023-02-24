@@ -1,0 +1,118 @@
+Sure! Here are some common categories of scripts in a Node.js project and a brief description of their role:
+
+Development - scripts for running the project in development mode and performing various development-related tasks such as linting and formatting code.
+Build - scripts for building the production version of the project by transpiling, bundling, and optimizing code.
+Testing - scripts for running automated tests and generating test coverage reports.
+Deployment - scripts for deploying the project to production environments, including rolling back to previous versions if necessary.
+Maintenance - scripts for performing maintenance tasks such as database migrations, backups, and data seeding.
+Utility - miscellaneous scripts for running specific tasks, such as starting and stopping the project, checking the status of the service, and viewing logs.
+Note that these categories are not exhaustive and there may be other types of scripts in a project. The role of each category is to provide a standardized way of performing specific tasks and ensuring consistency across the project.
+
+
+in summary what I want to do is simple here is a recap of what I want you to do: tell me what are in your opinion the 20 most common scripts names and the 20 most usefull or necessary scripts, can you please list them in the most idiomatic order to reflect the usual good practices please only list the scripts neames and only that
+
+Sure! Here are ten common scripts names in a suggested order:
+
+start: Start the application in production mode.
+dev: Start the application in development mode with auto-reloading.
+build: Build the production version of the application.
+test: Run automated tests.
+lint: Lint the code.
+format: Format the code.
+fix: Automatically fix linting errors and format the code.
+clean: Clean build artifacts and temporary files.
+precommit: Run lint, test, and fix before committing changes.
+prepublish: Run build before publishing the package to the registry.
+Note that this list may not be applicable to every project and some of the names may need to be adjusted or additional scripts may need to be added.
+
+`test`, `lint`, `format`, `fix`
+
+
+Benjamin Vincent
+this is interesting please continue listing the 10 next most idiomatic scripts a project would have (my project is a service not a library it will not be published it would be run or started or such)
+Sure! Here are the next ten common scripts names in a suggested order:
+
+stop: Stop the running service.
+restart: Restart the running service.
+status: Check the status of the running service.
+deploy: Deploy the service to a production environment.
+rollback: Roll back to a previous deployment.
+logs: View logs of the running service.
+monitor: Monitor the service for performance and availability.
+migrate: Migrate the database schema or data.
+seed: Seed the database with initial data.
+backup: Backup the service data and configuration.
+Again, note that this list may not be applicable to every project, and some of the names may need to be adjusted or additional scripts may need to be added.
+
+
+
+
+Benjamin Vincent
+how would you categorize the kind of tasks each script are doing and how would you describe teh role that play each of those categories of scripts in a nodeJS project
+Sure! Here are some common categories of scripts in a Node.js project and a brief description of their role:
+
+Development - scripts for running the project in development mode and performing various development-related tasks such as linting and formatting code.
+Build - scripts for building the production version of the project by transpiling, bundling, and optimizing code.
+Testing - scripts for running automated tests and generating test coverage reports.
+Deployment - scripts for deploying the project to production environments, including rolling back to previous versions if necessary.
+Maintenance - scripts for performing maintenance tasks such as database migrations, backups, and data seeding.
+Utility - miscellaneous scripts for running specific tasks, such as starting and stopping the project, checking the status of the service, and viewing logs.
+Note that these categories are not exhaustive and there may be other types of scripts in a project. The role of each category is to provide a standardized way of performing specific tasks and ensuring consistency across the project.
+
+Build:
+a. build - compiles the TypeScript code into JavaScript, or packages the code in a deployable format
+b. build:prod - compiles the code for production use, optimizing for performance and size
+
+Start:
+a. start - starts the service in development mode
+b. start:prod - starts the service in production mode
+
+Test:
+a. test - runs all the tests to ensure that the code is working as expected
+b. test:watch - runs tests in watch mode for faster feedback during development
+c. test:coverage - generates a code coverage report for the tests
+d. test:e2e - runs end-to-end tests for the service
+
+Code quality:
+a. lint - runs static code analysis to detect and report on patterns in the code that might be problematic
+b. format - formats code to a consistent style
+c. fix - automatically fixes simple code issues (like formatting) reported by the linter
+d. lint:fix - automatically fixes simple code issues (like formatting) reported by the linter
+
+Production:
+a. deploy - deploys the code to a server or a cloud service
+b. restart - restarts the service on the production server
+
+Development:
+a. clean - deletes any files or directories generated by previous builds/tests
+b. prepare - sets up the development environment, installs dependencies, and generates any required files
+c. watch - compiles the code and watches for changes, automatically rebuilding the code
+d. debug - starts the service with a debugger attached for debugging purposes
+e. inspect - starts the service with the Node.js inspector attached for debugging purposes
+f. start:watch - starts the service in watch mode for faster feedback during development
+
+"build": "echo UNIMPLEMENTED - compiles the TypeScript code into JavaScript, or packages the code in a deployable format",
+"build:prod": "echo UNIMPLEMENTED - compiles the code for production use, optimizing for performance and size",
+"start: "echo UNIMPLEMENTED - starts the service in development mode",
+"start:dev": "echo UNIMPLEMENTED - starts the service in production mode",
+"start:watch": "echo UNIMPLEMENTED - starts the service in watch mode for faster feedback during development",
+"start:debug": "echo UNIMPLEMENTED - starts the service with a debugger attached for debugging purposes",
+"start:inspect": "echo UNIMPLEMENTED - starts the service with the Node.js inspector attached for debugging purposes",
+"restart": "echo UNIMPLEMENTED - restarts the service on the production server",
+"stop": "echo UNIMPLEMENTED - stops the running service",
+"test": "echo UNIMPLEMENTED - runs all the tests to ensure that the code is working as expected",
+"test:watch": "echo UNIMPLEMENTED - runs tests in watch mode for faster feedback during development",
+"test:coverage": "echo UNIMPLEMENTED - generates a code coverage report for the tests",
+"lint": "echo UNIMPLEMENTED - runs static code analysis to detect and report on patterns in the code that might be problematic",
+"format": "echo UNIMPLEMENTED - formats code to a consistent style",
+"fix": "echo UNIMPLEMENTED - automatically fixes simple code issues (like formatting) reported by the linter",
+"clean": "echo UNIMPLEMENTED - deletes any files or directories generated by previous builds/tests",
+"prepare": "echo UNIMPLEMENTED - sets up the development environment, installs dependencies, and generates any required files",
+"deploy": "echo UNIMPLEMENTED - deploys the code to a server or a cloud service",
+"status": "echo UNIMPLEMENTED - checks the status of the running service",
+"monitor": "echo UNIMPLEMENTED - monitors the health of the service and sends alerts if there are issues",
+"logs": "echo UNIMPLEMENTED - displays the logs of the running service",
+"rollback": "echo UNIMPLEMENTED - rolls back the service to a previous version in case of issues",
+"migrate": "echo UNIMPLEMENTED - performs database migrations as part of the deployment process",
+"seed": "echo UNIMPLEMENTED - seeds the database with initial data",
+"backup": "echo UNIMPLEMENTED - creates a backup of the database or the service",

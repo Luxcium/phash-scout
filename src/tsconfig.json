@@ -1,7 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "include": ["../src/**/*.*"],
-  "exclude": ["out"],
+  "exclude": ["out", "archives", "**/archive/**/*.*"],
   "compilerOptions": {
     /* Module Resolution Interop Constraints */
     "target": "ESNext",

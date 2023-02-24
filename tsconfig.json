@@ -8,7 +8,7 @@
     }
   ],
   // Exclude references and emitted output
-  "exclude": ["dist", "node_modules", "**/archive", "out"],
+  "exclude": ["dist", "node_modules", "**/archive/**/*.*", "out"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

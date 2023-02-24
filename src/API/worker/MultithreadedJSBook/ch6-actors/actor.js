@@ -5,7 +5,12 @@ const RpcWorkerPool = require('./rpc-worker.js');
 
 const [, , host] = process.argv;
 const [hostname, port] = host.split(':');
-const worker = new RpcWorkerPool('./worker.js', 4, 'leastbusy');
+// XXX:
+const worker = new RpcWorkerPool(
+  '/home/luxcium/projects/phash-scout/src/API/worker/MultithreadedJSBook/ch6-actors/worker.js',
+  4,
+  'roundrobin'
+);
 // THIS TEXT SHOULD NOT APPEAR IN BOOK
 const upstream = net
   .connect(port, hostname, () => {
