@@ -52,7 +52,7 @@ const Rc = rConnect();
   if (await isDir(traverseDir)) {
     doTraverse(traverseDir);
   }
-})('/media/luxcium/D:\\ Archive locale/import/GAYBOYSTUBE/users');
+})('/run/media/luxcium/x250Mio/Archives TG/Twinks Lover 💙💚💔/jpgs');
 
 export async function doTraverse(dir: string) {
   const subfolders_Open = await fs.readdir(dir);

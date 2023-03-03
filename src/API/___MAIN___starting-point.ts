@@ -25,6 +25,8 @@ function main() {
   });
 }
 
-const dirList = ['/media/luxcium/Archive_Locale/import/'];
+const dirList = [
+  '/run/media/luxcium/x250Mio/Archives TG/Twinks Lover 💙💚💔/jpgs',
+];
 
 main();
