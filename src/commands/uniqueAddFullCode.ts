@@ -1,14 +1,12 @@
 import type { QueryResultItem, RawQueryResult, S } from '@types';
 
-// import { RADIUS } from '../constants/radius';
-import { IMGSCOUT, immediateZalgo, isQueryResultItem } from '../tools';
+import {
+  IMGSCOUT,
+  immediateZalgo,
+  isQueryResultItem,
+  shiftTitle,
+} from '../tools';
 import { pHsCardKey, phSetKey, phTitleKey } from '../tools/redis/keys';
-// import { hasSameTitleInclude } from '../tools/hasSameTitleInclude';
-// import { shiftTitle } from '../tools/shiftTitle';
-// import { zaddPhash } from './addPhash';
-// import { addPhash } from './addPhash';
-// import { syncPhash } from './syncPhash';
-// import { queryPhash } from './queryPhash';
 
 const VERBOSA3 = false;
 const RADIUS = '0';
@@ -74,7 +72,7 @@ export async function uniqueAdd(
   return [[title, id, '-5']];
 }
 
-export async function queryPhash(
+async function queryPhash(
   R: any,
   k: S,
   phash_: S,
@@ -99,7 +97,7 @@ export async function queryPhash(
   return [];
 }
 
-export async function syncPhash(R: any, k: string) {
+async function syncPhash(R: any, k: string) {
   try {
     // SEND COMMAND: IMGSCOUT.SYNC -----------------------------------
     await R.sendCommand([IMGSCOUT.SYNC, k]);
@@ -110,7 +108,7 @@ export async function syncPhash(R: any, k: string) {
   return false;
 }
 
-export async function addPhash(
+async function addPhash(
   redis: any,
   key: string,
   pHash: string,
@@ -142,7 +140,7 @@ export async function addPhash(
   return result[2];
 }
 
-export async function zaddPhash(cardinality: any, pHash: string, redis: any) {
+async function zaddPhash(cardinality: any, pHash: string, redis: any) {
   const ZADD = 'ZADD';
   // HACK: remove hardcoded name:
   const KEY = pHsCardKey();
@@ -152,24 +150,11 @@ export async function zaddPhash(cardinality: any, pHash: string, redis: any) {
   return redis.sendCommand([ZADD, KEY, SCORE, MEMBER]);
 }
 
-export function shiftTitle(title: string, level = '-1500') {
-  return (i: QueryResultItem) => {
-    if (i[0] === title) {
-      i[2] = level;
-    }
-
-    return i;
-  };
-}
-
-export function hasSameTitleInclude(
-  title: string,
-  queryResult: QueryResultItem[]
-) {
+function hasSameTitleInclude(title: string, queryResult: QueryResultItem[]) {
   return queryResult.some(i => i[0] === title);
 }
 
-export function isQueryResultList(
+function isQueryResultList(
   contender: unknown
 ): contender is Array<QueryResultItem> {
   return Array.isArray(contender) && contender.every(isQueryResultItem);

@@ -1,12 +1,7 @@
-import { logError } from '../constants';
 import { IMGSCOUT } from '../tools';
 
-export async function syncPhash(R: any, k: string) {
-  try {
-    await R.sendCommand([IMGSCOUT.SYNC, k]);
-    return true;
-  } catch (error) {
-    logError(String(error));
-  }
-  return false;
+export async function syncPhash(redis: any, key: string): Promise<boolean> {
+  // SEND COMMAND: IMGSCOUT.SYNC -------------------------------------
+  await redis.sendCommand([IMGSCOUT.SYNC, key]);
+  return true;
 }
