@@ -1,8 +1,5 @@
-import { QueryResultItem } from '@types';
+import { QueryResults } from '@types';
 
-export function hasSameTitleInclude(
-  title: string,
-  queryResult: QueryResultItem[]
-) {
-  return queryResult.some(i => i[0] === title);
+export function hasSameTitleInclude(title: string, queryResults: QueryResults) {
+  return queryResults.some(i => i[0] === title);
 }

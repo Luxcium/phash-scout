@@ -79,7 +79,7 @@ export type { PHashGet, PHashGetter } from './PHashGetter';
 export type { PhashNow } from './PhashNow';
 export type { PQuerryAndAdd } from './PQuerryAndAdd';
 export type { QueryResult } from './QueryResult';
-export type { QueryResultItem } from './QueryResultItem';
+export type { QueryResultItem, QueryResults } from './QueryResultItem';
 export type { QueryResultObject } from './QueryResultObject';
 export type { QueryResultSize } from './QueryResultSize';
 export type { RawQueryResult } from './RawQueryResult';

@@ -1,0 +1,163 @@
+import { phSetKey, phTitleKey } from '../../tools/redis/keys';
+import { zaddPhash } from './zaddPhash';
+
+const PH_SET_KEY = 'SADD' as const;
+const PH_SET_CARD = 'SCARD' as const;
+const IMG_SCOUT_ADD = 'IMGSCOUT.ADD' as const;
+const SET = 'SET' as const;
+
+export async function addPhash(
+  redis: any,
+  key: string,
+  pHash: string,
+  title: string
+): Promise<number> {
+  const result = await Promise.all([
+    redis.sendCommand([PH_SET_KEY, phSetKey(pHash), title]),
+    redis.sendCommand([PH_SET_CARD, phSetKey(pHash)]),
+    redis.sendCommand([IMG_SCOUT_ADD, key, pHash, title]),
+  ]);
+
+  await redis.sendCommand([SET, phTitleKey(title), String(result[2])]);
+
+  const cardinality = Number(result[1]);
+  if (cardinality > 1) {
+    await zaddPhash(cardinality, pHash, redis);
+  }
+
+  return result[2];
+}
+import { IMGSCOUT, immediateZalgo } from '../../tools';
+import { QueryResultItem } from '../../types';
+import { syncPhash } from '../syncPhash';
+
+const RADIUS = '0';
+
+export async function queryPhash(
+  R: any,
+  k: string,
+  phash_: string,
+  radius: string = RADIUS,
+  keys: any
+): Promise<QueryResultItem[]> {
+  const keys_ = keys(k);
+  const exists = await immediateZalgo(keys_ || R.EXISTS(k));
+  if (exists !== 1) {
+    console.error(`R.EXISTS(${k}) -> ${exists} ... keys.list[k]:${keys_}`);
+    throw new Error(`R.EXISTS(${k}) -> ${exists} ... keys.list[k]:${keys_}`);
+  }
+
+  await syncPhash(R, k); // call syncPhash before sending IMGSCOUT.QUERY
+
+  const result: QueryResultItem[] = R.sendCommand([
+    IMGSCOUT.QUERY,
+    k,
+    phash_,
+    radius,
+  ]);
+  return result;
+}
+import { QueryResultItem } from '../../types';
+
+export function shiftTitle(title: string, level = '-1500') {
+  return (i: QueryResultItem) => {
+    if (i[0] === title) {
+      i[2] = level;
+    }
+
+    return i;
+  };
+}
+import { IMGSCOUT } from '..';
+
+export async function syncPhash(R: any, k: string) {
+  try {
+    // SEND COMMAND: IMGSCOUT.SYNC -----------------------------------
+    await R.sendCommand([IMGSCOUT.SYNC, k]);
+    return true;
+  } catch (error) {
+    console.error(String(error));
+  }
+  return false;
+}
+import {
+  hasSameTitleInclude,
+  isQueryResultList,
+  shiftTitle,
+} from '../../tools';
+import { RawQueryResult } from '../../types';
+import { addPhash } from './addPhash';
+import { queryPhash } from './queryPhash';
+
+type QueryResultItem = [path: string, id: number, radius: string];
+type PQuerryAndAdd = {
+  R: any;
+  k: string;
+  phash_: string;
+  title: string;
+  radius?: string;
+};
+
+// -5 add as the first and only
+// (not isQueryResultList or length === 0)
+
+// -10 add as the next and more
+// (has Not SomeTitleInclude but is queryResultList & length > 0)
+
+// -15 already added previously
+// (has SomeTitleInclude so it was previously -10 or -5)
+
+const _keys: any = { list: {} };
+const keys: any = (k: string) => {
+  const tempValue = _keys.list[k] || 0;
+  _keys.list[k] = 1;
+  return tempValue;
+};
+
+export async function uniqueAdd(
+  querryAndAddParam: PQuerryAndAdd
+): Promise<QueryResultItem[]> {
+  const { R, k, phash_, title, radius } = querryAndAddParam;
+
+  const rawQueryResult: RawQueryResult = queryPhash(
+    R,
+    k,
+    phash_,
+    radius || '0',
+    keys
+  );
+  const queryResultList = await rawQueryResult;
+
+  let id = 0;
+  if (queryResultList.length > 0 && isQueryResultList(queryResultList)) {
+    if (hasSameTitleInclude(title, queryResultList)) {
+      let tCount = -15;
+      // ++ already added previously will be lower than -15 ----------
+      return queryResultList
+        .map(shiftTitle(title, `${tCount--}`))
+        .sort((a, b) => Number(a[2]) - Number(b[2]));
+    }
+
+    id = await addPhash(R, k, phash_, title);
+    // ++ add as the the next and more as -10 ------------------------
+    queryResultList.unshift([title, id, '-10']);
+    return queryResultList;
+  }
+
+  id = await addPhash(R, k, phash_, title);
+  // ++ add as the first and only as -5 ------------------------------
+  return [[title, id, '-5']];
+}
+import { pHsCardKey, phSetKey } from '../../tools/redis/keys';
+
+export async function zaddPhash(
+  cardinality: number,
+  pHash: string,
+  redis: any
+): Promise<number> {
+  const ZADD = 'ZADD';
+  const KEY = pHsCardKey();
+  const SCORE = String(cardinality || -1);
+  const MEMBER = phSetKey(pHash);
+  return Number(await redis.sendCommand([ZADD, KEY, SCORE, MEMBER]));
+}
