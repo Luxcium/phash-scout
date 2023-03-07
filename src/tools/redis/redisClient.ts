@@ -60,15 +60,23 @@ export function redisCreateClient(options?: RedisCStrOptions): RedisClientType {
   return client;
 }
 
-export async function redis6382Test() {
-  const R = redisCreateClient({ port: 6383 });
-  await R.connect();
-  const result = String(await R.PING());
-  logInfo(result, 'redis6382Test:');
-  await R.QUIT();
-  return result.toLowerCase() === 'pong';
+export async function redisTest(port: number = 6383) {
+  const R = redisCreateClient({ port });
+  if (!R) {
+    throw new Error(`Failed to create Redis client on port ${port}`);
+  }
+  try {
+    await R.connect();
+    const result = String(await R.PING());
+    logInfo(result, `redisTest:${port}`);
+    return result.toLowerCase() === 'pong';
+  } catch (error) {
+    logError(`Error running redisTest on port ${port}: ${error}`);
+    await R.quit();
+    return false;
+  }
 }
-// (async () => logInfo(await redis6382Test()))();
+// (async () => logInfo(await redisTest()))();
 /*
 Events
 The Node Redis client class is an Nodejs EventEmitter and it emits an event each time the network status changes:
