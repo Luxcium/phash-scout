@@ -1,4 +1,4 @@
-import type { QueryResultItem, RawQueryResult, S } from '@types';
+import type { QueryResultItem, RawQueryResult } from '@types';
 
 import {
   IMGSCOUT,
@@ -30,9 +30,9 @@ const keys: any = (k: string) => {
 
 type PQuerryAndAdd = {
   R: any;
-  k: S;
-  phash_: S;
-  title: S;
+  k: string;
+  phash_: string;
+  title: string;
   radius?: string;
 };
 
@@ -74,8 +74,8 @@ export async function uniqueAdd(
 
 async function queryPhash(
   R: any,
-  k: S,
-  phash_: S,
+  k: string,
+  phash_: string,
   radius: string = RADIUS,
   failSilently = true,
   keys: any

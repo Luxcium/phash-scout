@@ -1,5 +1,4 @@
 import {
-  P,
   QueryResultItem,
   QueryResultObject,
   QueryResultSize,
@@ -9,6 +8,8 @@ import {
 import { isA_Promise } from '.';
 import { getSplit } from './getSplit';
 import { reorder } from './reorder';
+
+type P<T> = Promise<T>;
 
 export function toQueryResultObj(
   queryItems: QueryResultItem

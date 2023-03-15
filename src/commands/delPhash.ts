@@ -1,9 +1,12 @@
-import { N, S } from '@types';
-
 import { IMGSCOUT } from '../tools';
 import { syncPhash } from './syncPhash';
 
-export async function delPhash(R: any, k: S, id: N, failSilently = true) {
+export async function delPhash(
+  R: any,
+  k: string,
+  id: number,
+  failSilently = true
+) {
   try {
     const R_EXISTS = await R.EXISTS(k);
     if (R_EXISTS === 1) {
@@ -18,7 +21,12 @@ export async function delPhash(R: any, k: S, id: N, failSilently = true) {
   }
   return [];
 }
-export async function delPhash2(R: any, k: S, id: N, failSilently = true) {
+export async function delPhash2(
+  R: any,
+  k: string,
+  id: number,
+  failSilently = true
+) {
   try {
     const R_EXISTS = await R.EXISTS(k);
     if (R_EXISTS === 1) {
@@ -37,6 +45,6 @@ export async function delPhash2(R: any, k: S, id: N, failSilently = true) {
 }
 
 export const delPhashKey =
-  (R: any, k: S, failSilently = true) =>
-  async (id: N) =>
+  (R: any, k: string, failSilently = true) =>
+  async (id: number) =>
     delPhash(R, k, id, failSilently);

@@ -1,13 +1,11 @@
-import type { S } from '@types';
-
 import { RADIUS } from '../constants/radius';
 import { IMGSCOUT, immediateZalgo } from '../tools';
 import { syncPhash } from './syncPhash';
 
 export async function queryPhash(
   R: any,
-  k: S,
-  phash_: S,
+  k: string,
+  phash_: string,
   radius: string = RADIUS,
   failSilently = true,
   keys: any

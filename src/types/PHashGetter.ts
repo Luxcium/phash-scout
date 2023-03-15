@@ -1,4 +1,5 @@
-import { IsExcluded, IsNotValidPHash, IsValidPHash, NotExcluded } from '.';
+import { IsNotValidPHash, IsValidPHash } from './ValidPHash';
+import { IsExcluded, NotExcluded } from './WithExclude';
 
 export type PHashGetter = () => Promise<
   (NotExcluded & IsValidPHash) | (IsExcluded & IsNotValidPHash)

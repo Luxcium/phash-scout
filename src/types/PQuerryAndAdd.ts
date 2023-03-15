@@ -1,9 +1,7 @@
-import { S } from '.';
-
 export type PQuerryAndAdd = {
   R: any;
-  k: S;
-  phash_: S;
-  title: S;
+  k: string;
+  phash_: string;
+  title: string;
   radius?: string;
 };

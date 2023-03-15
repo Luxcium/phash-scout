@@ -1,15 +1,11 @@
-import {
-  CurrentPathError,
-  FileType,
-  GetStats,
-  IsExcluded,
-  IsNotValidPHash,
-  IsValidPHash,
-  NotExcluded,
-  PathAndStats,
-  PathWithStats,
-  QueryResultObject,
-} from '.';
+import { FileType } from '../tools';
+import { CurrentPathError } from './complex-types';
+import { GetStats } from './GetStats';
+import { PathAndStats } from './PathAndStats';
+import { PathWithStats } from './PathWithStats';
+import { QueryResultObject } from './QueryResultObject';
+import { IsNotValidPHash, IsValidPHash } from './ValidPHash';
+import { IsExcluded, NotExcluded } from './WithExclude';
 
 export type RedisQueryResult<Bool extends boolean = true | false> = {
   baseName: string;
