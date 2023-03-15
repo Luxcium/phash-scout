@@ -9,7 +9,7 @@
   // "editor.fontSize": 20,
   // "editor.fontWeight": "500",
   "terminal.integrated.fontFamily": "'TerminessTTF Nerd Font', mono, 'Anonymice NF', '3270Narrow NF', mono",
-  "terminal.integrated.fontSize": 18,
+  "terminal.integrated.fontSize": 14,
   "terminal.integrated.fontWeight": "600",
   "terminal.integrated.fontWeightBold": "bold",
   // #endregion: EDITOR & TERMINAL                                   !

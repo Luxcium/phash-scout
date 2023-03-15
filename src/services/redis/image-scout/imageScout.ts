@@ -1,5 +1,6 @@
 import { logError, logInfo } from '../../../constants';
 import { redisCreateClient } from '../../../tools';
+import { BoundImageScout } from './imageScout-type';
 
 /**
  * A Redis client that supports the `send_command` method.
@@ -10,6 +11,7 @@ export type RedisClient = {
     args: Array<string | number>,
     callback?: (err: any, result: any) => void
   ) => Promise<R>;
+  close?: () => Promise<void>;
 };
 
 /**
@@ -269,7 +271,7 @@ export async function redisConnector(port: number = 6383) {
   }
 }
 
-export function bindImageScout(redisClient: RedisClient) {
+export function bindImageScout(redisClient: RedisClient): BoundImageScout {
   return {
     addImage: (key: string, hashValue: string, title: string, id?: number) => {
       return addImage(redisClient, key, hashValue, title, id);

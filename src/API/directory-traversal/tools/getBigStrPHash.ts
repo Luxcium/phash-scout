@@ -1,8 +1,8 @@
+import { bigString } from '@luxcium/bigintstring';
 import fs from 'fs';
 import sharpPhash from 'sharp-phash';
 
 import { logError } from '../../../constants';
-import { bigString } from '../../../utils';
 
 export async function getBigStrPHashFromFile(
   imgFilePath: string

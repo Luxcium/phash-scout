@@ -1,7 +1,6 @@
+import { bigString } from '@luxcium/bigintstring';
 import { promises } from 'fs';
 import sharpPhash from 'sharp-phash';
-
-import { bigString } from '../../../../utils';
 
 export async function getBigStrPHashFromFile(
   imgFilePath: string

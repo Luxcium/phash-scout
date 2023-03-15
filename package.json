@@ -52,7 +52,9 @@
     "versions": "echo ts-node: $(ts-node -vv); echo tsc: $(tsc -v)"
   },
   "dependencies": {
+    "@luxcium/bigintstring": "link:/projects/monorepo-one/library/bigintString",
     "@luxcium/boxed-list": "link:/projects/boxed-list",
+    "@luxcium/human-size": "link:/projects/monorepo-one/library/human-size",
     "axios": "^0.27.2",
     "chalk": "4.1.2",
     "dotenv": "~16.0.3",

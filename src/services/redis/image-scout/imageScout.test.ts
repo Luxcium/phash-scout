@@ -9,7 +9,7 @@ import {
 } from './imageScout';
 
 describe('imageScout functions', () => {
-  let redisClient: jest.Mocked<RedisClient>;
+  let redisClient: jest.Mocked<Omit<RedisClient, 'close'>>;
 
   beforeEach(() => {
     redisClient = {

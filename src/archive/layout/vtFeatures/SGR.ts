@@ -1,4 +1,6 @@
-import { SGR } from './vtfeatures';
+export const CSI = '\u009B';
+export const SGR = (Pm: any) => `${CSI}${Pm}m`;
+
 // CSI = '\u009B'
 // SGR = `${CSI}${Pm}m`;
 // SGR = `\u009B${Pm}m`;

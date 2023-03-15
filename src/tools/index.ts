@@ -81,7 +81,6 @@ export {
   doRedisQuery,
   manageRedisQuery,
   rConnect,
-  redis6382Test,
   redisConnectionString,
   redisCreateClient,
   redisQuery,

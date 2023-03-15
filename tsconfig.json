@@ -1,15 +1,96 @@
 {
-  "references": [
-    {
-      "path": "src"
-    },
-    {
-      "path": "test"
-    }
-  ],
+  //  "extends": "../tsconfig.json",
+  //   "exclude": ["out", "archives", "**/archive/**/*.*"],
+  /* Module Resolution Interop Constraints */
+
   // Exclude references and emitted output
-  "exclude": ["dist", "node_modules", "**/archive/**/*.*", "out"],
+  "include": ["./src/**/*.*"],
+  "exclude": [
+    "dist",
+    "lib",
+    "node_modules",
+    "**/archive/**/*.*",
+    "**/utils/**/*.*",
+    "out"
+  ],
   "compilerOptions": {
+    "generateCpuProfile": "./.tmp/performance/cpu-info.cpuprofile",
+    // ---------------------------------------------------------------
+    "target": "ESNext",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "preserveSymlinks": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    /* JavaScript Support */
+    "allowJs": true,
+    "checkJs": false,
+    "maxNodeModuleJsDepth": 1,
+    "disableSizeLimit": false,
+    /* Completeness */
+    "skipDefaultLibCheck": false,
+    "skipLibCheck": true,
+    "noResolve": false,
+    /* Vebosity */
+    "diagnostics": true,
+    "extendedDiagnostics": true,
+    "listEmittedFiles": false,
+    "listFiles": false,
+    "traceResolution": false,
+    "listFilesOnly": false,
+    /* Emit Options */
+    "rootDir": "./src",
+    "outDir": "./lib",
+    "declarationDir": "./lib/typings",
+    "tsBuildInfoFile": "./lib/src-ts-out-info.lib",
+    "sourceMap": false,
+    "declaration": true,
+    "declarationMap": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "downlevelIteration": true,
+    "emitBOM": false,
+    "emitDeclarationOnly": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "importsNotUsedAsValues": "remove",
+    "incremental": true,
+    "newLine": "lf",
+    "noEmit": false,
+    "noEmitHelpers": false,
+    "noEmitOnError": false,
+    "preserveConstEnums": true,
+    "preserveValueImports": false,
+    "preserveWatchOutput": false,
+    "pretty": true,
+    "removeComments": false,
+    "stripInternal": false,
+    "watch": false,
+    /* Projects */
+    "composite": true,
+    "disableSourceOfProjectReferenceRedirect": false,
+    "disableSolutionSearching": false,
+    "disableReferencedProjectLoad": false,
+    /* Compilation Options */
+    "noErrorTruncation": true,
+    "useDefineForClassFields": true,
+    "assumeChangesOnlyAffectDirectDependencies": false,
+    /* Specify a set of bundled library declaration files that describe the target runtime environment. */
+    "lib": ["dom", "esnext"],
+    /* Specify type package names to be included without being referenced in a source file. */
+    "types": ["node", "jest"],
+    // Source Map and declaration options
+    // VSCODE  emitting temporary error messages (that disappears and
+    // reappears all the time) in relation to my usage of the path
+    // property in my tsconfig file
+    // title VSCODE  Emitting Temporary Error Messages Due To Paths
+    // Emitting Temporary Error Messages In Relation To Usage Of Path
+    // Property In My Tsconfig File
+    // src/API/worker
     "baseUrl": ".",
     "paths": {
       "@worker": ["src/API/worker"],
@@ -19,67 +100,42 @@
       "$utils/*": ["src/utils/*"],
       "$worker/*": ["src/API/worker/*"]
     },
-    "target": "ESNext",
-    "module": "CommonJS",
-    "moduleResolution": "node",
-    "noErrorTruncation": false,
-    "composite": true,
-    "rootDir": ".",
-    "skipLibCheck": true,
-    // We can't pass "noEmit" in incremental mode, but this is close enough.
-    "outDir": "./.tmp/build",
-    "inlineSourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
-    "inlineSources": true,
-    "emitDeclarationOnly": true,
-    "allowSyntheticDefaultImports": true,
-    "generateCpuProfile": "./.tmp/performance/cpu-info.cpuprofile"
+
+    /* Type Checking */
+    /* ALWAYS FALSE NEVER ALLOW-UNUSED-LABELS & ALLOW-UNREACHABLE-CODE FALSE!  */
+    /* ALWAYS FALSE                                               ALWAYS FALSE */
+    /* ALWAYS FALSE */ "noImplicitUseStrict": false /*            ALWAYS FALSE */,
+    /* ALWAYS FALSE */ "noStrictGenericChecks": false /*          ALWAYS FALSE */,
+    /* ALWAYS FALSE */ "noUncheckedIndexedAccess": false /*       ALWAYS FALSE */,
+    /* ALWAYS FALSE */ "allowUmdGlobalAccess": false /*           ALWAYS FALSE */,
+    /* ALWAYS FALSE */ "allowUnreachableCode": false /*           ALWAYS FALSE */,
+    /* ALWAYS FALSE */ "allowUnusedLabels": false /*              ALWAYS FALSE */,
+    /* ALWAYS FALSE */ "suppressExcessPropertyErrors": false /*   ALWAYS FALSE */,
+    /* ALWAYS FALSE */ "suppressImplicitAnyIndexErrors": false /* ALWAYS FALSE */,
+    /* ALWAYS FALSE */ "keyofStringsOnly": false /*               ALWAYS FALSE */,
+    /* ALWAYS FALSE                                               ALWAYS FALSE */
+    /* ALWAYS FALSE NEVER ALLOW-UNUSED-LABELS & ALLOW-UNREACHABLE-CODE FALSE!  */
+    /* ALWAYS TRUE STRICT TYPE-CHECKING ADDITIONAL CHECKS MUST ALWAYS BE TRUE! */
+    /* ALWAYS TRUE                                                 ALWAYS TRUE */
+    /* ALWAYS TRUE */ "strict": true /*                            ALWAYS TRUE */,
+    /* ALWAYS TRUE                                                 ALWAYS TRUE */
+    /* ALWAYS TRUE */ "alwaysStrict": true /*                      ALWAYS TRUE */,
+    /* ALWAYS TRUE */ "exactOptionalPropertyTypes": true /*        ALWAYS TRUE */,
+    /* ALWAYS TRUE */ "noFallthroughCasesInSwitch": true /*        ALWAYS TRUE */,
+    /* ALWAYS TRUE */ "noImplicitAny": true /*                     ALWAYS TRUE */,
+    /* ALWAYS TRUE */ "noImplicitOverride": true /*                ALWAYS TRUE */,
+    /* ALWAYS TRUE */ "noImplicitReturns": true /*                 ALWAYS TRUE */,
+    /* ALWAYS TRUE */ "noImplicitThis": true /*                    ALWAYS TRUE */,
+    /* ALWAYS TRUE */ "noPropertyAccessFromIndexSignature": true /* ALWAYS TRUE */,
+    /* ALWAYS TRUE */ "noUnusedLocals": true /*                    ALWAYS TRUE */,
+    /* ALWAYS TRUE */ "noUnusedParameters": true /*                ALWAYS TRUE */,
+    /* ALWAYS TRUE */ "strictBindCallApply": true /*               ALWAYS TRUE */,
+    /* ALWAYS TRUE */ "strictFunctionTypes": true /*               ALWAYS TRUE */,
+    /* ALWAYS TRUE */ "strictNullChecks": true /*                  ALWAYS TRUE */,
+    /* ALWAYS TRUE */ "strictPropertyInitialization": true /*      ALWAYS TRUE */,
+    /* ALWAYS TRUE */ "useUnknownInCatchVariables": true /*        ALWAYS TRUE */
+    /* ALWAYS TRUE                                                 ALWAYS TRUE */
+    /* ALWAYS TRUE STRICT TYPE-CHECKING ADDITIONAL CHECKS MUST ALWAYS BE TRUE! */
+    /*                                                                         */
   }
 }
-
-// "$types": ["src/types/"],
-// "@types/*": ["src/types/*"],
-// "$API": ["src/API/"],
-// "$API/*": ["src/API/*"],
-// "$archive": ["src/archive/"],
-// "$archive/*": ["src/archive/*"],
-// "$commands": ["src/commands/"],
-// "$commands/*": ["src/commands/*"],
-// "$constants": ["src/constants/"],
-// "$constants/*": ["src/constants/*"],
-// "$main": ["src/main/"],
-// "$main/*": ["src/main/*"],
-// "$src/*": ["src/*"],
-// "$test/*": ["test/*"],
-// "$tools": ["src/tools/"],
-// "$tools/*": ["src/tools/*"],
-// "$utils": ["src/utils/"],
-// "@utils/*": ["src/utils/*"]
-// "paths": {
-//   "sharp-phash": ["./types/sharp-phash.d.ts"],
-//   "$types": ["src/types/"],
-//   "@types": ["src/types/"],
-//   "@types/*": ["src/types/*"],
-//   "$API": ["src/API/"],
-//   "$API/*": ["src/API/*"],
-//   "$archive": ["src/archive/"],
-//   "$archive/*": ["src/archive/*"],
-//   "$commands": ["src/commands/"],
-//   "$commands/*": ["src/commands/*"],
-//   "$constants": ["src/constants/"],
-//   "$constants/*": ["src/constants/*"],
-//   "$main": ["src/main/"],
-//   "$main/*": ["src/main/*"],
-//   "$src/*": ["src/*"],
-//   "$test/*": ["test/*"],
-//   "$tools": ["src/tools/"],
-//   "$tools/*": ["src/tools/*"],
-//   "$types/*": ["src/types/*"],
-//   "$utils": ["src/utils/"],
-//   "$utils/*": ["src/utils/*"],
-//   "@utils": ["src/utils/"],
-//   "@utils/*": ["src/utils/*"],
-//   "$worker": ["src/API/worker"],
-//   "$worker/*": ["src/API/worker/*"]
-// },

@@ -1,7 +1,7 @@
+import { bigString } from '@luxcium/bigintstring';
 import fs from 'fs';
 
 import { logError } from '../../constants';
-import { bigString } from '../../utils';
 
 const sharpPhash = require('sharp-phash');
 

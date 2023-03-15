@@ -1,13 +1,34 @@
 import { stderr } from 'node:process';
 import { inspect, stripVTControlCharacters } from 'node:util';
 
+// red
+// yellow
+// blue
+// magenta
+// green
 import { DebugLevels } from '../../constants/DebugLevels';
 import { inspectOptions } from '../../constants/inspectOptions';
 import { VerboLevels } from '../../constants/VerboLevels';
-import { colors } from '../../layout';
 
+export const CSI = '\u009B';
+export const SGR = (Pm: any) => `${CSI}${Pm}m`;
+const colors = {
+  red: SGR(41),
+  green: SGR(42),
+  yellow: SGR(43),
+  normal: SGR(49),
+  bright: {
+    black: SGR(30 + 60),
+    red: SGR(31 + 60),
+    green: SGR(32 + 60),
+    yellow: SGR(33 + 60),
+    blue: SGR(34 + 60),
+    magenta: SGR(35 + 60),
+    cyan: SGR(36 + 60),
+    white: SGR(37 + 60),
+  },
+};
 const { red, green, yellow, normal } = colors;
-
 export class Logers {
   constructor(
     private _verboLevel: VerboLevels,

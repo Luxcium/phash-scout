@@ -1,4 +1,4 @@
-import { makeRedisKeys } from '../../../utils';
+import { makeRedisKeys } from '../../redisKeyMake';
 
 export const phSetKey = (pHash: string) => makeRedisKeys.setKey('pHs', pHash);
 export const phTitleKey = (title: string) =>
