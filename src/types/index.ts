@@ -1,5 +1,4 @@
 // // export type { FileType } from '../tools';
-export type { Bg } from './Bg';
 export type {
   BlockDevicePath,
   CharacterDevicePath,

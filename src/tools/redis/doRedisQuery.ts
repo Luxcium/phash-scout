@@ -1,8 +1,8 @@
+import type { Bg } from '@luxcium/boxed-list';
 import { parse } from 'node:path';
 
 import { doUniqueAddObj } from '../../commands/doUniqueAddObj';
 import {
-  Bg,
   CurrentPathError,
   FilePathInfo,
   GetStats,

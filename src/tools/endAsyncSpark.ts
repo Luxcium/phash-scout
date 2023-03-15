@@ -1,4 +1,4 @@
-import { Bg } from '@types';
+import type { Bg } from '@luxcium/boxed-list';
 
 export function endAsyncSpark(R: any, errorMessage: string) {
   return async (bg: Bg<any>) => {

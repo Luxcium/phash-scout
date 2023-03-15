@@ -1,5 +1,7 @@
+import type { Bg } from '@luxcium/boxed-list';
+
 import { logError } from '../../constants';
-import { Bg, Strange } from '../../types';
+import { Strange } from '../../types';
 import { notExcluded } from '../notExclude';
 
 const count2 = { a1: 0, b: 0, len: 0 };

@@ -6,7 +6,7 @@ specifiers:
   '@babel/preset-typescript': ^7.21.0
   '@jest/globals': ^29.4.3
   '@luxcium/bigintstring': link:/projects/monorepo-one/library/bigintString
-  '@luxcium/boxed-list': link:/projects/boxed-list
+  '@luxcium/boxed-list': link:/projects/monorepo-one/library/boxed-list
   '@luxcium/human-size': link:/projects/monorepo-one/library/human-size
   '@types/jest': ~28.1.8
   '@types/node': ^18.14.1
@@ -41,7 +41,7 @@ specifiers:
 
 dependencies:
   '@luxcium/bigintstring': link:../monorepo-one/library/bigintString
-  '@luxcium/boxed-list': link:../boxed-list
+  '@luxcium/boxed-list': link:../monorepo-one/library/boxed-list
   '@luxcium/human-size': link:../monorepo-one/library/human-size
   axios: 0.27.2
   chalk: 4.1.2
