@@ -76,7 +76,8 @@ export async function redisTest(port: number = 6383) {
     return false;
   }
 }
-(async () => logInfo(await redisTest()))();
+
+// (async () => logInfo(await redisTest()))();
 /*
 Events
 The Node Redis client class is an Nodejs EventEmitter and it emits an event each time the network status changes:

@@ -1,7 +1,3 @@
-import { logError, logInfo } from '../../../constants';
-import { redisCreateClient } from '../../../tools';
-import { BoundImageScout } from './imageScout-type';
-
 /**
  * A Redis client that supports the `send_command` method.
  */
@@ -239,7 +235,22 @@ export async function deleteImage(
 }
 
 /**
- * A collection of Redis-ImageScout commands.
+ * @module Redis-ImageScout
+ *
+ * A TypeScript module for interacting with the Redis-ImageScout, which is a Redis module
+ * for indexing images. The module accepts precomputed perceptual hashes of images and
+ * indexes them for fast efficient retrieval. A perceptual hash is a fingerprint robust
+ * to small distortions, such as compression blur, scaling, etc. Useful for duplicate
+ * detection and copyright protection of images.
+ *
+ * This module provides the following functions for managing images in a Redis image index:
+ *
+ * @function addImage - Add an image to the Redis image index.
+ * @function syncImages - Sync the Redis image index.
+ * @function queryImages - Query images in the Redis image index within a specified radius.
+ * @function lookupImage - Lookup an image by ID in the Redis image index.
+ * @function getImageIndexSize - Get the size of the Redis image index.
+ * @function deleteImage - Delete an image by ID from the Redis image index.
  */
 export default {
   addImage,
@@ -249,48 +260,3 @@ export default {
   getImageIndexSize,
   deleteImage,
 };
-
-export async function redisConnector(port: number = 6383) {
-  const R = redisCreateClient({ port });
-  if (!R) {
-    throw new Error(`Failed to create Redis client on port ${port}`);
-  }
-  try {
-    await R.connect();
-    const result = String(await R.PING());
-    logInfo(result, `redisTest:${port}`);
-    const isConnected = result.toLowerCase() === 'pong';
-    if (isConnected) {
-      return R;
-    }
-    throw new Error('Connection failure');
-  } catch (error) {
-    logError(`Error running redisTest on port ${port}: ${error}`);
-    await R.quit();
-    return false;
-  }
-}
-
-export function bindImageScout(redisClient: RedisClient): BoundImageScout {
-  return {
-    addImage: (key: string, hashValue: string, title: string, id?: number) => {
-      return addImage(redisClient, key, hashValue, title, id);
-    },
-    deleteImage: (key: string, id: number) => {
-      return deleteImage(redisClient, key, id);
-    },
-    getImageIndexSize: (key: string) => {
-      return getImageIndexSize(redisClient, key);
-    },
-    queryImages: (key: string, targetHash: string, radius: number) => {
-      return queryImages(redisClient, key, targetHash, radius);
-    },
-    syncImages: (key: string) => {
-      return syncImages(redisClient, key);
-    },
-    lookupImage: (key: string, id: number) => {
-      return lookupImage(redisClient, key, id);
-    },
-    redisClient,
-  };
-}
