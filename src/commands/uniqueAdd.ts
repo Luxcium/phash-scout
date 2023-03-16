@@ -1,10 +1,10 @@
 import type { PQuerryAndAdd, QueryResultItem, RawQueryResult } from '@types';
 
 import { immediateZalgo, isQueryResultList } from '../tools';
-import { hasSameTitleInclude } from '../tools/hasSameTitleInclude';
 import { shiftTitle } from '../tools/shiftTitle';
 import { addPhash } from './addPhash';
 import { queryPhash } from './queryPhash';
+import { hasSameTitleInclude } from './unique-add/hasSameTitleInclude';
 
 // -5 add as the first and only
 // (not isQueryResultList or length === 0 )

@@ -1872,7 +1872,9 @@
   "todo-tree.tree.trackFile": true,
   "[shellscript]": {
     "editor.defaultFormatter": "shakram02.bash-beautify"
-  }
+  },
+  "typescript.referencesCodeLens.showOnAllFunctions": true,
+  "javascript.referencesCodeLens.showOnAllFunctions": true
   // "todo-tree.filtering.excludedWorkspaces": [], // new items
   // "todo-tree.filtering.ignoreGitSubmodules": false,
   // "todo-tree.filtering.includedWorkspaces": [], // new items

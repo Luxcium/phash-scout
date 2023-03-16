@@ -19,6 +19,7 @@ import {
 } from './utils';
 
 export { IMGSCOUT } from '../commands';
+export { hasSameTitleInclude } from '../commands/unique-add/hasSameTitleInclude';
 export { isA_Promise } from './assertion-tools/isA_Promise';
 export { isDir, isDirSync } from './assertion-tools/isDir';
 export { isQueryResult } from './assertion-tools/isQueryResult';
@@ -46,7 +47,6 @@ export {
   getSize,
   getSplit,
 } from './getSplit';
-export { hasSameTitleInclude } from './hasSameTitleInclude';
 export { isArray } from './isArray';
 export { MayBe, Nothing, Right } from './Maybe';
 export {

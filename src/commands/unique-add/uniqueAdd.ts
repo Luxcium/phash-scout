@@ -1,11 +1,9 @@
-import {
-  hasSameTitleInclude,
-  isQueryResultList,
-  shiftTitle,
-} from '../../tools';
+import { isQueryResultList } from '../../tools';
 import { RawQueryResult } from '../../types';
 import { addPhash } from './addPhash';
+import { hasSameTitleInclude } from './hasSameTitleInclude';
 import { queryPhash } from './queryPhash';
+import { shiftTitle } from './shiftTitle';
 
 type QueryResultItem = [path: string, id: number, radius: string];
 type PQuerryAndAdd = {
