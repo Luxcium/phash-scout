@@ -2,6 +2,7 @@ import { FileType } from '../tools';
 import { IsNotValidPHash, IsValidPHash } from './ValidPHash';
 import { WithExclude } from './WithExclude';
 
+/** @deprecated */
 export type ParsedWithTypeAndExcludeFlag = ParsedWithType & ParsedWithFlag;
 export type ParsedWithType = MyParsedPath & WithType;
 export type ParsedWithFlag = MyParsedPath & WithExcludeFlag;
@@ -54,6 +55,7 @@ export type WithExt = {
   ext: string;
 };
 
+/** @deprecated */
 export type WithExtention = WithExtname & WithExt;
 
 export type WithFileType = {
@@ -64,6 +66,7 @@ export type WithType = {
 };
 export type WithPHash = IsValidPHash | IsNotValidPHash;
 
+/** @deprecated */
 export type WithCount = {
   count: number;
 };
@@ -105,34 +108,43 @@ export interface ParsedPath {
   name: string;
 }
 
+/** @deprecated */
 export interface ParsedRoot {
   ParsedPath: { root: string };
 }
+/** @deprecated */
 export interface ParsedDir {
   ParsedPath: { dir: string };
 }
+/** @deprecated */
 export interface ParsedBase {
   ParsedPath: { base: string };
 }
+/** @deprecated */
 export interface ParsedExt {
   ParsedPath: { ext: string };
 }
+/** @deprecated */
 export interface ParsedName {
   ParsedPath: { name: string };
 }
 
+/** @deprecated */
 export interface BaseRoot {
   root: string;
 }
+/** @deprecated */
 export interface BasedDir {
   dir: string;
 }
+/** @deprecated */
 export interface BaseBase {
   base: string;
 }
 export interface BasedExt {
   ext: string;
 }
+/** @deprecated */
 export interface BaseName {
   name: string;
 }
