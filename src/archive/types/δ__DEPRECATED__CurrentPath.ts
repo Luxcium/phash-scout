@@ -1,4 +1,4 @@
-import type { FileType } from './Enums/FileTypeEnum';
+import type { FileType } from '../../types/Enums/FileTypeEnum';
 
 /** @deprecated */
 export type WithIndex = {
