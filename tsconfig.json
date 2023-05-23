@@ -40,7 +40,7 @@
     "listEmittedFiles": false,
     "listFiles": false,
     "traceResolution": false,
-    "listFilesOnly": false,
+
     /* Emit Options */
     "rootDir": "./src",
     "outDir": "./lib",

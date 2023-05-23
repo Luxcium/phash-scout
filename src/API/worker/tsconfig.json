@@ -1,16 +1,9 @@
 {
   // "extends": "../tsconfig.json",
-  "exclude": [
-    "*"
-  ],
+  "exclude": ["*"],
   // "exclude": ["node_modules", "out", "*"],
   "include": [],
-  "files": [
-    "RpcWorkerPool.js",
-    "./worker.js",
-    "./server.js",
-    "./actor.js"
-  ],
+  "files": ["RpcWorkerPool.js", "./worker.js", "./server.js", "./actor.js"],
   "compilerOptions": {
     /* Module Resolution Interop Constraints */
     "target": "ESNext",
@@ -23,13 +16,9 @@
     "maxNodeModuleJsDepth": 1,
     "disableSizeLimit": false,
     /* Specify a set of bundled library declaration files that describe the target runtime environment. */
-    "lib": [
-      "esnext"
-    ],
+    "lib": ["esnext"],
     /* Specify type package names to be included without being referenced in a source file. */
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     /* Emit Options */
     "emitBOM": false,
     // "rootDir": ".",
@@ -77,7 +66,6 @@
     "listEmittedFiles": false,
     "listFiles": false,
     "traceResolution": false,
-    "listFilesOnly": false,
     //
     "isolatedModules": true,
     // "preserveSymlinks": true,

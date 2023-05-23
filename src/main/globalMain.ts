@@ -18,9 +18,10 @@ export const globalMain = async (dir: S, grpKey: S, validExt: Ss, rC: any) => {
   void step1;
   void step2;
   const step3 = getPhash;
+
   await step1
-    .map(it => {
-      console.log('it', it);
+    .map((it, i) => {
+      console.log('it', `${i}`, it);
       return it;
     })
     .asyncSpark();
