@@ -34,23 +34,6 @@ export function sideFunctionBuilder(
   return result;
 }
 
-/*
-Promise<(string | {
-    result: any;
-    jsonrpc: string;
-    id: number;
-    pid: string;
-} | {
-    error: {
-        code: number;
-        message: string;
-        data: unknown;
-    };
-    jsonrpc: string;
-    id: number;
-    pid: string;
-})[]>
- */
 async function calculating(
   fullPath: string,
   count: Count,

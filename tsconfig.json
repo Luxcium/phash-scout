@@ -69,7 +69,6 @@
     "pretty": true,
     "removeComments": false,
     "stripInternal": false,
-    "watch": false,
     /* Projects */
     "composite": true,
     "disableSourceOfProjectReferenceRedirect": false,

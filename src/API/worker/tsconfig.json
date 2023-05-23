@@ -81,8 +81,6 @@
     // "preserveValueImports": false,
     // "removeComments": false,
     // "stripInternal": false,
-    // "preserveWatchOutput": false,
-    // "watch": true,
     /* Projects */
     // "composite": true,
     // "disableSourceOfProjectReferenceRedirect": false,
@@ -144,6 +142,5 @@
   // "compileOnSave": false,
   // "ts-node": {},
   // "typeAcquisition": {},
-  // "watchOptions": {},
   // "include": ["./**/*.*"]
 }

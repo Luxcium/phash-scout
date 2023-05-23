@@ -24,9 +24,8 @@ function main() {
     }
   });
 }
+const dir = '/home/luxcium/Téléchargements/telegram/chris/photos-x_copy';
 
-const dirList = [
-  '/run/media/luxcium/x250Mio/Archives TG/Twinks Lover 💙💚💔/jpgs',
-];
+const dirList = [dir];
 
 main();

@@ -1,5 +1,4 @@
 import { getBigStrPHashFromFile } from '../../../../tools';
-import { allInOne } from '../allInOne';
 import { getCachedPhash } from '../getCachedPhash';
 import { redisPhashQuery } from '../redisPhashQuery';
 import { redisPhashQueryResult } from '../redisPhashQueryResult';
