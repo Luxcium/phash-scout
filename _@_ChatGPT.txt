@@ -1,0 +1,140 @@
+Here is a complete summary of our discussion so far:
+
+Topic: The conversation has been about understanding the structure and functionality of a TypeScript-based project on GitHub.
+
+Context: The user has asked for help with understanding specific sections of code from a GitHub project, namely the LuxciumProject/monorepo-one. I've been asked to explain how the code works and the purpose of different files and functions within this project.
+
+Action items:
+
+I analyzed several files, including 'main.ts', 'sideFunctionBuilder.ts', 'constants.ts', 'commands.ts', and 'theTryCathBlock.ts'.
+I examined the structure and functionality of these files and their associated functions.
+Key Points:
+
+'main.ts': This file imports various dependencies and seems to be the entry point of the application​1​.
+'sideFunctionBuilder.ts': This file defines a function 'sideFunctionBuilder' that seems to be used for building side functions for the application, and contains another function named 'calculating'​2​.
+'constants.ts': This file defines several constants and logging functions that are used throughout the application​3​.
+'commands.ts': This file exports an object named 'commands' that contains two functions 'all_in_one' and 'redis_phash_query_result'​4​.
+'theTryCathBlock.ts': This file exports a function 'theTryCathBlock' which seems to be a wrapper for executing functions within a try-catch block​0at: ${errMsg}); \n return errVal","pub_date":null}}​.
+Contextual Information:
+
+These files are part of a larger project, and understanding their functionality requires understanding their role within that larger context.
+The project appears to be written in TypeScript and it uses several dependencies like node's 'fs' and 'path' modules.
+Next steps:
+
+Continue to analyze other files in the project as requested by the user. This includes files like 'doTraverseDirs.ts' which was provided by the user but not yet fully analyzed.
+Provide further explanations or clarifications as needed.
+Please feel free to copy and paste this summary into a new instance of ChatGPT so we can continue our conversation where we left off.
+
+Entry point during development phase:
+Relative Path: API/___MAIN___starting-point.ts
+Local File System Path: /projects/phash-scout/src/API/___MAIN___starting-point.ts
+GitHub Repository Link: https://github.com/Luxcium/phash-scout/blob/main/src/API/___MAIN___starting-point.ts
+Raw File Link: https://raw.githubusercontent.com/Luxcium/phash-scout/main/src/API/___MAIN___starting-point.ts
+
+File: doTraverseDirs.ts
+Description: Handles directory traversal in the API.
+Relative Path: API/directory-traversal/doTraverseDirs.ts
+Local File System Path: /projects/phash-scout/src/API/directory-traversal/doTraverseDirs.ts
+GitHub Repository Link: https://github.com/Luxcium/phash-scout/blob/main/src/API/directory-traversal/doTraverseDirs.ts
+Raw File Link: https://raw.githubusercontent.com/Luxcium/phash-scout/main/src/API/directory-traversal/doTraverseDirs.ts
+
+File: sideFunctionBuilder.ts
+Description: Builds the side function in the API.
+Relative Path: API/sideFunctionBuilder.ts
+Local File System Path: /projects/phash-scout/src/API/sideFunctionBuilder.ts
+GitHub Repository Link: https://github.com/Luxcium/phash-scout/blob/main/src/API/sideFunctionBuilder.ts
+Raw File Link: https://raw.githubusercontent.com/Luxcium/phash-scout/main/src/API/sideFunctionBuilder.ts
+
+
+File: commands.js
+Description: Contains worker commands in the API.
+Relative Path: API/worker/commands/object/commands.js
+Local File System Path: /projects/phash-scout/src/API/worker/commands/object/commands.js
+GitHub Repository Link: https://github.com/Luxcium/phash-scout/blob/main/src/API/worker/commands/object/commands.js
+Raw File Link: https://raw.githubusercontent.com/Luxcium/phash-scout/main/src/API/worker/commands/object/commands.js
+
+
+File: index.ts
+Description: Index file in the tools directory.
+Relative Path: tools/index.ts
+Local File System Path: /projects/phash-scout/src/tools/index.ts
+GitHub Repository Link: https://github.com/Luxcium/phash-scout/blob/main/src/tools/index.ts
+Raw File Link: https://raw.githubusercontent.com/Luxcium/phash-scout/main/src/tools/index.ts
+
+
+File: getCachedPhash.js
+Description: Retrieves cached pHash in the API.
+Relative Path: API/worker/commands/getCachedPhash.js
+Local File System Path: /projects/phash-scout/src/API/worker/commands/getCachedPhash.js
+GitHub Repository Link: https://github.com/Luxcium/phash-scout/blob/main/src/API/worker/commands/getCachedPhash.js
+Raw File Link: https://raw.githubusercontent.com/Luxcium/phash-scout/main/src/API/worker/commands/getCachedPhash.js
+
+
+File: redisPhashQuery.js
+Description: Queries redis pHash in the API.
+Relative Path: API/worker/commands/redisPhashQuery.js
+Local File System Path: /projects/phash-scout/src/API/worker/commands/redisPhashQuery.js
+GitHub Repository Link: https://github.com/Luxcium/phash-scout/blob/main/src/API/worker/commands/redisPhashQuery.js
+Raw File Link: https://raw.githubusercontent.com/Luxcium/phash-scout/main/src/API/worker/commands/redisPhashQuery.js
+
+
+Redis perceptual hash query result command:
+Relative Path: API/worker/commands/redisPhashQueryResult.js
+Local File System Path: /projects/phash-scout/src/API/worker/commands/redisPhashQueryResult.js
+GitHub Repository Link: https://github.com/Luxcium/phash-scout/blob/main/src/API/worker/commands/redisPhashQueryResult.js
+Raw File Link: https://raw.githubusercontent.com/Luxcium/phash-scout/main/src/API/worker/commands/redisPhashQueryResult.js
+
+Try catch block command:
+Relative Path: API/worker/commands/theTryCathBlock.js
+Local File System Path: /projects/phash-scout/src/API/worker/commands/theTryCathBlock.js
+GitHub Repository Link: https://github.com/Luxcium/phash-scout/blob/main/src/API/worker/commands/theTryCathBlock.js
+Raw File Link: https://raw.githubusercontent.com/Luxc# Open the raw file of the index.ts file located in the tools directory.
+open_url("https://raw.githubusercontent.com/Luxcium/phash-scout/main/src/tools/index.ts")
+
+Entry point during development phase:
+Relative Path: src/API/___MAIN___starting-point.ts
+Local File System Path: /projects/phash-scout/src/API/___MAIN___starting-point.ts
+GitHub Repository Link: https://github.com/Luxcium/phash-scout/blob/main/src/API/___MAIN___starting-point.ts
+Raw File Link: https://raw.githubusercontent.com/Luxcium/phash-scout/main/src/API/___MAIN___starting-point.ts
+
+Directory Traversal:
+Relative Path: src/API/directory-traversal/doTraverseDirs.ts
+Local File System Path: /projects/phash-scout/src/API/directory-traversal/doTraverseDirs.ts
+GitHub Repository Link: https://github.com/Luxcium/phash-scout/blob/main/src/API/directory-traversal/doTraverseDirs.ts
+Raw File Link: https://raw.githubusercontent.com/Luxcium/phash-scout/main/src/API/directory-traversal/doTraverseDirs.ts
+
+Side Function Builder:
+Relative Path: src/API/sideFunctionBuilder.ts
+Local File System Path: /projects/phash-scout/src/API/sideFunctionBuilder.ts
+GitHub Repository Link: https://github.com/Luxcium/phash-scout/blob/main/src/API/sideFunctionBuilder.ts
+Raw File Link: https://raw.githubusercontent.com/Luxcium/phash-scout/main/src/API/sideFunctionBuilder.ts
+
+Worker Commands:
+Relative Path: src/API/worker/commands/object/commands.js
+Local File System Path: /projects/phash-scout/src/API/worker/commands/object/commands.js
+GitHub Repository Link: https://github.com/Luxcium/phash-scout/blob/main/src/API/worker/commands/object/commands.js
+Raw File Link: https://raw.githubusercontent.com/Luxcium/phash-scout/main/src/API/worker/commands/object/commands.js
+
+Tools:
+Relative Path: src/tools/index.ts
+Local File System Path: /projects/phash-scout/src/tools/index.ts
+GitHub Repository Link: https://github.com/Luxcium/phash-scout/blob/main/src/tools/index.ts
+Raw File Link: https://raw.githubusercontent.com/Luxcium/phash-scout/main/src/tools/index.ts
+
+Cached Phash:
+Relative Path: src/API/worker/commands/getCachedPhash.js
+Local File System Path: /projects/phash-scout/src/API/worker/commands/getCachedPhash.js
+GitHub Repository Link: https://github.com/Luxcium/phash-scout/blob/main/src/API/worker/commands/getCachedPhash.js
+Raw File Link: https://raw.githubusercontent.com/Luxcium/phash-scout/main/src/API/worker/commands/getCachedPhash.js
+
+Redis Phash Query:
+Relative Path: src/API/worker/commands/redisPhashQuery.js
+Local File System Path: /projects/phash-scout/src/API/worker/commands/redisPhashQuery.js
+GitHub Repository Link: https://github.com/Luxcium/phash-scout/blob/main/src/API/worker/commands/redisPhashQuery.js
+Raw File Link: https://raw.githubusercontent.com/Luxcium/phash-scout/main/src/API/worker/commands/redisPhashQuery.js
+
+Redis Phash Query Result:
+Relative Path: src/API/worker/commands/redisPhashQueryResult.js
+Local File System Path: /projects/phash-scout/src/API/worker/commands/redisPhashQueryResult.js
+GitHub Repository Link: https://github.com/Luxcium/phash-scout/blob/main/src/API/worker/commands/redisPhashQueryResult.js
+Raw File Link: https://raw.githubusercontent.com/Luxc# Let's find the devPaths file

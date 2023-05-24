@@ -24,7 +24,8 @@ function main() {
     }
   });
 }
-const dir = '/home/luxcium/Téléchargements/telegram/chris/photos-x_copy';
+const dir =
+  '/run/media/luxcium/c23d5f4b-810b-48ee-9161-13236363af53/zExtra/archives-tg/chris/photos-x_copy';
 
 const dirList = [dir];
 
