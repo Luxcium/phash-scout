@@ -1,4 +1,10 @@
-Here is a complete summary of our discussion so far:
+this file is available in the root folder of the GitHub Repository:
+https://github.com/Luxcium/phash-scout/blob/main/_%40_ChatGPT.txt
+
+This file is also availabele in RAW forrmat:
+https://raw.githubusercontent.com/Luxcium/phash-scout/main/_%40_ChatGPT.txt
+
+Here is a summary of our discussion so far:
 
 Topic: The conversation has been about understanding the structure and functionality of a TypeScript-based project on GitHub.
 
