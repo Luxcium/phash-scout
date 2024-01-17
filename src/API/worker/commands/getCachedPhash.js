@@ -2,7 +2,7 @@ import {
   logFatal,
   PRE_CACHING,
   PROCESSED,
-  UNPROCESSED
+  UNPROCESSED,
 } from '../../../constants';
 import { SET } from '../../SET';
 import { commands, Rc } from '.';
@@ -21,7 +21,7 @@ export async function getCachedPhash(imgFileAbsPath) {
     const bigStrObj_ = bigStrObj(redisGetK_ || '');
     if (!isValid(bigStrObj_)) {
       const val = await commands.bigstr_phash_from_file(imgFileAbsPath);
-// getBigStrPHashFromFile
+      // getBigStrPHashFromFile
       if (PRE_CACHING) {
         return redisSetK(R, imgFileAbsPath, val, false);
       }
